@@ -2,15 +2,24 @@
 
 <html>
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/angrybirds-s4uk/angrybirdschrome-source-html5@main/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/angrybirds-s4uk/angrybirdschrome-source-html5@main/"
+    />
     <title>Angry Birds Chrome</title>
     <meta name="Title" content="Angry Birds Chrome" />
-    <meta name="description" content="Play Angry Birds online in HD with Google Chrome" />
+    <meta
+      name="description"
+      content="Play Angry Birds online in HD with Google Chrome"
+    />
     <meta
       name="keywords"
       content="angry birds, free angry birds, online game, play online, angry birds app, chrome, google chrome, web browser, HD, arcade game, online, play angry birds online, web, application, game, iphone, android, ipad, slingshot, catapult, explosions, golden egg, levels, pigs, birds, stars, high scores, chrome os, chrome web store, angry birds rovio, play angry birds on computer, apps for chrome, play angry birds free"
     />
-    <link href="http://fonts.googleapis.com/css?family=Terminal+Dosis:800" rel="stylesheet" type="text/css" />
+    <link
+      href="http://fonts.googleapis.com/css?family=Terminal+Dosis:800"
+      rel="stylesheet"
+      type="text/css"
+    />
     <link rel="stylesheet" href="css/angry_birds_chrome.css" type="text/css" />
     <link
       rel="chrome-webstore-item"
@@ -26,7 +35,9 @@
         ga.type = "text/javascript";
         ga.async = true;
         ga.src =
-          ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(ga, s);
       })();
@@ -43,7 +54,7 @@
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("payments", "1.0", {
-        packages: ["production_config"]
+        packages: ["production_config"],
       });
     </script>
   </head>
@@ -53,7 +64,9 @@
         try {
           var version;
           try {
-            version = new ActiveXObject("ShockwaveFlash.ShockwaveFlash").GetVariable("$version");
+            version = new ActiveXObject(
+              "ShockwaveFlash.ShockwaveFlash",
+            ).GetVariable("$version");
           } catch (e) {
             version = navigator.plugins["Shockwave Flash"].description;
           }
@@ -122,7 +135,8 @@
 
                 <script type="text/javascript">
                   installSuccess = function () {
-                    document.getElementById("installButton").id = "offlineInstalled";
+                    document.getElementById("installButton").id =
+                      "offlineInstalled";
                     _gaq.push(["_trackEvent", "InstalledApp", "New install"]);
                   };
                   installFail = function (message) {
@@ -133,11 +147,11 @@
                       chrome.webstore.install(
                         "https://chrome.google.com/webstore/detail/aknpkdffaafgjchaibgeefbgmgeghloj",
                         installSuccess,
-                        installFail
+                        installFail,
                       );
                     } else {
                       window.location.replace(
-                        "https://chrome.google.com/webstore/detail/aknpkdffaafgjchaibgeefbgmgeghloj?utm_medium=et&amp;utm_source=partner-angrybirds-bottom-link-1"
+                        "https://chrome.google.com/webstore/detail/aknpkdffaafgjchaibgeefbgmgeghloj?utm_medium=et&amp;utm_source=partner-angrybirds-bottom-link-1",
                       );
                     }
                   };
@@ -150,7 +164,8 @@
                     return false;
                   "
                   onmouseover="
-                    tooltip.innerHTML = 'Installing the game allows offline play. Crush pigs wherever you are!'
+                    tooltip.innerHTML =
+                      'Installing the game allows offline play. Crush pigs wherever you are!'
                   "
                   onmouseout="resetTooltip()"
                 ></a>
@@ -163,14 +178,22 @@
                   onmouseout="resetTooltip()"
                   onclick="
                     externalLink('FAQ');
-                    window.open('http://www.rovio.com/en/support/faq&support_category_id=36', '_blank');
+                    window.open(
+                      'http://www.rovio.com/en/support/faq&support_category_id=36',
+                      '_blank',
+                    );
                     return false;
                   "
                 ></a>
               </div>
 
               <div id="social-container">
-                <a id="twitterButton" href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                <a
+                  id="twitterButton"
+                  href="https://twitter.com/share"
+                  class="twitter-share-button"
+                  >Tweet</a
+                >
                 <script>
                   !(function (d, s, id) {
                     var js,
@@ -188,7 +211,13 @@
                   src="http://www.facebook.com/plugins/like.php?app_id=167680559959348&href=http%3A%2F%2Fwww.facebook.com%2Fangrybirds&send=false&layout=button_count&ref=chrome.angrybirds.com&width=100&show_faces=false&action=like&colorscheme=dark&font&height=25"
                   scrolling="no"
                   frameborder="0"
-                  style="visibility: hidden; border: none; overflow: hidden; width: 160px; height: 25px"
+                  style="
+                    visibility: hidden;
+                    border: none;
+                    overflow: hidden;
+                    width: 160px;
+                    height: 25px;
+                  "
                   allowTransparency="true"
                 ></iframe>
                 <a
@@ -221,15 +250,20 @@
       if (window.chrome && window.chrome.app && window.chrome.app.isInstalled) {
         addIframe = true;
       } else {
-        if (window.applicationCache && window.applicationCache.status == window.applicationCache.IDLE) {
+        if (
+          window.applicationCache &&
+          window.applicationCache.status == window.applicationCache.IDLE
+        ) {
           var date = new Date();
           date.setTime(date.getTime() + 60 * 1000);
-          document.cookie = "uninstall=1; expires=" + date.toGMTString() + "; path=/manifest";
+          document.cookie =
+            "uninstall=1; expires=" + date.toGMTString() + "; path=/manifest";
           addIframe = true;
         }
       }
       if (addIframe) {
-        document.getElementById("appcacheInstaller").src = "http://chrome.angrybirds.com/AppCacheInstaller.html";
+        document.getElementById("appcacheInstaller").src =
+          "http://chrome.angrybirds.com/AppCacheInstaller.html";
       }
     </script>
 
@@ -248,12 +282,16 @@
 
     <noscript>
       <div class="info-noscript">
-        Your web browser must have JavaScript enabled in order for this application to display correctly.
+        Your web browser must have JavaScript enabled in order for this
+        application to display correctly.
       </div>
     </noscript>
 
     <script type="text/javascript">
-      if (window.self != window.top && window.top.location.host.match("^[a-zA-Z]*\.angrybirds\.com") == null) {
+      if (
+        window.self != window.top &&
+        window.top.location.host.match("^[a-zA-Z]*\.angrybirds\.com") == null
+      ) {
         setInterval(function () {
           var content = document.getElementById("content");
           content.parentNode.style.display = "none";

@@ -1,5 +1,8 @@
 var unityFramework = (() => {
-  var _scriptDir = typeof document !== "undefined" && document.currentScript ? document.currentScript.src : undefined;
+  var _scriptDir =
+    typeof document !== "undefined" && document.currentScript
+      ? document.currentScript.src
+      : undefined;
   if (typeof __filename !== "undefined") _scriptDir = _scriptDir || __filename;
   return function (unityFramework) {
     unityFramework = unityFramework || {};
@@ -12,24 +15,33 @@ var unityFramework = (() => {
     });
     function Pointer_stringify(s, len) {
       warnOnce(
-        "The JavaScript function 'Pointer_stringify(ptrToSomeCString)' is obsoleted and will be removed in a future Unity version. Please call 'UTF8ToString(ptrToSomeCString)' instead."
+        "The JavaScript function 'Pointer_stringify(ptrToSomeCString)' is obsoleted and will be removed in a future Unity version. Please call 'UTF8ToString(ptrToSomeCString)' instead.",
       );
       return UTF8ToString(s, len);
     }
     Module["Pointer_stringify"] = Pointer_stringify;
-    var stackTraceReference = "(^|\\n)(\\s+at\\s+|)jsStackTrace(\\s+\\(|@)([^\\n]+):\\d+:\\d+(\\)|)(\\n|$)";
-    var stackTraceReferenceMatch = jsStackTrace().match(new RegExp(stackTraceReference));
+    var stackTraceReference =
+      "(^|\\n)(\\s+at\\s+|)jsStackTrace(\\s+\\(|@)([^\\n]+):\\d+:\\d+(\\)|)(\\n|$)";
+    var stackTraceReferenceMatch = jsStackTrace().match(
+      new RegExp(stackTraceReference),
+    );
     if (stackTraceReferenceMatch)
       Module.stackTraceRegExp = new RegExp(
         stackTraceReference
-          .replace("([^\\n]+)", stackTraceReferenceMatch[4].replace(/[\\^${}[\]().*+?|]/g, "\\$&"))
-          .replace("jsStackTrace", "[^\\n]+")
+          .replace(
+            "([^\\n]+)",
+            stackTraceReferenceMatch[4].replace(/[\\^${}[\]().*+?|]/g, "\\$&"),
+          )
+          .replace("jsStackTrace", "[^\\n]+"),
       );
     var abort = function (what) {
       if (ABORT) return;
       ABORT = true;
       EXITSTATUS = 1;
-      if (typeof ENVIRONMENT_IS_PTHREAD !== "undefined" && ENVIRONMENT_IS_PTHREAD)
+      if (
+        typeof ENVIRONMENT_IS_PTHREAD !== "undefined" &&
+        ENVIRONMENT_IS_PTHREAD
+      )
         console.error("Pthread aborting at " + new Error().stack);
       if (what !== undefined) {
         out(what);
@@ -67,7 +79,7 @@ var unityFramework = (() => {
             FS.syncfs(true, function (err) {
               if (err)
                 console.log(
-                  "IndexedDB is not available. Data will not persist in cache and PlayerPrefs will not be saved."
+                  "IndexedDB is not available. Data will not persist in cache and PlayerPrefs will not be saved.",
                 );
               Module.removeRunDependency("JS_FileSystem_Mount");
             });
@@ -95,7 +107,13 @@ var unityFramework = (() => {
       }
       for (var i = 0; i < oldDevices.length; ++i) {
         var old = videoInputDevices[oldDevices[i]];
-        if (old.groupId && old.kind && old.groupId == newDevice.groupId && old.kind == newDevice.kind) return old;
+        if (
+          old.groupId &&
+          old.kind &&
+          old.groupId == newDevice.groupId &&
+          old.kind == newDevice.kind
+        )
+          return old;
       }
     }
     function assignNewVideoInputId() {
@@ -125,7 +143,8 @@ var unityFramework = (() => {
           device.name = device.label || "Video input #" + (device.id + 1);
           device.isFrontFacing =
             device.name.toLowerCase().includes("front") ||
-            (!device.name.toLowerCase().includes("front") && !device.name.toLowerCase().includes("back"));
+            (!device.name.toLowerCase().includes("front") &&
+              !device.name.toLowerCase().includes("back"));
           videoInputDevices[device.id] = device;
         }
       });
@@ -139,17 +158,29 @@ var unityFramework = (() => {
           videoInputDevicesEnumerated = true;
         })
         .catch(function (e) {
-          console.warn("Unable to enumerate media devices: " + e + "\nWebcams will not be available.");
+          console.warn(
+            "Unable to enumerate media devices: " +
+              e +
+              "\nWebcams will not be available.",
+          );
           disableAccessToMediaDevices();
         });
       if (/Firefox/.test(navigator.userAgent)) {
         setTimeout(enumerateMediaDeviceList, 6e4);
-        warnOnce("Applying workaround to Firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=1397977");
+        warnOnce(
+          "Applying workaround to Firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=1397977",
+        );
       }
     }
     function disableAccessToMediaDevices() {
-      if (navigator.mediaDevices && navigator.mediaDevices.removeEventListener) {
-        navigator.mediaDevices.removeEventListener("devicechange", enumerateMediaDeviceList);
+      if (
+        navigator.mediaDevices &&
+        navigator.mediaDevices.removeEventListener
+      ) {
+        navigator.mediaDevices.removeEventListener(
+          "devicechange",
+          enumerateMediaDeviceList,
+        );
       }
       videoInputDevices = null;
     }
@@ -159,22 +190,32 @@ var unityFramework = (() => {
         "navigator.mediaDevices not supported by this browser. Webcam access will not be available." +
           (location.protocol == "https:"
             ? ""
-            : " Try hosting the page over HTTPS, because some browsers disable webcam access when insecure HTTP is being used.")
+            : " Try hosting the page over HTTPS, because some browsers disable webcam access when insecure HTTP is being used."),
       );
       disableAccessToMediaDevices();
-    } else if (typeof ENVIRONMENT_IS_PTHREAD === "undefined" || !ENVIRONMENT_IS_PTHREAD)
+    } else if (
+      typeof ENVIRONMENT_IS_PTHREAD === "undefined" ||
+      !ENVIRONMENT_IS_PTHREAD
+    )
       setTimeout(function () {
         try {
           addRunDependency("enumerateMediaDevices");
           removeEnumerateMediaDevicesRunDependency = function () {
             if (enumerateWatchdog !== null) clearTimeout(enumerateWatchdog);
             removeRunDependency("enumerateMediaDevices");
-            if (navigator.mediaDevices) console.log("navigator.mediaDevices support available");
+            if (navigator.mediaDevices)
+              console.log("navigator.mediaDevices support available");
             removeEnumerateMediaDevicesRunDependency = function () {};
           };
           enumerateMediaDeviceList();
-          enumerateWatchdog = setTimeout(removeEnumerateMediaDevicesRunDependency, 1e3);
-          navigator.mediaDevices.addEventListener("devicechange", enumerateMediaDeviceList);
+          enumerateWatchdog = setTimeout(
+            removeEnumerateMediaDevicesRunDependency,
+            1e3,
+          );
+          navigator.mediaDevices.addEventListener(
+            "devicechange",
+            enumerateMediaDeviceList,
+          );
         } catch (e) {
           console.warn("Unable to enumerate media devices: " + e);
           disableAccessToMediaDevices();
@@ -189,8 +230,14 @@ var unityFramework = (() => {
         else if (typeof param === "string") {
           param_cstr = stringToNewUTF8(param);
           _SendMessageString(gameObject_cstr, func_cstr, param_cstr);
-        } else if (typeof param === "number") _SendMessageFloat(gameObject_cstr, func_cstr, param);
-        else throw "" + param + " is does not have a type which is supported by SendMessage.";
+        } else if (typeof param === "number")
+          _SendMessageFloat(gameObject_cstr, func_cstr, param);
+        else
+          throw (
+            "" +
+            param +
+            " is does not have a type which is supported by SendMessage."
+          );
       } finally {
         _free(param_cstr);
         _free(gameObject_cstr);
@@ -214,7 +261,9 @@ var unityFramework = (() => {
     var ENVIRONMENT_IS_WEB = typeof window == "object";
     var ENVIRONMENT_IS_WORKER = typeof importScripts == "function";
     var ENVIRONMENT_IS_NODE =
-      typeof process == "object" && typeof process.versions == "object" && typeof process.versions.node == "string";
+      typeof process == "object" &&
+      typeof process.versions == "object" &&
+      typeof process.versions.node == "string";
     var scriptDirectory = "";
     function locateFile(path) {
       if (Module["locateFile"]) {
@@ -296,7 +345,10 @@ var unityFramework = (() => {
         scriptDirectory = _scriptDir;
       }
       if (scriptDirectory.indexOf("blob:") !== 0) {
-        scriptDirectory = scriptDirectory.substr(0, scriptDirectory.replace(/[?#].*/, "").lastIndexOf("/") + 1);
+        scriptDirectory = scriptDirectory.substr(
+          0,
+          scriptDirectory.replace(/[?#].*/, "").lastIndexOf("/") + 1,
+        );
       } else {
         scriptDirectory = "";
       }
@@ -386,7 +438,7 @@ var unityFramework = (() => {
           var ret = stackAlloc(arr.length);
           writeArrayToMemory(arr, ret);
           return ret;
-        }
+        },
       };
       function convertReturnValue(ret) {
         if (returnType === "string") return UTF8ToString(ret);
@@ -428,7 +480,8 @@ var unityFramework = (() => {
         return ccall(ident, returnType, argTypes, arguments, opts);
       };
     }
-    var UTF8Decoder = typeof TextDecoder != "undefined" ? new TextDecoder("utf8") : undefined;
+    var UTF8Decoder =
+      typeof TextDecoder != "undefined" ? new TextDecoder("utf8") : undefined;
     function UTF8ArrayToString(heapOrArray, idx, maxBytesToRead) {
       var endIdx = idx + maxBytesToRead;
       var endPtr = idx;
@@ -452,7 +505,11 @@ var unityFramework = (() => {
           if ((u0 & 240) == 224) {
             u0 = ((u0 & 15) << 12) | (u1 << 6) | u2;
           } else {
-            u0 = ((u0 & 7) << 18) | (u1 << 12) | (u2 << 6) | (heapOrArray[idx++] & 63);
+            u0 =
+              ((u0 & 7) << 18) |
+              (u1 << 12) |
+              (u2 << 6) |
+              (heapOrArray[idx++] & 63);
           }
           if (u0 < 65536) {
             str += String.fromCharCode(u0);
@@ -507,7 +564,8 @@ var unityFramework = (() => {
       var len = 0;
       for (var i = 0; i < str.length; ++i) {
         var u = str.charCodeAt(i);
-        if (u >= 55296 && u <= 57343) u = (65536 + ((u & 1023) << 10)) | (str.charCodeAt(++i) & 1023);
+        if (u >= 55296 && u <= 57343)
+          u = (65536 + ((u & 1023) << 10)) | (str.charCodeAt(++i) & 1023);
         if (u <= 127) ++len;
         else if (u <= 2047) len += 2;
         else if (u <= 65535) len += 3;
@@ -536,7 +594,15 @@ var unityFramework = (() => {
       }
       if (!dontAddNull) HEAP8[buffer >> 0] = 0;
     }
-    var buffer, HEAP8, HEAPU8, HEAP16, HEAPU16, HEAP32, HEAPU32, HEAPF32, HEAPF64;
+    var buffer,
+      HEAP8,
+      HEAPU8,
+      HEAP16,
+      HEAPU16,
+      HEAP32,
+      HEAPU32,
+      HEAPF32,
+      HEAPF64;
     function updateGlobalBufferAndViews(buf) {
       buffer = buf;
       Module["HEAP8"] = HEAP8 = new Int8Array(buf);
@@ -561,7 +627,8 @@ var unityFramework = (() => {
     }
     function preRun() {
       if (Module["preRun"]) {
-        if (typeof Module["preRun"] == "function") Module["preRun"] = [Module["preRun"]];
+        if (typeof Module["preRun"] == "function")
+          Module["preRun"] = [Module["preRun"]];
         while (Module["preRun"].length) {
           addOnPreRun(Module["preRun"].shift());
         }
@@ -581,7 +648,8 @@ var unityFramework = (() => {
     }
     function postRun() {
       if (Module["postRun"]) {
-        if (typeof Module["postRun"] == "function") Module["postRun"] = [Module["postRun"]];
+        if (typeof Module["postRun"] == "function")
+          Module["postRun"] = [Module["postRun"]];
         while (Module["postRun"].length) {
           addOnPostRun(Module["postRun"].shift());
         }
@@ -675,7 +743,9 @@ var unityFramework = (() => {
           return fetch(wasmBinaryFile, { credentials: "same-origin" })
             .then(function (response) {
               if (!response["ok"]) {
-                throw "failed to load wasm binary file at '" + wasmBinaryFile + "'";
+                throw (
+                  "failed to load wasm binary file at '" + wasmBinaryFile + "'"
+                );
               }
               return response["arrayBuffer"]();
             })
@@ -690,7 +760,7 @@ var unityFramework = (() => {
                 function (response) {
                   resolve(new Uint8Array(response));
                 },
-                reject
+                reject,
               );
             });
           }
@@ -736,14 +806,16 @@ var unityFramework = (() => {
           !isFileURI(wasmBinaryFile) &&
           typeof fetch == "function"
         ) {
-          return fetch(wasmBinaryFile, { credentials: "same-origin" }).then(function (response) {
-            var result = WebAssembly.instantiateStreaming(response, info);
-            return result.then(receiveInstantiationResult, function (reason) {
-              err("wasm streaming compile failed: " + reason);
-              err("falling back to ArrayBuffer instantiation");
-              return instantiateArrayBuffer(receiveInstantiationResult);
-            });
-          });
+          return fetch(wasmBinaryFile, { credentials: "same-origin" }).then(
+            function (response) {
+              var result = WebAssembly.instantiateStreaming(response, info);
+              return result.then(receiveInstantiationResult, function (reason) {
+                err("wasm streaming compile failed: " + reason);
+                err("falling back to ArrayBuffer instantiation");
+                return instantiateArrayBuffer(receiveInstantiationResult);
+              });
+            },
+          );
         } else {
           return instantiateArrayBuffer(receiveInstantiationResult);
         }
@@ -771,7 +843,7 @@ var unityFramework = (() => {
       },
       3072857: function () {
         return Module.webglContextAttributes.powerPreference;
-      }
+      },
     };
     function callRuntimeCallbacks(callbacks) {
       while (callbacks.length > 0) {
@@ -814,7 +886,9 @@ var unityFramework = (() => {
     }
     function dynCallLegacy(sig, ptr, args) {
       var f = Module["dynCall_" + sig];
-      return args && args.length ? f.apply(null, [ptr].concat(args)) : f.call(null, ptr);
+      return args && args.length
+        ? f.apply(null, [ptr].concat(args))
+        : f.call(null, ptr);
     }
     function dynCall(sig, ptr, args) {
       return dynCallLegacy(sig, ptr, args);
@@ -856,7 +930,10 @@ var unityFramework = (() => {
     var JS_Accelerometer = null;
     var JS_Accelerometer_callback = 0;
     function _JS_Accelerometer_IsRunning() {
-      return (JS_Accelerometer && JS_Accelerometer.activated) || JS_Accelerometer_callback != 0;
+      return (
+        (JS_Accelerometer && JS_Accelerometer.activated) ||
+        JS_Accelerometer_callback != 0
+      );
     }
     var JS_Accelerometer_multiplier = 1;
     var JS_Accelerometer_lastValue = { x: 0, y: 0, z: 0 };
@@ -864,14 +941,14 @@ var unityFramework = (() => {
       JS_Accelerometer_lastValue = {
         x: JS_Accelerometer.x * JS_Accelerometer_multiplier,
         y: JS_Accelerometer.y * JS_Accelerometer_multiplier,
-        z: JS_Accelerometer.z * JS_Accelerometer_multiplier
+        z: JS_Accelerometer.z * JS_Accelerometer_multiplier,
       };
       if (JS_Accelerometer_callback != 0)
         dynCall_vfff(
           JS_Accelerometer_callback,
           JS_Accelerometer_lastValue.x,
           JS_Accelerometer_lastValue.y,
-          JS_Accelerometer_lastValue.z
+          JS_Accelerometer_lastValue.z,
         );
     }
     var JS_Accelerometer_frequencyRequest = 0;
@@ -883,14 +960,16 @@ var unityFramework = (() => {
       var difference = {
         x: accelerometerValue.x - linearAccelerationValue.x,
         y: accelerometerValue.y - linearAccelerationValue.y,
-        z: accelerometerValue.z - linearAccelerationValue.z
+        z: accelerometerValue.z - linearAccelerationValue.z,
       };
       var differenceMagnitudeSq =
-        difference.x * difference.x + difference.y * difference.y + difference.z * difference.z;
+        difference.x * difference.x +
+        difference.y * difference.y +
+        difference.z * difference.z;
       var sum = {
         x: accelerometerValue.x + linearAccelerationValue.x,
         y: accelerometerValue.y + linearAccelerationValue.y,
-        z: accelerometerValue.z + linearAccelerationValue.z
+        z: accelerometerValue.z + linearAccelerationValue.z,
       };
       var sumMagnitudeSq = sum.x * sum.x + sum.y * sum.y + sum.z * sum.z;
       return differenceMagnitudeSq <= sumMagnitudeSq ? difference : sum;
@@ -899,25 +978,38 @@ var unityFramework = (() => {
       var accelerometerValue = {
         x: event.accelerationIncludingGravity.x * JS_Accelerometer_multiplier,
         y: event.accelerationIncludingGravity.y * JS_Accelerometer_multiplier,
-        z: event.accelerationIncludingGravity.z * JS_Accelerometer_multiplier
+        z: event.accelerationIncludingGravity.z * JS_Accelerometer_multiplier,
       };
       if (JS_Accelerometer_callback != 0)
-        dynCall_vfff(JS_Accelerometer_callback, accelerometerValue.x, accelerometerValue.y, accelerometerValue.z);
+        dynCall_vfff(
+          JS_Accelerometer_callback,
+          accelerometerValue.x,
+          accelerometerValue.y,
+          accelerometerValue.z,
+        );
       var linearAccelerationValue = {
         x: event.acceleration.x * JS_Accelerometer_multiplier,
         y: event.acceleration.y * JS_Accelerometer_multiplier,
-        z: event.acceleration.z * JS_Accelerometer_multiplier
+        z: event.acceleration.z * JS_Accelerometer_multiplier,
       };
       if (JS_LinearAccelerationSensor_callback != 0)
         dynCall_vfff(
           JS_LinearAccelerationSensor_callback,
           linearAccelerationValue.x,
           linearAccelerationValue.y,
-          linearAccelerationValue.z
+          linearAccelerationValue.z,
         );
       if (JS_GravitySensor_callback != 0) {
-        var gravityValue = JS_ComputeGravity(accelerometerValue, linearAccelerationValue);
-        dynCall_vfff(JS_GravitySensor_callback, gravityValue.x, gravityValue.y, gravityValue.z);
+        var gravityValue = JS_ComputeGravity(
+          accelerometerValue,
+          linearAccelerationValue,
+        );
+        dynCall_vfff(
+          JS_GravitySensor_callback,
+          gravityValue.x,
+          gravityValue.y,
+          gravityValue.z,
+        );
       }
       if (JS_Gyroscope_callback != 0) {
         var degToRad = Math.PI / 180;
@@ -925,7 +1017,7 @@ var unityFramework = (() => {
           JS_Gyroscope_callback,
           event.rotationRate.alpha * degToRad,
           event.rotationRate.beta * degToRad,
-          event.rotationRate.gamma * degToRad
+          event.rotationRate.gamma * degToRad,
         );
       }
     }
@@ -977,7 +1069,11 @@ var unityFramework = (() => {
     }
     function JS_DefineAccelerometerMultiplier() {
       var g = 9.80665;
-      JS_Accelerometer_multiplier = /(iPhone|iPad|Macintosh)/i.test(navigator.userAgent) ? 1 / g : -1 / g;
+      JS_Accelerometer_multiplier = /(iPhone|iPad|Macintosh)/i.test(
+        navigator.userAgent,
+      )
+        ? 1 / g
+        : -1 / g;
     }
     function _JS_Accelerometer_Start(callback, frequency) {
       JS_DefineAccelerometerMultiplier();
@@ -988,8 +1084,14 @@ var unityFramework = (() => {
       }
       if (callback != 0) JS_Accelerometer_callback = callback;
       function InitializeAccelerometer(frequency) {
-        JS_Accelerometer = new Accelerometer({ frequency: frequency, referenceFrame: "device" });
-        JS_Accelerometer.addEventListener("reading", JS_Accelerometer_eventHandler);
+        JS_Accelerometer = new Accelerometer({
+          frequency: frequency,
+          referenceFrame: "device",
+        });
+        JS_Accelerometer.addEventListener(
+          "reading",
+          JS_Accelerometer_eventHandler,
+        );
         JS_Accelerometer.addEventListener("error", function (e) {
           warnOnce(e.error ? e.error : e);
         });
@@ -999,21 +1101,26 @@ var unityFramework = (() => {
       if (JS_Accelerometer) {
         if (JS_Accelerometer_frequency != frequency) {
           JS_Accelerometer.stop();
-          JS_Accelerometer.removeEventListener("reading", JS_Accelerometer_eventHandler);
+          JS_Accelerometer.removeEventListener(
+            "reading",
+            JS_Accelerometer_eventHandler,
+          );
           InitializeAccelerometer(frequency);
         }
       } else if (JS_Accelerometer_frequencyRequest != 0) {
         JS_Accelerometer_frequencyRequest = frequency;
       } else {
         JS_Accelerometer_frequencyRequest = frequency;
-        navigator.permissions.query({ name: "accelerometer" }).then(function (result) {
-          if (result.state === "granted") {
-            InitializeAccelerometer(JS_Accelerometer_frequencyRequest);
-          } else {
-            warnOnce("No permission to use Accelerometer.");
-          }
-          JS_Accelerometer_frequencyRequest = 0;
-        });
+        navigator.permissions
+          .query({ name: "accelerometer" })
+          .then(function (result) {
+            if (result.state === "granted") {
+              InitializeAccelerometer(JS_Accelerometer_frequencyRequest);
+            } else {
+              warnOnce("No permission to use Accelerometer.");
+            }
+            JS_Accelerometer_frequencyRequest = 0;
+          });
       }
     }
     function JS_DeviceMotion_remove() {
@@ -1023,14 +1130,23 @@ var unityFramework = (() => {
         JS_GravitySensor_callback == 0 &&
         JS_Gyroscope_callback == 0
       ) {
-        window.removeEventListener("devicemotion", JS_DeviceOrientation_eventHandler);
+        window.removeEventListener(
+          "devicemotion",
+          JS_DeviceOrientation_eventHandler,
+        );
       }
     }
     function _JS_Accelerometer_Stop() {
       if (JS_Accelerometer) {
-        if (typeof GravitySensor !== "undefined" || JS_GravitySensor_callback == 0) {
+        if (
+          typeof GravitySensor !== "undefined" ||
+          JS_GravitySensor_callback == 0
+        ) {
           JS_Accelerometer.stop();
-          JS_Accelerometer.removeEventListener("reading", JS_Accelerometer_eventHandler);
+          JS_Accelerometer.removeEventListener(
+            "reading",
+            JS_Accelerometer_eventHandler,
+          );
           JS_Accelerometer = null;
         }
         JS_Accelerometer_callback = 0;
@@ -1059,14 +1175,19 @@ var unityFramework = (() => {
     }
     function _JS_Cursor_SetImage(ptr, length) {
       var binary = "";
-      for (var i = 0; i < length; i++) binary += String.fromCharCode(HEAPU8[ptr + i]);
-      Module.canvas.style.cursor = "url(data:image/cur;base64," + btoa(binary) + "),default";
+      for (var i = 0; i < length; i++)
+        binary += String.fromCharCode(HEAPU8[ptr + i]);
+      Module.canvas.style.cursor =
+        "url(data:image/cur;base64," + btoa(binary) + "),default";
     }
     function _JS_Cursor_SetShow(show) {
       Module.canvas.style.cursor = show ? "default" : "none";
     }
     function jsDomCssEscapeId(id) {
-      if (typeof window.CSS !== "undefined" && typeof window.CSS.escape !== "undefined") {
+      if (
+        typeof window.CSS !== "undefined" &&
+        typeof window.CSS.escape !== "undefined"
+      ) {
         return window.CSS.escape(id);
       }
       return id.replace(/(#|\.|\+|\[|\]|\(|\)|\{|\})/g, "\\$1");
@@ -1075,7 +1196,12 @@ var unityFramework = (() => {
       var canvasId = Module["canvas"] ? Module["canvas"].id : "unity-canvas";
       return "#" + jsDomCssEscapeId(canvasId);
     }
-    function _JS_DOM_MapViewportCoordinateToElementLocalCoordinate(viewportX, viewportY, targetX, targetY) {
+    function _JS_DOM_MapViewportCoordinateToElementLocalCoordinate(
+      viewportX,
+      viewportY,
+      targetX,
+      targetY,
+    ) {
       var canvas = document.querySelector(jsCanvasSelector());
       var rect = canvas && canvas.getBoundingClientRect();
       HEAPU32[targetX >> 2] = viewportX - (rect ? rect.left : 0);
@@ -1129,7 +1255,7 @@ var unityFramework = (() => {
           JS_GravitySensor_callback,
           JS_GravitySensor.x * JS_Accelerometer_multiplier,
           JS_GravitySensor.y * JS_Accelerometer_multiplier,
-          JS_GravitySensor.z * JS_Accelerometer_multiplier
+          JS_GravitySensor.z * JS_Accelerometer_multiplier,
         );
     }
     var JS_GravitySensor_frequencyRequest = 0;
@@ -1138,18 +1264,29 @@ var unityFramework = (() => {
       var linearAccelerationValue = {
         x: JS_LinearAccelerationSensor.x * JS_Accelerometer_multiplier,
         y: JS_LinearAccelerationSensor.y * JS_Accelerometer_multiplier,
-        z: JS_LinearAccelerationSensor.z * JS_Accelerometer_multiplier
+        z: JS_LinearAccelerationSensor.z * JS_Accelerometer_multiplier,
       };
       if (JS_LinearAccelerationSensor_callback != 0)
         dynCall_vfff(
           JS_LinearAccelerationSensor_callback,
           linearAccelerationValue.x,
           linearAccelerationValue.y,
-          linearAccelerationValue.z
+          linearAccelerationValue.z,
         );
-      if (JS_GravitySensor_callback != 0 && typeof GravitySensor === "undefined") {
-        var gravityValue = JS_ComputeGravity(JS_Accelerometer_lastValue, linearAccelerationValue);
-        dynCall_vfff(JS_GravitySensor_callback, gravityValue.x, gravityValue.y, gravityValue.z);
+      if (
+        JS_GravitySensor_callback != 0 &&
+        typeof GravitySensor === "undefined"
+      ) {
+        var gravityValue = JS_ComputeGravity(
+          JS_Accelerometer_lastValue,
+          linearAccelerationValue,
+        );
+        dynCall_vfff(
+          JS_GravitySensor_callback,
+          gravityValue.x,
+          gravityValue.y,
+          gravityValue.z,
+        );
       }
     }
     var JS_LinearAccelerationSensor_frequencyRequest = 0;
@@ -1163,8 +1300,14 @@ var unityFramework = (() => {
       }
       if (callback != 0) JS_LinearAccelerationSensor_callback = callback;
       function InitializeLinearAccelerationSensor(frequency) {
-        JS_LinearAccelerationSensor = new LinearAccelerationSensor({ frequency: frequency, referenceFrame: "device" });
-        JS_LinearAccelerationSensor.addEventListener("reading", JS_LinearAccelerationSensor_eventHandler);
+        JS_LinearAccelerationSensor = new LinearAccelerationSensor({
+          frequency: frequency,
+          referenceFrame: "device",
+        });
+        JS_LinearAccelerationSensor.addEventListener(
+          "reading",
+          JS_LinearAccelerationSensor_eventHandler,
+        );
         JS_LinearAccelerationSensor.addEventListener("error", function (e) {
           warnOnce(e.error ? e.error : e);
         });
@@ -1174,35 +1317,54 @@ var unityFramework = (() => {
       if (JS_LinearAccelerationSensor) {
         if (JS_LinearAccelerationSensor_frequency != frequency) {
           JS_LinearAccelerationSensor.stop();
-          JS_LinearAccelerationSensor.removeEventListener("reading", JS_LinearAccelerationSensor_eventHandler);
+          JS_LinearAccelerationSensor.removeEventListener(
+            "reading",
+            JS_LinearAccelerationSensor_eventHandler,
+          );
           InitializeLinearAccelerationSensor(frequency);
         }
       } else if (JS_LinearAccelerationSensor_frequencyRequest != 0) {
         JS_LinearAccelerationSensor_frequencyRequest = frequency;
       } else {
         JS_LinearAccelerationSensor_frequencyRequest = frequency;
-        navigator.permissions.query({ name: "accelerometer" }).then(function (result) {
-          if (result.state === "granted") {
-            InitializeLinearAccelerationSensor(JS_LinearAccelerationSensor_frequencyRequest);
-          } else {
-            warnOnce("No permission to use LinearAccelerationSensor.");
-          }
-          JS_LinearAccelerationSensor_frequencyRequest = 0;
-        });
+        navigator.permissions
+          .query({ name: "accelerometer" })
+          .then(function (result) {
+            if (result.state === "granted") {
+              InitializeLinearAccelerationSensor(
+                JS_LinearAccelerationSensor_frequencyRequest,
+              );
+            } else {
+              warnOnce("No permission to use LinearAccelerationSensor.");
+            }
+            JS_LinearAccelerationSensor_frequencyRequest = 0;
+          });
       }
     }
     function _JS_GravitySensor_Start(callback, frequency) {
       if (typeof GravitySensor === "undefined") {
-        _JS_Accelerometer_Start(0, Math.max(frequency, JS_Accelerometer_frequency));
-        _JS_LinearAccelerationSensor_Start(0, Math.max(frequency, JS_LinearAccelerationSensor_frequency));
+        _JS_Accelerometer_Start(
+          0,
+          Math.max(frequency, JS_Accelerometer_frequency),
+        );
+        _JS_LinearAccelerationSensor_Start(
+          0,
+          Math.max(frequency, JS_LinearAccelerationSensor_frequency),
+        );
         JS_GravitySensor_callback = callback;
         return;
       }
       JS_DefineAccelerometerMultiplier();
       JS_GravitySensor_callback = callback;
       function InitializeGravitySensor(frequency) {
-        JS_GravitySensor = new GravitySensor({ frequency: frequency, referenceFrame: "device" });
-        JS_GravitySensor.addEventListener("reading", JS_GravitySensor_eventHandler);
+        JS_GravitySensor = new GravitySensor({
+          frequency: frequency,
+          referenceFrame: "device",
+        });
+        JS_GravitySensor.addEventListener(
+          "reading",
+          JS_GravitySensor_eventHandler,
+        );
         JS_GravitySensor.addEventListener("error", function (e) {
           warnOnce(e.error ? e.error : e);
         });
@@ -1210,27 +1372,38 @@ var unityFramework = (() => {
       }
       if (JS_GravitySensor) {
         JS_GravitySensor.stop();
-        JS_GravitySensor.removeEventListener("reading", JS_GravitySensor_eventHandler);
+        JS_GravitySensor.removeEventListener(
+          "reading",
+          JS_GravitySensor_eventHandler,
+        );
         InitializeGravitySensor(frequency);
       } else if (JS_GravitySensor_frequencyRequest != 0) {
         JS_GravitySensor_frequencyRequest = frequency;
       } else {
         JS_GravitySensor_frequencyRequest = frequency;
-        navigator.permissions.query({ name: "accelerometer" }).then(function (result) {
-          if (result.state === "granted") {
-            InitializeGravitySensor(JS_GravitySensor_frequencyRequest);
-          } else {
-            warnOnce("No permission to use GravitySensor.");
-          }
-          JS_GravitySensor_frequencyRequest = 0;
-        });
+        navigator.permissions
+          .query({ name: "accelerometer" })
+          .then(function (result) {
+            if (result.state === "granted") {
+              InitializeGravitySensor(JS_GravitySensor_frequencyRequest);
+            } else {
+              warnOnce("No permission to use GravitySensor.");
+            }
+            JS_GravitySensor_frequencyRequest = 0;
+          });
       }
     }
     function _JS_LinearAccelerationSensor_Stop() {
       if (JS_LinearAccelerationSensor) {
-        if (typeof GravitySensor !== "undefined" || JS_GravitySensor_callback == 0) {
+        if (
+          typeof GravitySensor !== "undefined" ||
+          JS_GravitySensor_callback == 0
+        ) {
           JS_LinearAccelerationSensor.stop();
-          JS_LinearAccelerationSensor.removeEventListener("reading", JS_LinearAccelerationSensor_eventHandler);
+          JS_LinearAccelerationSensor.removeEventListener(
+            "reading",
+            JS_LinearAccelerationSensor_eventHandler,
+          );
           JS_LinearAccelerationSensor = null;
         }
         JS_LinearAccelerationSensor_callback = 0;
@@ -1244,12 +1417,16 @@ var unityFramework = (() => {
       JS_GravitySensor_callback = 0;
       if (typeof GravitySensor === "undefined") {
         if (JS_Accelerometer_callback == 0) _JS_Accelerometer_Stop();
-        if (JS_LinearAccelerationSensor_callback == 0) _JS_LinearAccelerationSensor_Stop();
+        if (JS_LinearAccelerationSensor_callback == 0)
+          _JS_LinearAccelerationSensor_Stop();
         return;
       }
       if (JS_GravitySensor) {
         JS_GravitySensor.stop();
-        JS_GravitySensor.removeEventListener("reading", JS_GravitySensor_eventHandler);
+        JS_GravitySensor.removeEventListener(
+          "reading",
+          JS_GravitySensor_eventHandler,
+        );
         JS_GravitySensor = null;
       }
     }
@@ -1264,11 +1441,18 @@ var unityFramework = (() => {
     }
     var JS_Gyroscope = null;
     function _JS_Gyroscope_IsRunning() {
-      return (JS_Gyroscope && JS_Gyroscope.activated) || JS_Gyroscope_callback != 0;
+      return (
+        (JS_Gyroscope && JS_Gyroscope.activated) || JS_Gyroscope_callback != 0
+      );
     }
     function JS_Gyroscope_eventHandler() {
       if (JS_Gyroscope_callback != 0)
-        dynCall_vfff(JS_Gyroscope_callback, JS_Gyroscope.x, JS_Gyroscope.y, JS_Gyroscope.z);
+        dynCall_vfff(
+          JS_Gyroscope_callback,
+          JS_Gyroscope.x,
+          JS_Gyroscope.y,
+          JS_Gyroscope.z,
+        );
     }
     var JS_Gyroscope_frequencyRequest = 0;
     function _JS_Gyroscope_Start(callback, frequency) {
@@ -1279,7 +1463,10 @@ var unityFramework = (() => {
       }
       JS_Gyroscope_callback = callback;
       function InitializeGyroscope(frequency) {
-        JS_Gyroscope = new Gyroscope({ frequency: frequency, referenceFrame: "device" });
+        JS_Gyroscope = new Gyroscope({
+          frequency: frequency,
+          referenceFrame: "device",
+        });
         JS_Gyroscope.addEventListener("reading", JS_Gyroscope_eventHandler);
         JS_Gyroscope.addEventListener("error", function (e) {
           warnOnce(e.error ? e.error : e);
@@ -1294,14 +1481,16 @@ var unityFramework = (() => {
         JS_Gyroscope_frequencyRequest = frequency;
       } else {
         JS_Gyroscope_frequencyRequest = frequency;
-        navigator.permissions.query({ name: "gyroscope" }).then(function (result) {
-          if (result.state === "granted") {
-            InitializeGyroscope(JS_Gyroscope_frequencyRequest);
-          } else {
-            warnOnce("No permission to use Gyroscope.");
-          }
-          JS_Gyroscope_frequencyRequest = 0;
-        });
+        navigator.permissions
+          .query({ name: "gyroscope" })
+          .then(function (result) {
+            if (result.state === "granted") {
+              InitializeGyroscope(JS_Gyroscope_frequencyRequest);
+            } else {
+              warnOnce("No permission to use Gyroscope.");
+            }
+            JS_Gyroscope_frequencyRequest = 0;
+          });
       }
     }
     function _JS_Gyroscope_Stop() {
@@ -1326,7 +1515,8 @@ var unityFramework = (() => {
     }
     function _JS_LinearAccelerationSensor_IsRunning() {
       return (
-        (JS_LinearAccelerationSensor && JS_LinearAccelerationSensor.activated) ||
+        (JS_LinearAccelerationSensor &&
+          JS_LinearAccelerationSensor.activated) ||
         JS_LinearAccelerationSensor_callback != 0
       );
     }
@@ -1371,7 +1561,11 @@ var unityFramework = (() => {
     }
     function _JS_MobileKeyboard_GetText(buffer, bufferSize) {
       var text =
-        mobile_input && mobile_input.input ? mobile_input.input.value : mobile_input_text ? mobile_input_text : "";
+        mobile_input && mobile_input.input
+          ? mobile_input.input.value
+          : mobile_input_text
+            ? mobile_input_text
+            : "";
       if (buffer) stringToUTF8(text, buffer, bufferSize);
       return lengthBytesUTF8(text);
     }
@@ -1382,7 +1576,8 @@ var unityFramework = (() => {
         return;
       }
       HEAP32[outStart >> 2] = mobile_input.input.selectionStart;
-      HEAP32[outLength >> 2] = mobile_input.input.selectionEnd - mobile_input.input.selectionStart;
+      HEAP32[outLength >> 2] =
+        mobile_input.input.selectionEnd - mobile_input.input.selectionStart;
     }
     function _JS_MobileKeyboard_Hide(delay) {
       if (mobile_input_hide_delay) return;
@@ -1435,7 +1630,7 @@ var unityFramework = (() => {
       secure,
       alert,
       placeholder,
-      characterLimit
+      characterLimit,
     ) {
       if (mobile_input_hide_delay) {
         clearTimeout(mobile_input_hide_delay);
@@ -1535,7 +1730,10 @@ var unityFramework = (() => {
     var JS_OrientationSensor = null;
     var JS_OrientationSensor_callback = 0;
     function _JS_OrientationSensor_IsRunning() {
-      return (JS_OrientationSensor && JS_OrientationSensor.activated) || JS_OrientationSensor_callback != 0;
+      return (
+        (JS_OrientationSensor && JS_OrientationSensor.activated) ||
+        JS_OrientationSensor_callback != 0
+      );
     }
     function JS_OrientationSensor_eventHandler() {
       if (JS_OrientationSensor_callback != 0)
@@ -1544,7 +1742,7 @@ var unityFramework = (() => {
           JS_OrientationSensor.quaternion[0],
           JS_OrientationSensor.quaternion[1],
           JS_OrientationSensor.quaternion[2],
-          JS_OrientationSensor.quaternion[3]
+          JS_OrientationSensor.quaternion[3],
         );
     }
     var JS_OrientationSensor_frequencyRequest = 0;
@@ -1572,14 +1770,23 @@ var unityFramework = (() => {
         if (JS_OrientationSensor_callback == 0) {
           JS_OrientationSensor_callback = callback;
           JS_RequestDeviceSensorPermissions(1);
-          window.addEventListener("deviceorientation", JS_DeviceOrientation_eventHandler);
+          window.addEventListener(
+            "deviceorientation",
+            JS_DeviceOrientation_eventHandler,
+          );
         }
         return;
       }
       JS_OrientationSensor_callback = callback;
       function InitializeOrientationSensor(frequency) {
-        JS_OrientationSensor = new RelativeOrientationSensor({ frequency: frequency, referenceFrame: "device" });
-        JS_OrientationSensor.addEventListener("reading", JS_OrientationSensor_eventHandler);
+        JS_OrientationSensor = new RelativeOrientationSensor({
+          frequency: frequency,
+          referenceFrame: "device",
+        });
+        JS_OrientationSensor.addEventListener(
+          "reading",
+          JS_OrientationSensor_eventHandler,
+        );
         JS_OrientationSensor.addEventListener("error", function (e) {
           warnOnce(e.error ? e.error : e);
         });
@@ -1587,7 +1794,10 @@ var unityFramework = (() => {
       }
       if (JS_OrientationSensor) {
         JS_OrientationSensor.stop();
-        JS_OrientationSensor.removeEventListener("reading", JS_OrientationSensor_eventHandler);
+        JS_OrientationSensor.removeEventListener(
+          "reading",
+          JS_OrientationSensor_eventHandler,
+        );
         InitializeOrientationSensor(frequency);
       } else if (JS_OrientationSensor_frequencyRequest != 0) {
         JS_OrientationSensor_frequencyRequest = frequency;
@@ -1595,7 +1805,7 @@ var unityFramework = (() => {
         JS_OrientationSensor_frequencyRequest = frequency;
         Promise.all([
           navigator.permissions.query({ name: "accelerometer" }),
-          navigator.permissions.query({ name: "gyroscope" })
+          navigator.permissions.query({ name: "gyroscope" }),
         ]).then(function (results) {
           if (
             results.every(function (result) {
@@ -1613,10 +1823,16 @@ var unityFramework = (() => {
     function _JS_OrientationSensor_Stop() {
       if (JS_OrientationSensor) {
         JS_OrientationSensor.stop();
-        JS_OrientationSensor.removeEventListener("reading", JS_OrientationSensor_eventHandler);
+        JS_OrientationSensor.removeEventListener(
+          "reading",
+          JS_OrientationSensor_eventHandler,
+        );
         JS_OrientationSensor = null;
       } else if (JS_OrientationSensor_callback != 0) {
-        window.removeEventListener("deviceorientation", JS_DeviceOrientation_eventHandler);
+        window.removeEventListener(
+          "deviceorientation",
+          JS_DeviceOrientation_eventHandler,
+        );
       }
       JS_OrientationSensor_callback = 0;
     }
@@ -1634,20 +1850,26 @@ var unityFramework = (() => {
           JS_ScreenOrientation_callback,
           window.innerWidth,
           window.innerHeight,
-          screen.orientation ? screen.orientation.angle : window.orientation
+          screen.orientation ? screen.orientation.angle : window.orientation,
         );
     }
     function _JS_ScreenOrientation_DeInit() {
       JS_ScreenOrientation_callback = 0;
       window.removeEventListener("resize", JS_ScreenOrientation_eventHandler);
       if (screen.orientation) {
-        screen.orientation.removeEventListener("change", JS_ScreenOrientation_eventHandler);
+        screen.orientation.removeEventListener(
+          "change",
+          JS_ScreenOrientation_eventHandler,
+        );
       }
     }
     function _JS_ScreenOrientation_Init(callback) {
       if (!JS_ScreenOrientation_callback) {
         if (screen.orientation) {
-          screen.orientation.addEventListener("change", JS_ScreenOrientation_eventHandler);
+          screen.orientation.addEventListener(
+            "change",
+            JS_ScreenOrientation_eventHandler,
+          );
         }
         window.addEventListener("resize", JS_ScreenOrientation_eventHandler);
         JS_ScreenOrientation_callback = callback;
@@ -1662,7 +1884,8 @@ var unityFramework = (() => {
         return;
       }
       function applyLock() {
-        JS_ScreenOrientation_appliedLockType = JS_ScreenOrientation_requestedLockType;
+        JS_ScreenOrientation_appliedLockType =
+          JS_ScreenOrientation_requestedLockType;
         var screenOrientations = [
           "any",
           0,
@@ -1671,13 +1894,16 @@ var unityFramework = (() => {
           "portrait-primary",
           "portrait-secondary",
           "landscape-primary",
-          "landscape-secondary"
+          "landscape-secondary",
         ];
         var type = screenOrientations[JS_ScreenOrientation_appliedLockType];
         screen.orientation
           .lock(type)
           .then(function () {
-            if (JS_ScreenOrientation_requestedLockType != JS_ScreenOrientation_appliedLockType) {
+            if (
+              JS_ScreenOrientation_requestedLockType !=
+              JS_ScreenOrientation_appliedLockType
+            ) {
               JS_ScreenOrientation_timeoutID = setTimeout(applyLock, 0);
             } else {
               JS_ScreenOrientation_timeoutID = -1;
@@ -1689,7 +1915,10 @@ var unityFramework = (() => {
           });
       }
       JS_ScreenOrientation_requestedLockType = orientationLockType;
-      if (JS_ScreenOrientation_timeoutID == -1 && orientationLockType != JS_ScreenOrientation_appliedLockType) {
+      if (
+        JS_ScreenOrientation_timeoutID == -1 &&
+        orientationLockType != JS_ScreenOrientation_appliedLockType
+      ) {
         JS_ScreenOrientation_timeoutID = setTimeout(applyLock, 0);
       }
     }
@@ -1699,22 +1928,28 @@ var unityFramework = (() => {
       audioContext: null,
       audioWebEnabled: 0,
       audioCache: [],
-      pendingAudioSources: {}
+      pendingAudioSources: {},
     };
     function jsAudioMixinSetPitch(source) {
       source.estimatePlaybackPosition = function () {
-        var t = (WEBAudio.audioContext.currentTime - source.playbackStartTime) * source.playbackRate.value;
+        var t =
+          (WEBAudio.audioContext.currentTime - source.playbackStartTime) *
+          source.playbackRate.value;
         if (source.loop && t >= source.loopStart) {
-          t = ((t - source.loopStart) % (source.loopEnd - source.loopStart)) + source.loopStart;
+          t =
+            ((t - source.loopStart) % (source.loopEnd - source.loopStart)) +
+            source.loopStart;
         }
         return t;
       };
       source.setPitch = function (newPitch) {
         var curPosition = source.estimatePlaybackPosition();
         if (curPosition >= 0) {
-          source.playbackStartTime = WEBAudio.audioContext.currentTime - curPosition / newPitch;
+          source.playbackStartTime =
+            WEBAudio.audioContext.currentTime - curPosition / newPitch;
         }
-        if (source.playbackRate.value !== newPitch) source.playbackRate.value = newPitch;
+        if (source.playbackRate.value !== newPitch)
+          source.playbackRate.value = newPitch;
       };
     }
     function jsAudioCreateUncompressedSoundClip(buffer, error) {
@@ -1734,11 +1969,18 @@ var unityFramework = (() => {
           return 0;
         }
         var startOutputBuffer = ptr >> 2;
-        var output = HEAPF32.subarray(startOutputBuffer, startOutputBuffer + (length >> 2));
-        var numMaxSamples = Math.floor((length >> 2) / this.buffer.numberOfChannels);
+        var output = HEAPF32.subarray(
+          startOutputBuffer,
+          startOutputBuffer + (length >> 2),
+        );
+        var numMaxSamples = Math.floor(
+          (length >> 2) / this.buffer.numberOfChannels,
+        );
         var numReadSamples = Math.min(this.buffer.length, numMaxSamples);
         for (var i = 0; i < this.buffer.numberOfChannels; i++) {
-          var channelData = this.buffer.getChannelData(i).subarray(0, numReadSamples);
+          var channelData = this.buffer
+            .getChannelData(i)
+            .subarray(0, numReadSamples);
           output.set(channelData, i * numReadSamples);
         }
         return numReadSamples * this.buffer.numberOfChannels * 4;
@@ -1781,7 +2023,7 @@ var unityFramework = (() => {
         loop: false,
         loopStart: 0,
         loopEnd: 0,
-        pitch: 1
+        pitch: 1,
       };
       channel.panner.rolloffFactor = 0;
       channel.release = function () {
@@ -1806,7 +2048,8 @@ var unityFramework = (() => {
           this.source.loopStart = this.loopStart;
           this.source.loopEnd = this.loopEnd;
           this.source.start(startTime, startOffset);
-          this.source.playbackStartTime = startTime - startOffset / this.source.playbackRate.value;
+          this.source.playbackStartTime =
+            startTime - startOffset / this.source.playbackRate.value;
           this.source.setPitch(this.pitch);
         } catch (e) {
           console.error("Channel.playSoundClip error. Exception: " + e);
@@ -1857,7 +2100,7 @@ var unityFramework = (() => {
           },
           stop: function (when) {
             this.scheduledStopTime = when;
-          }
+          },
         };
         this.stop(0);
         this.disconnectSource();
@@ -1872,18 +2115,24 @@ var unityFramework = (() => {
           return;
         }
         var pausedSource = this.source;
-        var soundClip = jsAudioCreateUncompressedSoundClip(pausedSource.buffer, false);
+        var soundClip = jsAudioCreateUncompressedSoundClip(
+          pausedSource.buffer,
+          false,
+        );
         this.playSoundClip(
           soundClip,
           WEBAudio.audioContext.currentTime,
-          Math.max(0, pausedSource.playbackPausedAtPosition)
+          Math.max(0, pausedSource.playbackPausedAtPosition),
         );
         this.source.loop = pausedSource.loop;
         this.source.loopStart = pausedSource.loopStart;
         this.source.loopEnd = pausedSource.loopEnd;
         this.source.setPitch(pausedSource.playbackRate);
         if (typeof pausedSource.scheduledStopTime !== "undefined") {
-          var delay = Math.max(pausedSource.scheduledStopTime - WEBAudio.audioContext.currentTime, 0);
+          var delay = Math.max(
+            pausedSource.scheduledStopTime - WEBAudio.audioContext.currentTime,
+            0,
+          );
           this.stop(delay);
         }
       };
@@ -1950,11 +2199,13 @@ var unityFramework = (() => {
         delete this.source;
       };
       channel.setSpatialBlendLevel = function (spatialBlendLevel) {
-        var sourceCanBeConfigured = this.source && !this.source.isPausedMockNode;
+        var sourceCanBeConfigured =
+          this.source && !this.source.isPausedMockNode;
         var spatializationTypeChanged =
           (this.spatialBlendLevel > 0 && spatialBlendLevel == 0) ||
           (this.spatialBlendLevel == 0 && spatialBlendLevel > 0);
-        var needToReconfigureNodes = sourceCanBeConfigured && spatializationTypeChanged;
+        var needToReconfigureNodes =
+          sourceCanBeConfigured && spatializationTypeChanged;
         this.spatialBlendWetGain.gain.value = spatialBlendLevel;
         this.spatialBlendDryGain.gain.value = 1 - spatialBlendLevel;
         this.spatialBlendLevel = spatialBlendLevel;
@@ -1991,7 +2242,8 @@ var unityFramework = (() => {
     }
     function _JS_Sound_Create_Channel(callback, userData) {
       if (WEBAudio.audioWebEnabled == 0) return;
-      WEBAudio.audioInstances[++WEBAudio.audioInstanceIdCounter] = jsAudioCreateChannel(callback, userData);
+      WEBAudio.audioInstances[++WEBAudio.audioInstanceIdCounter] =
+        jsAudioCreateChannel(callback, userData);
       return WEBAudio.audioInstanceIdCounter;
     }
     function _JS_Sound_GetLength(bufferInstance) {
@@ -2024,7 +2276,9 @@ var unityFramework = (() => {
         var tryToResumeAudioContext = function () {
           if (WEBAudio.audioContext.state === "suspended")
             WEBAudio.audioContext.resume().catch(function (error) {
-              console.warn("Could not resume audio context. Exception: " + error);
+              console.warn(
+                "Could not resume audio context. Exception: " + error,
+              );
             });
           else Module.clearInterval(resumeInterval);
         };
@@ -2032,9 +2286,14 @@ var unityFramework = (() => {
         WEBAudio.audioWebEnabled = 1;
         var _userEventCallback = function () {
           try {
-            if (WEBAudio.audioContext.state !== "running" && WEBAudio.audioContext.state !== "closed") {
+            if (
+              WEBAudio.audioContext.state !== "running" &&
+              WEBAudio.audioContext.state !== "closed"
+            ) {
               WEBAudio.audioContext.resume().catch(function (error) {
-                console.warn("Could not resume audio context. Exception: " + error);
+                console.warn(
+                  "Could not resume audio context. Exception: " + error,
+                );
               });
             }
             jsAudioPlayBlockedAudios();
@@ -2066,12 +2325,15 @@ var unityFramework = (() => {
         function (_error) {
           soundClip.error = true;
           console.log("Decode error: " + _error);
-        }
+        },
       );
       return soundClip;
     }
     function jsAudioAddPendingBlockedAudio(sourceNode, offset) {
-      WEBAudio.pendingAudioSources[sourceNode.mediaElement.src] = { sourceNode: sourceNode, offset: offset };
+      WEBAudio.pendingAudioSources[sourceNode.mediaElement.src] = {
+        sourceNode: sourceNode,
+        offset: offset,
+      };
     }
     function jsAudioGetMimeTypeFromType(fmodSoundType) {
       switch (fmodSoundType) {
@@ -2086,7 +2348,11 @@ var unityFramework = (() => {
     function jsAudioCreateCompressedSoundClip(audioData, fmodSoundType) {
       var mimeType = jsAudioGetMimeTypeFromType(fmodSoundType);
       var blob = new Blob([audioData], { type: mimeType });
-      var soundClip = { url: URL.createObjectURL(blob), error: false, mediaElement: new Audio() };
+      var soundClip = {
+        url: URL.createObjectURL(blob),
+        error: false,
+        mediaElement: new Audio(),
+      };
       soundClip.mediaElement.preload = "metadata";
       soundClip.mediaElement.src = soundClip.url;
       soundClip.release = function () {
@@ -2106,7 +2372,9 @@ var unityFramework = (() => {
         return 0;
       };
       soundClip.getNumberOfChannels = function () {
-        console.warn("getNumberOfChannels() is not supported for compressed sound.");
+        console.warn(
+          "getNumberOfChannels() is not supported for compressed sound.",
+        );
         return 0;
       };
       soundClip.getFrequency = function () {
@@ -2115,17 +2383,20 @@ var unityFramework = (() => {
       };
       soundClip.createSourceNode = function () {
         var self = this;
-        var mediaElement = WEBAudio.audioCache.length ? WEBAudio.audioCache.pop() : new Audio();
+        var mediaElement = WEBAudio.audioCache.length
+          ? WEBAudio.audioCache.pop()
+          : new Audio();
         mediaElement.preload = "metadata";
         mediaElement.src = this.url;
-        var source = WEBAudio.audioContext.createMediaElementSource(mediaElement);
+        var source =
+          WEBAudio.audioContext.createMediaElementSource(mediaElement);
         Object.defineProperty(source, "loop", {
           get: function () {
             return source.mediaElement.loop;
           },
           set: function (v) {
             if (source.mediaElement.loop !== v) source.mediaElement.loop = v;
-          }
+          },
         });
         source.playbackRate = {};
         Object.defineProperty(source.playbackRate, "value", {
@@ -2133,16 +2404,18 @@ var unityFramework = (() => {
             return source.mediaElement.playbackRate;
           },
           set: function (v) {
-            if (source.mediaElement.playbackRate !== v) source.mediaElement.playbackRate = v;
-          }
+            if (source.mediaElement.playbackRate !== v)
+              source.mediaElement.playbackRate = v;
+          },
         });
         Object.defineProperty(source, "currentTime", {
           get: function () {
             return source.mediaElement.currentTime;
           },
           set: function (v) {
-            if (source.mediaElement.currentTime !== v) source.mediaElement.currentTime = v;
-          }
+            if (source.mediaElement.currentTime !== v)
+              source.mediaElement.currentTime = v;
+          },
         });
         Object.defineProperty(source, "mute", {
           get: function () {
@@ -2150,7 +2423,7 @@ var unityFramework = (() => {
           },
           set: function (v) {
             if (source.mediaElement.mute !== v) source.mediaElement.mute = v;
-          }
+          },
         });
         Object.defineProperty(source, "onended", {
           get: function () {
@@ -2158,7 +2431,7 @@ var unityFramework = (() => {
           },
           set: function (onended) {
             source.mediaElement.onended = onended;
-          }
+          },
         });
         source.playPromise = null;
         source.playTimeout = null;
@@ -2203,7 +2476,8 @@ var unityFramework = (() => {
             offset = 0;
           }
           var startDelayThresholdMS = 4;
-          var startDelayMS = (startTime - WEBAudio.audioContext.currentTime) * 1e3;
+          var startDelayMS =
+            (startTime - WEBAudio.audioContext.currentTime) * 1e3;
           if (startDelayMS > startDelayThresholdMS) {
             source.playTimeout = setTimeout(function () {
               source.playTimeout = null;
@@ -2218,7 +2492,8 @@ var unityFramework = (() => {
             stopTime = WEBAudio.audioContext.currentTime;
           }
           var stopDelayThresholdMS = 4;
-          var stopDelayMS = (stopTime - WEBAudio.audioContext.currentTime) * 1e3;
+          var stopDelayMS =
+            (stopTime - WEBAudio.audioContext.currentTime) * 1e3;
           if (stopDelayMS > stopDelayThresholdMS) {
             setTimeout(function () {
               source._pauseMediaElement();
@@ -2240,30 +2515,55 @@ var unityFramework = (() => {
       if (length < 131072) decompress = 1;
       var sound;
       if (decompress) {
-        sound = jsAudioCreateUncompressedSoundClipFromCompressedAudio(audioData);
+        sound =
+          jsAudioCreateUncompressedSoundClipFromCompressedAudio(audioData);
       } else {
         sound = jsAudioCreateCompressedSoundClip(audioData, fmodSoundType);
       }
       WEBAudio.audioInstances[++WEBAudio.audioInstanceIdCounter] = sound;
       return WEBAudio.audioInstanceIdCounter;
     }
-    function jsAudioCreateUncompressedSoundClipFromPCM(channels, length, sampleRate, ptr) {
-      var buffer = WEBAudio.audioContext.createBuffer(channels, length, sampleRate);
+    function jsAudioCreateUncompressedSoundClipFromPCM(
+      channels,
+      length,
+      sampleRate,
+      ptr,
+    ) {
+      var buffer = WEBAudio.audioContext.createBuffer(
+        channels,
+        length,
+        sampleRate,
+      );
       for (var i = 0; i < channels; i++) {
         var offs = (ptr >> 2) + length * i;
         var copyToChannel =
           buffer["copyToChannel"] ||
           function (source, channelNumber, startInChannel) {
-            var clipped = source.subarray(0, Math.min(source.length, this.length - (startInChannel | 0)));
-            this.getChannelData(channelNumber | 0).set(clipped, startInChannel | 0);
+            var clipped = source.subarray(
+              0,
+              Math.min(source.length, this.length - (startInChannel | 0)),
+            );
+            this.getChannelData(channelNumber | 0).set(
+              clipped,
+              startInChannel | 0,
+            );
           };
-        copyToChannel.apply(buffer, [HEAPF32.subarray(offs, offs + length), i, 0]);
+        copyToChannel.apply(buffer, [
+          HEAPF32.subarray(offs, offs + length),
+          i,
+          0,
+        ]);
       }
       return jsAudioCreateUncompressedSoundClip(buffer, false);
     }
     function _JS_Sound_Load_PCM(channels, length, sampleRate, ptr) {
       if (WEBAudio.audioWebEnabled == 0) return 0;
-      var sound = jsAudioCreateUncompressedSoundClipFromPCM(channels, length, sampleRate, ptr);
+      var sound = jsAudioCreateUncompressedSoundClipFromPCM(
+        channels,
+        length,
+        sampleRate,
+        ptr,
+      );
       WEBAudio.audioInstances[++WEBAudio.audioInstanceIdCounter] = sound;
       return WEBAudio.audioInstanceIdCounter;
     }
@@ -2277,7 +2577,11 @@ var unityFramework = (() => {
         return;
       }
       try {
-        channel.playSoundClip(soundClip, WEBAudio.audioContext.currentTime + delay, offset);
+        channel.playSoundClip(
+          soundClip,
+          WEBAudio.audioContext.currentTime + delay,
+          offset,
+        );
       } catch (error) {
         console.error("playSoundClip error. Exception: " + e);
       }
@@ -2337,7 +2641,11 @@ var unityFramework = (() => {
         if (l.positionX.value !== x) l.positionX.value = x;
         if (l.positionY.value !== y) l.positionY.value = y;
         if (l.positionZ.value !== z) l.positionZ.value = z;
-      } else if (l._positionX !== x || l._positionY !== y || l._positionZ !== z) {
+      } else if (
+        l._positionX !== x ||
+        l._positionY !== y ||
+        l._positionZ !== z
+      ) {
         l.setPosition(x, y, z);
         l._positionX = x;
         l._positionY = y;
@@ -2368,7 +2676,14 @@ var unityFramework = (() => {
         var channel = WEBAudio.audioInstances[channelInstance];
         channel.setPitch(v);
       } catch (e) {
-        console.error("JS_Sound_SetPitch(channel=" + channelInstance + ", pitch=" + v + ") threw an exception: " + e);
+        console.error(
+          "JS_Sound_SetPitch(channel=" +
+            channelInstance +
+            ", pitch=" +
+            v +
+            ") threw an exception: " +
+            e,
+        );
       }
     }
     function _JS_Sound_SetPosition(channelInstance, x, y, z) {
@@ -2382,7 +2697,14 @@ var unityFramework = (() => {
         var channel = WEBAudio.audioInstances[channelInstance];
         channel.setVolume(v);
       } catch (e) {
-        console.error("JS_Sound_SetVolume(channel=" + channelInstance + ", volume=" + v + ") threw an exception: " + e);
+        console.error(
+          "JS_Sound_SetVolume(channel=" +
+            channelInstance +
+            ", volume=" +
+            v +
+            ") threw an exception: " +
+            e,
+        );
       }
     }
     function _JS_Sound_Stop(channelInstance, delay) {
@@ -2400,9 +2722,16 @@ var unityFramework = (() => {
       if (buffer) stringToUTF8(browserVer, buffer, bufferSize);
       return lengthBytesUTF8(browserVer);
     }
-    function _JS_SystemInfo_GetCanvasClientSize(domElementSelector, outWidth, outHeight) {
+    function _JS_SystemInfo_GetCanvasClientSize(
+      domElementSelector,
+      outWidth,
+      outHeight,
+    ) {
       var selector = UTF8ToString(domElementSelector);
-      var canvas = selector == "#canvas" ? Module["canvas"] : document.querySelector(selector);
+      var canvas =
+        selector == "#canvas"
+          ? Module["canvas"]
+          : document.querySelector(selector);
       var w = 0,
         h = 0;
       if (canvas) {
@@ -2428,7 +2757,10 @@ var unityFramework = (() => {
       return lengthBytesUTF8(language);
     }
     function _JS_SystemInfo_GetMatchWebGLToCanvasSize() {
-      return Module.matchWebGLToCanvasSize || Module.matchWebGLToCanvasSize === undefined;
+      return (
+        Module.matchWebGLToCanvasSize ||
+        Module.matchWebGLToCanvasSize === undefined
+      );
     }
     function _JS_SystemInfo_GetMemory() {
       return HEAPU8.length / (1024 * 1024);
@@ -2439,7 +2771,9 @@ var unityFramework = (() => {
       return lengthBytesUTF8(browser);
     }
     function _JS_SystemInfo_GetPreferredDevicePixelRatio() {
-      return Module.matchWebGLToCanvasSize == false ? 1 : Module.devicePixelRatio || window.devicePixelRatio || 1;
+      return Module.matchWebGLToCanvasSize == false
+        ? 1
+        : Module.devicePixelRatio || window.devicePixelRatio || 1;
     }
     function _JS_SystemInfo_GetScreenSize(outWidth, outHeight) {
       HEAPF64[outWidth >> 3] = Module.SystemInfo.width;
@@ -2495,7 +2829,9 @@ var unityFramework = (() => {
       video.crossOrigin = "anonymous";
       videoInstances[++videoInstanceIdCounter] = video;
       if (hasSRGBATextures == null)
-        hasSRGBATextures = Module.SystemInfo.browser == "Chrome" || Module.SystemInfo.browser == "Edge";
+        hasSRGBATextures =
+          Module.SystemInfo.browser == "Chrome" ||
+          Module.SystemInfo.browser == "Edge";
       return videoInstanceIdCounter;
     }
     var jsVideoPendingBlockedVideos = {};
@@ -2506,14 +2842,21 @@ var unityFramework = (() => {
     }
     function jsVideoAttemptToPlayBlockedVideos() {
       for (var i in jsVideoPendingBlockedVideos) {
-        if (jsVideoPendingBlockedVideos.hasOwnProperty(i)) jsVideoPlayPendingBlockedVideo(i);
+        if (jsVideoPendingBlockedVideos.hasOwnProperty(i))
+          jsVideoPlayPendingBlockedVideo(i);
       }
     }
     function jsVideoRemovePendingBlockedVideo(video) {
       delete jsVideoPendingBlockedVideos[video];
       if (Object.keys(jsVideoPendingBlockedVideos).length == 0) {
-        window.removeEventListener("mousedown", jsVideoAttemptToPlayBlockedVideos);
-        window.removeEventListener("touchstart", jsVideoAttemptToPlayBlockedVideos);
+        window.removeEventListener(
+          "mousedown",
+          jsVideoAttemptToPlayBlockedVideos,
+        );
+        window.removeEventListener(
+          "touchstart",
+          jsVideoAttemptToPlayBlockedVideos,
+        );
       }
     }
     function _JS_Video_Destroy(video) {
@@ -2540,7 +2883,12 @@ var unityFramework = (() => {
       var track = tracks[trackIndex];
       if (track) track.enabled = enabled ? true : false;
     }
-    function _JS_Video_GetAudioLanguageCode(video, trackIndex, buffer, bufferSize) {
+    function _JS_Video_GetAudioLanguageCode(
+      video,
+      trackIndex,
+      buffer,
+      bufferSize,
+    ) {
       var tracks = videoInstances[video].audioTracks;
       if (!tracks) return 0;
       var track = tracks[trackIndex];
@@ -2564,7 +2912,9 @@ var unityFramework = (() => {
     }
     function _JS_Video_IsReady(video) {
       var v = videoInstances[video];
-      var targetReadyState = /(iPhone|iPad)/i.test(navigator.userAgent) ? v.HAVE_METADATA : v.HAVE_ENOUGH_DATA;
+      var targetReadyState = /(iPhone|iPad)/i.test(navigator.userAgent)
+        ? v.HAVE_METADATA
+        : v.HAVE_ENOUGH_DATA;
       if (!v.isReady && v.readyState >= targetReadyState) v.isReady = true;
       return v.isReady;
     }
@@ -2614,8 +2964,16 @@ var unityFramework = (() => {
     }
     function jsVideoAddPendingBlockedVideo(video, v) {
       if (Object.keys(jsVideoPendingBlockedVideos).length == 0) {
-        window.addEventListener("mousedown", jsVideoAttemptToPlayBlockedVideos, true);
-        window.addEventListener("touchstart", jsVideoAttemptToPlayBlockedVideos, true);
+        window.addEventListener(
+          "mousedown",
+          jsVideoAttemptToPlayBlockedVideos,
+          true,
+        );
+        window.addEventListener(
+          "touchstart",
+          jsVideoAttemptToPlayBlockedVideos,
+          true,
+        );
       }
       jsVideoPendingBlockedVideos[video] = v;
     }
@@ -2625,7 +2983,8 @@ var unityFramework = (() => {
       var promise = v.play();
       if (promise)
         promise.catch(function (e) {
-          if (e.name == "NotAllowedError") jsVideoAddPendingBlockedVideo(video, v);
+          if (e.name == "NotAllowedError")
+            jsVideoAddPendingBlockedVideo(video, v);
         });
       _JS_Video_SetLoop(video, v.loop);
     }
@@ -2671,9 +3030,21 @@ var unityFramework = (() => {
     function jsVideoCreateTexture2D() {
       var t = GLctx.createTexture();
       GLctx.bindTexture(GLctx.TEXTURE_2D, t);
-      GLctx.texParameteri(GLctx.TEXTURE_2D, GLctx.TEXTURE_WRAP_S, GLctx.CLAMP_TO_EDGE);
-      GLctx.texParameteri(GLctx.TEXTURE_2D, GLctx.TEXTURE_WRAP_T, GLctx.CLAMP_TO_EDGE);
-      GLctx.texParameteri(GLctx.TEXTURE_2D, GLctx.TEXTURE_MIN_FILTER, GLctx.LINEAR);
+      GLctx.texParameteri(
+        GLctx.TEXTURE_2D,
+        GLctx.TEXTURE_WRAP_S,
+        GLctx.CLAMP_TO_EDGE,
+      );
+      GLctx.texParameteri(
+        GLctx.TEXTURE_2D,
+        GLctx.TEXTURE_WRAP_T,
+        GLctx.CLAMP_TO_EDGE,
+      );
+      GLctx.texParameteri(
+        GLctx.TEXTURE_2D,
+        GLctx.TEXTURE_MIN_FILTER,
+        GLctx.LINEAR,
+      );
       return t;
     }
     var s2lTexture = null;
@@ -2688,9 +3059,20 @@ var unityFramework = (() => {
       if (v.seeking) return false;
       v.lastUpdateTextureTime = v.currentTime;
       GLctx.pixelStorei(GLctx.UNPACK_FLIP_Y_WEBGL, true);
-      var internalFormat = adjustToLinearspace ? (hasSRGBATextures ? GLctx.RGBA : GLctx.RGB) : GLctx.RGBA;
-      var format = adjustToLinearspace ? (hasSRGBATextures ? GLctx.RGBA : GLctx.RGB) : GLctx.RGBA;
-      if (v.previousUploadedWidth != v.videoWidth || v.previousUploadedHeight != v.videoHeight) {
+      var internalFormat = adjustToLinearspace
+        ? hasSRGBATextures
+          ? GLctx.RGBA
+          : GLctx.RGB
+        : GLctx.RGBA;
+      var format = adjustToLinearspace
+        ? hasSRGBATextures
+          ? GLctx.RGBA
+          : GLctx.RGB
+        : GLctx.RGBA;
+      if (
+        v.previousUploadedWidth != v.videoWidth ||
+        v.previousUploadedHeight != v.videoHeight
+      ) {
         GLctx.deleteTexture(GL.textures[tex]);
         var t = jsVideoCreateTexture2D();
         t.name = tex;
@@ -2707,7 +3089,7 @@ var unityFramework = (() => {
             0,
             format,
             GLctx.UNSIGNED_BYTE,
-            null
+            null,
           );
           if (!s2lTexture) {
             s2lTexture = jsVideoCreateTexture2D();
@@ -2715,7 +3097,14 @@ var unityFramework = (() => {
             GLctx.bindTexture(GLctx.TEXTURE_2D, s2lTexture);
           }
         }
-        GLctx.texImage2D(GLctx.TEXTURE_2D, 0, internalFormat, format, GLctx.UNSIGNED_BYTE, v);
+        GLctx.texImage2D(
+          GLctx.TEXTURE_2D,
+          0,
+          internalFormat,
+          format,
+          GLctx.UNSIGNED_BYTE,
+          v,
+        );
       } else {
         if (adjustToLinearspace) {
           if (!s2lTexture) {
@@ -2726,7 +3115,14 @@ var unityFramework = (() => {
         } else {
           GLctx.bindTexture(GLctx.TEXTURE_2D, GL.textures[tex]);
         }
-        GLctx.texImage2D(GLctx.TEXTURE_2D, 0, internalFormat, format, GLctx.UNSIGNED_BYTE, v);
+        GLctx.texImage2D(
+          GLctx.TEXTURE_2D,
+          0,
+          internalFormat,
+          format,
+          GLctx.UNSIGNED_BYTE,
+          v,
+        );
       }
       GLctx.pixelStorei(GLctx.UNPACK_FLIP_Y_WEBGL, false);
       if (adjustToLinearspace) {
@@ -2743,25 +3139,45 @@ var unityFramework = (() => {
           GLctx.attachShader(s2lProgram, vertexShader);
           GLctx.attachShader(s2lProgram, fragmentShader);
           GLctx.linkProgram(s2lProgram);
-          s2lVertexPositionNDC = GLctx.getAttribLocation(s2lProgram, "vertexPositionNDC");
+          s2lVertexPositionNDC = GLctx.getAttribLocation(
+            s2lProgram,
+            "vertexPositionNDC",
+          );
         }
         if (s2lVBO == null) {
           s2lVBO = GLctx.createBuffer();
           GLctx.bindBuffer(GLctx.ARRAY_BUFFER, s2lVBO);
           var verts = [1, 1, -1, 1, -1, -1, -1, -1, 1, -1, 1, 1];
-          GLctx.bufferData(GLctx.ARRAY_BUFFER, new Float32Array(verts), GLctx.STATIC_DRAW);
+          GLctx.bufferData(
+            GLctx.ARRAY_BUFFER,
+            new Float32Array(verts),
+            GLctx.STATIC_DRAW,
+          );
         }
         if (!s2lFBO) {
           s2lFBO = GLctx.createFramebuffer();
         }
         GLctx.bindFramebuffer(GLctx.FRAMEBUFFER, s2lFBO);
-        GLctx.framebufferTexture2D(GLctx.FRAMEBUFFER, GLctx.COLOR_ATTACHMENT0, GLctx.TEXTURE_2D, GL.textures[tex], 0);
+        GLctx.framebufferTexture2D(
+          GLctx.FRAMEBUFFER,
+          GLctx.COLOR_ATTACHMENT0,
+          GLctx.TEXTURE_2D,
+          GL.textures[tex],
+          0,
+        );
         GLctx.bindTexture(GLctx.TEXTURE_2D, s2lTexture);
         GLctx.viewport(0, 0, v.videoWidth, v.videoHeight);
         GLctx.useProgram(s2lProgram);
         GLctx.bindBuffer(GLctx.ARRAY_BUFFER, s2lVBO);
         GLctx.enableVertexAttribArray(s2lVertexPositionNDC);
-        GLctx.vertexAttribPointer(s2lVertexPositionNDC, 2, GLctx.FLOAT, false, 0, 0);
+        GLctx.vertexAttribPointer(
+          s2lVertexPositionNDC,
+          2,
+          GLctx.FLOAT,
+          false,
+          0,
+          0,
+        );
         GLctx.drawArrays(GLctx.TRIANGLES, 0, 6);
         GLctx.viewport(0, 0, GLctx.canvas.width, GLctx.canvas.height);
         GLctx.bindFramebuffer(GLctx.FRAMEBUFFER, null);
@@ -2774,19 +3190,27 @@ var unityFramework = (() => {
     var activeWebCams = {};
     function _JS_WebCamVideo_CanPlay(deviceId) {
       var webcam = activeWebCams[deviceId];
-      return webcam && webcam.video.videoWidth > 0 && webcam.video.videoHeight > 0;
+      return (
+        webcam && webcam.video.videoWidth > 0 && webcam.video.videoHeight > 0
+      );
     }
     function _JS_WebCamVideo_GetDeviceName(deviceId, buffer, bufferSize) {
       var webcam = videoInputDevices[deviceId];
-      var name = webcam ? webcam.name : "(disconnected input #" + (deviceId + 1) + ")";
+      var name = webcam
+        ? webcam.name
+        : "(disconnected input #" + (deviceId + 1) + ")";
       if (buffer) stringToUTF8(name, buffer, bufferSize);
       return lengthBytesUTF8(name);
     }
     function _JS_WebCamVideo_GetNativeHeight(deviceId) {
-      return activeWebCams[deviceId] && activeWebCams[deviceId].video.videoHeight;
+      return (
+        activeWebCams[deviceId] && activeWebCams[deviceId].video.videoHeight
+      );
     }
     function _JS_WebCamVideo_GetNativeWidth(deviceId) {
-      return activeWebCams[deviceId] && activeWebCams[deviceId].video.videoWidth;
+      return (
+        activeWebCams[deviceId] && activeWebCams[deviceId].video.videoWidth
+      );
     }
     function _JS_WebCamVideo_GetNumDevices() {
       var numDevices = 0;
@@ -2797,7 +3221,7 @@ var unityFramework = (() => {
             "application is being loaded in the background.\n" +
             "If you are a developer, you can ensure WebCam devices are enumerated by first requiring " +
             "user interaction.\n" +
-            "See https://github.com/w3c/mediacapture-main/issues/905 for details."
+            "See https://github.com/w3c/mediacapture-main/issues/905 for details.",
         );
         return numDevices;
       }
@@ -2806,7 +3230,12 @@ var unityFramework = (() => {
       });
       return numDevices;
     }
-    function _JS_WebCamVideo_GrabFrame(deviceId, buffer, destWidth, destHeight) {
+    function _JS_WebCamVideo_GrabFrame(
+      deviceId,
+      buffer,
+      destWidth,
+      destHeight,
+    ) {
       var webcam = activeWebCams[deviceId];
       if (!webcam) return;
       var timeNow = performance.now();
@@ -2818,7 +3247,11 @@ var unityFramework = (() => {
         webcam.nextFrameAvailableTime = timeNow + webcam.frameLengthInMsecs;
       }
       var canvas = webcam.canvas;
-      if (canvas.width != destWidth || canvas.height != destHeight || !webcam.context2d) {
+      if (
+        canvas.width != destWidth ||
+        canvas.height != destHeight ||
+        !webcam.context2d
+      ) {
         canvas.width = destWidth;
         canvas.height = destHeight;
         webcam.context2d = canvas.getContext("2d");
@@ -2833,9 +3266,12 @@ var unityFramework = (() => {
         0,
         0,
         destWidth,
-        destHeight
+        destHeight,
       );
-      HEAPU8.set(context.getImageData(0, 0, destWidth, destHeight).data, buffer);
+      HEAPU8.set(
+        context.getImageData(0, 0, destWidth, destHeight).data,
+        buffer,
+      );
       return 1;
     }
     function _JS_WebCamVideo_IsFrontFacing(deviceId) {
@@ -2848,7 +3284,9 @@ var unityFramework = (() => {
       }
       if (!videoInputDevices[deviceId]) {
         console.error(
-          "Cannot start video input with ID " + deviceId + ". No such ID exists! Existing video inputs are:"
+          "Cannot start video input with ID " +
+            deviceId +
+            ". No such ID exists! Existing video inputs are:",
         );
         console.dir(videoInputDevices);
         return;
@@ -2858,14 +3296,14 @@ var unityFramework = (() => {
           audio: false,
           video: videoInputDevices[deviceId].deviceId
             ? { deviceId: { exact: videoInputDevices[deviceId].deviceId } }
-            : true
+            : true,
         })
         .then(function (stream) {
           var video = document.createElement("video");
           video.srcObject = stream;
           if (/(iPhone|iPad|iPod)/.test(navigator.userAgent)) {
             warnOnce(
-              "Applying iOS Safari specific workaround to video playback: https://bugs.webkit.org/show_bug.cgi?id=217578"
+              "Applying iOS Safari specific workaround to video playback: https://bugs.webkit.org/show_bug.cgi?id=217578",
             );
             video.setAttribute("playsinline", "");
           }
@@ -2875,9 +3313,10 @@ var unityFramework = (() => {
             video: video,
             canvas: document.createElement("canvas"),
             stream: stream,
-            frameLengthInMsecs: 1e3 / stream.getVideoTracks()[0].getSettings().frameRate,
+            frameLengthInMsecs:
+              1e3 / stream.getVideoTracks()[0].getSettings().frameRate,
             nextFrameAvailableTime: 0,
-            refCount: 1
+            refCount: 1,
           };
         })
         .catch(function (e) {
@@ -2896,17 +3335,29 @@ var unityFramework = (() => {
         delete activeWebCams[deviceId];
       }
     }
-    function _JS_WebCamVideo_Update(deviceId, textureId, destWidth, destHeight) {
+    function _JS_WebCamVideo_Update(
+      deviceId,
+      textureId,
+      destWidth,
+      destHeight,
+    ) {
       var webcam = activeWebCams[deviceId];
       if (!webcam) return;
       GLctx.pixelStorei(GLctx.UNPACK_FLIP_Y_WEBGL, true);
       var webCamTexture = webcam.video;
-      if (webcam.video.videoWidth != destWidth || webcam.video.videoHeight != destHeight) {
+      if (
+        webcam.video.videoWidth != destWidth ||
+        webcam.video.videoHeight != destHeight
+      ) {
         if (!webcam.canvas) {
           webcam.canvas = document.createElement("canvas");
         }
         var canvas = webcam.canvas;
-        if (canvas.width != destWidth || canvas.height != destHeight || !webcam.context2d) {
+        if (
+          canvas.width != destWidth ||
+          canvas.height != destHeight ||
+          !webcam.context2d
+        ) {
           canvas.width = destWidth;
           canvas.height = destHeight;
           webcam.context2d = canvas.getContext("2d");
@@ -2921,18 +3372,32 @@ var unityFramework = (() => {
           0,
           0,
           destWidth,
-          destHeight
+          destHeight,
         );
         webCamTexture = canvas;
       }
       GLctx.bindTexture(GLctx.TEXTURE_2D, GL.textures[textureId]);
-      GLctx.texSubImage2D(GLctx.TEXTURE_2D, 0, 0, 0, GLctx.RGBA, GLctx.UNSIGNED_BYTE, webCamTexture);
+      GLctx.texSubImage2D(
+        GLctx.TEXTURE_2D,
+        0,
+        0,
+        0,
+        GLctx.RGBA,
+        GLctx.UNSIGNED_BYTE,
+        webCamTexture,
+      );
       GLctx.pixelStorei(GLctx.UNPACK_FLIP_Y_WEBGL, false);
     }
     function _JS_WebCam_IsSupported() {
       return !!navigator.mediaDevices;
     }
-    var wr = { requests: {}, responses: {}, abortControllers: {}, timer: {}, nextRequestId: 1 };
+    var wr = {
+      requests: {},
+      responses: {},
+      abortControllers: {},
+      timer: {},
+      nextRequestId: 1,
+    };
     function _JS_WebRequest_Abort(requestId) {
       var abortController = wr.abortControllers[requestId];
       if (!abortController || abortController.signal.aborted) {
@@ -2946,9 +3411,14 @@ var unityFramework = (() => {
       var abortController = new AbortController();
       var requestOptions = {
         url: _url,
-        init: { method: _method, signal: abortController.signal, headers: {}, enableStreamingDownload: true },
+        init: {
+          method: _method,
+          signal: abortController.signal,
+          headers: {},
+          enableStreamingDownload: true,
+        },
         tempBuffer: null,
-        tempBufferSize: 0
+        tempBufferSize: 0,
       };
       wr.abortControllers[wr.nextRequestId] = abortController;
       wr.requests[wr.nextRequestId] = requestOptions;
@@ -2975,7 +3445,7 @@ var unityFramework = (() => {
       headerBuffer,
       headerSize,
       responseUrlBuffer,
-      responseUrlSize
+      responseUrlSize,
     ) {
       var response = wr.responses[requestId];
       if (!response) {
@@ -3011,7 +3481,14 @@ var unityFramework = (() => {
       delete wr.abortControllers[requestId];
       delete wr.timer[requestId];
     }
-    function _JS_WebRequest_Send(requestId, ptr, length, arg, onresponse, onprogress) {
+    function _JS_WebRequest_Send(
+      requestId,
+      ptr,
+      length,
+      arg,
+      onresponse,
+      onprogress,
+    ) {
       var requestOptions = wr.requests[requestId];
       var abortController = wr.abortControllers[requestId];
       function getTempBuffer(size) {
@@ -3040,13 +3517,34 @@ var unityFramework = (() => {
         }
         var kWebRequestOK = 0;
         if (requestOptions.init.enableStreamingDownload) {
-          dynCall("viiiiii", onresponse, [arg, response.status, 0, body.length, 0, kWebRequestOK]);
+          dynCall("viiiiii", onresponse, [
+            arg,
+            response.status,
+            0,
+            body.length,
+            0,
+            kWebRequestOK,
+          ]);
         } else if (body.length != 0) {
           var buffer = _malloc(body.length);
           HEAPU8.set(body, buffer);
-          dynCall("viiiiii", onresponse, [arg, response.status, buffer, body.length, 0, kWebRequestOK]);
+          dynCall("viiiiii", onresponse, [
+            arg,
+            response.status,
+            buffer,
+            body.length,
+            0,
+            kWebRequestOK,
+          ]);
         } else {
-          dynCall("viiiiii", onresponse, [arg, response.status, 0, 0, 0, kWebRequestOK]);
+          dynCall("viiiiii", onresponse, [
+            arg,
+            response.status,
+            0,
+            0,
+            0,
+            kWebRequestOK,
+          ]);
         }
         if (requestOptions.tempBuffer) {
           _free(requestOptions.tempBuffer);
@@ -3075,9 +3573,23 @@ var unityFramework = (() => {
         if (e.chunk) {
           var buffer = getTempBuffer(e.chunk.length);
           HEAPU8.set(e.chunk, buffer);
-          dynCall("viiiiii", onprogress, [arg, response.status, e.loaded, e.total, buffer, e.chunk.length]);
+          dynCall("viiiiii", onprogress, [
+            arg,
+            response.status,
+            e.loaded,
+            e.total,
+            buffer,
+            e.chunk.length,
+          ]);
         } else {
-          dynCall("viiiiii", onprogress, [arg, response.status, e.loaded, e.total, 0, 0]);
+          dynCall("viiiiii", onprogress, [
+            arg,
+            response.status,
+            e.loaded,
+            e.total,
+            0,
+            0,
+          ]);
         }
       }
       try {
@@ -3171,7 +3683,8 @@ var unityFramework = (() => {
     }
     var PATH = {
       splitPath: function (filename) {
-        var splitPathRe = /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
+        var splitPathRe =
+          /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
         return splitPathRe.exec(filename).slice(1);
       },
       normalizeArray: function (parts, allowAboveRoot) {
@@ -3202,7 +3715,7 @@ var unityFramework = (() => {
           path.split("/").filter(function (p) {
             return !!p;
           }),
-          !isAbsolute
+          !isAbsolute,
         ).join("/");
         if (!path && !isAbsolute) {
           path = ".";
@@ -3241,10 +3754,13 @@ var unityFramework = (() => {
       },
       join2: function (l, r) {
         return PATH.normalize(l + "/" + r);
-      }
+      },
     };
     function getRandomDevice() {
-      if (typeof crypto == "object" && typeof crypto["getRandomValues"] == "function") {
+      if (
+        typeof crypto == "object" &&
+        typeof crypto["getRandomValues"] == "function"
+      ) {
         var randomBuffer = new Uint8Array(1);
         return function () {
           crypto.getRandomValues(randomBuffer);
@@ -3280,7 +3796,7 @@ var unityFramework = (() => {
           resolvedPath.split("/").filter(function (p) {
             return !!p;
           }),
-          !resolvedAbsolute
+          !resolvedAbsolute,
         ).join("/");
         return (resolvedAbsolute ? "/" : "") + resolvedPath || ".";
       },
@@ -3315,7 +3831,7 @@ var unityFramework = (() => {
         }
         outputParts = outputParts.concat(toParts.slice(samePartsLength));
         return outputParts.join("/");
-      }
+      },
     };
     var TTY = {
       ttys: [],
@@ -3379,7 +3895,7 @@ var unityFramework = (() => {
             stream.node.timestamp = Date.now();
           }
           return i;
-        }
+        },
       },
       default_tty_ops: {
         get_char: function (tty) {
@@ -3400,7 +3916,10 @@ var unityFramework = (() => {
               } else {
                 result = null;
               }
-            } else if (typeof window != "undefined" && typeof window.prompt == "function") {
+            } else if (
+              typeof window != "undefined" &&
+              typeof window.prompt == "function"
+            ) {
               result = window.prompt("Input: ");
               if (result !== null) {
                 result += "\n";
@@ -3431,7 +3950,7 @@ var unityFramework = (() => {
             out(UTF8ArrayToString(tty.output, 0));
             tty.output = [];
           }
-        }
+        },
       },
       default_tty1_ops: {
         put_char: function (tty, val) {
@@ -3447,8 +3966,8 @@ var unityFramework = (() => {
             err(UTF8ArrayToString(tty.output, 0));
             tty.output = [];
           }
-        }
-      }
+        },
+      },
     };
     function zeroMemory(address, size) {
       HEAPU8.fill(0, address, address + size);
@@ -3484,33 +4003,39 @@ var unityFramework = (() => {
                 unlink: MEMFS.node_ops.unlink,
                 rmdir: MEMFS.node_ops.rmdir,
                 readdir: MEMFS.node_ops.readdir,
-                symlink: MEMFS.node_ops.symlink
+                symlink: MEMFS.node_ops.symlink,
               },
-              stream: { llseek: MEMFS.stream_ops.llseek }
+              stream: { llseek: MEMFS.stream_ops.llseek },
             },
             file: {
-              node: { getattr: MEMFS.node_ops.getattr, setattr: MEMFS.node_ops.setattr },
+              node: {
+                getattr: MEMFS.node_ops.getattr,
+                setattr: MEMFS.node_ops.setattr,
+              },
               stream: {
                 llseek: MEMFS.stream_ops.llseek,
                 read: MEMFS.stream_ops.read,
                 write: MEMFS.stream_ops.write,
                 allocate: MEMFS.stream_ops.allocate,
                 mmap: MEMFS.stream_ops.mmap,
-                msync: MEMFS.stream_ops.msync
-              }
+                msync: MEMFS.stream_ops.msync,
+              },
             },
             link: {
               node: {
                 getattr: MEMFS.node_ops.getattr,
                 setattr: MEMFS.node_ops.setattr,
-                readlink: MEMFS.node_ops.readlink
+                readlink: MEMFS.node_ops.readlink,
               },
-              stream: {}
+              stream: {},
             },
             chrdev: {
-              node: { getattr: MEMFS.node_ops.getattr, setattr: MEMFS.node_ops.setattr },
-              stream: FS.chrdev_stream_ops
-            }
+              node: {
+                getattr: MEMFS.node_ops.getattr,
+                setattr: MEMFS.node_ops.setattr,
+              },
+              stream: FS.chrdev_stream_ops,
+            },
           };
         }
         var node = FS.createNode(parent, name, mode, dev);
@@ -3539,18 +4064,25 @@ var unityFramework = (() => {
       },
       getFileDataAsTypedArray: function (node) {
         if (!node.contents) return new Uint8Array(0);
-        if (node.contents.subarray) return node.contents.subarray(0, node.usedBytes);
+        if (node.contents.subarray)
+          return node.contents.subarray(0, node.usedBytes);
         return new Uint8Array(node.contents);
       },
       expandFileStorage: function (node, newCapacity) {
         var prevCapacity = node.contents ? node.contents.length : 0;
         if (prevCapacity >= newCapacity) return;
         var CAPACITY_DOUBLING_MAX = 1024 * 1024;
-        newCapacity = Math.max(newCapacity, (prevCapacity * (prevCapacity < CAPACITY_DOUBLING_MAX ? 2 : 1.125)) >>> 0);
+        newCapacity = Math.max(
+          newCapacity,
+          (prevCapacity *
+            (prevCapacity < CAPACITY_DOUBLING_MAX ? 2 : 1.125)) >>>
+            0,
+        );
         if (prevCapacity != 0) newCapacity = Math.max(newCapacity, 256);
         var oldContents = node.contents;
         node.contents = new Uint8Array(newCapacity);
-        if (node.usedBytes > 0) node.contents.set(oldContents.subarray(0, node.usedBytes), 0);
+        if (node.usedBytes > 0)
+          node.contents.set(oldContents.subarray(0, node.usedBytes), 0);
       },
       resizeFileStorage: function (node, newSize) {
         if (node.usedBytes == newSize) return;
@@ -3561,7 +4093,9 @@ var unityFramework = (() => {
           var oldContents = node.contents;
           node.contents = new Uint8Array(newSize);
           if (oldContents) {
-            node.contents.set(oldContents.subarray(0, Math.min(newSize, node.usedBytes)));
+            node.contents.set(
+              oldContents.subarray(0, Math.min(newSize, node.usedBytes)),
+            );
           }
           node.usedBytes = newSize;
         }
@@ -3660,7 +4194,7 @@ var unityFramework = (() => {
             throw new FS.ErrnoError(28);
           }
           return node.link;
-        }
+        },
       },
       stream_ops: {
         read: function (stream, buffer, offset, length, position) {
@@ -3670,7 +4204,8 @@ var unityFramework = (() => {
           if (size > 8 && contents.subarray) {
             buffer.set(contents.subarray(position, position + size), offset);
           } else {
-            for (var i = 0; i < size; i++) buffer[offset + i] = contents[position + i];
+            for (var i = 0; i < size; i++)
+              buffer[offset + i] = contents[position + i];
           }
           return size;
         },
@@ -3691,13 +4226,19 @@ var unityFramework = (() => {
               node.usedBytes = length;
               return length;
             } else if (position + length <= node.usedBytes) {
-              node.contents.set(buffer.subarray(offset, offset + length), position);
+              node.contents.set(
+                buffer.subarray(offset, offset + length),
+                position,
+              );
               return length;
             }
           }
           MEMFS.expandFileStorage(node, position + length);
           if (node.contents.subarray && buffer.subarray) {
-            node.contents.set(buffer.subarray(offset, offset + length), position);
+            node.contents.set(
+              buffer.subarray(offset, offset + length),
+              position,
+            );
           } else {
             for (var i = 0; i < length; i++) {
               node.contents[position + i] = buffer[offset + i];
@@ -3722,7 +4263,10 @@ var unityFramework = (() => {
         },
         allocate: function (stream, offset, length) {
           MEMFS.expandFileStorage(stream.node, offset + length);
-          stream.node.usedBytes = Math.max(stream.node.usedBytes, offset + length);
+          stream.node.usedBytes = Math.max(
+            stream.node.usedBytes,
+            offset + length,
+          );
         },
         mmap: function (stream, address, length, position, prot, flags) {
           if (address !== 0) {
@@ -3742,7 +4286,11 @@ var unityFramework = (() => {
               if (contents.subarray) {
                 contents = contents.subarray(position, position + length);
               } else {
-                contents = Array.prototype.slice.call(contents, position, position + length);
+                contents = Array.prototype.slice.call(
+                  contents,
+                  position,
+                  position + length,
+                );
               }
             }
             allocated = true;
@@ -3761,17 +4309,27 @@ var unityFramework = (() => {
           if (mmapFlags & 2) {
             return 0;
           }
-          var bytesWritten = MEMFS.stream_ops.write(stream, buffer, 0, length, offset, false);
+          var bytesWritten = MEMFS.stream_ops.write(
+            stream,
+            buffer,
+            0,
+            length,
+            offset,
+            false,
+          );
           return 0;
-        }
-      }
+        },
+      },
     };
     function asyncLoad(url, onload, onerror, noRunDep) {
       var dep = !noRunDep ? getUniqueRunDependency("al " + url) : "";
       readAsync(
         url,
         function (arrayBuffer) {
-          assert(arrayBuffer, 'Loading data file "' + url + '" failed (no arrayBuffer).');
+          assert(
+            arrayBuffer,
+            'Loading data file "' + url + '" failed (no arrayBuffer).',
+          );
           onload(new Uint8Array(arrayBuffer));
           if (dep) removeRunDependency(dep);
         },
@@ -3781,7 +4339,7 @@ var unityFramework = (() => {
           } else {
             throw 'Loading data file "' + url + '" failed.';
           }
-        }
+        },
       );
       if (dep) addRunDependency(dep);
     }
@@ -3791,7 +4349,11 @@ var unityFramework = (() => {
         if (typeof indexedDB != "undefined") return indexedDB;
         var ret = null;
         if (typeof window == "object")
-          ret = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+          ret =
+            window.indexedDB ||
+            window.mozIndexedDB ||
+            window.webkitIndexedDB ||
+            window.msIndexedDB;
         assert(ret, "IDBFS used, but indexedDB not supported");
         return ret;
       },
@@ -3858,7 +4420,9 @@ var unityFramework = (() => {
             return PATH.join2(root, p);
           };
         }
-        var check = FS.readdir(mount.mountpoint).filter(isRealDir).map(toAbsolute(mount.mountpoint));
+        var check = FS.readdir(mount.mountpoint)
+          .filter(isRealDir)
+          .map(toAbsolute(mount.mountpoint));
         while (check.length) {
           var path = check.pop();
           var stat;
@@ -3868,7 +4432,10 @@ var unityFramework = (() => {
             return callback(e);
           }
           if (FS.isDir(stat.mode)) {
-            check.push.apply(check, FS.readdir(path).filter(isRealDir).map(toAbsolute(path)));
+            check.push.apply(
+              check,
+              FS.readdir(path).filter(isRealDir).map(toAbsolute(path)),
+            );
           }
           entries[path] = { timestamp: stat.mtime };
         }
@@ -3889,7 +4456,11 @@ var unityFramework = (() => {
             index.openKeyCursor().onsuccess = (event) => {
               var cursor = event.target.result;
               if (!cursor) {
-                return callback(null, { type: "remote", db: db, entries: entries });
+                return callback(null, {
+                  type: "remote",
+                  db: db,
+                  entries: entries,
+                });
               }
               entries[cursor.primaryKey] = { timestamp: cursor.key };
               cursor.continue();
@@ -3912,7 +4483,11 @@ var unityFramework = (() => {
           return callback(null, { timestamp: stat.mtime, mode: stat.mode });
         } else if (FS.isFile(stat.mode)) {
           node.contents = MEMFS.getFileDataAsTypedArray(node);
-          return callback(null, { timestamp: stat.mtime, mode: stat.mode, contents: node.contents });
+          return callback(null, {
+            timestamp: stat.mtime,
+            mode: stat.mode,
+            contents: node.contents,
+          });
         } else {
           return callback(new Error("node type not supported"));
         }
@@ -4045,7 +4620,7 @@ var unityFramework = (() => {
               IDBFS.removeRemoteEntry(store, path, done);
             }
           });
-      }
+      },
     };
     var FS = {
       root: null,
@@ -4071,7 +4646,7 @@ var unityFramework = (() => {
         }
         var parts = PATH.normalizeArray(
           path.split("/").filter((p) => !!p),
-          false
+          false,
         );
         var current = FS.root;
         var current_path = "/";
@@ -4092,7 +4667,9 @@ var unityFramework = (() => {
             while (FS.isLink(current.mode)) {
               var link = FS.readlink(current_path);
               current_path = PATH_FS.resolve(PATH.dirname(current_path), link);
-              var lookup = FS.lookupPath(current_path, { recurse_count: opts.recurse_count + 1 });
+              var lookup = FS.lookupPath(current_path, {
+                recurse_count: opts.recurse_count + 1,
+              });
               current = lookup.node;
               if (count++ > 40) {
                 throw new FS.ErrnoError(32);
@@ -4108,7 +4685,9 @@ var unityFramework = (() => {
           if (FS.isRoot(node)) {
             var mount = node.mount.mountpoint;
             if (!path) return mount;
-            return mount[mount.length - 1] !== "/" ? mount + "/" + path : mount + path;
+            return mount[mount.length - 1] !== "/"
+              ? mount + "/" + path
+              : mount + path;
           }
           path = path ? node.name + "/" + path : node.name;
           node = node.parent;
@@ -4289,23 +4868,23 @@ var unityFramework = (() => {
               },
               set: function (val) {
                 this.node = val;
-              }
+              },
             },
             isRead: {
               get: function () {
                 return (this.flags & 2097155) !== 1;
-              }
+              },
             },
             isWrite: {
               get: function () {
                 return (this.flags & 2097155) !== 0;
-              }
+              },
             },
             isAppend: {
               get: function () {
                 return this.flags & 1024;
-              }
-            }
+              },
+            },
           };
         }
         stream = Object.assign(new FS.FSStream(), stream);
@@ -4327,7 +4906,7 @@ var unityFramework = (() => {
         },
         llseek: () => {
           throw new FS.ErrnoError(70);
-        }
+        },
       },
       major: (dev) => dev >> 8,
       minor: (dev) => dev & 255,
@@ -4354,7 +4933,9 @@ var unityFramework = (() => {
         FS.syncFSRequests++;
         if (FS.syncFSRequests > 1) {
           err(
-            "warning: " + FS.syncFSRequests + " FS.syncfs operations in flight at once, probably just doing extra work"
+            "warning: " +
+              FS.syncFSRequests +
+              " FS.syncfs operations in flight at once, probably just doing extra work",
           );
         }
         var mounts = FS.getMounts(FS.root.mount);
@@ -4399,7 +4980,12 @@ var unityFramework = (() => {
             throw new FS.ErrnoError(54);
           }
         }
-        var mount = { type: type, opts: opts, mountpoint: mountpoint, mounts: [] };
+        var mount = {
+          type: type,
+          opts: opts,
+          mountpoint: mountpoint,
+          mounts: [],
+        };
         var mountRoot = type.mount(mount);
         mountRoot.mount = mount;
         mount.root = mountRoot;
@@ -4541,14 +5127,19 @@ var unityFramework = (() => {
         if (errCode) {
           throw new FS.ErrnoError(errCode);
         }
-        errCode = new_node ? FS.mayDelete(new_dir, new_name, isdir) : FS.mayCreate(new_dir, new_name);
+        errCode = new_node
+          ? FS.mayDelete(new_dir, new_name, isdir)
+          : FS.mayCreate(new_dir, new_name);
         if (errCode) {
           throw new FS.ErrnoError(errCode);
         }
         if (!old_dir.node_ops.rename) {
           throw new FS.ErrnoError(63);
         }
-        if (FS.isMountpoint(old_node) || (new_node && FS.isMountpoint(new_node))) {
+        if (
+          FS.isMountpoint(old_node) ||
+          (new_node && FS.isMountpoint(new_node))
+        ) {
           throw new FS.ErrnoError(10);
         }
         if (new_dir !== old_dir) {
@@ -4622,7 +5213,10 @@ var unityFramework = (() => {
         if (!link.node_ops.readlink) {
           throw new FS.ErrnoError(28);
         }
-        return PATH_FS.resolve(FS.getPath(link.parent), link.node_ops.readlink(link));
+        return PATH_FS.resolve(
+          FS.getPath(link.parent),
+          link.node_ops.readlink(link),
+        );
       },
       stat: (path, dontFollow) => {
         var lookup = FS.lookupPath(path, { follow: !dontFollow });
@@ -4649,7 +5243,10 @@ var unityFramework = (() => {
         if (!node.node_ops.setattr) {
           throw new FS.ErrnoError(63);
         }
-        node.node_ops.setattr(node, { mode: (mode & 4095) | (node.mode & ~4095), timestamp: Date.now() });
+        node.node_ops.setattr(node, {
+          mode: (mode & 4095) | (node.mode & ~4095),
+          timestamp: Date.now(),
+        });
       },
       lchmod: (path, mode) => {
         FS.chmod(path, mode, true);
@@ -4785,10 +5382,10 @@ var unityFramework = (() => {
             position: 0,
             stream_ops: node.stream_ops,
             ungotten: [],
-            error: false
+            error: false,
           },
           fd_start,
-          fd_end
+          fd_end,
         );
         if (stream.stream_ops.open) {
           stream.stream_ops.open(stream);
@@ -4856,7 +5453,13 @@ var unityFramework = (() => {
         } else if (!stream.seekable) {
           throw new FS.ErrnoError(70);
         }
-        var bytesRead = stream.stream_ops.read(stream, buffer, offset, length, position);
+        var bytesRead = stream.stream_ops.read(
+          stream,
+          buffer,
+          offset,
+          length,
+          position,
+        );
         if (!seeking) stream.position += bytesRead;
         return bytesRead;
       },
@@ -4885,7 +5488,14 @@ var unityFramework = (() => {
         } else if (!stream.seekable) {
           throw new FS.ErrnoError(70);
         }
-        var bytesWritten = stream.stream_ops.write(stream, buffer, offset, length, position, canOwn);
+        var bytesWritten = stream.stream_ops.write(
+          stream,
+          buffer,
+          offset,
+          length,
+          position,
+          canOwn,
+        );
         if (!seeking) stream.position += bytesWritten;
         return bytesWritten;
       },
@@ -4908,7 +5518,11 @@ var unityFramework = (() => {
         stream.stream_ops.allocate(stream, offset, length);
       },
       mmap: (stream, address, length, position, prot, flags) => {
-        if ((prot & 2) !== 0 && (flags & 2) === 0 && (stream.flags & 2097155) !== 2) {
+        if (
+          (prot & 2) !== 0 &&
+          (flags & 2) === 0 &&
+          (stream.flags & 2097155) !== 2
+        ) {
           throw new FS.ErrnoError(2);
         }
         if ((stream.flags & 2097155) === 1) {
@@ -4917,13 +5531,26 @@ var unityFramework = (() => {
         if (!stream.stream_ops.mmap) {
           throw new FS.ErrnoError(43);
         }
-        return stream.stream_ops.mmap(stream, address, length, position, prot, flags);
+        return stream.stream_ops.mmap(
+          stream,
+          address,
+          length,
+          position,
+          prot,
+          flags,
+        );
       },
       msync: (stream, buffer, offset, length, mmapFlags) => {
         if (!stream || !stream.stream_ops.msync) {
           return 0;
         }
-        return stream.stream_ops.msync(stream, buffer, offset, length, mmapFlags);
+        return stream.stream_ops.msync(
+          stream,
+          buffer,
+          offset,
+          length,
+          mmapFlags,
+        );
       },
       munmap: (stream) => 0,
       ioctl: (stream, cmd, arg) => {
@@ -4988,7 +5615,10 @@ var unityFramework = (() => {
       },
       createDefaultDevices: () => {
         FS.mkdir("/dev");
-        FS.registerDevice(FS.makedev(1, 3), { read: () => 0, write: (stream, buffer, offset, length, pos) => length });
+        FS.registerDevice(FS.makedev(1, 3), {
+          read: () => 0,
+          write: (stream, buffer, offset, length, pos) => length,
+        });
         FS.mkdev("/dev/null", FS.makedev(1, 3));
         TTY.register(FS.makedev(5, 0), TTY.default_tty_ops);
         TTY.register(FS.makedev(6, 0), TTY.default_tty1_ops);
@@ -5013,16 +5643,20 @@ var unityFramework = (() => {
                   var fd = +name;
                   var stream = FS.getStream(fd);
                   if (!stream) throw new FS.ErrnoError(8);
-                  var ret = { parent: null, mount: { mountpoint: "fake" }, node_ops: { readlink: () => stream.path } };
+                  var ret = {
+                    parent: null,
+                    mount: { mountpoint: "fake" },
+                    node_ops: { readlink: () => stream.path },
+                  };
                   ret.parent = ret;
                   return ret;
-                }
+                },
               };
               return node;
-            }
+            },
           },
           {},
-          "/proc/self/fd"
+          "/proc/self/fd",
         );
       },
       createStandardStreams: () => {
@@ -5117,7 +5751,7 @@ var unityFramework = (() => {
           object: null,
           parentExists: false,
           parentPath: null,
-          parentObject: null
+          parentObject: null,
         };
         try {
           var lookup = FS.lookupPath(path, { parent: true });
@@ -5151,7 +5785,10 @@ var unityFramework = (() => {
         return current;
       },
       createFile: (parent, name, properties, canRead, canWrite) => {
-        var path = PATH.join2(typeof parent == "string" ? parent : FS.getPath(parent), name);
+        var path = PATH.join2(
+          typeof parent == "string" ? parent : FS.getPath(parent),
+          name,
+        );
         var mode = FS.getMode(canRead, canWrite);
         return FS.create(path, mode);
       },
@@ -5166,7 +5803,8 @@ var unityFramework = (() => {
         if (data) {
           if (typeof data == "string") {
             var arr = new Array(data.length);
-            for (var i = 0, len = data.length; i < len; ++i) arr[i] = data.charCodeAt(i);
+            for (var i = 0, len = data.length; i < len; ++i)
+              arr[i] = data.charCodeAt(i);
             data = arr;
           }
           FS.chmod(node, mode | 146);
@@ -5178,7 +5816,10 @@ var unityFramework = (() => {
         return node;
       },
       createDevice: (parent, name, input, output) => {
-        var path = PATH.join2(typeof parent == "string" ? parent : FS.getPath(parent), name);
+        var path = PATH.join2(
+          typeof parent == "string" ? parent : FS.getPath(parent),
+          name,
+        );
         var mode = FS.getMode(!!input, !!output);
         if (!FS.createDevice.major) FS.createDevice.major = 64;
         var dev = FS.makedev(FS.createDevice.major++, 0);
@@ -5224,15 +5865,16 @@ var unityFramework = (() => {
               stream.node.timestamp = Date.now();
             }
             return i;
-          }
+          },
         });
         return FS.mkdev(path, mode, dev);
       },
       forceLoadFile: (obj) => {
-        if (obj.isDevice || obj.isFolder || obj.link || obj.contents) return true;
+        if (obj.isDevice || obj.isFolder || obj.link || obj.contents)
+          return true;
         if (typeof XMLHttpRequest != "undefined") {
           throw new Error(
-            "Lazy loading should have been performed (contents set) in createLazyFile, but it was not. Lazy loading only works in web workers. Use --embed-file or --preload-file in emcc on the main thread."
+            "Lazy loading should have been performed (contents set) in createLazyFile, but it was not. Lazy loading only works in web workers. Use --embed-file or --preload-file in emcc on the main thread.",
           );
         } else if (read_) {
           try {
@@ -5258,61 +5900,89 @@ var unityFramework = (() => {
           var chunkNum = (idx / this.chunkSize) | 0;
           return this.getter(chunkNum)[chunkOffset];
         };
-        LazyUint8Array.prototype.setDataGetter = function LazyUint8Array_setDataGetter(getter) {
-          this.getter = getter;
-        };
-        LazyUint8Array.prototype.cacheLength = function LazyUint8Array_cacheLength() {
-          var xhr = new XMLHttpRequest();
-          xhr.open("HEAD", url, false);
-          xhr.send(null);
-          if (!((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304))
-            throw new Error("Couldn't load " + url + ". Status: " + xhr.status);
-          var datalength = Number(xhr.getResponseHeader("Content-length"));
-          var header;
-          var hasByteServing = (header = xhr.getResponseHeader("Accept-Ranges")) && header === "bytes";
-          var usesGzip = (header = xhr.getResponseHeader("Content-Encoding")) && header === "gzip";
-          var chunkSize = 1024 * 1024;
-          if (!hasByteServing) chunkSize = datalength;
-          var doXHR = (from, to) => {
-            if (from > to) throw new Error("invalid range (" + from + ", " + to + ") or no bytes requested!");
-            if (to > datalength - 1) throw new Error("only " + datalength + " bytes available! programmer error!");
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", url, false);
-            if (datalength !== chunkSize) xhr.setRequestHeader("Range", "bytes=" + from + "-" + to);
-            xhr.responseType = "arraybuffer";
-            if (xhr.overrideMimeType) {
-              xhr.overrideMimeType("text/plain; charset=x-user-defined");
-            }
-            xhr.send(null);
-            if (!((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304))
-              throw new Error("Couldn't load " + url + ". Status: " + xhr.status);
-            if (xhr.response !== undefined) {
-              return new Uint8Array(xhr.response || []);
-            } else {
-              return intArrayFromString(xhr.responseText || "", true);
-            }
+        LazyUint8Array.prototype.setDataGetter =
+          function LazyUint8Array_setDataGetter(getter) {
+            this.getter = getter;
           };
-          var lazyArray = this;
-          lazyArray.setDataGetter((chunkNum) => {
-            var start = chunkNum * chunkSize;
-            var end = (chunkNum + 1) * chunkSize - 1;
-            end = Math.min(end, datalength - 1);
-            if (typeof lazyArray.chunks[chunkNum] == "undefined") {
-              lazyArray.chunks[chunkNum] = doXHR(start, end);
+        LazyUint8Array.prototype.cacheLength =
+          function LazyUint8Array_cacheLength() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("HEAD", url, false);
+            xhr.send(null);
+            if (
+              !((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304)
+            )
+              throw new Error(
+                "Couldn't load " + url + ". Status: " + xhr.status,
+              );
+            var datalength = Number(xhr.getResponseHeader("Content-length"));
+            var header;
+            var hasByteServing =
+              (header = xhr.getResponseHeader("Accept-Ranges")) &&
+              header === "bytes";
+            var usesGzip =
+              (header = xhr.getResponseHeader("Content-Encoding")) &&
+              header === "gzip";
+            var chunkSize = 1024 * 1024;
+            if (!hasByteServing) chunkSize = datalength;
+            var doXHR = (from, to) => {
+              if (from > to)
+                throw new Error(
+                  "invalid range (" +
+                    from +
+                    ", " +
+                    to +
+                    ") or no bytes requested!",
+                );
+              if (to > datalength - 1)
+                throw new Error(
+                  "only " + datalength + " bytes available! programmer error!",
+                );
+              var xhr = new XMLHttpRequest();
+              xhr.open("GET", url, false);
+              if (datalength !== chunkSize)
+                xhr.setRequestHeader("Range", "bytes=" + from + "-" + to);
+              xhr.responseType = "arraybuffer";
+              if (xhr.overrideMimeType) {
+                xhr.overrideMimeType("text/plain; charset=x-user-defined");
+              }
+              xhr.send(null);
+              if (
+                !((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304)
+              )
+                throw new Error(
+                  "Couldn't load " + url + ". Status: " + xhr.status,
+                );
+              if (xhr.response !== undefined) {
+                return new Uint8Array(xhr.response || []);
+              } else {
+                return intArrayFromString(xhr.responseText || "", true);
+              }
+            };
+            var lazyArray = this;
+            lazyArray.setDataGetter((chunkNum) => {
+              var start = chunkNum * chunkSize;
+              var end = (chunkNum + 1) * chunkSize - 1;
+              end = Math.min(end, datalength - 1);
+              if (typeof lazyArray.chunks[chunkNum] == "undefined") {
+                lazyArray.chunks[chunkNum] = doXHR(start, end);
+              }
+              if (typeof lazyArray.chunks[chunkNum] == "undefined")
+                throw new Error("doXHR failed!");
+              return lazyArray.chunks[chunkNum];
+            });
+            if (usesGzip || !datalength) {
+              chunkSize = datalength = 1;
+              datalength = this.getter(0).length;
+              chunkSize = datalength;
+              out(
+                "LazyFiles on gzip forces download of the whole file when length is accessed",
+              );
             }
-            if (typeof lazyArray.chunks[chunkNum] == "undefined") throw new Error("doXHR failed!");
-            return lazyArray.chunks[chunkNum];
-          });
-          if (usesGzip || !datalength) {
-            chunkSize = datalength = 1;
-            datalength = this.getter(0).length;
-            chunkSize = datalength;
-            out("LazyFiles on gzip forces download of the whole file when length is accessed");
-          }
-          this._length = datalength;
-          this._chunkSize = chunkSize;
-          this.lengthKnown = true;
-        };
+            this._length = datalength;
+            this._chunkSize = chunkSize;
+            this.lengthKnown = true;
+          };
         if (typeof XMLHttpRequest != "undefined") {
           if (!ENVIRONMENT_IS_WORKER)
             throw "Cannot do synchronous binary XHRs outside webworkers in modern browsers. Use --embed-file or --preload-file in emcc";
@@ -5324,7 +5994,7 @@ var unityFramework = (() => {
                   this.cacheLength();
                 }
                 return this._length;
-              }
+              },
             },
             chunkSize: {
               get: function () {
@@ -5332,8 +6002,8 @@ var unityFramework = (() => {
                   this.cacheLength();
                 }
                 return this._chunkSize;
-              }
-            }
+              },
+            },
           });
           var properties = { isDevice: false, contents: lazyArray };
         } else {
@@ -5350,8 +6020,8 @@ var unityFramework = (() => {
           usedBytes: {
             get: function () {
               return this.contents.length;
-            }
-          }
+            },
+          },
         });
         var stream_ops = {};
         var keys = Object.keys(node.stream_ops);
@@ -5391,15 +6061,24 @@ var unityFramework = (() => {
         onerror,
         dontCreateFile,
         canOwn,
-        preFinish
+        preFinish,
       ) => {
-        var fullname = name ? PATH_FS.resolve(PATH.join2(parent, name)) : parent;
+        var fullname = name
+          ? PATH_FS.resolve(PATH.join2(parent, name))
+          : parent;
         var dep = getUniqueRunDependency("cp " + fullname);
         function processData(byteArray) {
           function finish(byteArray) {
             if (preFinish) preFinish();
             if (!dontCreateFile) {
-              FS.createDataFile(parent, name, byteArray, canRead, canWrite, canOwn);
+              FS.createDataFile(
+                parent,
+                name,
+                byteArray,
+                canRead,
+                canWrite,
+                canOwn,
+              );
             }
             if (onload) onload();
             removeRunDependency(dep);
@@ -5422,7 +6101,12 @@ var unityFramework = (() => {
         }
       },
       indexedDB: () => {
-        return window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+        return (
+          window.indexedDB ||
+          window.mozIndexedDB ||
+          window.webkitIndexedDB ||
+          window.msIndexedDB
+        );
       },
       DB_NAME: () => {
         return "EM_FS_" + window.location.pathname;
@@ -5455,7 +6139,10 @@ var unityFramework = (() => {
             else onerror();
           }
           paths.forEach((path) => {
-            var putRequest = files.put(FS.analyzePath(path).object.contents, path);
+            var putRequest = files.put(
+              FS.analyzePath(path).object.contents,
+              path,
+            );
             putRequest.onsuccess = () => {
               ok++;
               if (ok + fail == total) finish();
@@ -5501,7 +6188,14 @@ var unityFramework = (() => {
               if (FS.analyzePath(path).exists) {
                 FS.unlink(path);
               }
-              FS.createDataFile(PATH.dirname(path), PATH.basename(path), getRequest.result, true, true, true);
+              FS.createDataFile(
+                PATH.dirname(path),
+                PATH.basename(path),
+                getRequest.result,
+                true,
+                true,
+                true,
+              );
               ok++;
               if (ok + fail == total) finish();
             };
@@ -5513,7 +6207,7 @@ var unityFramework = (() => {
           transaction.onerror = onerror;
         };
         openRequest.onerror = onerror;
-      }
+      },
     };
     var SYSCALLS = {
       DEFAULT_POLLMASK: 5,
@@ -5541,7 +6235,11 @@ var unityFramework = (() => {
         try {
           var stat = func(path);
         } catch (e) {
-          if (e && e.node && PATH.normalize(path) !== PATH.normalize(FS.getPath(e.node))) {
+          if (
+            e &&
+            e.node &&
+            PATH.normalize(path) !== PATH.normalize(FS.getPath(e.node))
+          ) {
             return -54;
           }
           throw e;
@@ -5560,9 +6258,13 @@ var unityFramework = (() => {
           ((tempDouble = stat.size),
           +Math.abs(tempDouble) >= 1
             ? tempDouble > 0
-              ? (Math.min(+Math.floor(tempDouble / 4294967296), 4294967295) | 0) >>> 0
-              : ~~+Math.ceil((tempDouble - +(~~tempDouble >>> 0)) / 4294967296) >>> 0
-            : 0)
+              ? (Math.min(+Math.floor(tempDouble / 4294967296), 4294967295) |
+                  0) >>>
+                0
+              : ~~+Math.ceil(
+                  (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
+                ) >>> 0
+            : 0),
         ]),
           (HEAP32[(buf + 40) >> 2] = tempI64[0]),
           (HEAP32[(buf + 44) >> 2] = tempI64[1]));
@@ -5579,9 +6281,13 @@ var unityFramework = (() => {
           ((tempDouble = stat.ino),
           +Math.abs(tempDouble) >= 1
             ? tempDouble > 0
-              ? (Math.min(+Math.floor(tempDouble / 4294967296), 4294967295) | 0) >>> 0
-              : ~~+Math.ceil((tempDouble - +(~~tempDouble >>> 0)) / 4294967296) >>> 0
-            : 0)
+              ? (Math.min(+Math.floor(tempDouble / 4294967296), 4294967295) |
+                  0) >>>
+                0
+              : ~~+Math.ceil(
+                  (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
+                ) >>> 0
+            : 0),
         ]),
           (HEAP32[(buf + 80) >> 2] = tempI64[0]),
           (HEAP32[(buf + 84) >> 2] = tempI64[1]));
@@ -5593,7 +6299,8 @@ var unityFramework = (() => {
       },
       doMkdir: function (path, mode) {
         path = PATH.normalize(path);
-        if (path[path.length - 1] === "/") path = path.substr(0, path.length - 1);
+        if (path[path.length - 1] === "/")
+          path = path.substr(0, path.length - 1);
         FS.mkdir(path, mode, 0);
         return 0;
       },
@@ -5678,9 +6385,15 @@ var unityFramework = (() => {
       },
       get64: function (low, high) {
         return low;
-      }
+      },
     };
-    function ___syscall__newselect(nfds, readfds, writefds, exceptfds, timeout) {
+    function ___syscall__newselect(
+      nfds,
+      readfds,
+      writefds,
+      exceptfds,
+      timeout,
+    ) {
       try {
         var total = 0;
         var srcReadLow = readfds ? HEAP32[readfds >> 2] : 0,
@@ -5718,15 +6431,21 @@ var unityFramework = (() => {
             flags = stream.stream_ops.poll(stream);
           }
           if (flags & 1 && check(fd, srcReadLow, srcReadHigh, mask)) {
-            fd < 32 ? (dstReadLow = dstReadLow | mask) : (dstReadHigh = dstReadHigh | mask);
+            fd < 32
+              ? (dstReadLow = dstReadLow | mask)
+              : (dstReadHigh = dstReadHigh | mask);
             total++;
           }
           if (flags & 4 && check(fd, srcWriteLow, srcWriteHigh, mask)) {
-            fd < 32 ? (dstWriteLow = dstWriteLow | mask) : (dstWriteHigh = dstWriteHigh | mask);
+            fd < 32
+              ? (dstWriteLow = dstWriteLow | mask)
+              : (dstWriteHigh = dstWriteHigh | mask);
             total++;
           }
           if (flags & 2 && check(fd, srcExceptLow, srcExceptHigh, mask)) {
-            fd < 32 ? (dstExceptLow = dstExceptLow | mask) : (dstExceptHigh = dstExceptHigh | mask);
+            fd < 32
+              ? (dstExceptLow = dstExceptLow | mask)
+              : (dstExceptHigh = dstExceptHigh | mask);
             total++;
           }
         }
@@ -5760,7 +6479,10 @@ var unityFramework = (() => {
     }
     var SOCKFS = {
       mount: function (mount) {
-        Module["websocket"] = Module["websocket"] && "object" === typeof Module["websocket"] ? Module["websocket"] : {};
+        Module["websocket"] =
+          Module["websocket"] && "object" === typeof Module["websocket"]
+            ? Module["websocket"]
+            : {};
         Module["websocket"]._callbacks = {};
         Module["websocket"]["on"] = function (event, callback) {
           if ("function" === typeof callback) {
@@ -5790,7 +6512,7 @@ var unityFramework = (() => {
           peers: {},
           pending: [],
           recv_queue: [],
-          sock_ops: SOCKFS.websocket_sock_ops
+          sock_ops: SOCKFS.websocket_sock_ops,
         };
         var name = SOCKFS.nextname();
         var node = FS.createNode(SOCKFS.root, name, 49152, 0);
@@ -5800,7 +6522,7 @@ var unityFramework = (() => {
           node: node,
           flags: 2,
           seekable: false,
-          stream_ops: SOCKFS.stream_ops
+          stream_ops: SOCKFS.stream_ops,
         });
         sock.stream = stream;
         return sock;
@@ -5837,7 +6559,7 @@ var unityFramework = (() => {
         close: function (stream) {
           var sock = stream.node.sock;
           sock.sock_ops.close(sock);
-        }
+        },
       },
       nextname: function () {
         if (!SOCKFS.nextname.current) {
@@ -5860,14 +6582,17 @@ var unityFramework = (() => {
             } else {
               var result = /ws[s]?:\/\/([^:]+):(\d+)/.exec(ws.url);
               if (!result) {
-                throw new Error("WebSocket URL must be in the format ws(s)://address:port");
+                throw new Error(
+                  "WebSocket URL must be in the format ws(s)://address:port",
+                );
               }
               addr = result[1];
               port = parseInt(result[2], 10);
             }
           } else {
             try {
-              var runtimeConfig = Module["websocket"] && "object" === typeof Module["websocket"];
+              var runtimeConfig =
+                Module["websocket"] && "object" === typeof Module["websocket"];
               var url = "ws:#".replace("#", "//");
               if (runtimeConfig) {
                 if ("string" === typeof Module["websocket"]["url"]) {
@@ -5876,7 +6601,8 @@ var unityFramework = (() => {
               }
               if (url === "ws://" || url === "wss://") {
                 var parts = addr.split("/");
-                url = url + parts[0] + ":" + port + "/" + parts.slice(1).join("/");
+                url =
+                  url + parts[0] + ":" + port + "/" + parts.slice(1).join("/");
               }
               var subProtocols = "binary";
               if (runtimeConfig) {
@@ -5886,10 +6612,17 @@ var unityFramework = (() => {
               }
               var opts = undefined;
               if (subProtocols !== "null") {
-                subProtocols = subProtocols.replace(/^ +| +$/g, "").split(/ *, */);
-                opts = ENVIRONMENT_IS_NODE ? { protocol: subProtocols.toString() } : subProtocols;
+                subProtocols = subProtocols
+                  .replace(/^ +| +$/g, "")
+                  .split(/ *, */);
+                opts = ENVIRONMENT_IS_NODE
+                  ? { protocol: subProtocols.toString() }
+                  : subProtocols;
               }
-              if (runtimeConfig && null === Module["websocket"]["subprotocol"]) {
+              if (
+                runtimeConfig &&
+                null === Module["websocket"]["subprotocol"]
+              ) {
                 subProtocols = "null";
                 opts = undefined;
               }
@@ -5905,7 +6638,12 @@ var unityFramework = (() => {
               throw new FS.ErrnoError(23);
             }
           }
-          var peer = { addr: addr, port: port, socket: ws, dgram_send_queue: [] };
+          var peer = {
+            addr: addr,
+            port: port,
+            socket: ws,
+            dgram_send_queue: [],
+          };
           SOCKFS.websocket_sock_ops.addPeer(sock, peer);
           SOCKFS.websocket_sock_ops.handlePeerEvents(sock, peer);
           if (sock.type === 2 && typeof sock.sport != "undefined") {
@@ -5920,8 +6658,8 @@ var unityFramework = (() => {
                 "r".charCodeAt(0),
                 "t".charCodeAt(0),
                 (sock.sport & 65280) >> 8,
-                sock.sport & 255
-              ])
+                sock.sport & 255,
+              ]),
             );
           }
           return peer;
@@ -5981,7 +6719,11 @@ var unityFramework = (() => {
               SOCKFS.websocket_sock_ops.addPeer(sock, peer);
               return;
             }
-            sock.recv_queue.push({ addr: peer.addr, port: peer.port, data: data });
+            sock.recv_queue.push({
+              addr: peer.addr,
+              port: peer.port,
+              data: data,
+            });
             Module["websocket"].emit("message", sock.stream.fd);
           }
           if (ENVIRONMENT_IS_NODE) {
@@ -5997,7 +6739,11 @@ var unityFramework = (() => {
             });
             peer.socket.on("error", function (error) {
               sock.error = 14;
-              Module["websocket"].emit("error", [sock.stream.fd, sock.error, "ECONNREFUSED: Connection refused"]);
+              Module["websocket"].emit("error", [
+                sock.stream.fd,
+                sock.error,
+                "ECONNREFUSED: Connection refused",
+              ]);
             });
           } else {
             peer.socket.onopen = handleOpen;
@@ -6009,7 +6755,11 @@ var unityFramework = (() => {
             };
             peer.socket.onerror = function (error) {
               sock.error = 14;
-              Module["websocket"].emit("error", [sock.stream.fd, sock.error, "ECONNREFUSED: Connection refused"]);
+              Module["websocket"].emit("error", [
+                sock.stream.fd,
+                sock.error,
+                "ECONNREFUSED: Connection refused",
+              ]);
             };
           }
         },
@@ -6018,7 +6768,10 @@ var unityFramework = (() => {
             return sock.pending.length ? 64 | 1 : 0;
           }
           var mask = 0;
-          var dest = sock.type === 1 ? SOCKFS.websocket_sock_ops.getPeer(sock, sock.daddr, sock.dport) : null;
+          var dest =
+            sock.type === 1
+              ? SOCKFS.websocket_sock_ops.getPeer(sock, sock.daddr, sock.dport)
+              : null;
           if (
             sock.recv_queue.length ||
             !dest ||
@@ -6069,7 +6822,10 @@ var unityFramework = (() => {
           return 0;
         },
         bind: function (sock, addr, port) {
-          if (typeof sock.saddr != "undefined" || typeof sock.sport != "undefined") {
+          if (
+            typeof sock.saddr != "undefined" ||
+            typeof sock.sport != "undefined"
+          ) {
             throw new FS.ErrnoError(28);
           }
           sock.saddr = addr;
@@ -6091,8 +6847,15 @@ var unityFramework = (() => {
           if (sock.server) {
             throw new FS.ErrnoError(138);
           }
-          if (typeof sock.daddr != "undefined" && typeof sock.dport != "undefined") {
-            var dest = SOCKFS.websocket_sock_ops.getPeer(sock, sock.daddr, sock.dport);
+          if (
+            typeof sock.daddr != "undefined" &&
+            typeof sock.dport != "undefined"
+          ) {
+            var dest = SOCKFS.websocket_sock_ops.getPeer(
+              sock,
+              sock.daddr,
+              sock.dport,
+            );
             if (dest) {
               if (dest.socket.readyState === dest.socket.CONNECTING) {
                 throw new FS.ErrnoError(7);
@@ -6119,7 +6882,11 @@ var unityFramework = (() => {
           Module["websocket"].emit("listen", sock.stream.fd);
           sock.server.on("connection", function (ws) {
             if (sock.type === 1) {
-              var newsock = SOCKFS.createSocket(sock.family, sock.type, sock.protocol);
+              var newsock = SOCKFS.createSocket(
+                sock.family,
+                sock.type,
+                sock.protocol,
+              );
               var peer = SOCKFS.websocket_sock_ops.createPeer(newsock, ws);
               newsock.daddr = peer.addr;
               newsock.dport = peer.port;
@@ -6136,7 +6903,11 @@ var unityFramework = (() => {
           });
           sock.server.on("error", function (error) {
             sock.error = 23;
-            Module["websocket"].emit("error", [sock.stream.fd, sock.error, "EHOSTUNREACH: Host is unreachable"]);
+            Module["websocket"].emit("error", [
+              sock.stream.fd,
+              sock.error,
+              "EHOSTUNREACH: Host is unreachable",
+            ]);
           });
         },
         accept: function (listensock) {
@@ -6219,7 +6990,11 @@ var unityFramework = (() => {
           var queued = sock.recv_queue.shift();
           if (!queued) {
             if (sock.type === 1) {
-              var dest = SOCKFS.websocket_sock_ops.getPeer(sock, sock.daddr, sock.dport);
+              var dest = SOCKFS.websocket_sock_ops.getPeer(
+                sock,
+                sock.daddr,
+                sock.dport,
+              );
               if (!dest) {
                 throw new FS.ErrnoError(53);
               } else if (
@@ -6241,16 +7016,20 @@ var unityFramework = (() => {
           var res = {
             buffer: new Uint8Array(queuedBuffer, queuedOffset, bytesRead),
             addr: queued.addr,
-            port: queued.port
+            port: queued.port,
           };
           if (sock.type === 1 && bytesRead < queuedLength) {
             var bytesRemaining = queuedLength - bytesRead;
-            queued.data = new Uint8Array(queuedBuffer, queuedOffset + bytesRead, bytesRemaining);
+            queued.data = new Uint8Array(
+              queuedBuffer,
+              queuedOffset + bytesRead,
+              bytesRemaining,
+            );
             sock.recv_queue.unshift(queued);
           }
           return res;
-        }
-      }
+        },
+      },
     };
     function getSocketFromFD(fd) {
       var socket = SOCKFS.getSocket(fd);
@@ -6262,7 +7041,15 @@ var unityFramework = (() => {
       return value;
     }
     function inetNtop4(addr) {
-      return (addr & 255) + "." + ((addr >> 8) & 255) + "." + ((addr >> 16) & 255) + "." + ((addr >> 24) & 255);
+      return (
+        (addr & 255) +
+        "." +
+        ((addr >> 8) & 255) +
+        "." +
+        ((addr >> 16) & 255) +
+        "." +
+        ((addr >> 24) & 255)
+      );
     }
     function inetNtop6(ints) {
       var str = "";
@@ -6280,7 +7067,7 @@ var unityFramework = (() => {
         ints[2] & 65535,
         ints[2] >> 16,
         ints[3] & 65535,
-        ints[3] >> 16
+        ints[3] >> 16,
       ];
       var hasipv4 = true;
       var v4part = "";
@@ -6349,7 +7136,12 @@ var unityFramework = (() => {
           if (salen !== 28) {
             return { errno: 28 };
           }
-          addr = [HEAP32[(sa + 8) >> 2], HEAP32[(sa + 12) >> 2], HEAP32[(sa + 16) >> 2], HEAP32[(sa + 20) >> 2]];
+          addr = [
+            HEAP32[(sa + 8) >> 2],
+            HEAP32[(sa + 12) >> 2],
+            HEAP32[(sa + 16) >> 2],
+            HEAP32[(sa + 20) >> 2],
+          ];
           addr = inetNtop6(addr);
           break;
         default:
@@ -6389,8 +7181,12 @@ var unityFramework = (() => {
       if (str.indexOf(".") > 0) {
         str = str.replace(new RegExp("[.]", "g"), ":");
         words = str.split(":");
-        words[words.length - 4] = jstoi_q(words[words.length - 4]) + jstoi_q(words[words.length - 3]) * 256;
-        words[words.length - 3] = jstoi_q(words[words.length - 2]) + jstoi_q(words[words.length - 1]) * 256;
+        words[words.length - 4] =
+          jstoi_q(words[words.length - 4]) +
+          jstoi_q(words[words.length - 3]) * 256;
+        words[words.length - 3] =
+          jstoi_q(words[words.length - 2]) +
+          jstoi_q(words[words.length - 1]) * 256;
         words = words.slice(0, words.length - 2);
       } else {
         words = str.split(":");
@@ -6415,7 +7211,7 @@ var unityFramework = (() => {
         (parts[1] << 16) | parts[0],
         (parts[3] << 16) | parts[2],
         (parts[5] << 16) | parts[4],
-        (parts[7] << 16) | parts[6]
+        (parts[7] << 16) | parts[6],
       ];
     }
     var DNS = {
@@ -6446,7 +7242,7 @@ var unityFramework = (() => {
           return DNS.address_map.names[addr];
         }
         return null;
-      }
+      },
     };
     function getSocketAddress(addrp, addrlen, allowNull) {
       if (allowNull && addrp === 0) return null;
@@ -6570,16 +7366,26 @@ var unityFramework = (() => {
           } else {
             var child = FS.lookupNode(stream.node, name);
             id = child.id;
-            type = FS.isChrdev(child.mode) ? 2 : FS.isDir(child.mode) ? 4 : FS.isLink(child.mode) ? 10 : 8;
+            type = FS.isChrdev(child.mode)
+              ? 2
+              : FS.isDir(child.mode)
+                ? 4
+                : FS.isLink(child.mode)
+                  ? 10
+                  : 8;
           }
           ((tempI64 = [
             id >>> 0,
             ((tempDouble = id),
             +Math.abs(tempDouble) >= 1
               ? tempDouble > 0
-                ? (Math.min(+Math.floor(tempDouble / 4294967296), 4294967295) | 0) >>> 0
-                : ~~+Math.ceil((tempDouble - +(~~tempDouble >>> 0)) / 4294967296) >>> 0
-              : 0)
+                ? (Math.min(+Math.floor(tempDouble / 4294967296), 4294967295) |
+                    0) >>>
+                  0
+                : ~~+Math.ceil(
+                    (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
+                  ) >>> 0
+              : 0),
           ]),
             (HEAP32[(dirp + pos) >> 2] = tempI64[0]),
             (HEAP32[(dirp + pos + 4) >> 2] = tempI64[1]));
@@ -6588,9 +7394,13 @@ var unityFramework = (() => {
             ((tempDouble = (idx + 1) * struct_size),
             +Math.abs(tempDouble) >= 1
               ? tempDouble > 0
-                ? (Math.min(+Math.floor(tempDouble / 4294967296), 4294967295) | 0) >>> 0
-                : ~~+Math.ceil((tempDouble - +(~~tempDouble >>> 0)) / 4294967296) >>> 0
-              : 0)
+                ? (Math.min(+Math.floor(tempDouble / 4294967296), 4294967295) |
+                    0) >>>
+                  0
+                : ~~+Math.ceil(
+                    (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
+                  ) >>> 0
+              : 0),
           ]),
             (HEAP32[(dirp + pos + 8) >> 2] = tempI64[0]),
             (HEAP32[(dirp + pos + 12) >> 2] = tempI64[1]));
@@ -6745,7 +7555,13 @@ var unityFramework = (() => {
         var msg = sock.sock_ops.recvmsg(sock, len);
         if (!msg) return 0;
         if (addr) {
-          var errno = writeSockaddr(addr, sock.family, DNS.lookup_name(msg.addr), msg.port, addrlen);
+          var errno = writeSockaddr(
+            addr,
+            sock.family,
+            DNS.lookup_name(msg.addr),
+            msg.port,
+            addrlen,
+          );
         }
         HEAPU8.set(msg.buffer, buf);
         return msg.buffer.byteLength;
@@ -6784,7 +7600,14 @@ var unityFramework = (() => {
         if (!dest) {
           return FS.write(sock.stream, HEAP8, message, length);
         } else {
-          return sock.sock_ops.sendmsg(sock, HEAP8, message, length, dest.addr, dest.port);
+          return sock.sock_ops.sendmsg(
+            sock,
+            HEAP8,
+            message,
+            length,
+            dest.addr,
+            dest.port,
+          );
         }
       } catch (e) {
         if (typeof FS == "undefined" || !(e instanceof FS.ErrnoError)) throw e;
@@ -6921,12 +7744,15 @@ var unityFramework = (() => {
       HEAP32[(tmPtr + 20) >> 2] = date.getFullYear() - 1900;
       HEAP32[(tmPtr + 24) >> 2] = date.getDay();
       var start = new Date(date.getFullYear(), 0, 1);
-      var yday = ((date.getTime() - start.getTime()) / (1e3 * 60 * 60 * 24)) | 0;
+      var yday =
+        ((date.getTime() - start.getTime()) / (1e3 * 60 * 60 * 24)) | 0;
       HEAP32[(tmPtr + 28) >> 2] = yday;
       HEAP32[(tmPtr + 36) >> 2] = -(date.getTimezoneOffset() * 60);
       var summerOffset = new Date(date.getFullYear(), 6, 1).getTimezoneOffset();
       var winterOffset = start.getTimezoneOffset();
-      var dst = (summerOffset != winterOffset && date.getTimezoneOffset() == Math.min(winterOffset, summerOffset)) | 0;
+      var dst =
+        (summerOffset != winterOffset &&
+          date.getTimezoneOffset() == Math.min(winterOffset, summerOffset)) | 0;
       HEAP32[(tmPtr + 32) >> 2] = dst;
     }
     function __mktime_js(tmPtr) {
@@ -6937,7 +7763,7 @@ var unityFramework = (() => {
         HEAP32[(tmPtr + 8) >> 2],
         HEAP32[(tmPtr + 4) >> 2],
         HEAP32[tmPtr >> 2],
-        0
+        0,
       );
       var dst = HEAP32[(tmPtr + 32) >> 2];
       var guessedOffset = date.getTimezoneOffset();
@@ -6946,14 +7772,17 @@ var unityFramework = (() => {
       var winterOffset = start.getTimezoneOffset();
       var dstOffset = Math.min(winterOffset, summerOffset);
       if (dst < 0) {
-        HEAP32[(tmPtr + 32) >> 2] = Number(summerOffset != winterOffset && dstOffset == guessedOffset);
+        HEAP32[(tmPtr + 32) >> 2] = Number(
+          summerOffset != winterOffset && dstOffset == guessedOffset,
+        );
       } else if (dst > 0 != (dstOffset == guessedOffset)) {
         var nonDstOffset = Math.max(winterOffset, summerOffset);
         var trueOffset = dst > 0 ? dstOffset : nonDstOffset;
         date.setTime(date.getTime() + (trueOffset - guessedOffset) * 6e4);
       }
       HEAP32[(tmPtr + 24) >> 2] = date.getDay();
-      var yday = ((date.getTime() - start.getTime()) / (1e3 * 60 * 60 * 24)) | 0;
+      var yday =
+        ((date.getTime() - start.getTime()) / (1e3 * 60 * 60 * 24)) | 0;
       HEAP32[(tmPtr + 28) >> 2] = yday;
       HEAP32[tmPtr >> 2] = date.getSeconds();
       HEAP32[(tmPtr + 4) >> 2] = date.getMinutes();
@@ -7017,7 +7846,9 @@ var unityFramework = (() => {
       while ((ch = HEAPU8[sigPtr++])) {
         var readAsmConstArgsDouble = ch < 105;
         if (readAsmConstArgsDouble && buf & 1) buf++;
-        readAsmConstArgsArray.push(readAsmConstArgsDouble ? HEAPF64[buf++ >> 1] : HEAP32[buf]);
+        readAsmConstArgsArray.push(
+          readAsmConstArgsDouble ? HEAPF64[buf++ >> 1] : HEAP32[buf],
+        );
         ++buf;
       }
       return readAsmConstArgsArray;
@@ -7026,7 +7857,11 @@ var unityFramework = (() => {
       var args = readAsmConstArgs(sigPtr, argbuf);
       return ASM_CONSTS[code].apply(null, args);
     }
-    function _emscripten_asm_const_int_sync_on_main_thread(code, sigPtr, argbuf) {
+    function _emscripten_asm_const_int_sync_on_main_thread(
+      code,
+      sigPtr,
+      argbuf,
+    ) {
       return mainThreadEM_ASM(code, sigPtr, argbuf, 1);
     }
     function _emscripten_set_main_loop_timing(mode, value) {
@@ -7039,10 +7874,15 @@ var unityFramework = (() => {
         Browser.mainLoop.running = true;
       }
       if (mode == 0) {
-        Browser.mainLoop.scheduler = function Browser_mainLoop_scheduler_setTimeout() {
-          var timeUntilNextTick = Math.max(0, Browser.mainLoop.tickStartTime + value - _emscripten_get_now()) | 0;
-          setTimeout(Browser.mainLoop.runner, timeUntilNextTick);
-        };
+        Browser.mainLoop.scheduler =
+          function Browser_mainLoop_scheduler_setTimeout() {
+            var timeUntilNextTick =
+              Math.max(
+                0,
+                Browser.mainLoop.tickStartTime + value - _emscripten_get_now(),
+              ) | 0;
+            setTimeout(Browser.mainLoop.runner, timeUntilNextTick);
+          };
         Browser.mainLoop.method = "timeout";
       } else if (mode == 1) {
         Browser.mainLoop.scheduler = function Browser_mainLoop_scheduler_rAF() {
@@ -7054,24 +7894,33 @@ var unityFramework = (() => {
           var setImmediates = [];
           var emscriptenMainLoopMessageId = "setimmediate";
           var Browser_setImmediate_messageHandler = function (event) {
-            if (event.data === emscriptenMainLoopMessageId || event.data.target === emscriptenMainLoopMessageId) {
+            if (
+              event.data === emscriptenMainLoopMessageId ||
+              event.data.target === emscriptenMainLoopMessageId
+            ) {
               event.stopPropagation();
               setImmediates.shift()();
             }
           };
-          addEventListener("message", Browser_setImmediate_messageHandler, true);
+          addEventListener(
+            "message",
+            Browser_setImmediate_messageHandler,
+            true,
+          );
           setImmediate = function Browser_emulated_setImmediate(func) {
             setImmediates.push(func);
             if (ENVIRONMENT_IS_WORKER) {
-              if (Module["setImmediates"] === undefined) Module["setImmediates"] = [];
+              if (Module["setImmediates"] === undefined)
+                Module["setImmediates"] = [];
               Module["setImmediates"].push(func);
               postMessage({ target: emscriptenMainLoopMessageId });
             } else postMessage(emscriptenMainLoopMessageId, "*");
           };
         }
-        Browser.mainLoop.scheduler = function Browser_mainLoop_scheduler_setImmediate() {
-          setImmediate(Browser.mainLoop.runner);
-        };
+        Browser.mainLoop.scheduler =
+          function Browser_mainLoop_scheduler_setImmediate() {
+            setImmediate(Browser.mainLoop.runner);
+          };
         Browser.mainLoop.method = "immediate";
       }
       return 0;
@@ -7087,10 +7936,16 @@ var unityFramework = (() => {
       exit(status);
     }
     function maybeExit() {}
-    function setMainLoop(browserIterationFunc, fps, simulateInfiniteLoop, arg, noSetTiming) {
+    function setMainLoop(
+      browserIterationFunc,
+      fps,
+      simulateInfiniteLoop,
+      arg,
+      noSetTiming,
+    ) {
       assert(
         !Browser.mainLoop.func,
-        "emscripten_set_main_loop: there can only be one main loop function at once: call emscripten_cancel_main_loop to cancel the previous one before setting a new one with different parameters."
+        "emscripten_set_main_loop: there can only be one main loop function at once: call emscripten_cancel_main_loop to cancel the previous one before setting a new one with different parameters.",
       );
       Browser.mainLoop.func = browserIterationFunc;
       Browser.mainLoop.arg = arg;
@@ -7111,7 +7966,8 @@ var unityFramework = (() => {
           blocker.func(blocker.arg);
           if (Browser.mainLoop.remainingBlockers) {
             var remaining = Browser.mainLoop.remainingBlockers;
-            var next = remaining % 1 == 0 ? remaining - 1 : Math.floor(remaining);
+            var next =
+              remaining % 1 == 0 ? remaining - 1 : Math.floor(remaining);
             if (blocker.counted) {
               Browser.mainLoop.remainingBlockers = next;
             } else {
@@ -7119,18 +7975,26 @@ var unityFramework = (() => {
               Browser.mainLoop.remainingBlockers = (8 * remaining + next) / 9;
             }
           }
-          out('main loop blocker "' + blocker.name + '" took ' + (Date.now() - start) + " ms");
+          out(
+            'main loop blocker "' +
+              blocker.name +
+              '" took ' +
+              (Date.now() - start) +
+              " ms",
+          );
           Browser.mainLoop.updateStatus();
           if (!checkIsRunning()) return;
           setTimeout(Browser.mainLoop.runner, 0);
           return;
         }
         if (!checkIsRunning()) return;
-        Browser.mainLoop.currentFrameNumber = (Browser.mainLoop.currentFrameNumber + 1) | 0;
+        Browser.mainLoop.currentFrameNumber =
+          (Browser.mainLoop.currentFrameNumber + 1) | 0;
         if (
           Browser.mainLoop.timingMode == 1 &&
           Browser.mainLoop.timingValue > 1 &&
-          Browser.mainLoop.currentFrameNumber % Browser.mainLoop.timingValue != 0
+          Browser.mainLoop.currentFrameNumber % Browser.mainLoop.timingValue !=
+            0
         ) {
           Browser.mainLoop.scheduler();
           return;
@@ -7140,7 +8004,8 @@ var unityFramework = (() => {
         GL.newRenderingFrameStarted();
         Browser.mainLoop.runIter(browserIterationFunc);
         if (!checkIsRunning()) return;
-        if (typeof SDL == "object" && SDL.audio && SDL.audio.queueNewAudioData) SDL.audio.queueNewAudioData();
+        if (typeof SDL == "object" && SDL.audio && SDL.audio.queueNewAudioData)
+          SDL.audio.queueNewAudioData();
         Browser.mainLoop.scheduler();
       };
       if (!noSetTiming) {
@@ -7204,7 +8069,14 @@ var unityFramework = (() => {
             var expected = Browser.mainLoop.expectedBlockers;
             if (remaining) {
               if (remaining < expected) {
-                Module["setStatus"](message + " (" + (expected - remaining) + "/" + expected + ")");
+                Module["setStatus"](
+                  message +
+                    " (" +
+                    (expected - remaining) +
+                    "/" +
+                    expected +
+                    ")",
+                );
               } else {
                 Module["setStatus"](message);
               }
@@ -7223,7 +8095,7 @@ var unityFramework = (() => {
           }
           callUserCallback(func);
           if (Module["postMainLoop"]) Module["postMainLoop"]();
-        }
+        },
       },
       isFullscreen: false,
       pointerLock: false,
@@ -7238,7 +8110,9 @@ var unityFramework = (() => {
           Browser.hasBlobConstructor = true;
         } catch (e) {
           Browser.hasBlobConstructor = false;
-          out("warning: no blob constructor, cannot create blobs with mimetypes");
+          out(
+            "warning: no blob constructor, cannot create blobs with mimetypes",
+          );
         }
         Browser.BlobBuilder =
           typeof MozBlobBuilder != "undefined"
@@ -7248,10 +8122,18 @@ var unityFramework = (() => {
               : !Browser.hasBlobConstructor
                 ? out("warning: no BlobBuilder")
                 : null;
-        Browser.URLObject = typeof window != "undefined" ? (window.URL ? window.URL : window.webkitURL) : undefined;
-        if (!Module.noImageDecoding && typeof Browser.URLObject == "undefined") {
+        Browser.URLObject =
+          typeof window != "undefined"
+            ? window.URL
+              ? window.URL
+              : window.webkitURL
+            : undefined;
+        if (
+          !Module.noImageDecoding &&
+          typeof Browser.URLObject == "undefined"
+        ) {
           out(
-            "warning: Browser does not support creating object URLs. Built-in browser image decoding will not be available."
+            "warning: Browser does not support creating object URLs. Built-in browser image decoding will not be available.",
           );
           Module.noImageDecoding = true;
         }
@@ -7259,16 +8141,27 @@ var unityFramework = (() => {
         imagePlugin["canHandle"] = function imagePlugin_canHandle(name) {
           return !Module.noImageDecoding && /\.(jpg|jpeg|png|bmp)$/i.test(name);
         };
-        imagePlugin["handle"] = function imagePlugin_handle(byteArray, name, onload, onerror) {
+        imagePlugin["handle"] = function imagePlugin_handle(
+          byteArray,
+          name,
+          onload,
+          onerror,
+        ) {
           var b = null;
           if (Browser.hasBlobConstructor) {
             try {
               b = new Blob([byteArray], { type: Browser.getMimetype(name) });
               if (b.size !== byteArray.length) {
-                b = new Blob([new Uint8Array(byteArray).buffer], { type: Browser.getMimetype(name) });
+                b = new Blob([new Uint8Array(byteArray).buffer], {
+                  type: Browser.getMimetype(name),
+                });
               }
             } catch (e) {
-              warnOnce("Blob constructor present but fails: " + e + "; falling back to blob builder");
+              warnOnce(
+                "Blob constructor present but fails: " +
+                  e +
+                  "; falling back to blob builder",
+              );
             }
           }
           if (!b) {
@@ -7298,9 +8191,17 @@ var unityFramework = (() => {
         Module["preloadPlugins"].push(imagePlugin);
         var audioPlugin = {};
         audioPlugin["canHandle"] = function audioPlugin_canHandle(name) {
-          return !Module.noAudioDecoding && name.substr(-4) in { ".ogg": 1, ".wav": 1, ".mp3": 1 };
+          return (
+            !Module.noAudioDecoding &&
+            name.substr(-4) in { ".ogg": 1, ".wav": 1, ".mp3": 1 }
+          );
         };
-        audioPlugin["handle"] = function audioPlugin_handle(byteArray, name, onload, onerror) {
+        audioPlugin["handle"] = function audioPlugin_handle(
+          byteArray,
+          name,
+          onload,
+          onerror,
+        ) {
           var done = false;
           function finish(audio) {
             if (done) return;
@@ -7316,7 +8217,9 @@ var unityFramework = (() => {
           }
           if (Browser.hasBlobConstructor) {
             try {
-              var b = new Blob([byteArray], { type: Browser.getMimetype(name) });
+              var b = new Blob([byteArray], {
+                type: Browser.getMimetype(name),
+              });
             } catch (e) {
               return fail();
             }
@@ -7327,13 +8230,18 @@ var unityFramework = (() => {
               function () {
                 finish(audio);
               },
-              false
+              false,
             );
             audio.onerror = function audio_onerror(event) {
               if (done) return;
-              out("warning: browser could not fully decode audio " + name + ", trying slower base64 approach");
+              out(
+                "warning: browser could not fully decode audio " +
+                  name +
+                  ", trying slower base64 approach",
+              );
               function encode64(data) {
-                var BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+                var BASE =
+                  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
                 var PAD = "=";
                 var ret = "";
                 var leftchar = 0;
@@ -7356,7 +8264,11 @@ var unityFramework = (() => {
                 }
                 return ret;
               }
-              audio.src = "data:audio/x-" + name.substr(-3) + ";base64," + encode64(byteArray);
+              audio.src =
+                "data:audio/x-" +
+                name.substr(-3) +
+                ";base64," +
+                encode64(byteArray);
               finish(audio);
             };
             audio.src = url;
@@ -7390,20 +8302,39 @@ var unityFramework = (() => {
             document["msExitPointerLock"] ||
             function () {};
           canvas.exitPointerLock = canvas.exitPointerLock.bind(document);
-          document.addEventListener("pointerlockchange", pointerLockChange, false);
-          document.addEventListener("mozpointerlockchange", pointerLockChange, false);
-          document.addEventListener("webkitpointerlockchange", pointerLockChange, false);
-          document.addEventListener("mspointerlockchange", pointerLockChange, false);
+          document.addEventListener(
+            "pointerlockchange",
+            pointerLockChange,
+            false,
+          );
+          document.addEventListener(
+            "mozpointerlockchange",
+            pointerLockChange,
+            false,
+          );
+          document.addEventListener(
+            "webkitpointerlockchange",
+            pointerLockChange,
+            false,
+          );
+          document.addEventListener(
+            "mspointerlockchange",
+            pointerLockChange,
+            false,
+          );
           if (Module["elementPointerLock"]) {
             canvas.addEventListener(
               "click",
               function (ev) {
-                if (!Browser.pointerLock && Module["canvas"].requestPointerLock) {
+                if (
+                  !Browser.pointerLock &&
+                  Module["canvas"].requestPointerLock
+                ) {
                   Module["canvas"].requestPointerLock();
                   ev.preventDefault();
                 }
               },
-              false
+              false,
             );
           }
         }
@@ -7420,15 +8351,21 @@ var unityFramework = (() => {
         });
         return handled;
       },
-      createContext: function (canvas, useWebGL, setInModule, webGLContextAttributes) {
-        if (useWebGL && Module.ctx && canvas == Module.canvas) return Module.ctx;
+      createContext: function (
+        canvas,
+        useWebGL,
+        setInModule,
+        webGLContextAttributes,
+      ) {
+        if (useWebGL && Module.ctx && canvas == Module.canvas)
+          return Module.ctx;
         var ctx;
         var contextHandle;
         if (useWebGL) {
           var contextAttributes = {
             antialias: false,
             alpha: false,
-            majorVersion: typeof WebGL2RenderingContext != "undefined" ? 2 : 1
+            majorVersion: typeof WebGL2RenderingContext != "undefined" ? 2 : 1,
           };
           if (webGLContextAttributes) {
             for (var attribute in webGLContextAttributes) {
@@ -7449,7 +8386,7 @@ var unityFramework = (() => {
           if (!useWebGL)
             assert(
               typeof GLctx == "undefined",
-              "cannot set in module if GLctx is used, but we are a non-GL context that would replace it"
+              "cannot set in module if GLctx is used, but we are a non-GL context that would replace it",
             );
           Module.ctx = ctx;
           if (useWebGL) GL.makeContextCurrent(contextHandle);
@@ -7468,8 +8405,10 @@ var unityFramework = (() => {
       requestFullscreen: function (lockPointer, resizeCanvas) {
         Browser.lockPointer = lockPointer;
         Browser.resizeCanvas = resizeCanvas;
-        if (typeof Browser.lockPointer == "undefined") Browser.lockPointer = true;
-        if (typeof Browser.resizeCanvas == "undefined") Browser.resizeCanvas = false;
+        if (typeof Browser.lockPointer == "undefined")
+          Browser.lockPointer = true;
+        if (typeof Browser.resizeCanvas == "undefined")
+          Browser.resizeCanvas = false;
         var canvas = Module["canvas"];
         function fullscreenChange() {
           Browser.isFullscreen = false;
@@ -7498,15 +8437,33 @@ var unityFramework = (() => {
               Browser.updateCanvasDimensions(canvas);
             }
           }
-          if (Module["onFullScreen"]) Module["onFullScreen"](Browser.isFullscreen);
-          if (Module["onFullscreen"]) Module["onFullscreen"](Browser.isFullscreen);
+          if (Module["onFullScreen"])
+            Module["onFullScreen"](Browser.isFullscreen);
+          if (Module["onFullscreen"])
+            Module["onFullscreen"](Browser.isFullscreen);
         }
         if (!Browser.fullscreenHandlersInstalled) {
           Browser.fullscreenHandlersInstalled = true;
-          document.addEventListener("fullscreenchange", fullscreenChange, false);
-          document.addEventListener("mozfullscreenchange", fullscreenChange, false);
-          document.addEventListener("webkitfullscreenchange", fullscreenChange, false);
-          document.addEventListener("MSFullscreenChange", fullscreenChange, false);
+          document.addEventListener(
+            "fullscreenchange",
+            fullscreenChange,
+            false,
+          );
+          document.addEventListener(
+            "mozfullscreenchange",
+            fullscreenChange,
+            false,
+          );
+          document.addEventListener(
+            "webkitfullscreenchange",
+            fullscreenChange,
+            false,
+          );
+          document.addEventListener(
+            "MSFullscreenChange",
+            fullscreenChange,
+            false,
+          );
         }
         var canvasContainer = document.createElement("div");
         canvas.parentNode.insertBefore(canvasContainer, canvas);
@@ -7517,12 +8474,16 @@ var unityFramework = (() => {
           canvasContainer["msRequestFullscreen"] ||
           (canvasContainer["webkitRequestFullscreen"]
             ? function () {
-                canvasContainer["webkitRequestFullscreen"](Element["ALLOW_KEYBOARD_INPUT"]);
+                canvasContainer["webkitRequestFullscreen"](
+                  Element["ALLOW_KEYBOARD_INPUT"],
+                );
               }
             : null) ||
           (canvasContainer["webkitRequestFullScreen"]
             ? function () {
-                canvasContainer["webkitRequestFullScreen"](Element["ALLOW_KEYBOARD_INPUT"]);
+                canvasContainer["webkitRequestFullScreen"](
+                  Element["ALLOW_KEYBOARD_INPUT"],
+                );
               }
             : null);
         canvasContainer.requestFullscreen();
@@ -7578,20 +8539,31 @@ var unityFramework = (() => {
           bmp: "image/bmp",
           ogg: "audio/ogg",
           wav: "audio/wav",
-          mp3: "audio/mpeg"
+          mp3: "audio/mpeg",
         }[name.substr(name.lastIndexOf(".") + 1)];
       },
       getUserMedia: function (func) {
         if (!window.getUserMedia) {
-          window.getUserMedia = navigator["getUserMedia"] || navigator["mozGetUserMedia"];
+          window.getUserMedia =
+            navigator["getUserMedia"] || navigator["mozGetUserMedia"];
         }
         window.getUserMedia(func);
       },
       getMovementX: function (event) {
-        return event["movementX"] || event["mozMovementX"] || event["webkitMovementX"] || 0;
+        return (
+          event["movementX"] ||
+          event["mozMovementX"] ||
+          event["webkitMovementX"] ||
+          0
+        );
       },
       getMovementY: function (event) {
-        return event["movementY"] || event["mozMovementY"] || event["webkitMovementY"] || 0;
+        return (
+          event["movementY"] ||
+          event["mozMovementY"] ||
+          event["webkitMovementY"] ||
+          0
+        );
       },
       getMouseWheelDelta: function (event) {
         var delta = 0;
@@ -7648,9 +8620,19 @@ var unityFramework = (() => {
           var rect = Module["canvas"].getBoundingClientRect();
           var cw = Module["canvas"].width;
           var ch = Module["canvas"].height;
-          var scrollX = typeof window.scrollX != "undefined" ? window.scrollX : window.pageXOffset;
-          var scrollY = typeof window.scrollY != "undefined" ? window.scrollY : window.pageYOffset;
-          if (event.type === "touchstart" || event.type === "touchend" || event.type === "touchmove") {
+          var scrollX =
+            typeof window.scrollX != "undefined"
+              ? window.scrollX
+              : window.pageXOffset;
+          var scrollY =
+            typeof window.scrollY != "undefined"
+              ? window.scrollY
+              : window.pageYOffset;
+          if (
+            event.type === "touchstart" ||
+            event.type === "touchend" ||
+            event.type === "touchmove"
+          ) {
             var touch = event.touch;
             if (touch === undefined) {
               return;
@@ -7663,7 +8645,10 @@ var unityFramework = (() => {
             if (event.type === "touchstart") {
               Browser.lastTouches[touch.identifier] = coords;
               Browser.touches[touch.identifier] = coords;
-            } else if (event.type === "touchend" || event.type === "touchmove") {
+            } else if (
+              event.type === "touchend" ||
+              event.type === "touchmove"
+            ) {
               var last = Browser.touches[touch.identifier];
               if (!last) last = coords;
               Browser.lastTouches[touch.identifier] = last;
@@ -7762,7 +8747,7 @@ var unityFramework = (() => {
             }
           }
         }
-      }
+      },
     };
     function _emscripten_cancel_main_loop() {
       Browser.mainLoop.pause();
@@ -7797,11 +8782,18 @@ var unityFramework = (() => {
         }
         for (var i in JSEvents.deferredCalls) {
           var call = JSEvents.deferredCalls[i];
-          if (call.targetFunction == targetFunction && arraysHaveEqualContent(call.argsList, argsList)) {
+          if (
+            call.targetFunction == targetFunction &&
+            arraysHaveEqualContent(call.argsList, argsList)
+          ) {
             return;
           }
         }
-        JSEvents.deferredCalls.push({ targetFunction: targetFunction, precedence: precedence, argsList: argsList });
+        JSEvents.deferredCalls.push({
+          targetFunction: targetFunction,
+          precedence: precedence,
+          argsList: argsList,
+        });
         JSEvents.deferredCalls.sort(function (x, y) {
           return x.precedence < y.precedence;
         });
@@ -7815,7 +8807,10 @@ var unityFramework = (() => {
         }
       },
       canPerformEventHandlerRequests: function () {
-        return JSEvents.inEventHandler && JSEvents.currentEventHandler.allowsDeferredCalls;
+        return (
+          JSEvents.inEventHandler &&
+          JSEvents.currentEventHandler.allowsDeferredCalls
+        );
       },
       runDeferredCalls: function () {
         if (!JSEvents.canPerformEventHandlerRequests()) {
@@ -7833,7 +8828,8 @@ var unityFramework = (() => {
         for (var i = 0; i < JSEvents.eventHandlers.length; ++i) {
           if (
             JSEvents.eventHandlers[i].target == target &&
-            (!eventTypeString || eventTypeString == JSEvents.eventHandlers[i].eventTypeString)
+            (!eventTypeString ||
+              eventTypeString == JSEvents.eventHandlers[i].eventTypeString)
           ) {
             JSEvents._removeHandler(i--);
           }
@@ -7841,7 +8837,11 @@ var unityFramework = (() => {
       },
       _removeHandler: function (i) {
         var h = JSEvents.eventHandlers[i];
-        h.target.removeEventListener(h.eventTypeString, h.eventListenerFunc, h.useCapture);
+        h.target.removeEventListener(
+          h.eventTypeString,
+          h.eventListenerFunc,
+          h.useCapture,
+        );
         JSEvents.eventHandlers.splice(i, 1);
       },
       registerOrRemoveHandler: function (eventHandler) {
@@ -7855,14 +8855,19 @@ var unityFramework = (() => {
         };
         if (eventHandler.callbackfunc) {
           eventHandler.eventListenerFunc = jsEventHandler;
-          eventHandler.target.addEventListener(eventHandler.eventTypeString, jsEventHandler, eventHandler.useCapture);
+          eventHandler.target.addEventListener(
+            eventHandler.eventTypeString,
+            jsEventHandler,
+            eventHandler.useCapture,
+          );
           JSEvents.eventHandlers.push(eventHandler);
           JSEvents.registerRemoveEventListeners();
         } else {
           for (var i = 0; i < JSEvents.eventHandlers.length; ++i) {
             if (
               JSEvents.eventHandlers[i].target == eventHandler.target &&
-              JSEvents.eventHandlers[i].eventTypeString == eventHandler.eventTypeString
+              JSEvents.eventHandlers[i].eventTypeString ==
+                eventHandler.eventTypeString
             ) {
               JSEvents._removeHandler(i--);
             }
@@ -7877,7 +8882,7 @@ var unityFramework = (() => {
       },
       fullscreenEnabled: function () {
         return document.fullscreenEnabled || document.webkitFullscreenEnabled;
-      }
+      },
     };
     var currentFullscreenStrategy = {};
     function maybeCStringToJsString(cString) {
@@ -7886,12 +8891,15 @@ var unityFramework = (() => {
     var specialHTMLTargets = [
       0,
       typeof document != "undefined" ? document : 0,
-      typeof window != "undefined" ? window : 0
+      typeof window != "undefined" ? window : 0,
     ];
     function findEventTarget(target) {
       target = maybeCStringToJsString(target);
       var domElement =
-        specialHTMLTargets[target] || (typeof document != "undefined" ? document.querySelector(target) : undefined);
+        specialHTMLTargets[target] ||
+        (typeof document != "undefined"
+          ? document.querySelector(target)
+          : undefined);
       return domElement;
     }
     function findCanvasEventTarget(target) {
@@ -7955,15 +8963,21 @@ var unityFramework = (() => {
       var oldImageRendering = canvas.style.imageRendering;
       function restoreOldStyle() {
         var fullscreenElement =
-          document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+          document.fullscreenElement ||
+          document.webkitFullscreenElement ||
+          document.msFullscreenElement;
         if (!fullscreenElement) {
           document.removeEventListener("fullscreenchange", restoreOldStyle);
-          document.removeEventListener("webkitfullscreenchange", restoreOldStyle);
+          document.removeEventListener(
+            "webkitfullscreenchange",
+            restoreOldStyle,
+          );
           setCanvasElementSize(canvas, oldWidth, oldHeight);
           canvas.style.width = oldCssWidth;
           canvas.style.height = oldCssHeight;
           canvas.style.backgroundColor = oldBackgroundColor;
-          if (!oldDocumentBackgroundColor) document.body.style.backgroundColor = "white";
+          if (!oldDocumentBackgroundColor)
+            document.body.style.backgroundColor = "white";
           document.body.style.backgroundColor = oldDocumentBackgroundColor;
           canvas.style.paddingLeft = oldPaddingLeft;
           canvas.style.paddingRight = oldPaddingRight;
@@ -7977,10 +8991,16 @@ var unityFramework = (() => {
           document.documentElement.style.overflow = oldDocumentOverflow;
           document.body.scroll = oldDocumentScroll;
           canvas.style.imageRendering = oldImageRendering;
-          if (canvas.GLctxObject) canvas.GLctxObject.GLctx.viewport(0, 0, oldWidth, oldHeight);
+          if (canvas.GLctxObject)
+            canvas.GLctxObject.GLctx.viewport(0, 0, oldWidth, oldHeight);
           if (currentFullscreenStrategy.canvasResizedCallback) {
             (function (a1, a2, a3) {
-              return dynCall_iiii.apply(null, [currentFullscreenStrategy.canvasResizedCallback, a1, a2, a3]);
+              return dynCall_iiii.apply(null, [
+                currentFullscreenStrategy.canvasResizedCallback,
+                a1,
+                a2,
+                a3,
+              ]);
             })(37, 0, currentFullscreenStrategy.canvasResizedCallbackUserData);
           }
         }
@@ -7994,7 +9014,9 @@ var unityFramework = (() => {
       element.style.paddingTop = element.style.paddingBottom = topBottom + "px";
     }
     function getBoundingClientRect(e) {
-      return specialHTMLTargets.indexOf(e) < 0 ? e.getBoundingClientRect() : { left: 0, top: 0 };
+      return specialHTMLTargets.indexOf(e) < 0
+        ? e.getBoundingClientRect()
+        : { left: 0, top: 0 };
     }
     function _JSEvents_resizeCanvasForFullscreen(target, strategy) {
       var restoreOldStyle = registerRestoreOldStyle(target);
@@ -8007,22 +9029,29 @@ var unityFramework = (() => {
       var windowedRttWidth = canvasSize[0];
       var windowedRttHeight = canvasSize[1];
       if (strategy.scaleMode == 3) {
-        setLetterbox(target, (cssHeight - windowedCssHeight) / 2, (cssWidth - windowedCssWidth) / 2);
+        setLetterbox(
+          target,
+          (cssHeight - windowedCssHeight) / 2,
+          (cssWidth - windowedCssWidth) / 2,
+        );
         cssWidth = windowedCssWidth;
         cssHeight = windowedCssHeight;
       } else if (strategy.scaleMode == 2) {
         if (cssWidth * windowedRttHeight < windowedRttWidth * cssHeight) {
-          var desiredCssHeight = (windowedRttHeight * cssWidth) / windowedRttWidth;
+          var desiredCssHeight =
+            (windowedRttHeight * cssWidth) / windowedRttWidth;
           setLetterbox(target, (cssHeight - desiredCssHeight) / 2, 0);
           cssHeight = desiredCssHeight;
         } else {
-          var desiredCssWidth = (windowedRttWidth * cssHeight) / windowedRttHeight;
+          var desiredCssWidth =
+            (windowedRttWidth * cssHeight) / windowedRttHeight;
           setLetterbox(target, 0, (cssWidth - desiredCssWidth) / 2);
           cssWidth = desiredCssWidth;
         }
       }
       if (!target.style.backgroundColor) target.style.backgroundColor = "black";
-      if (!document.body.style.backgroundColor) document.body.style.backgroundColor = "black";
+      if (!document.body.style.backgroundColor)
+        document.body.style.backgroundColor = "black";
       target.style.width = cssWidth + "px";
       target.style.height = cssHeight + "px";
       if (strategy.filteringMode == 1) {
@@ -8034,12 +9063,14 @@ var unityFramework = (() => {
         target.style.imageRendering = "crisp-edges";
         target.style.imageRendering = "pixelated";
       }
-      var dpiScale = strategy.canvasResolutionScaleMode == 2 ? devicePixelRatio : 1;
+      var dpiScale =
+        strategy.canvasResolutionScaleMode == 2 ? devicePixelRatio : 1;
       if (strategy.canvasResolutionScaleMode != 0) {
         var newWidth = (cssWidth * dpiScale) | 0;
         var newHeight = (cssHeight * dpiScale) | 0;
         setCanvasElementSize(target, newWidth, newHeight);
-        if (target.GLctxObject) target.GLctxObject.GLctx.viewport(0, 0, newWidth, newHeight);
+        if (target.GLctxObject)
+          target.GLctxObject.GLctx.viewport(0, 0, newWidth, newHeight);
       }
       return restoreOldStyle;
     }
@@ -8057,7 +9088,12 @@ var unityFramework = (() => {
       currentFullscreenStrategy = strategy;
       if (strategy.canvasResizedCallback) {
         (function (a1, a2, a3) {
-          return dynCall_iiii.apply(null, [strategy.canvasResizedCallback, a1, a2, a3]);
+          return dynCall_iiii.apply(null, [
+            strategy.canvasResizedCallback,
+            a1,
+            a2,
+            a3,
+          ]);
         })(37, 0, strategy.canvasResizedCallbackUserData);
       }
       return 0;
@@ -8081,7 +9117,10 @@ var unityFramework = (() => {
       } else if (target.msRequestPointerLock) {
         target.msRequestPointerLock();
       } else {
-        if (document.body.requestPointerLock || document.body.msRequestPointerLock) {
+        if (
+          document.body.requestPointerLock ||
+          document.body.msRequestPointerLock
+        ) {
           return -3;
         } else {
           return -1;
@@ -8109,13 +9148,19 @@ var unityFramework = (() => {
       var isFullscreen = !!fullscreenElement;
       HEAP32[eventStruct >> 2] = isFullscreen;
       HEAP32[(eventStruct + 4) >> 2] = JSEvents.fullscreenEnabled();
-      var reportedElement = isFullscreen ? fullscreenElement : JSEvents.previousFullscreenElement;
+      var reportedElement = isFullscreen
+        ? fullscreenElement
+        : JSEvents.previousFullscreenElement;
       var nodeName = JSEvents.getNodeNameForTarget(reportedElement);
       var id = reportedElement && reportedElement.id ? reportedElement.id : "";
       stringToUTF8(nodeName, eventStruct + 8, 128);
       stringToUTF8(id, eventStruct + 136, 128);
-      HEAP32[(eventStruct + 264) >> 2] = reportedElement ? reportedElement.clientWidth : 0;
-      HEAP32[(eventStruct + 268) >> 2] = reportedElement ? reportedElement.clientHeight : 0;
+      HEAP32[(eventStruct + 264) >> 2] = reportedElement
+        ? reportedElement.clientWidth
+        : 0;
+      HEAP32[(eventStruct + 268) >> 2] = reportedElement
+        ? reportedElement.clientHeight
+        : 0;
       HEAP32[(eventStruct + 272) >> 2] = screen.width;
       HEAP32[(eventStruct + 276) >> 2] = screen.height;
       if (isFullscreen) {
@@ -8174,7 +9219,10 @@ var unityFramework = (() => {
       JSEvents.removeAllEventListeners();
     }
     function _emscripten_is_webgl_context_lost(contextHandle) {
-      return !GL.contexts[contextHandle] || GL.contexts[contextHandle].GLctx.isContextLost();
+      return (
+        !GL.contexts[contextHandle] ||
+        GL.contexts[contextHandle].GLctx.isContextLost()
+      );
     }
     function reallyNegative(x) {
       return x < 0 || (x === 0 && 1 / x === -Infinity);
@@ -8199,7 +9247,9 @@ var unityFramework = (() => {
       if (value >= 0) {
         return value;
       }
-      return bits <= 32 ? 2 * Math.abs(1 << (bits - 1)) + value : Math.pow(2, bits) + value;
+      return bits <= 32
+        ? 2 * Math.abs(1 << (bits - 1)) + value
+        : Math.pow(2, bits) + value;
     }
     function formatString(format, varargs) {
       var textIndex = format;
@@ -8360,7 +9410,10 @@ var unityFramework = (() => {
               }
               if (argSize <= 4) {
                 var limit = Math.pow(256, argSize) - 1;
-                currArg = (signed ? reSign : unSign)(currArg & limit, argSize * 8);
+                currArg = (signed ? reSign : unSign)(
+                  currArg & limit,
+                  argSize * 8,
+                );
               }
               var currAbsArg = Math.abs(currArg);
               var prefix = "";
@@ -8450,7 +9503,10 @@ var unityFramework = (() => {
                 if (next == 103 || next == 71) {
                   isGeneral = true;
                   precision = precision || 1;
-                  var exponent = parseInt(currArg.toExponential(effectivePrecision).split("e")[1], 10);
+                  var exponent = parseInt(
+                    currArg.toExponential(effectivePrecision).split("e")[1],
+                    10,
+                  );
                   if (precision > exponent && exponent >= -4) {
                     next = (next == 103 ? "f" : "F").charCodeAt(0);
                     precision -= exponent + 1;
@@ -8481,7 +9537,8 @@ var unityFramework = (() => {
                     parts[0] = parts[0].slice(0, -1);
                   }
                 } else {
-                  if (flagAlternative && argText.indexOf(".") == -1) parts[0] += ".";
+                  if (flagAlternative && argText.indexOf(".") == -1)
+                    parts[0] += ".";
                   while (precision > effectivePrecision++) parts[0] += "0";
                 }
                 argText = parts[0] + (parts.length > 1 ? "e" + parts[1] : "");
@@ -8525,7 +9582,9 @@ var unityFramework = (() => {
                   ret.push(HEAPU8[arg++ >> 0]);
                 }
               } else {
-                ret = ret.concat(intArrayFromString("(null)".substr(0, argLength), true));
+                ret = ret.concat(
+                  intArrayFromString("(null)".substr(0, argLength), true),
+                );
               }
               if (flagLeftAlign) {
                 while (argLength < width--) {
@@ -8595,14 +9654,15 @@ var unityFramework = (() => {
       var callstack = jsStackTrace();
       var iThisFunc = callstack.lastIndexOf("_emscripten_log");
       var iThisFunc2 = callstack.lastIndexOf("_emscripten_get_callstack");
-      var iNextLine = callstack.indexOf("\n", Math.max(iThisFunc, iThisFunc2)) + 1;
+      var iNextLine =
+        callstack.indexOf("\n", Math.max(iThisFunc, iThisFunc2)) + 1;
       callstack = callstack.slice(iNextLine);
       if (flags & 32) {
         warnOnce("EM_LOG_DEMANGLE is deprecated; ignoring");
       }
       if (flags & 8 && typeof emscripten_source_map == "undefined") {
         warnOnce(
-          'Source map information is not available, emscripten_log with EM_LOG_C_STACK will be ignored. Build with "--pre-js $EMSCRIPTEN/src/emscripten-source-map.min.js" linker flag to add source map loading to code.'
+          'Source map information is not available, emscripten_log with EM_LOG_C_STACK will be ignored. Build with "--pre-js $EMSCRIPTEN/src/emscripten-source-map.min.js" linker flag to add source map loading to code.',
         );
         flags ^= 8;
         flags |= 16;
@@ -8610,7 +9670,8 @@ var unityFramework = (() => {
       var stack_args = null;
       if (flags & 128) {
         stack_args = traverseStack(arguments);
-        while (stack_args[1].includes("_emscripten_")) stack_args = traverseStack(stack_args[0]);
+        while (stack_args[1].includes("_emscripten_"))
+          stack_args = traverseStack(stack_args[0]);
       }
       var lines = callstack.split("\n");
       callstack = "";
@@ -8644,18 +9705,34 @@ var unityFramework = (() => {
         }
         var haveSourceMap = false;
         if (flags & 8) {
-          var orig = emscripten_source_map.originalPositionFor({ line: lineno, column: column });
+          var orig = emscripten_source_map.originalPositionFor({
+            line: lineno,
+            column: column,
+          });
           haveSourceMap = orig && orig.source;
           if (haveSourceMap) {
             if (flags & 64) {
-              orig.source = orig.source.substring(orig.source.replace(/\\/g, "/").lastIndexOf("/") + 1);
+              orig.source = orig.source.substring(
+                orig.source.replace(/\\/g, "/").lastIndexOf("/") + 1,
+              );
             }
-            callstack += "    at " + symbolName + " (" + orig.source + ":" + orig.line + ":" + orig.column + ")\n";
+            callstack +=
+              "    at " +
+              symbolName +
+              " (" +
+              orig.source +
+              ":" +
+              orig.line +
+              ":" +
+              orig.column +
+              ")\n";
           }
         }
         if (flags & 16 || !haveSourceMap) {
           if (flags & 64) {
-            file = file.substring(file.replace(/\\/g, "/").lastIndexOf("/") + 1);
+            file = file.substring(
+              file.replace(/\\/g, "/").lastIndexOf("/") + 1,
+            );
           }
           callstack +=
             (haveSourceMap ? "     = " + symbolName : "    at " + symbolName) +
@@ -8670,7 +9747,8 @@ var unityFramework = (() => {
         if (flags & 128 && stack_args[0]) {
           if (stack_args[1] == symbolName && stack_args[2].length > 0) {
             callstack = callstack.replace(/\s+$/, "");
-            callstack += " with values: " + stack_args[1] + stack_args[2] + "\n";
+            callstack +=
+              " with values: " + stack_args[1] + stack_args[2] + "\n";
           }
           stack_args = traverseStack(stack_args[0]);
         }
@@ -8681,7 +9759,8 @@ var unityFramework = (() => {
     function _emscripten_log_js(flags, str) {
       if (flags & 24) {
         str = str.replace(/\s+$/, "");
-        str += (str.length > 0 ? "\n" : "") + _emscripten_get_callstack_js(flags);
+        str +=
+          (str.length > 0 ? "\n" : "") + _emscripten_get_callstack_js(flags);
       }
       if (flags & 1) {
         if (flags & 4) {
@@ -8719,7 +9798,10 @@ var unityFramework = (() => {
       var canPerformRequests = JSEvents.canPerformEventHandlerRequests();
       if (!canPerformRequests) {
         if (strategy.deferUntilInEventHandler) {
-          JSEvents.deferCall(_JSEvents_requestFullscreen, 1, [target, strategy]);
+          JSEvents.deferCall(_JSEvents_requestFullscreen, 1, [
+            target,
+            strategy,
+          ]);
           return 1;
         } else {
           return -2;
@@ -8733,7 +9815,7 @@ var unityFramework = (() => {
         canvasResolutionScaleMode: 0,
         filteringMode: 0,
         deferUntilInEventHandler: deferUntilInEventHandler,
-        canvasResizedCallbackTargetThread: 2
+        canvasResizedCallbackTargetThread: 2,
       };
       return doRequestFullscreen(target, strategy);
     }
@@ -8768,11 +9850,18 @@ var unityFramework = (() => {
       if (requestedSize > maxHeapSize) {
         return false;
       }
-      let alignUp = (x, multiple) => x + ((multiple - (x % multiple)) % multiple);
+      let alignUp = (x, multiple) =>
+        x + ((multiple - (x % multiple)) % multiple);
       for (var cutDown = 1; cutDown <= 4; cutDown *= 2) {
         var overGrownHeapSize = oldSize * (1 + 0.2 / cutDown);
-        overGrownHeapSize = Math.min(overGrownHeapSize, requestedSize + 100663296);
-        var newSize = Math.min(maxHeapSize, alignUp(Math.max(requestedSize, overGrownHeapSize), 65536));
+        overGrownHeapSize = Math.min(
+          overGrownHeapSize,
+          requestedSize + 100663296,
+        );
+        var newSize = Math.min(
+          maxHeapSize,
+          alignUp(Math.max(requestedSize, overGrownHeapSize), 65536),
+        );
         var replacement = emscripten_realloc_buffer(newSize);
         if (replacement) {
           return true;
@@ -8782,7 +9871,8 @@ var unityFramework = (() => {
     }
     function _emscripten_sample_gamepad_data() {
       try {
-        if (navigator.getGamepads) return (JSEvents.lastGamepadState = navigator.getGamepads()) ? 0 : -1;
+        if (navigator.getGamepads)
+          return (JSEvents.lastGamepadState = navigator.getGamepads()) ? 0 : -1;
       } catch (e) {
         navigator.getGamepads = null;
       }
@@ -8795,7 +9885,7 @@ var unityFramework = (() => {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.focusEvent) JSEvents.focusEvent = _malloc(256);
       var focusEventHandlerFunc = function (ev) {
@@ -8817,16 +9907,44 @@ var unityFramework = (() => {
         eventTypeString: eventTypeString,
         callbackfunc: callbackfunc,
         handlerFunc: focusEventHandlerFunc,
-        useCapture: useCapture
+        useCapture: useCapture,
       };
       JSEvents.registerOrRemoveHandler(eventHandler);
     }
-    function _emscripten_set_blur_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerFocusEventCallback(target, userData, useCapture, callbackfunc, 12, "blur", targetThread);
+    function _emscripten_set_blur_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerFocusEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        12,
+        "blur",
+        targetThread,
+      );
       return 0;
     }
-    function _emscripten_set_focus_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerFocusEventCallback(target, userData, useCapture, callbackfunc, 13, "focus", targetThread);
+    function _emscripten_set_focus_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerFocusEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        13,
+        "focus",
+        targetThread,
+      );
       return 0;
     }
     function registerFullscreenChangeEventCallback(
@@ -8836,9 +9954,10 @@ var unityFramework = (() => {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
-      if (!JSEvents.fullscreenChangeEvent) JSEvents.fullscreenChangeEvent = _malloc(280);
+      if (!JSEvents.fullscreenChangeEvent)
+        JSEvents.fullscreenChangeEvent = _malloc(280);
       var fullscreenChangeEventhandlerFunc = function (ev) {
         var e = ev || event;
         var fullscreenChangeEvent = JSEvents.fullscreenChangeEvent;
@@ -8855,7 +9974,7 @@ var unityFramework = (() => {
         eventTypeString: eventTypeString,
         callbackfunc: callbackfunc,
         handlerFunc: fullscreenChangeEventhandlerFunc,
-        useCapture: useCapture
+        useCapture: useCapture,
       };
       JSEvents.registerOrRemoveHandler(eventHandler);
     }
@@ -8864,7 +9983,7 @@ var unityFramework = (() => {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.fullscreenEnabled()) return -1;
       target = findEventTarget(target);
@@ -8876,7 +9995,7 @@ var unityFramework = (() => {
         callbackfunc,
         19,
         "fullscreenchange",
-        targetThread
+        targetThread,
       );
       registerFullscreenChangeEventCallback(
         target,
@@ -8885,7 +10004,7 @@ var unityFramework = (() => {
         callbackfunc,
         19,
         "webkitfullscreenchange",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -8896,7 +10015,7 @@ var unityFramework = (() => {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.gamepadEvent) JSEvents.gamepadEvent = _malloc(1432);
       var gamepadEventHandlerFunc = function (ev) {
@@ -8916,15 +10035,33 @@ var unityFramework = (() => {
         eventTypeString: eventTypeString,
         callbackfunc: callbackfunc,
         handlerFunc: gamepadEventHandlerFunc,
-        useCapture: useCapture
+        useCapture: useCapture,
       };
       JSEvents.registerOrRemoveHandler(eventHandler);
     }
-    function _emscripten_set_gamepadconnected_callback_on_thread(userData, useCapture, callbackfunc, targetThread) {
+    function _emscripten_set_gamepadconnected_callback_on_thread(
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
       if (_emscripten_sample_gamepad_data()) return -1;
-      return registerGamepadEventCallback(2, userData, useCapture, callbackfunc, 26, "gamepadconnected", targetThread);
+      return registerGamepadEventCallback(
+        2,
+        userData,
+        useCapture,
+        callbackfunc,
+        26,
+        "gamepadconnected",
+        targetThread,
+      );
     }
-    function _emscripten_set_gamepaddisconnected_callback_on_thread(userData, useCapture, callbackfunc, targetThread) {
+    function _emscripten_set_gamepaddisconnected_callback_on_thread(
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
       if (_emscripten_sample_gamepad_data()) return -1;
       return registerGamepadEventCallback(
         2,
@@ -8933,7 +10070,7 @@ var unityFramework = (() => {
         callbackfunc,
         27,
         "gamepaddisconnected",
-        targetThread
+        targetThread,
       );
     }
     function _emscripten_set_interval(cb, msecs, userData) {
@@ -8952,7 +10089,7 @@ var unityFramework = (() => {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.keyEvent) JSEvents.keyEvent = _malloc(176);
       var keyEventHandlerFunc = function (e) {
@@ -8985,20 +10122,62 @@ var unityFramework = (() => {
         eventTypeString: eventTypeString,
         callbackfunc: callbackfunc,
         handlerFunc: keyEventHandlerFunc,
-        useCapture: useCapture
+        useCapture: useCapture,
       };
       JSEvents.registerOrRemoveHandler(eventHandler);
     }
-    function _emscripten_set_keydown_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerKeyEventCallback(target, userData, useCapture, callbackfunc, 2, "keydown", targetThread);
+    function _emscripten_set_keydown_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerKeyEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        2,
+        "keydown",
+        targetThread,
+      );
       return 0;
     }
-    function _emscripten_set_keypress_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerKeyEventCallback(target, userData, useCapture, callbackfunc, 1, "keypress", targetThread);
+    function _emscripten_set_keypress_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerKeyEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        1,
+        "keypress",
+        targetThread,
+      );
       return 0;
     }
-    function _emscripten_set_keyup_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerKeyEventCallback(target, userData, useCapture, callbackfunc, 3, "keyup", targetThread);
+    function _emscripten_set_keyup_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerKeyEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        3,
+        "keyup",
+        targetThread,
+      );
       return 0;
     }
     function _emscripten_set_main_loop(func, fps, simulateInfiniteLoop) {
@@ -9033,7 +10212,7 @@ var unityFramework = (() => {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.mouseEvent) JSEvents.mouseEvent = _malloc(72);
       target = findEventTarget(target);
@@ -9050,24 +10229,68 @@ var unityFramework = (() => {
       var eventHandler = {
         target: target,
         allowsDeferredCalls:
-          eventTypeString != "mousemove" && eventTypeString != "mouseenter" && eventTypeString != "mouseleave",
+          eventTypeString != "mousemove" &&
+          eventTypeString != "mouseenter" &&
+          eventTypeString != "mouseleave",
         eventTypeString: eventTypeString,
         callbackfunc: callbackfunc,
         handlerFunc: mouseEventHandlerFunc,
-        useCapture: useCapture
+        useCapture: useCapture,
       };
       JSEvents.registerOrRemoveHandler(eventHandler);
     }
-    function _emscripten_set_mousedown_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerMouseEventCallback(target, userData, useCapture, callbackfunc, 5, "mousedown", targetThread);
+    function _emscripten_set_mousedown_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerMouseEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        5,
+        "mousedown",
+        targetThread,
+      );
       return 0;
     }
-    function _emscripten_set_mousemove_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerMouseEventCallback(target, userData, useCapture, callbackfunc, 8, "mousemove", targetThread);
+    function _emscripten_set_mousemove_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerMouseEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        8,
+        "mousemove",
+        targetThread,
+      );
       return 0;
     }
-    function _emscripten_set_mouseup_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerMouseEventCallback(target, userData, useCapture, callbackfunc, 6, "mouseup", targetThread);
+    function _emscripten_set_mouseup_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerMouseEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        6,
+        "mouseup",
+        targetThread,
+      );
       return 0;
     }
     function fillPointerlockChangeEventData(eventStruct) {
@@ -9079,7 +10302,10 @@ var unityFramework = (() => {
       var isPointerlocked = !!pointerLockElement;
       HEAP32[eventStruct >> 2] = isPointerlocked;
       var nodeName = JSEvents.getNodeNameForTarget(pointerLockElement);
-      var id = pointerLockElement && pointerLockElement.id ? pointerLockElement.id : "";
+      var id =
+        pointerLockElement && pointerLockElement.id
+          ? pointerLockElement.id
+          : "";
       stringToUTF8(nodeName, eventStruct + 4, 128);
       stringToUTF8(id, eventStruct + 132, 128);
     }
@@ -9090,9 +10316,10 @@ var unityFramework = (() => {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
-      if (!JSEvents.pointerlockChangeEvent) JSEvents.pointerlockChangeEvent = _malloc(260);
+      if (!JSEvents.pointerlockChangeEvent)
+        JSEvents.pointerlockChangeEvent = _malloc(260);
       var pointerlockChangeEventHandlerFunc = function (ev) {
         var e = ev || event;
         var pointerlockChangeEvent = JSEvents.pointerlockChangeEvent;
@@ -9109,7 +10336,7 @@ var unityFramework = (() => {
         eventTypeString: eventTypeString,
         callbackfunc: callbackfunc,
         handlerFunc: pointerlockChangeEventHandlerFunc,
-        useCapture: useCapture
+        useCapture: useCapture,
       };
       JSEvents.registerOrRemoveHandler(eventHandler);
     }
@@ -9118,7 +10345,7 @@ var unityFramework = (() => {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       if (
         !document ||
@@ -9139,7 +10366,7 @@ var unityFramework = (() => {
         callbackfunc,
         20,
         "pointerlockchange",
-        targetThread
+        targetThread,
       );
       registerPointerlockChangeEventCallback(
         target,
@@ -9148,7 +10375,7 @@ var unityFramework = (() => {
         callbackfunc,
         20,
         "mozpointerlockchange",
-        targetThread
+        targetThread,
       );
       registerPointerlockChangeEventCallback(
         target,
@@ -9157,7 +10384,7 @@ var unityFramework = (() => {
         callbackfunc,
         20,
         "webkitpointerlockchange",
-        targetThread
+        targetThread,
       );
       registerPointerlockChangeEventCallback(
         target,
@@ -9166,7 +10393,7 @@ var unityFramework = (() => {
         callbackfunc,
         20,
         "mspointerlockchange",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9177,7 +10404,7 @@ var unityFramework = (() => {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.touchEvent) JSEvents.touchEvent = _malloc(1696);
       target = findEventTarget(target);
@@ -9235,28 +10462,85 @@ var unityFramework = (() => {
       };
       var eventHandler = {
         target: target,
-        allowsDeferredCalls: eventTypeString == "touchstart" || eventTypeString == "touchend",
+        allowsDeferredCalls:
+          eventTypeString == "touchstart" || eventTypeString == "touchend",
         eventTypeString: eventTypeString,
         callbackfunc: callbackfunc,
         handlerFunc: touchEventHandlerFunc,
-        useCapture: useCapture
+        useCapture: useCapture,
       };
       JSEvents.registerOrRemoveHandler(eventHandler);
     }
-    function _emscripten_set_touchcancel_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerTouchEventCallback(target, userData, useCapture, callbackfunc, 25, "touchcancel", targetThread);
+    function _emscripten_set_touchcancel_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerTouchEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        25,
+        "touchcancel",
+        targetThread,
+      );
       return 0;
     }
-    function _emscripten_set_touchend_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerTouchEventCallback(target, userData, useCapture, callbackfunc, 23, "touchend", targetThread);
+    function _emscripten_set_touchend_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerTouchEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        23,
+        "touchend",
+        targetThread,
+      );
       return 0;
     }
-    function _emscripten_set_touchmove_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerTouchEventCallback(target, userData, useCapture, callbackfunc, 24, "touchmove", targetThread);
+    function _emscripten_set_touchmove_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerTouchEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        24,
+        "touchmove",
+        targetThread,
+      );
       return 0;
     }
-    function _emscripten_set_touchstart_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
-      registerTouchEventCallback(target, userData, useCapture, callbackfunc, 22, "touchstart", targetThread);
+    function _emscripten_set_touchstart_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
+      registerTouchEventCallback(
+        target,
+        userData,
+        useCapture,
+        callbackfunc,
+        22,
+        "touchstart",
+        targetThread,
+      );
       return 0;
     }
     function registerWheelEventCallback(
@@ -9266,7 +10550,7 @@ var unityFramework = (() => {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.wheelEvent) JSEvents.wheelEvent = _malloc(104);
       var wheelHandlerFunc = function (ev) {
@@ -9290,14 +10574,28 @@ var unityFramework = (() => {
         eventTypeString: eventTypeString,
         callbackfunc: callbackfunc,
         handlerFunc: wheelHandlerFunc,
-        useCapture: useCapture
+        useCapture: useCapture,
       };
       JSEvents.registerOrRemoveHandler(eventHandler);
     }
-    function _emscripten_set_wheel_callback_on_thread(target, userData, useCapture, callbackfunc, targetThread) {
+    function _emscripten_set_wheel_callback_on_thread(
+      target,
+      userData,
+      useCapture,
+      callbackfunc,
+      targetThread,
+    ) {
       target = findEventTarget(target);
       if (typeof target.onwheel != "undefined") {
-        registerWheelEventCallback(target, userData, useCapture, callbackfunc, 9, "wheel", targetThread);
+        registerWheelEventCallback(
+          target,
+          userData,
+          useCapture,
+          callbackfunc,
+          9,
+          "wheel",
+          targetThread,
+        );
         return 0;
       } else {
         return -1;
@@ -9312,8 +10610,20 @@ var unityFramework = (() => {
         ctx["drawArraysInstanced"] = function (mode, first, count, primcount) {
           ext["drawArraysInstancedANGLE"](mode, first, count, primcount);
         };
-        ctx["drawElementsInstanced"] = function (mode, count, type, indices, primcount) {
-          ext["drawElementsInstancedANGLE"](mode, count, type, indices, primcount);
+        ctx["drawElementsInstanced"] = function (
+          mode,
+          count,
+          type,
+          indices,
+          primcount,
+        ) {
+          ext["drawElementsInstancedANGLE"](
+            mode,
+            count,
+            type,
+            indices,
+            primcount,
+          );
         };
         return 1;
       }
@@ -9345,11 +10655,19 @@ var unityFramework = (() => {
         return 1;
       }
     }
-    function __webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance(ctx) {
-      return !!(ctx.dibvbi = ctx.getExtension("WEBGL_draw_instanced_base_vertex_base_instance"));
+    function __webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance(
+      ctx,
+    ) {
+      return !!(ctx.dibvbi = ctx.getExtension(
+        "WEBGL_draw_instanced_base_vertex_base_instance",
+      ));
     }
-    function __webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance(ctx) {
-      return !!(ctx.mdibvbi = ctx.getExtension("WEBGL_multi_draw_instanced_base_vertex_base_instance"));
+    function __webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance(
+      ctx,
+    ) {
+      return !!(ctx.mdibvbi = ctx.getExtension(
+        "WEBGL_multi_draw_instanced_base_vertex_base_instance",
+      ));
     }
     function __webgl_enable_WEBGL_multi_draw(ctx) {
       return !!(ctx.multiDrawWebgl = ctx.getExtension("WEBGL_multi_draw"));
@@ -9396,15 +10714,18 @@ var unityFramework = (() => {
         var largestIndex = GL.log2ceilLookup(GL.MAX_TEMP_BUFFER_SIZE);
         context.tempVertexBufferCounters1 = [];
         context.tempVertexBufferCounters2 = [];
-        context.tempVertexBufferCounters1.length = context.tempVertexBufferCounters2.length = largestIndex + 1;
+        context.tempVertexBufferCounters1.length =
+          context.tempVertexBufferCounters2.length = largestIndex + 1;
         context.tempVertexBuffers1 = [];
         context.tempVertexBuffers2 = [];
-        context.tempVertexBuffers1.length = context.tempVertexBuffers2.length = largestIndex + 1;
+        context.tempVertexBuffers1.length = context.tempVertexBuffers2.length =
+          largestIndex + 1;
         context.tempIndexBuffers = [];
         context.tempIndexBuffers.length = largestIndex + 1;
         for (var i = 0; i <= largestIndex; ++i) {
           context.tempIndexBuffers[i] = null;
-          context.tempVertexBufferCounters1[i] = context.tempVertexBufferCounters2[i] = 0;
+          context.tempVertexBufferCounters1[i] =
+            context.tempVertexBufferCounters2[i] = 0;
           var ringbufferLength = GL.numTempVertexBuffersPerSize;
           context.tempVertexBuffers1[i] = [];
           context.tempVertexBuffers2[i] = [];
@@ -9444,9 +10765,11 @@ var unityFramework = (() => {
       getTempVertexBuffer: function getTempVertexBuffer(sizeBytes) {
         var idx = GL.log2ceilLookup(sizeBytes);
         var ringbuffer = GL.currentContext.tempVertexBuffers1[idx];
-        var nextFreeBufferIndex = GL.currentContext.tempVertexBufferCounters1[idx];
+        var nextFreeBufferIndex =
+          GL.currentContext.tempVertexBufferCounters1[idx];
         GL.currentContext.tempVertexBufferCounters1[idx] =
-          (GL.currentContext.tempVertexBufferCounters1[idx] + 1) & (GL.numTempVertexBuffersPerSize - 1);
+          (GL.currentContext.tempVertexBufferCounters1[idx] + 1) &
+          (GL.numTempVertexBuffersPerSize - 1);
         var vbo = ringbuffer[nextFreeBufferIndex];
         if (vbo) {
           return vbo;
@@ -9476,10 +10799,12 @@ var unityFramework = (() => {
           return;
         }
         var vb = GL.currentContext.tempVertexBuffers1;
-        GL.currentContext.tempVertexBuffers1 = GL.currentContext.tempVertexBuffers2;
+        GL.currentContext.tempVertexBuffers1 =
+          GL.currentContext.tempVertexBuffers2;
         GL.currentContext.tempVertexBuffers2 = vb;
         vb = GL.currentContext.tempVertexBufferCounters1;
-        GL.currentContext.tempVertexBufferCounters1 = GL.currentContext.tempVertexBufferCounters2;
+        GL.currentContext.tempVertexBufferCounters1 =
+          GL.currentContext.tempVertexBufferCounters2;
         GL.currentContext.tempVertexBufferCounters2 = vb;
         var largestIndex = GL.log2ceilLookup(GL.MAX_TEMP_BUFFER_SIZE);
         for (var i = 0; i <= largestIndex; ++i) {
@@ -9490,7 +10815,10 @@ var unityFramework = (() => {
         var source = "";
         for (var i = 0; i < count; ++i) {
           var len = length ? HEAP32[(length + i * 4) >> 2] : -1;
-          source += UTF8ToString(HEAP32[(string + i * 4) >> 2], len < 0 ? undefined : len);
+          source += UTF8ToString(
+            HEAP32[(string + i * 4) >> 2],
+            len < 0 ? undefined : len,
+          );
         }
         return source;
       },
@@ -9502,30 +10830,49 @@ var unityFramework = (() => {
         return size * typeSize * count;
       },
       usedTempBuffers: [],
-      preDrawHandleClientVertexAttribBindings: function preDrawHandleClientVertexAttribBindings(count) {
-        GL.resetBufferBinding = false;
-        for (var i = 0; i < GL.currentContext.maxVertexAttribs; ++i) {
-          var cb = GL.currentContext.clientBuffers[i];
-          if (!cb.clientside || !cb.enabled) continue;
-          GL.resetBufferBinding = true;
-          var size = GL.calcBufLength(cb.size, cb.type, cb.stride, count);
-          var buf = GL.getTempVertexBuffer(size);
-          GLctx.bindBuffer(34962, buf);
-          GLctx.bufferSubData(34962, 0, HEAPU8.subarray(cb.ptr, cb.ptr + size));
-          cb.vertexAttribPointerAdaptor.call(GLctx, i, cb.size, cb.type, cb.normalized, cb.stride, 0);
-        }
-      },
-      postDrawHandleClientVertexAttribBindings: function postDrawHandleClientVertexAttribBindings() {
-        if (GL.resetBufferBinding) {
-          GLctx.bindBuffer(34962, GL.buffers[GLctx.currentArrayBufferBinding]);
-        }
-      },
+      preDrawHandleClientVertexAttribBindings:
+        function preDrawHandleClientVertexAttribBindings(count) {
+          GL.resetBufferBinding = false;
+          for (var i = 0; i < GL.currentContext.maxVertexAttribs; ++i) {
+            var cb = GL.currentContext.clientBuffers[i];
+            if (!cb.clientside || !cb.enabled) continue;
+            GL.resetBufferBinding = true;
+            var size = GL.calcBufLength(cb.size, cb.type, cb.stride, count);
+            var buf = GL.getTempVertexBuffer(size);
+            GLctx.bindBuffer(34962, buf);
+            GLctx.bufferSubData(
+              34962,
+              0,
+              HEAPU8.subarray(cb.ptr, cb.ptr + size),
+            );
+            cb.vertexAttribPointerAdaptor.call(
+              GLctx,
+              i,
+              cb.size,
+              cb.type,
+              cb.normalized,
+              cb.stride,
+              0,
+            );
+          }
+        },
+      postDrawHandleClientVertexAttribBindings:
+        function postDrawHandleClientVertexAttribBindings() {
+          if (GL.resetBufferBinding) {
+            GLctx.bindBuffer(
+              34962,
+              GL.buffers[GLctx.currentArrayBufferBinding],
+            );
+          }
+        },
       createContext: function (canvas, webGLContextAttributes) {
         if (!canvas.getContextSafariWebGL2Fixed) {
           canvas.getContextSafariWebGL2Fixed = canvas.getContext;
           function fixedGetContext(ver, attrs) {
             var gl = canvas.getContextSafariWebGL2Fixed(ver, attrs);
-            return (ver == "webgl") == gl instanceof WebGLRenderingContext ? gl : null;
+            return (ver == "webgl") == gl instanceof WebGLRenderingContext
+              ? gl
+              : null;
           }
           canvas.getContext = fixedGetContext;
         }
@@ -9543,12 +10890,13 @@ var unityFramework = (() => {
           handle: handle,
           attributes: webGLContextAttributes,
           version: webGLContextAttributes.majorVersion,
-          GLctx: ctx
+          GLctx: ctx,
         };
         if (ctx.canvas) ctx.canvas.GLctxObject = context;
         GL.contexts[handle] = context;
         if (
-          typeof webGLContextAttributes.enableExtensionsByDefault == "undefined" ||
+          typeof webGLContextAttributes.enableExtensionsByDefault ==
+            "undefined" ||
           webGLContextAttributes.enableExtensionsByDefault
         ) {
           GL.initExtensions(context);
@@ -9564,7 +10912,7 @@ var unityFramework = (() => {
             normalized: 0,
             stride: 0,
             ptr: 0,
-            vertexAttribPointerAdaptor: null
+            vertexAttribPointerAdaptor: null,
           };
         }
         GL.generateTempBuffers(false, context);
@@ -9579,9 +10927,16 @@ var unityFramework = (() => {
         return GL.contexts[contextHandle];
       },
       deleteContext: function (contextHandle) {
-        if (GL.currentContext === GL.contexts[contextHandle]) GL.currentContext = null;
-        if (typeof JSEvents == "object") JSEvents.removeAllHandlersOnTarget(GL.contexts[contextHandle].GLctx.canvas);
-        if (GL.contexts[contextHandle] && GL.contexts[contextHandle].GLctx.canvas)
+        if (GL.currentContext === GL.contexts[contextHandle])
+          GL.currentContext = null;
+        if (typeof JSEvents == "object")
+          JSEvents.removeAllHandlersOnTarget(
+            GL.contexts[contextHandle].GLctx.canvas,
+          );
+        if (
+          GL.contexts[contextHandle] &&
+          GL.contexts[contextHandle].GLctx.canvas
+        )
           GL.contexts[contextHandle].GLctx.canvas.GLctxObject = undefined;
         GL.contexts[contextHandle] = null;
       },
@@ -9594,12 +10949,18 @@ var unityFramework = (() => {
         __webgl_enable_OES_vertex_array_object(GLctx);
         __webgl_enable_WEBGL_draw_buffers(GLctx);
         __webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance(GLctx);
-        __webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance(GLctx);
+        __webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance(
+          GLctx,
+        );
         if (context.version >= 2) {
-          GLctx.disjointTimerQueryExt = GLctx.getExtension("EXT_disjoint_timer_query_webgl2");
+          GLctx.disjointTimerQueryExt = GLctx.getExtension(
+            "EXT_disjoint_timer_query_webgl2",
+          );
         }
         if (context.version < 2 || !GLctx.disjointTimerQueryExt) {
-          GLctx.disjointTimerQueryExt = GLctx.getExtension("EXT_disjoint_timer_query");
+          GLctx.disjointTimerQueryExt = GLctx.getExtension(
+            "EXT_disjoint_timer_query",
+          );
         }
         __webgl_enable_WEBGL_multi_draw(GLctx);
         var exts = GLctx.getSupportedExtensions() || [];
@@ -9608,9 +10969,13 @@ var unityFramework = (() => {
             GLctx.getExtension(ext);
           }
         });
-      }
+      },
     };
-    var __emscripten_webgl_power_preferences = ["default", "low-power", "high-performance"];
+    var __emscripten_webgl_power_preferences = [
+      "default",
+      "low-power",
+      "high-performance",
+    ];
     function _emscripten_webgl_do_create_context(target, attributes) {
       var a = attributes >> 2;
       var powerPreference = HEAP32[a + (24 >> 2)];
@@ -9628,7 +10993,7 @@ var unityFramework = (() => {
         enableExtensionsByDefault: HEAP32[a + (40 >> 2)],
         explicitSwapControl: HEAP32[a + (44 >> 2)],
         proxyContextToMainThread: HEAP32[a + (48 >> 2)],
-        renderViaOffscreenBackBuffer: HEAP32[a + (52 >> 2)]
+        renderViaOffscreenBackBuffer: HEAP32[a + (52 >> 2)],
       };
       var canvas = findCanvasEventTarget(target);
       if (!canvas) {
@@ -9651,14 +11016,20 @@ var unityFramework = (() => {
       var context = GL.getContext(contextHandle);
       var extString = UTF8ToString(extension);
       if (extString.startsWith("GL_")) extString = extString.substr(3);
-      if (extString == "ANGLE_instanced_arrays") __webgl_enable_ANGLE_instanced_arrays(GLctx);
-      if (extString == "OES_vertex_array_object") __webgl_enable_OES_vertex_array_object(GLctx);
-      if (extString == "WEBGL_draw_buffers") __webgl_enable_WEBGL_draw_buffers(GLctx);
+      if (extString == "ANGLE_instanced_arrays")
+        __webgl_enable_ANGLE_instanced_arrays(GLctx);
+      if (extString == "OES_vertex_array_object")
+        __webgl_enable_OES_vertex_array_object(GLctx);
+      if (extString == "WEBGL_draw_buffers")
+        __webgl_enable_WEBGL_draw_buffers(GLctx);
       if (extString == "WEBGL_draw_instanced_base_vertex_base_instance")
         __webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance(GLctx);
       if (extString == "WEBGL_multi_draw_instanced_base_vertex_base_instance")
-        __webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance(GLctx);
-      if (extString == "WEBGL_multi_draw") __webgl_enable_WEBGL_multi_draw(GLctx);
+        __webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance(
+          GLctx,
+        );
+      if (extString == "WEBGL_multi_draw")
+        __webgl_enable_WEBGL_multi_draw(GLctx);
       var ext = context.GLctx.getExtension(extString);
       return !!ext;
     }
@@ -9692,8 +11063,12 @@ var unityFramework = (() => {
     function getEnvStrings() {
       if (!getEnvStrings.strings) {
         var lang =
-          ((typeof navigator == "object" && navigator.languages && navigator.languages[0]) || "C").replace("-", "_") +
-          ".UTF-8";
+          (
+            (typeof navigator == "object" &&
+              navigator.languages &&
+              navigator.languages[0]) ||
+            "C"
+          ).replace("-", "_") + ".UTF-8";
         var env = {
           USER: "web_user",
           LOGNAME: "web_user",
@@ -9701,7 +11076,7 @@ var unityFramework = (() => {
           PWD: "/",
           HOME: "/home/web_user",
           LANG: lang,
-          _: getExecutableName()
+          _: getExecutableName(),
         };
         for (var x in ENV) {
           if (ENV[x] === undefined) delete env[x];
@@ -9748,7 +11123,13 @@ var unityFramework = (() => {
     function _fd_fdstat_get(fd, pbuf) {
       try {
         var stream = SYSCALLS.getStreamFromFD(fd);
-        var type = stream.tty ? 2 : FS.isDir(stream.mode) ? 3 : FS.isLink(stream.mode) ? 7 : 4;
+        var type = stream.tty
+          ? 2
+          : FS.isDir(stream.mode)
+            ? 3
+            : FS.isLink(stream.mode)
+              ? 7
+              : 4;
         HEAP8[pbuf >> 0] = type;
         return 0;
       } catch (e) {
@@ -9782,13 +11163,18 @@ var unityFramework = (() => {
           ((tempDouble = stream.position),
           +Math.abs(tempDouble) >= 1
             ? tempDouble > 0
-              ? (Math.min(+Math.floor(tempDouble / 4294967296), 4294967295) | 0) >>> 0
-              : ~~+Math.ceil((tempDouble - +(~~tempDouble >>> 0)) / 4294967296) >>> 0
-            : 0)
+              ? (Math.min(+Math.floor(tempDouble / 4294967296), 4294967295) |
+                  0) >>>
+                0
+              : ~~+Math.ceil(
+                  (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
+                ) >>> 0
+            : 0),
         ]),
           (HEAP32[newOffset >> 2] = tempI64[0]),
           (HEAP32[(newOffset + 4) >> 2] = tempI64[1]));
-        if (stream.getdents && offset === 0 && whence === 0) stream.getdents = null;
+        if (stream.getdents && offset === 0 && whence === 0)
+          stream.getdents = null;
         return 0;
       } catch (e) {
         if (typeof FS == "undefined" || !(e instanceof FS.ErrnoError)) throw e;
@@ -9875,7 +11261,13 @@ var unityFramework = (() => {
       GLctx["bindBufferBase"](target, index, GL.buffers[buffer]);
     }
     function _glBindBufferRange(target, index, buffer, offset, ptrsize) {
-      GLctx["bindBufferRange"](target, index, GL.buffers[buffer], offset, ptrsize);
+      GLctx["bindBufferRange"](
+        target,
+        index,
+        GL.buffers[buffer],
+        offset,
+        ptrsize,
+      );
     }
     function _glBindFramebuffer(target, framebuffer) {
       GLctx.bindFramebuffer(target, GL.framebuffers[framebuffer]);
@@ -9914,7 +11306,11 @@ var unityFramework = (() => {
           GLctx.bufferData(target, size, usage);
         }
       } else {
-        GLctx.bufferData(target, data ? HEAPU8.subarray(data, data + size) : size, usage);
+        GLctx.bufferData(
+          target,
+          data ? HEAPU8.subarray(data, data + size) : size,
+          usage,
+        );
       }
     }
     function _glBufferSubData(target, offset, size, data) {
@@ -9949,7 +11345,11 @@ var unityFramework = (() => {
       GLctx["clearStencil"](x0);
     }
     function _glClientWaitSync(sync, flags, timeoutLo, timeoutHi) {
-      return GLctx.clientWaitSync(GL.syncs[sync], flags, convertI32PairToI53(timeoutLo, timeoutHi));
+      return GLctx.clientWaitSync(
+        GL.syncs[sync],
+        flags,
+        convertI32PairToI53(timeoutLo, timeoutHi),
+      );
     }
     function _glColorMask(red, green, blue, alpha) {
       GLctx.colorMask(!!red, !!green, !!blue, !!alpha);
@@ -9957,12 +11357,40 @@ var unityFramework = (() => {
     function _glCompileShader(shader) {
       GLctx.compileShader(GL.shaders[shader]);
     }
-    function _glCompressedTexImage2D(target, level, internalFormat, width, height, border, imageSize, data) {
+    function _glCompressedTexImage2D(
+      target,
+      level,
+      internalFormat,
+      width,
+      height,
+      border,
+      imageSize,
+      data,
+    ) {
       if (GL.currentContext.version >= 2) {
         if (GLctx.currentPixelUnpackBufferBinding) {
-          GLctx["compressedTexImage2D"](target, level, internalFormat, width, height, border, imageSize, data);
+          GLctx["compressedTexImage2D"](
+            target,
+            level,
+            internalFormat,
+            width,
+            height,
+            border,
+            imageSize,
+            data,
+          );
         } else {
-          GLctx["compressedTexImage2D"](target, level, internalFormat, width, height, border, HEAPU8, data, imageSize);
+          GLctx["compressedTexImage2D"](
+            target,
+            level,
+            internalFormat,
+            width,
+            height,
+            border,
+            HEAPU8,
+            data,
+            imageSize,
+          );
         }
         return;
       }
@@ -9973,12 +11401,32 @@ var unityFramework = (() => {
         width,
         height,
         border,
-        data ? HEAPU8.subarray(data, data + imageSize) : null
+        data ? HEAPU8.subarray(data, data + imageSize) : null,
       );
     }
-    function _glCompressedTexImage3D(target, level, internalFormat, width, height, depth, border, imageSize, data) {
+    function _glCompressedTexImage3D(
+      target,
+      level,
+      internalFormat,
+      width,
+      height,
+      depth,
+      border,
+      imageSize,
+      data,
+    ) {
       if (GLctx.currentPixelUnpackBufferBinding) {
-        GLctx["compressedTexImage3D"](target, level, internalFormat, width, height, depth, border, imageSize, data);
+        GLctx["compressedTexImage3D"](
+          target,
+          level,
+          internalFormat,
+          width,
+          height,
+          depth,
+          border,
+          imageSize,
+          data,
+        );
       } else {
         GLctx["compressedTexImage3D"](
           target,
@@ -9990,14 +11438,34 @@ var unityFramework = (() => {
           border,
           HEAPU8,
           data,
-          imageSize
+          imageSize,
         );
       }
     }
-    function _glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data) {
+    function _glCompressedTexSubImage2D(
+      target,
+      level,
+      xoffset,
+      yoffset,
+      width,
+      height,
+      format,
+      imageSize,
+      data,
+    ) {
       if (GL.currentContext.version >= 2) {
         if (GLctx.currentPixelUnpackBufferBinding) {
-          GLctx["compressedTexSubImage2D"](target, level, xoffset, yoffset, width, height, format, imageSize, data);
+          GLctx["compressedTexSubImage2D"](
+            target,
+            level,
+            xoffset,
+            yoffset,
+            width,
+            height,
+            format,
+            imageSize,
+            data,
+          );
         } else {
           GLctx["compressedTexSubImage2D"](
             target,
@@ -10009,7 +11477,7 @@ var unityFramework = (() => {
             format,
             HEAPU8,
             data,
-            imageSize
+            imageSize,
           );
         }
         return;
@@ -10022,7 +11490,7 @@ var unityFramework = (() => {
         width,
         height,
         format,
-        data ? HEAPU8.subarray(data, data + imageSize) : null
+        data ? HEAPU8.subarray(data, data + imageSize) : null,
       );
     }
     function _glCompressedTexSubImage3D(
@@ -10036,7 +11504,7 @@ var unityFramework = (() => {
       depth,
       format,
       imageSize,
-      data
+      data,
     ) {
       if (GLctx.currentPixelUnpackBufferBinding) {
         GLctx["compressedTexSubImage3D"](
@@ -10050,7 +11518,7 @@ var unityFramework = (() => {
           depth,
           format,
           imageSize,
-          data
+          data,
         );
       } else {
         GLctx["compressedTexSubImage3D"](
@@ -10065,7 +11533,7 @@ var unityFramework = (() => {
           format,
           HEAPU8,
           data,
-          imageSize
+          imageSize,
         );
       }
     }
@@ -10082,7 +11550,10 @@ var unityFramework = (() => {
       var id = GL.getNewId(GL.programs);
       var program = GLctx.createProgram();
       program.name = id;
-      program.maxUniformLength = program.maxAttributeLength = program.maxUniformBlockNameLength = 0;
+      program.maxUniformLength =
+        program.maxAttributeLength =
+        program.maxUniformBlockNameLength =
+          0;
       program.uniformIdCounter = 1;
       GL.programs[id] = program;
       return id;
@@ -10104,10 +11575,14 @@ var unityFramework = (() => {
         GLctx.deleteBuffer(buffer);
         buffer.name = 0;
         GL.buffers[id] = null;
-        if (id == GLctx.currentArrayBufferBinding) GLctx.currentArrayBufferBinding = 0;
-        if (id == GLctx.currentElementArrayBufferBinding) GLctx.currentElementArrayBufferBinding = 0;
-        if (id == GLctx.currentPixelPackBufferBinding) GLctx.currentPixelPackBufferBinding = 0;
-        if (id == GLctx.currentPixelUnpackBufferBinding) GLctx.currentPixelUnpackBufferBinding = 0;
+        if (id == GLctx.currentArrayBufferBinding)
+          GLctx.currentArrayBufferBinding = 0;
+        if (id == GLctx.currentElementArrayBufferBinding)
+          GLctx.currentElementArrayBufferBinding = 0;
+        if (id == GLctx.currentPixelPackBufferBinding)
+          GLctx.currentPixelPackBufferBinding = 0;
+        if (id == GLctx.currentPixelUnpackBufferBinding)
+          GLctx.currentPixelUnpackBufferBinding = 0;
       }
     }
     function _glDeleteFramebuffers(n, framebuffers) {
@@ -10339,7 +11814,9 @@ var unityFramework = (() => {
       }
       if (!(mapping.access & 16)) {
         GL.recordError(1282);
-        err("buffer was not mapped with GL_MAP_FLUSH_EXPLICIT_BIT in glFlushMappedBufferRange");
+        err(
+          "buffer was not mapped with GL_MAP_FLUSH_EXPLICIT_BIT in glFlushMappedBufferRange",
+        );
         return;
       }
       if (offset < 0 || length < 0 || offset + length > mapping.length) {
@@ -10347,16 +11824,54 @@ var unityFramework = (() => {
         err("invalid range in glFlushMappedBufferRange");
         return;
       }
-      GLctx.bufferSubData(target, mapping.offset, HEAPU8.subarray(mapping.mem + offset, mapping.mem + offset + length));
+      GLctx.bufferSubData(
+        target,
+        mapping.offset,
+        HEAPU8.subarray(mapping.mem + offset, mapping.mem + offset + length),
+      );
     }
-    function _glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) {
-      GLctx.framebufferRenderbuffer(target, attachment, renderbuffertarget, GL.renderbuffers[renderbuffer]);
+    function _glFramebufferRenderbuffer(
+      target,
+      attachment,
+      renderbuffertarget,
+      renderbuffer,
+    ) {
+      GLctx.framebufferRenderbuffer(
+        target,
+        attachment,
+        renderbuffertarget,
+        GL.renderbuffers[renderbuffer],
+      );
     }
-    function _glFramebufferTexture2D(target, attachment, textarget, texture, level) {
-      GLctx.framebufferTexture2D(target, attachment, textarget, GL.textures[texture], level);
+    function _glFramebufferTexture2D(
+      target,
+      attachment,
+      textarget,
+      texture,
+      level,
+    ) {
+      GLctx.framebufferTexture2D(
+        target,
+        attachment,
+        textarget,
+        GL.textures[texture],
+        level,
+      );
     }
-    function _glFramebufferTextureLayer(target, attachment, texture, level, layer) {
-      GLctx.framebufferTextureLayer(target, attachment, GL.textures[texture], level, layer);
+    function _glFramebufferTextureLayer(
+      target,
+      attachment,
+      texture,
+      level,
+      layer,
+    ) {
+      GLctx.framebufferTextureLayer(
+        target,
+        attachment,
+        GL.textures[texture],
+        level,
+        layer,
+      );
     }
     function _glFrontFace(x0) {
       GLctx["frontFace"](x0);
@@ -10398,45 +11913,114 @@ var unityFramework = (() => {
     function _glGenerateMipmap(x0) {
       GLctx["generateMipmap"](x0);
     }
-    function __glGetActiveAttribOrUniform(funcName, program, index, bufSize, length, size, type, name) {
+    function __glGetActiveAttribOrUniform(
+      funcName,
+      program,
+      index,
+      bufSize,
+      length,
+      size,
+      type,
+      name,
+    ) {
       program = GL.programs[program];
       var info = GLctx[funcName](program, index);
       if (info) {
-        var numBytesWrittenExclNull = name && stringToUTF8(info.name, name, bufSize);
+        var numBytesWrittenExclNull =
+          name && stringToUTF8(info.name, name, bufSize);
         if (length) HEAP32[length >> 2] = numBytesWrittenExclNull;
         if (size) HEAP32[size >> 2] = info.size;
         if (type) HEAP32[type >> 2] = info.type;
       }
     }
-    function _glGetActiveAttrib(program, index, bufSize, length, size, type, name) {
-      __glGetActiveAttribOrUniform("getActiveAttrib", program, index, bufSize, length, size, type, name);
+    function _glGetActiveAttrib(
+      program,
+      index,
+      bufSize,
+      length,
+      size,
+      type,
+      name,
+    ) {
+      __glGetActiveAttribOrUniform(
+        "getActiveAttrib",
+        program,
+        index,
+        bufSize,
+        length,
+        size,
+        type,
+        name,
+      );
     }
-    function _glGetActiveUniform(program, index, bufSize, length, size, type, name) {
-      __glGetActiveAttribOrUniform("getActiveUniform", program, index, bufSize, length, size, type, name);
+    function _glGetActiveUniform(
+      program,
+      index,
+      bufSize,
+      length,
+      size,
+      type,
+      name,
+    ) {
+      __glGetActiveAttribOrUniform(
+        "getActiveUniform",
+        program,
+        index,
+        bufSize,
+        length,
+        size,
+        type,
+        name,
+      );
     }
-    function _glGetActiveUniformBlockName(program, uniformBlockIndex, bufSize, length, uniformBlockName) {
+    function _glGetActiveUniformBlockName(
+      program,
+      uniformBlockIndex,
+      bufSize,
+      length,
+      uniformBlockName,
+    ) {
       program = GL.programs[program];
-      var result = GLctx["getActiveUniformBlockName"](program, uniformBlockIndex);
+      var result = GLctx["getActiveUniformBlockName"](
+        program,
+        uniformBlockIndex,
+      );
       if (!result) return;
       if (uniformBlockName && bufSize > 0) {
-        var numBytesWrittenExclNull = stringToUTF8(result, uniformBlockName, bufSize);
+        var numBytesWrittenExclNull = stringToUTF8(
+          result,
+          uniformBlockName,
+          bufSize,
+        );
         if (length) HEAP32[length >> 2] = numBytesWrittenExclNull;
       } else {
         if (length) HEAP32[length >> 2] = 0;
       }
     }
-    function _glGetActiveUniformBlockiv(program, uniformBlockIndex, pname, params) {
+    function _glGetActiveUniformBlockiv(
+      program,
+      uniformBlockIndex,
+      pname,
+      params,
+    ) {
       if (!params) {
         GL.recordError(1281);
         return;
       }
       program = GL.programs[program];
       if (pname == 35393) {
-        var name = GLctx["getActiveUniformBlockName"](program, uniformBlockIndex);
+        var name = GLctx["getActiveUniformBlockName"](
+          program,
+          uniformBlockIndex,
+        );
         HEAP32[params >> 2] = name.length + 1;
         return;
       }
-      var result = GLctx["getActiveUniformBlockParameter"](program, uniformBlockIndex, pname);
+      var result = GLctx["getActiveUniformBlockParameter"](
+        program,
+        uniformBlockIndex,
+        pname,
+      );
       if (result === null) return;
       if (pname == 35395) {
         for (var i = 0; i < result.length; i++) {
@@ -10446,7 +12030,13 @@ var unityFramework = (() => {
         HEAP32[params >> 2] = result;
       }
     }
-    function _glGetActiveUniformsiv(program, uniformCount, uniformIndices, pname, params) {
+    function _glGetActiveUniformsiv(
+      program,
+      uniformCount,
+      uniformIndices,
+      pname,
+      params,
+    ) {
       if (!params) {
         GL.recordError(1281);
         return;
@@ -10482,9 +12072,21 @@ var unityFramework = (() => {
       GL.lastError = 0;
       return error;
     }
-    function _glGetFramebufferAttachmentParameteriv(target, attachment, pname, params) {
-      var result = GLctx.getFramebufferAttachmentParameter(target, attachment, pname);
-      if (result instanceof WebGLRenderbuffer || result instanceof WebGLTexture) {
+    function _glGetFramebufferAttachmentParameteriv(
+      target,
+      attachment,
+      pname,
+      params,
+    ) {
+      var result = GLctx.getFramebufferAttachmentParameter(
+        target,
+        attachment,
+        pname,
+      );
+      if (
+        result instanceof WebGLRenderbuffer ||
+        result instanceof WebGLTexture
+      ) {
         result = result.name | 0;
       }
       HEAP32[params >> 2] = result;
@@ -10667,7 +12269,7 @@ var unityFramework = (() => {
                     name_ +
                     ")! (error: " +
                     e +
-                    ")"
+                    ")",
                 );
                 return;
               }
@@ -10686,7 +12288,7 @@ var unityFramework = (() => {
                 result +
                 " of type " +
                 typeof result +
-                "!"
+                "!",
             );
             return;
         }
@@ -10709,7 +12311,13 @@ var unityFramework = (() => {
     function _glGetIntegerv(name_, p) {
       emscriptenWebGLGet(name_, p, 0);
     }
-    function _glGetInternalformativ(target, internalformat, pname, bufSize, params) {
+    function _glGetInternalformativ(
+      target,
+      internalformat,
+      pname,
+      bufSize,
+      params,
+    ) {
       if (bufSize < 0) {
         GL.recordError(1281);
         return;
@@ -10718,19 +12326,30 @@ var unityFramework = (() => {
         GL.recordError(1281);
         return;
       }
-      var ret = GLctx["getInternalformatParameter"](target, internalformat, pname);
+      var ret = GLctx["getInternalformatParameter"](
+        target,
+        internalformat,
+        pname,
+      );
       if (ret === null) return;
       for (var i = 0; i < ret.length && i < bufSize; ++i) {
         HEAP32[(params + i * 4) >> 2] = ret[i];
       }
     }
-    function _glGetProgramBinary(program, bufSize, length, binaryFormat, binary) {
+    function _glGetProgramBinary(
+      program,
+      bufSize,
+      length,
+      binaryFormat,
+      binary,
+    ) {
       GL.recordError(1282);
     }
     function _glGetProgramInfoLog(program, maxLength, length, infoLog) {
       var log = GLctx.getProgramInfoLog(GL.programs[program]);
       if (log === null) log = "(unknown error)";
-      var numBytesWrittenExclNull = maxLength > 0 && infoLog ? stringToUTF8(log, infoLog, maxLength) : 0;
+      var numBytesWrittenExclNull =
+        maxLength > 0 && infoLog ? stringToUTF8(log, infoLog, maxLength) : 0;
       if (length) HEAP32[length >> 2] = numBytesWrittenExclNull;
     }
     function _glGetProgramiv(program, pname, p) {
@@ -10752,7 +12371,7 @@ var unityFramework = (() => {
           for (var i = 0; i < GLctx.getProgramParameter(program, 35718); ++i) {
             program.maxUniformLength = Math.max(
               program.maxUniformLength,
-              GLctx.getActiveUniform(program, i).name.length + 1
+              GLctx.getActiveUniform(program, i).name.length + 1,
             );
           }
         }
@@ -10762,7 +12381,7 @@ var unityFramework = (() => {
           for (var i = 0; i < GLctx.getProgramParameter(program, 35721); ++i) {
             program.maxAttributeLength = Math.max(
               program.maxAttributeLength,
-              GLctx.getActiveAttrib(program, i).name.length + 1
+              GLctx.getActiveAttrib(program, i).name.length + 1,
             );
           }
         }
@@ -10772,7 +12391,7 @@ var unityFramework = (() => {
           for (var i = 0; i < GLctx.getProgramParameter(program, 35382); ++i) {
             program.maxUniformBlockNameLength = Math.max(
               program.maxUniformBlockNameLength,
-              GLctx.getActiveUniformBlockName(program, i).length + 1
+              GLctx.getActiveUniformBlockName(program, i).length + 1,
             );
           }
         }
@@ -10813,10 +12432,16 @@ var unityFramework = (() => {
     function _glGetShaderInfoLog(shader, maxLength, length, infoLog) {
       var log = GLctx.getShaderInfoLog(GL.shaders[shader]);
       if (log === null) log = "(unknown error)";
-      var numBytesWrittenExclNull = maxLength > 0 && infoLog ? stringToUTF8(log, infoLog, maxLength) : 0;
+      var numBytesWrittenExclNull =
+        maxLength > 0 && infoLog ? stringToUTF8(log, infoLog, maxLength) : 0;
       if (length) HEAP32[length >> 2] = numBytesWrittenExclNull;
     }
-    function _glGetShaderPrecisionFormat(shaderType, precisionType, range, precision) {
+    function _glGetShaderPrecisionFormat(
+      shaderType,
+      precisionType,
+      range,
+      precision,
+    ) {
       var result = GLctx.getShaderPrecisionFormat(shaderType, precisionType);
       HEAP32[range >> 2] = result.rangeMin;
       HEAP32[(range + 4) >> 2] = result.rangeMax;
@@ -10825,7 +12450,8 @@ var unityFramework = (() => {
     function _glGetShaderSource(shader, bufSize, length, source) {
       var result = GLctx.getShaderSource(GL.shaders[shader]);
       if (!result) return;
-      var numBytesWrittenExclNull = bufSize > 0 && source ? stringToUTF8(result, source, bufSize) : 0;
+      var numBytesWrittenExclNull =
+        bufSize > 0 && source ? stringToUTF8(result, source, bufSize) : 0;
       if (length) HEAP32[length >> 2] = numBytesWrittenExclNull;
     }
     function _glGetShaderiv(shader, pname, p) {
@@ -10855,7 +12481,7 @@ var unityFramework = (() => {
             exts = exts.concat(
               exts.map(function (e) {
                 return "GL_" + e;
-              })
+              }),
             );
             ret = stringToNewUTF8(exts.join(" "));
             break;
@@ -10871,7 +12497,8 @@ var unityFramework = (() => {
             break;
           case 7938:
             var glVersion = GLctx.getParameter(7938);
-            if (GL.currentContext.version >= 2) glVersion = "OpenGL ES 3.0 (" + glVersion + ")";
+            if (GL.currentContext.version >= 2)
+              glVersion = "OpenGL ES 3.0 (" + glVersion + ")";
             else {
               glVersion = "OpenGL ES 2.0 (" + glVersion + ")";
             }
@@ -10883,7 +12510,8 @@ var unityFramework = (() => {
             var ver_num = glslVersion.match(ver_re);
             if (ver_num !== null) {
               if (ver_num[1].length == 3) ver_num[1] = ver_num[1] + "0";
-              glslVersion = "OpenGL ES GLSL ES " + ver_num[1] + " (" + glslVersion + ")";
+              glslVersion =
+                "OpenGL ES GLSL ES " + ver_num[1] + " (" + glslVersion + ")";
             }
             ret = stringToNewUTF8(glslVersion);
             break;
@@ -10913,7 +12541,7 @@ var unityFramework = (() => {
           exts = exts.concat(
             exts.map(function (e) {
               return "GL_" + e;
-            })
+            }),
           );
           exts = exts.map(function (e) {
             return stringToNewUTF8(e);
@@ -10937,9 +12565,17 @@ var unityFramework = (() => {
       HEAP32[params >> 2] = GLctx.getTexParameter(target, pname);
     }
     function _glGetUniformBlockIndex(program, uniformBlockName) {
-      return GLctx["getUniformBlockIndex"](GL.programs[program], UTF8ToString(uniformBlockName));
+      return GLctx["getUniformBlockIndex"](
+        GL.programs[program],
+        UTF8ToString(uniformBlockName),
+      );
     }
-    function _glGetUniformIndices(program, uniformCount, uniformNames, uniformIndices) {
+    function _glGetUniformIndices(
+      program,
+      uniformCount,
+      uniformNames,
+      uniformIndices,
+    ) {
       if (!uniformIndices) {
         GL.recordError(1281);
         return;
@@ -10950,7 +12586,8 @@ var unityFramework = (() => {
       }
       program = GL.programs[program];
       var names = [];
-      for (var i = 0; i < uniformCount; i++) names.push(UTF8ToString(HEAP32[(uniformNames + i * 4) >> 2]));
+      for (var i = 0; i < uniformCount; i++)
+        names.push(UTF8ToString(HEAP32[(uniformNames + i * 4) >> 2]));
       var result = GLctx["getUniformIndices"](program, names);
       if (!result) return;
       var len = result.length;
@@ -10978,7 +12615,10 @@ var unityFramework = (() => {
           var id = uniformSizeAndIdsByName[arrayName]
             ? uniformSizeAndIdsByName[arrayName][1]
             : program.uniformIdCounter;
-          program.uniformIdCounter = Math.max(id + sz, program.uniformIdCounter);
+          program.uniformIdCounter = Math.max(
+            id + sz,
+            program.uniformIdCounter,
+          );
           uniformSizeAndIdsByName[arrayName] = [sz, id];
           for (j = 0; j < sz; ++j) {
             uniformLocsById[id] = j;
@@ -11002,7 +12642,11 @@ var unityFramework = (() => {
         var sizeAndId = program.uniformSizeAndIdsByName[uniformBaseName];
         if (sizeAndId && arrayIndex < sizeAndId[0]) {
           arrayIndex += sizeAndId[1];
-          if ((uniformLocsById[arrayIndex] = uniformLocsById[arrayIndex] || GLctx.getUniformLocation(program, name))) {
+          if (
+            (uniformLocsById[arrayIndex] =
+              uniformLocsById[arrayIndex] ||
+              GLctx.getUniformLocation(program, name))
+          ) {
             return arrayIndex;
           }
         }
@@ -11018,7 +12662,8 @@ var unityFramework = (() => {
         if (typeof webglLoc == "number") {
           p.uniformLocsById[location] = webglLoc = GLctx.getUniformLocation(
             p,
-            p.uniformArrayNamesById[location] + (webglLoc > 0 ? "[" + webglLoc + "]" : "")
+            p.uniformArrayNamesById[location] +
+              (webglLoc > 0 ? "[" + webglLoc + "]" : ""),
           );
         }
         return webglLoc;
@@ -11065,7 +12710,9 @@ var unityFramework = (() => {
         return;
       }
       if (GL.currentContext.clientBuffers[index].enabled) {
-        err("glGetVertexAttrib*v on client-side array: not supported, bad data returned");
+        err(
+          "glGetVertexAttrib*v on client-side array: not supported, bad data returned",
+        );
       }
       var data = GLctx.getVertexAttrib(index, pname);
       if (pname == 34975) {
@@ -11122,11 +12769,16 @@ var unityFramework = (() => {
       program.uniformLocsById = 0;
       program.uniformSizeAndIdsByName = {};
       [program["vs"], program["fs"]].forEach(function (s) {
-        Object.keys(s.explicitUniformLocations).forEach(function (shaderLocation) {
-          var loc = s.explicitUniformLocations[shaderLocation];
-          program.uniformSizeAndIdsByName[shaderLocation] = [1, loc];
-          program.uniformIdCounter = Math.max(program.uniformIdCounter, loc + 1);
-        });
+        Object.keys(s.explicitUniformLocations).forEach(
+          function (shaderLocation) {
+            var loc = s.explicitUniformLocations[shaderLocation];
+            program.uniformSizeAndIdsByName[shaderLocation] = [1, loc];
+            program.uniformIdCounter = Math.max(
+              program.uniformIdCounter,
+              loc + 1,
+            );
+          },
+        );
       });
       function copyKeys(dst, src) {
         Object.keys(src).forEach(function (key) {
@@ -11143,7 +12795,9 @@ var unityFramework = (() => {
     }
     function _glMapBufferRange(target, offset, length, access) {
       if (access != 26 && access != 10) {
-        err("glMapBufferRange is only supported when access is MAP_WRITE|INVALIDATE_BUFFER");
+        err(
+          "glMapBufferRange is only supported when access is MAP_WRITE|INVALIDATE_BUFFER",
+        );
         return 0;
       }
       if (!emscriptenWebGLValidateMapBufferTarget(target)) {
@@ -11157,7 +12811,7 @@ var unityFramework = (() => {
         offset: offset,
         length: length,
         mem: mem,
-        access: access
+        access: access,
       };
       return mem;
     }
@@ -11179,7 +12833,12 @@ var unityFramework = (() => {
     function _glReadBuffer(x0) {
       GLctx["readBuffer"](x0);
     }
-    function computeUnpackAlignedImageSize(width, height, sizePerPixel, alignment) {
+    function computeUnpackAlignedImageSize(
+      width,
+      height,
+      sizePerPixel,
+      alignment,
+    ) {
       function roundedToNextMultipleOf(x, y) {
         return (x + y - 1) & -y;
       }
@@ -11188,7 +12847,17 @@ var unityFramework = (() => {
       return height * alignedRowSize;
     }
     function __colorChannelsInGlTextureFormat(format) {
-      var colorChannels = { 5: 3, 6: 4, 8: 2, 29502: 3, 29504: 4, 26917: 2, 26918: 2, 29846: 3, 29847: 4 };
+      var colorChannels = {
+        5: 3,
+        6: 4,
+        8: 2,
+        29502: 3,
+        29504: 4,
+        26917: 2,
+        26918: 2,
+        29846: 3,
+        29847: 4,
+      };
       return colorChannels[format - 6402] || 1;
     }
     function heapObjectForWebGLType(type) {
@@ -11198,18 +12867,37 @@ var unityFramework = (() => {
       if (type == 2) return HEAP16;
       if (type == 4) return HEAP32;
       if (type == 6) return HEAPF32;
-      if (type == 5 || type == 28922 || type == 28520 || type == 30779 || type == 30782) return HEAPU32;
+      if (
+        type == 5 ||
+        type == 28922 ||
+        type == 28520 ||
+        type == 30779 ||
+        type == 30782
+      )
+        return HEAPU32;
       return HEAPU16;
     }
     function heapAccessShiftForWebGLHeap(heap) {
       return 31 - Math.clz32(heap.BYTES_PER_ELEMENT);
     }
-    function emscriptenWebGLGetTexPixelData(type, format, width, height, pixels, internalFormat) {
+    function emscriptenWebGLGetTexPixelData(
+      type,
+      format,
+      width,
+      height,
+      pixels,
+      internalFormat,
+    ) {
       var heap = heapObjectForWebGLType(type);
       var shift = heapAccessShiftForWebGLHeap(heap);
       var byteSize = 1 << shift;
       var sizePerPixel = __colorChannelsInGlTextureFormat(format) * byteSize;
-      var bytes = computeUnpackAlignedImageSize(width, height, sizePerPixel, GL.unpackAlignment);
+      var bytes = computeUnpackAlignedImageSize(
+        width,
+        height,
+        sizePerPixel,
+        GL.unpackAlignment,
+      );
       return heap.subarray(pixels >> shift, (pixels + bytes) >> shift);
     }
     function _glReadPixels(x, y, width, height, format, type, pixels) {
@@ -11218,11 +12906,27 @@ var unityFramework = (() => {
           GLctx.readPixels(x, y, width, height, format, type, pixels);
         } else {
           var heap = heapObjectForWebGLType(type);
-          GLctx.readPixels(x, y, width, height, format, type, heap, pixels >> heapAccessShiftForWebGLHeap(heap));
+          GLctx.readPixels(
+            x,
+            y,
+            width,
+            height,
+            format,
+            type,
+            heap,
+            pixels >> heapAccessShiftForWebGLHeap(heap),
+          );
         }
         return;
       }
-      var pixelData = emscriptenWebGLGetTexPixelData(type, format, width, height, pixels, format);
+      var pixelData = emscriptenWebGLGetTexPixelData(
+        type,
+        format,
+        width,
+        height,
+        pixels,
+        format,
+      );
       if (!pixelData) {
         GL.recordError(1280);
         return;
@@ -11320,7 +13024,8 @@ var unityFramework = (() => {
                   if (pp.length && str[j] == "(") {
                     var closeParens = find_closing_parens_index(str, j);
                     expanded +=
-                      pp(str.substring(j + 1, closeParens).split(",")) + str.substring(closeParens + 1, lineEnd);
+                      pp(str.substring(j + 1, closeParens).split(",")) +
+                      str.substring(closeParens + 1, lineEnd);
                   } else {
                     expanded += pp() + str.substring(j, lineEnd);
                   }
@@ -11347,8 +13052,22 @@ var unityFramework = (() => {
               operatorAndPriority = -2;
             for (j = 0; j < tokens.length; ++j) {
               if (
-                (p = ["*", "/", "+", "-", "!", "<", "<=", ">", ">=", "==", "!=", "&&", "||", "("].indexOf(tokens[j])) >
-                operatorAndPriority
+                (p = [
+                  "*",
+                  "/",
+                  "+",
+                  "-",
+                  "!",
+                  "<",
+                  "<=",
+                  ">",
+                  ">=",
+                  "==",
+                  "!=",
+                  "&&",
+                  "||",
+                  "(",
+                ].indexOf(tokens[j])) > operatorAndPriority
               ) {
                 i = j;
                 operatorAndPriority = p;
@@ -11357,7 +13076,11 @@ var unityFramework = (() => {
             if (operatorAndPriority == 13) {
               var j = find_closing_parens_index(tokens, i);
               if (j) {
-                tokens.splice(i, j + 1 - i, buildExprTree(tokens.slice(i + 1, j)));
+                tokens.splice(
+                  i,
+                  j + 1 - i,
+                  buildExprTree(tokens.slice(i + 1, j)),
+                );
                 return tokens;
               }
             }
@@ -11377,73 +13100,73 @@ var unityFramework = (() => {
                   return [
                     function () {
                       return left() && right();
-                    }
+                    },
                   ];
                 case "||":
                   return [
                     function () {
                       return left() || right();
-                    }
+                    },
                   ];
                 case "==":
                   return [
                     function () {
                       return left() == right();
-                    }
+                    },
                   ];
                 case "!=":
                   return [
                     function () {
                       return left() != right();
-                    }
+                    },
                   ];
                 case "<":
                   return [
                     function () {
                       return left() < right();
-                    }
+                    },
                   ];
                 case "<=":
                   return [
                     function () {
                       return left() <= right();
-                    }
+                    },
                   ];
                 case ">":
                   return [
                     function () {
                       return left() > right();
-                    }
+                    },
                   ];
                 case ">=":
                   return [
                     function () {
                       return left() >= right();
-                    }
+                    },
                   ];
                 case "+":
                   return [
                     function () {
                       return left() + right();
-                    }
+                    },
                   ];
                 case "-":
                   return [
                     function () {
                       return left() - right();
-                    }
+                    },
                   ];
                 case "*":
                   return [
                     function () {
                       return left() * right();
-                    }
+                    },
                   ];
                 case "/":
                   return [
                     function () {
                       return Math.floor(left() / right());
-                    }
+                    },
                   ];
               }
             }
@@ -11451,7 +13174,7 @@ var unityFramework = (() => {
             return [
               function () {
                 return num;
-              }
+              },
             ];
           })(tokens);
         }
@@ -11512,7 +13235,10 @@ var unityFramework = (() => {
                   return ret;
                 };
               } else {
-                let value = expandMacros(expression.substring(firstWs + 1).trim(), 0);
+                let value = expandMacros(
+                  expression.substring(firstWs + 1).trim(),
+                  0,
+                );
                 defs[expression.substring(0, firstWs)] = () => value;
               }
             }
@@ -11521,7 +13247,11 @@ var unityFramework = (() => {
             if (thisLineIsInActivePreprocessingBlock) delete defs[expression];
             break;
           default:
-            if (directive != "version" && directive != "pragma" && directive != "extension") {
+            if (
+              directive != "version" &&
+              directive != "pragma" &&
+              directive != "extension"
+            ) {
             }
             out += expandMacros(code, lineStart, i) + "\n";
         }
@@ -11556,20 +13286,26 @@ var unityFramework = (() => {
       source = preprocess_c_code(remove_cpp_comments_in_shaders(source), {
         GL_FRAGMENT_PRECISION_HIGH: () => 1,
         GL_ES: () => 1,
-        __VERSION__: () => (source.includes("#version 300") ? 300 : 100)
+        __VERSION__: () => (source.includes("#version 300") ? 300 : 100),
       });
-      var regex = /layout\s*\(\s*location\s*=\s*(-?\d+)\s*\)\s*(uniform\s+((lowp|mediump|highp)\s+)?\w+\s+(\w+))/g,
+      var regex =
+          /layout\s*\(\s*location\s*=\s*(-?\d+)\s*\)\s*(uniform\s+((lowp|mediump|highp)\s+)?\w+\s+(\w+))/g,
         explicitUniformLocations = {},
         match;
       while ((match = regex.exec(source))) {
         explicitUniformLocations[match[5]] = jstoi_q(match[1]);
-        if (!(explicitUniformLocations[match[5]] >= 0 && explicitUniformLocations[match[5]] < 1048576)) {
+        if (
+          !(
+            explicitUniformLocations[match[5]] >= 0 &&
+            explicitUniformLocations[match[5]] < 1048576
+          )
+        ) {
           err(
             'Specified an out of range layout(location=x) directive "' +
               explicitUniformLocations[match[5]] +
               '"! (' +
               match[0] +
-              ")"
+              ")",
           );
           GL.recordError(1281);
           return;
@@ -11577,18 +13313,24 @@ var unityFramework = (() => {
       }
       source = source.replace(regex, "$2");
       GL.shaders[shader].explicitUniformLocations = explicitUniformLocations;
-      var bindingRegex = /layout\s*\(.*?binding\s*=\s*(-?\d+).*?\)\s*uniform\s+(\w+)\s+(\w+)?/g,
+      var bindingRegex =
+          /layout\s*\(.*?binding\s*=\s*(-?\d+).*?\)\s*uniform\s+(\w+)\s+(\w+)?/g,
         samplerBindings = {},
         uniformBindings = {},
         bindingMatch;
       while ((bindingMatch = bindingRegex.exec(source))) {
         var arrayLength = 1;
-        for (var i = bindingMatch.index; i < source.length && source[i] != ";"; ++i) {
+        for (
+          var i = bindingMatch.index;
+          i < source.length && source[i] != ";";
+          ++i
+        ) {
           if (source[i] == "[") {
             arrayLength = jstoi_q(source.slice(i + 1));
             break;
           }
-          if (source[i] == "{") i = find_closing_parens_index(source, i, "{", "}") - 1;
+          if (source[i] == "{")
+            i = find_closing_parens_index(source, i, "{", "}") - 1;
         }
         var binding = jstoi_q(bindingMatch[1]);
         var bindingsType = 34930;
@@ -11607,15 +13349,21 @@ var unityFramework = (() => {
               bindingMatch[0] +
               "). Valid range is [0, " +
               numBindingPoints +
-              "-1]"
+              "-1]",
           );
           GL.recordError(1281);
           return;
         }
       }
       source = source.replace(/layout\s*\(.*?binding\s*=\s*([-\d]+).*?\)/g, "");
-      source = source.replace(/(layout\s*\((.*?)),\s*binding\s*=\s*([-\d]+)\)/g, "$1)");
-      source = source.replace(/layout\s*\(\s*binding\s*=\s*([-\d]+)\s*,(.*?)\)/g, "layout($2)");
+      source = source.replace(
+        /(layout\s*\((.*?)),\s*binding\s*=\s*([-\d]+)\)/g,
+        "$1)",
+      );
+      source = source.replace(
+        /layout\s*\(\s*binding\s*=\s*([-\d]+)\s*,(.*?)\)/g,
+        "layout($2)",
+      );
       GL.shaders[shader].explicitSamplerBindings = samplerBindings;
       GL.shaders[shader].explicitUniformBindings = uniformBindings;
       GLctx.shaderSource(GL.shaders[shader], source);
@@ -11629,10 +13377,30 @@ var unityFramework = (() => {
     function _glStencilOpSeparate(x0, x1, x2, x3) {
       GLctx["stencilOpSeparate"](x0, x1, x2, x3);
     }
-    function _glTexImage2D(target, level, internalFormat, width, height, border, format, type, pixels) {
+    function _glTexImage2D(
+      target,
+      level,
+      internalFormat,
+      width,
+      height,
+      border,
+      format,
+      type,
+      pixels,
+    ) {
       if (GL.currentContext.version >= 2) {
         if (GLctx.currentPixelUnpackBufferBinding) {
-          GLctx.texImage2D(target, level, internalFormat, width, height, border, format, type, pixels);
+          GLctx.texImage2D(
+            target,
+            level,
+            internalFormat,
+            width,
+            height,
+            border,
+            format,
+            type,
+            pixels,
+          );
         } else if (pixels) {
           var heap = heapObjectForWebGLType(type);
           GLctx.texImage2D(
@@ -11645,10 +13413,20 @@ var unityFramework = (() => {
             format,
             type,
             heap,
-            pixels >> heapAccessShiftForWebGLHeap(heap)
+            pixels >> heapAccessShiftForWebGLHeap(heap),
           );
         } else {
-          GLctx.texImage2D(target, level, internalFormat, width, height, border, format, type, null);
+          GLctx.texImage2D(
+            target,
+            level,
+            internalFormat,
+            width,
+            height,
+            border,
+            format,
+            type,
+            null,
+          );
         }
         return;
       }
@@ -11661,12 +13439,43 @@ var unityFramework = (() => {
         border,
         format,
         type,
-        pixels ? emscriptenWebGLGetTexPixelData(type, format, width, height, pixels, internalFormat) : null
+        pixels
+          ? emscriptenWebGLGetTexPixelData(
+              type,
+              format,
+              width,
+              height,
+              pixels,
+              internalFormat,
+            )
+          : null,
       );
     }
-    function _glTexImage3D(target, level, internalFormat, width, height, depth, border, format, type, pixels) {
+    function _glTexImage3D(
+      target,
+      level,
+      internalFormat,
+      width,
+      height,
+      depth,
+      border,
+      format,
+      type,
+      pixels,
+    ) {
       if (GLctx.currentPixelUnpackBufferBinding) {
-        GLctx["texImage3D"](target, level, internalFormat, width, height, depth, border, format, type, pixels);
+        GLctx["texImage3D"](
+          target,
+          level,
+          internalFormat,
+          width,
+          height,
+          depth,
+          border,
+          format,
+          type,
+          pixels,
+        );
       } else if (pixels) {
         var heap = heapObjectForWebGLType(type);
         GLctx["texImage3D"](
@@ -11680,10 +13489,21 @@ var unityFramework = (() => {
           format,
           type,
           heap,
-          pixels >> heapAccessShiftForWebGLHeap(heap)
+          pixels >> heapAccessShiftForWebGLHeap(heap),
         );
       } else {
-        GLctx["texImage3D"](target, level, internalFormat, width, height, depth, border, format, type, null);
+        GLctx["texImage3D"](
+          target,
+          level,
+          internalFormat,
+          width,
+          height,
+          depth,
+          border,
+          format,
+          type,
+          null,
+        );
       }
     }
     function _glTexParameterf(x0, x1, x2) {
@@ -11702,10 +13522,30 @@ var unityFramework = (() => {
     function _glTexStorage3D(x0, x1, x2, x3, x4, x5) {
       GLctx["texStorage3D"](x0, x1, x2, x3, x4, x5);
     }
-    function _glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels) {
+    function _glTexSubImage2D(
+      target,
+      level,
+      xoffset,
+      yoffset,
+      width,
+      height,
+      format,
+      type,
+      pixels,
+    ) {
       if (GL.currentContext.version >= 2) {
         if (GLctx.currentPixelUnpackBufferBinding) {
-          GLctx.texSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels);
+          GLctx.texSubImage2D(
+            target,
+            level,
+            xoffset,
+            yoffset,
+            width,
+            height,
+            format,
+            type,
+            pixels,
+          );
         } else if (pixels) {
           var heap = heapObjectForWebGLType(type);
           GLctx.texSubImage2D(
@@ -11718,20 +13558,72 @@ var unityFramework = (() => {
             format,
             type,
             heap,
-            pixels >> heapAccessShiftForWebGLHeap(heap)
+            pixels >> heapAccessShiftForWebGLHeap(heap),
           );
         } else {
-          GLctx.texSubImage2D(target, level, xoffset, yoffset, width, height, format, type, null);
+          GLctx.texSubImage2D(
+            target,
+            level,
+            xoffset,
+            yoffset,
+            width,
+            height,
+            format,
+            type,
+            null,
+          );
         }
         return;
       }
       var pixelData = null;
-      if (pixels) pixelData = emscriptenWebGLGetTexPixelData(type, format, width, height, pixels, 0);
-      GLctx.texSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixelData);
+      if (pixels)
+        pixelData = emscriptenWebGLGetTexPixelData(
+          type,
+          format,
+          width,
+          height,
+          pixels,
+          0,
+        );
+      GLctx.texSubImage2D(
+        target,
+        level,
+        xoffset,
+        yoffset,
+        width,
+        height,
+        format,
+        type,
+        pixelData,
+      );
     }
-    function _glTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels) {
+    function _glTexSubImage3D(
+      target,
+      level,
+      xoffset,
+      yoffset,
+      zoffset,
+      width,
+      height,
+      depth,
+      format,
+      type,
+      pixels,
+    ) {
       if (GLctx.currentPixelUnpackBufferBinding) {
-        GLctx["texSubImage3D"](target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+        GLctx["texSubImage3D"](
+          target,
+          level,
+          xoffset,
+          yoffset,
+          zoffset,
+          width,
+          height,
+          depth,
+          format,
+          type,
+          pixels,
+        );
       } else if (pixels) {
         var heap = heapObjectForWebGLType(type);
         GLctx["texSubImage3D"](
@@ -11746,16 +13638,33 @@ var unityFramework = (() => {
           format,
           type,
           heap,
-          pixels >> heapAccessShiftForWebGLHeap(heap)
+          pixels >> heapAccessShiftForWebGLHeap(heap),
         );
       } else {
-        GLctx["texSubImage3D"](target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, null);
+        GLctx["texSubImage3D"](
+          target,
+          level,
+          xoffset,
+          yoffset,
+          zoffset,
+          width,
+          height,
+          depth,
+          format,
+          type,
+          null,
+        );
       }
     }
     var miniTempWebGLFloatBuffers = [];
     function _glUniform1fv(location, count, value) {
       if (GL.currentContext.version >= 2) {
-        GLctx.uniform1fv(webglGetUniformLocation(location), HEAPF32, value >> 2, count);
+        GLctx.uniform1fv(
+          webglGetUniformLocation(location),
+          HEAPF32,
+          value >> 2,
+          count,
+        );
         return;
       }
       if (count <= 288) {
@@ -11774,7 +13683,12 @@ var unityFramework = (() => {
     var __miniTempWebGLIntBuffers = [];
     function _glUniform1iv(location, count, value) {
       if (GL.currentContext.version >= 2) {
-        GLctx.uniform1iv(webglGetUniformLocation(location), HEAP32, value >> 2, count);
+        GLctx.uniform1iv(
+          webglGetUniformLocation(location),
+          HEAP32,
+          value >> 2,
+          count,
+        );
         return;
       }
       if (count <= 288) {
@@ -11788,11 +13702,21 @@ var unityFramework = (() => {
       GLctx.uniform1iv(webglGetUniformLocation(location), view);
     }
     function _glUniform1uiv(location, count, value) {
-      GLctx.uniform1uiv(webglGetUniformLocation(location), HEAPU32, value >> 2, count);
+      GLctx.uniform1uiv(
+        webglGetUniformLocation(location),
+        HEAPU32,
+        value >> 2,
+        count,
+      );
     }
     function _glUniform2fv(location, count, value) {
       if (GL.currentContext.version >= 2) {
-        GLctx.uniform2fv(webglGetUniformLocation(location), HEAPF32, value >> 2, count * 2);
+        GLctx.uniform2fv(
+          webglGetUniformLocation(location),
+          HEAPF32,
+          value >> 2,
+          count * 2,
+        );
         return;
       }
       if (count <= 144) {
@@ -11808,7 +13732,12 @@ var unityFramework = (() => {
     }
     function _glUniform2iv(location, count, value) {
       if (GL.currentContext.version >= 2) {
-        GLctx.uniform2iv(webglGetUniformLocation(location), HEAP32, value >> 2, count * 2);
+        GLctx.uniform2iv(
+          webglGetUniformLocation(location),
+          HEAP32,
+          value >> 2,
+          count * 2,
+        );
         return;
       }
       if (count <= 144) {
@@ -11823,11 +13752,21 @@ var unityFramework = (() => {
       GLctx.uniform2iv(webglGetUniformLocation(location), view);
     }
     function _glUniform2uiv(location, count, value) {
-      GLctx.uniform2uiv(webglGetUniformLocation(location), HEAPU32, value >> 2, count * 2);
+      GLctx.uniform2uiv(
+        webglGetUniformLocation(location),
+        HEAPU32,
+        value >> 2,
+        count * 2,
+      );
     }
     function _glUniform3fv(location, count, value) {
       if (GL.currentContext.version >= 2) {
-        GLctx.uniform3fv(webglGetUniformLocation(location), HEAPF32, value >> 2, count * 3);
+        GLctx.uniform3fv(
+          webglGetUniformLocation(location),
+          HEAPF32,
+          value >> 2,
+          count * 3,
+        );
         return;
       }
       if (count <= 96) {
@@ -11844,7 +13783,12 @@ var unityFramework = (() => {
     }
     function _glUniform3iv(location, count, value) {
       if (GL.currentContext.version >= 2) {
-        GLctx.uniform3iv(webglGetUniformLocation(location), HEAP32, value >> 2, count * 3);
+        GLctx.uniform3iv(
+          webglGetUniformLocation(location),
+          HEAP32,
+          value >> 2,
+          count * 3,
+        );
         return;
       }
       if (count <= 96) {
@@ -11860,11 +13804,21 @@ var unityFramework = (() => {
       GLctx.uniform3iv(webglGetUniformLocation(location), view);
     }
     function _glUniform3uiv(location, count, value) {
-      GLctx.uniform3uiv(webglGetUniformLocation(location), HEAPU32, value >> 2, count * 3);
+      GLctx.uniform3uiv(
+        webglGetUniformLocation(location),
+        HEAPU32,
+        value >> 2,
+        count * 3,
+      );
     }
     function _glUniform4fv(location, count, value) {
       if (GL.currentContext.version >= 2) {
-        GLctx.uniform4fv(webglGetUniformLocation(location), HEAPF32, value >> 2, count * 4);
+        GLctx.uniform4fv(
+          webglGetUniformLocation(location),
+          HEAPF32,
+          value >> 2,
+          count * 4,
+        );
         return;
       }
       if (count <= 72) {
@@ -11885,7 +13839,12 @@ var unityFramework = (() => {
     }
     function _glUniform4iv(location, count, value) {
       if (GL.currentContext.version >= 2) {
-        GLctx.uniform4iv(webglGetUniformLocation(location), HEAP32, value >> 2, count * 4);
+        GLctx.uniform4iv(
+          webglGetUniformLocation(location),
+          HEAP32,
+          value >> 2,
+          count * 4,
+        );
         return;
       }
       if (count <= 72) {
@@ -11902,15 +13861,34 @@ var unityFramework = (() => {
       GLctx.uniform4iv(webglGetUniformLocation(location), view);
     }
     function _glUniform4uiv(location, count, value) {
-      GLctx.uniform4uiv(webglGetUniformLocation(location), HEAPU32, value >> 2, count * 4);
+      GLctx.uniform4uiv(
+        webglGetUniformLocation(location),
+        HEAPU32,
+        value >> 2,
+        count * 4,
+      );
     }
-    function _glUniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding) {
+    function _glUniformBlockBinding(
+      program,
+      uniformBlockIndex,
+      uniformBlockBinding,
+    ) {
       program = GL.programs[program];
-      GLctx["uniformBlockBinding"](program, uniformBlockIndex, uniformBlockBinding);
+      GLctx["uniformBlockBinding"](
+        program,
+        uniformBlockIndex,
+        uniformBlockBinding,
+      );
     }
     function _glUniformMatrix3fv(location, count, transpose, value) {
       if (GL.currentContext.version >= 2) {
-        GLctx.uniformMatrix3fv(webglGetUniformLocation(location), !!transpose, HEAPF32, value >> 2, count * 9);
+        GLctx.uniformMatrix3fv(
+          webglGetUniformLocation(location),
+          !!transpose,
+          HEAPF32,
+          value >> 2,
+          count * 9,
+        );
         return;
       }
       if (count <= 32) {
@@ -11929,11 +13907,21 @@ var unityFramework = (() => {
       } else {
         var view = HEAPF32.subarray(value >> 2, (value + count * 36) >> 2);
       }
-      GLctx.uniformMatrix3fv(webglGetUniformLocation(location), !!transpose, view);
+      GLctx.uniformMatrix3fv(
+        webglGetUniformLocation(location),
+        !!transpose,
+        view,
+      );
     }
     function _glUniformMatrix4fv(location, count, transpose, value) {
       if (GL.currentContext.version >= 2) {
-        GLctx.uniformMatrix4fv(webglGetUniformLocation(location), !!transpose, HEAPF32, value >> 2, count * 16);
+        GLctx.uniformMatrix4fv(
+          webglGetUniformLocation(location),
+          !!transpose,
+          HEAPF32,
+          value >> 2,
+          count * 16,
+        );
         return;
       }
       if (count <= 18) {
@@ -11962,7 +13950,11 @@ var unityFramework = (() => {
       } else {
         var view = HEAPF32.subarray(value >> 2, (value + count * 64) >> 2);
       }
-      GLctx.uniformMatrix4fv(webglGetUniformLocation(location), !!transpose, view);
+      GLctx.uniformMatrix4fv(
+        webglGetUniformLocation(location),
+        !!transpose,
+        view,
+      );
     }
     function _glUnmapBuffer(target) {
       if (!emscriptenWebGLValidateMapBufferTarget(target)) {
@@ -11980,9 +13972,19 @@ var unityFramework = (() => {
       GL.mappedBuffers[buffer] = null;
       if (!(mapping.access & 16))
         if (GL.currentContext.version >= 2) {
-          GLctx.bufferSubData(target, mapping.offset, HEAPU8, mapping.mem, mapping.length);
+          GLctx.bufferSubData(
+            target,
+            mapping.offset,
+            HEAPU8,
+            mapping.mem,
+            mapping.length,
+          );
         } else {
-          GLctx.bufferSubData(target, mapping.offset, HEAPU8.subarray(mapping.mem, mapping.mem + mapping.length));
+          GLctx.bufferSubData(
+            target,
+            mapping.offset,
+            HEAPU8.subarray(mapping.mem, mapping.mem + mapping.length),
+          );
         }
       _free(mapping.mem);
       return 1;
@@ -11994,7 +13996,10 @@ var unityFramework = (() => {
           Object.keys(p.explicitUniformBindings).forEach(function (ubo) {
             var bindings = p.explicitUniformBindings[ubo];
             for (var i = 0; i < bindings[1]; ++i) {
-              var blockIndex = GLctx.getUniformBlockIndex(p, ubo + (bindings[1] > 1 ? "[" + i + "]" : ""));
+              var blockIndex = GLctx.getUniformBlockIndex(
+                p,
+                ubo + (bindings[1] > 1 ? "[" + i + "]" : ""),
+              );
               GLctx.uniformBlockBinding(p, blockIndex, bindings[0] + i);
             }
           });
@@ -12002,7 +14007,10 @@ var unityFramework = (() => {
         Object.keys(p.explicitSamplerBindings).forEach(function (sampler) {
           var bindings = p.explicitSamplerBindings[sampler];
           for (var i = 0; i < bindings[1]; ++i) {
-            GLctx.uniform1i(GLctx.getUniformLocation(p, sampler + (i ? "[" + i + "]" : "")), bindings[0] + i);
+            GLctx.uniform1i(
+              GLctx.getUniformLocation(p, sampler + (i ? "[" + i + "]" : "")),
+              bindings[0] + i,
+            );
           }
         });
         p.explicitProgramBindingsApplied = 1;
@@ -12027,7 +14035,7 @@ var unityFramework = (() => {
         HEAPF32[v >> 2],
         HEAPF32[(v + 4) >> 2],
         HEAPF32[(v + 8) >> 2],
-        HEAPF32[(v + 12) >> 2]
+        HEAPF32[(v + 12) >> 2],
       );
     }
     function _glVertexAttribIPointer(index, size, type, stride, ptr) {
@@ -12039,7 +14047,14 @@ var unityFramework = (() => {
         cb.stride = stride;
         cb.ptr = ptr;
         cb.clientside = true;
-        cb.vertexAttribPointerAdaptor = function (index, size, type, normalized, stride, ptr) {
+        cb.vertexAttribPointerAdaptor = function (
+          index,
+          size,
+          type,
+          normalized,
+          stride,
+          ptr,
+        ) {
           this.vertexAttribIPointer(index, size, type, stride, ptr);
         };
         return;
@@ -12047,7 +14062,14 @@ var unityFramework = (() => {
       cb.clientside = false;
       GLctx["vertexAttribIPointer"](index, size, type, stride, ptr);
     }
-    function _glVertexAttribPointer(index, size, type, normalized, stride, ptr) {
+    function _glVertexAttribPointer(
+      index,
+      size,
+      type,
+      normalized,
+      stride,
+      ptr,
+    ) {
       var cb = GL.currentContext.clientBuffers[index];
       if (!GLctx.currentArrayBufferBinding) {
         cb.size = size;
@@ -12056,7 +14078,14 @@ var unityFramework = (() => {
         cb.stride = stride;
         cb.ptr = ptr;
         cb.clientside = true;
-        cb.vertexAttribPointerAdaptor = function (index, size, type, normalized, stride, ptr) {
+        cb.vertexAttribPointerAdaptor = function (
+          index,
+          size,
+          type,
+          normalized,
+          stride,
+          ptr,
+        ) {
           this.vertexAttribPointer(index, size, type, normalized, stride, ptr);
         };
         return;
@@ -12088,7 +14117,9 @@ var unityFramework = (() => {
       while (days > 0) {
         var leap = __isLeapYear(newDate.getFullYear());
         var currentMonth = newDate.getMonth();
-        var daysInCurrentMonth = (leap ? __MONTH_DAYS_LEAP : __MONTH_DAYS_REGULAR)[currentMonth];
+        var daysInCurrentMonth = (
+          leap ? __MONTH_DAYS_LEAP : __MONTH_DAYS_REGULAR
+        )[currentMonth];
         if (days > daysInCurrentMonth - newDate.getDate()) {
           days -= daysInCurrentMonth - newDate.getDate() + 1;
           newDate.setDate(1);
@@ -12118,7 +14149,7 @@ var unityFramework = (() => {
         tm_yday: HEAP32[(tm + 28) >> 2],
         tm_isdst: HEAP32[(tm + 32) >> 2],
         tm_gmtoff: HEAP32[(tm + 36) >> 2],
-        tm_zone: tm_zone ? UTF8ToString(tm_zone) : ""
+        tm_zone: tm_zone ? UTF8ToString(tm_zone) : "",
       };
       var pattern = UTF8ToString(format);
       var EXPANSION_RULES_1 = {
@@ -12149,12 +14180,23 @@ var unityFramework = (() => {
         "%OV": "%V",
         "%Ow": "%w",
         "%OW": "%W",
-        "%Oy": "%y"
+        "%Oy": "%y",
       };
       for (var rule in EXPANSION_RULES_1) {
-        pattern = pattern.replace(new RegExp(rule, "g"), EXPANSION_RULES_1[rule]);
+        pattern = pattern.replace(
+          new RegExp(rule, "g"),
+          EXPANSION_RULES_1[rule],
+        );
       }
-      var WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      var WEEKDAYS = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
       var MONTHS = [
         "January",
         "February",
@@ -12167,7 +14209,7 @@ var unityFramework = (() => {
         "September",
         "October",
         "November",
-        "December"
+        "December",
       ];
       function leadingSomething(value, digits, character) {
         var str = typeof value == "number" ? value.toString() : value || "";
@@ -12210,7 +14252,10 @@ var unityFramework = (() => {
         }
       }
       function getWeekBasedYear(date) {
-        var thisDate = __addDays(new Date(date.tm_year + 1900, 0, 1), date.tm_yday);
+        var thisDate = __addDays(
+          new Date(date.tm_year + 1900, 0, 1),
+          date.tm_yday,
+        );
         var janFourthThisYear = new Date(thisDate.getFullYear(), 0, 4);
         var janFourthNextYear = new Date(thisDate.getFullYear() + 1, 0, 4);
         var firstWeekStartThisYear = getFirstWeekStartDate(janFourthThisYear);
@@ -12266,8 +14311,13 @@ var unityFramework = (() => {
         "%j": function (date) {
           return leadingNulls(
             date.tm_mday +
-              __arraySum(__isLeapYear(date.tm_year + 1900) ? __MONTH_DAYS_LEAP : __MONTH_DAYS_REGULAR, date.tm_mon - 1),
-            3
+              __arraySum(
+                __isLeapYear(date.tm_year + 1900)
+                  ? __MONTH_DAYS_LEAP
+                  : __MONTH_DAYS_REGULAR,
+                date.tm_mon - 1,
+              ),
+            3,
           );
         },
         "%m": function (date) {
@@ -12300,19 +14350,25 @@ var unityFramework = (() => {
           return leadingNulls(Math.floor(days / 7), 2);
         },
         "%V": function (date) {
-          var val = Math.floor((date.tm_yday + 7 - ((date.tm_wday + 6) % 7)) / 7);
+          var val = Math.floor(
+            (date.tm_yday + 7 - ((date.tm_wday + 6) % 7)) / 7,
+          );
           if ((date.tm_wday + 371 - date.tm_yday - 2) % 7 <= 2) {
             val++;
           }
           if (!val) {
             val = 52;
             var dec31 = (date.tm_wday + 7 - date.tm_yday - 1) % 7;
-            if (dec31 == 4 || (dec31 == 5 && __isLeapYear((date.tm_year % 400) - 1))) {
+            if (
+              dec31 == 4 ||
+              (dec31 == 5 && __isLeapYear((date.tm_year % 400) - 1))
+            ) {
               val++;
             }
           } else if (val == 53) {
             var jan1 = (date.tm_wday + 371 - date.tm_yday) % 7;
-            if (jan1 != 4 && (jan1 != 3 || !__isLeapYear(date.tm_year))) val = 1;
+            if (jan1 != 4 && (jan1 != 3 || !__isLeapYear(date.tm_year)))
+              val = 1;
           }
           return leadingNulls(val, 2);
         },
@@ -12341,12 +14397,15 @@ var unityFramework = (() => {
         },
         "%%": function () {
           return "%";
-        }
+        },
       };
       pattern = pattern.replace(/%%/g, "\0\0");
       for (var rule in EXPANSION_RULES_2) {
         if (pattern.includes(rule)) {
-          pattern = pattern.replace(new RegExp(rule, "g"), EXPANSION_RULES_2[rule](date));
+          pattern = pattern.replace(
+            new RegExp(rule, "g"),
+            EXPANSION_RULES_2[rule](date),
+          );
         }
       }
       pattern = pattern.replace(/\0\0/g, "%");
@@ -12380,7 +14439,7 @@ var unityFramework = (() => {
         },
         set: function (val) {
           val ? (this.mode |= readMode) : (this.mode &= ~readMode);
-        }
+        },
       },
       write: {
         get: function () {
@@ -12388,30 +14447,39 @@ var unityFramework = (() => {
         },
         set: function (val) {
           val ? (this.mode |= writeMode) : (this.mode &= ~writeMode);
-        }
+        },
       },
       isFolder: {
         get: function () {
           return FS.isDir(this.mode);
-        }
+        },
       },
       isDevice: {
         get: function () {
           return FS.isChrdev(this.mode);
-        }
-      }
+        },
+      },
     });
     FS.FSNode = FSNode;
     FS.staticInit();
     Module["FS_createPath"] = FS.createPath;
     Module["FS_createDataFile"] = FS.createDataFile;
-    Module["requestFullscreen"] = function Module_requestFullscreen(lockPointer, resizeCanvas) {
+    Module["requestFullscreen"] = function Module_requestFullscreen(
+      lockPointer,
+      resizeCanvas,
+    ) {
       Browser.requestFullscreen(lockPointer, resizeCanvas);
     };
-    Module["requestAnimationFrame"] = function Module_requestAnimationFrame(func) {
+    Module["requestAnimationFrame"] = function Module_requestAnimationFrame(
+      func,
+    ) {
       Browser.requestAnimationFrame(func);
     };
-    Module["setCanvasSize"] = function Module_setCanvasSize(width, height, noUpdates) {
+    Module["setCanvasSize"] = function Module_setCanvasSize(
+      width,
+      height,
+      noUpdates,
+    ) {
       Browser.setCanvasSize(width, height, noUpdates);
     };
     Module["pauseMainLoop"] = function Module_pauseMainLoop() {
@@ -12423,23 +14491,44 @@ var unityFramework = (() => {
     Module["getUserMedia"] = function Module_getUserMedia() {
       Browser.getUserMedia();
     };
-    Module["createContext"] = function Module_createContext(canvas, useWebGL, setInModule, webGLContextAttributes) {
-      return Browser.createContext(canvas, useWebGL, setInModule, webGLContextAttributes);
+    Module["createContext"] = function Module_createContext(
+      canvas,
+      useWebGL,
+      setInModule,
+      webGLContextAttributes,
+    ) {
+      return Browser.createContext(
+        canvas,
+        useWebGL,
+        setInModule,
+        webGLContextAttributes,
+      );
     };
     var GLctx;
     for (var i = 0; i < 32; ++i) tempFixedLengthArray.push(new Array(i));
     var miniTempWebGLFloatBuffersStorage = new Float32Array(288);
     for (var i = 0; i < 288; ++i) {
-      miniTempWebGLFloatBuffers[i] = miniTempWebGLFloatBuffersStorage.subarray(0, i + 1);
+      miniTempWebGLFloatBuffers[i] = miniTempWebGLFloatBuffersStorage.subarray(
+        0,
+        i + 1,
+      );
     }
     var __miniTempWebGLIntBuffersStorage = new Int32Array(288);
     for (var i = 0; i < 288; ++i) {
-      __miniTempWebGLIntBuffers[i] = __miniTempWebGLIntBuffersStorage.subarray(0, i + 1);
+      __miniTempWebGLIntBuffers[i] = __miniTempWebGLIntBuffersStorage.subarray(
+        0,
+        i + 1,
+      );
     }
     function intArrayFromString(stringy, dontAddNull, length) {
       var len = length > 0 ? length : lengthBytesUTF8(stringy) + 1;
       var u8array = new Array(len);
-      var numBytesWritten = stringToUTF8Array(stringy, u8array, 0, u8array.length);
+      var numBytesWritten = stringToUTF8Array(
+        stringy,
+        u8array,
+        0,
+        u8array.length,
+      );
       if (dontAddNull) u8array.length = numBytesWritten;
       return u8array;
     }
@@ -12900,1099 +14989,1577 @@ var unityFramework = (() => {
       Cc: invoke_vjjjiiii,
       j: _llvm_eh_typeid_for,
       t: _setTempRet0,
-      ja: _strftime
+      ja: _strftime,
     };
     var asm = createWasm();
     var ___wasm_call_ctors = (Module["___wasm_call_ctors"] = function () {
-      return (___wasm_call_ctors = Module["___wasm_call_ctors"] = Module["asm"]["Bh"]).apply(null, arguments);
+      return (___wasm_call_ctors = Module["___wasm_call_ctors"] =
+        Module["asm"]["Bh"]).apply(null, arguments);
     });
     var _ReleaseKeys = (Module["_ReleaseKeys"] = function () {
-      return (_ReleaseKeys = Module["_ReleaseKeys"] = Module["asm"]["Ch"]).apply(null, arguments);
+      return (_ReleaseKeys = Module["_ReleaseKeys"] =
+        Module["asm"]["Ch"]).apply(null, arguments);
     });
     var _getMemInfo = (Module["_getMemInfo"] = function () {
-      return (_getMemInfo = Module["_getMemInfo"] = Module["asm"]["Dh"]).apply(null, arguments);
+      return (_getMemInfo = Module["_getMemInfo"] = Module["asm"]["Dh"]).apply(
+        null,
+        arguments,
+      );
     });
     var _SendMessageFloat = (Module["_SendMessageFloat"] = function () {
-      return (_SendMessageFloat = Module["_SendMessageFloat"] = Module["asm"]["Eh"]).apply(null, arguments);
+      return (_SendMessageFloat = Module["_SendMessageFloat"] =
+        Module["asm"]["Eh"]).apply(null, arguments);
     });
     var _SendMessageString = (Module["_SendMessageString"] = function () {
-      return (_SendMessageString = Module["_SendMessageString"] = Module["asm"]["Fh"]).apply(null, arguments);
+      return (_SendMessageString = Module["_SendMessageString"] =
+        Module["asm"]["Fh"]).apply(null, arguments);
     });
     var _SendMessage = (Module["_SendMessage"] = function () {
-      return (_SendMessage = Module["_SendMessage"] = Module["asm"]["Gh"]).apply(null, arguments);
+      return (_SendMessage = Module["_SendMessage"] =
+        Module["asm"]["Gh"]).apply(null, arguments);
     });
     var _SetFullscreen = (Module["_SetFullscreen"] = function () {
-      return (_SetFullscreen = Module["_SetFullscreen"] = Module["asm"]["Hh"]).apply(null, arguments);
+      return (_SetFullscreen = Module["_SetFullscreen"] =
+        Module["asm"]["Hh"]).apply(null, arguments);
     });
     var _main = (Module["_main"] = function () {
-      return (_main = Module["_main"] = Module["asm"]["Ih"]).apply(null, arguments);
+      return (_main = Module["_main"] = Module["asm"]["Ih"]).apply(
+        null,
+        arguments,
+      );
     });
     var ___errno_location = (Module["___errno_location"] = function () {
-      return (___errno_location = Module["___errno_location"] = Module["asm"]["Jh"]).apply(null, arguments);
+      return (___errno_location = Module["___errno_location"] =
+        Module["asm"]["Jh"]).apply(null, arguments);
     });
     var _htons = (Module["_htons"] = function () {
-      return (_htons = Module["_htons"] = Module["asm"]["Kh"]).apply(null, arguments);
+      return (_htons = Module["_htons"] = Module["asm"]["Kh"]).apply(
+        null,
+        arguments,
+      );
     });
     var _ntohs = (Module["_ntohs"] = function () {
-      return (_ntohs = Module["_ntohs"] = Module["asm"]["Lh"]).apply(null, arguments);
+      return (_ntohs = Module["_ntohs"] = Module["asm"]["Lh"]).apply(
+        null,
+        arguments,
+      );
     });
     var _strlen = (Module["_strlen"] = function () {
-      return (_strlen = Module["_strlen"] = Module["asm"]["Mh"]).apply(null, arguments);
+      return (_strlen = Module["_strlen"] = Module["asm"]["Mh"]).apply(
+        null,
+        arguments,
+      );
     });
     var _malloc = (Module["_malloc"] = function () {
-      return (_malloc = Module["_malloc"] = Module["asm"]["Nh"]).apply(null, arguments);
+      return (_malloc = Module["_malloc"] = Module["asm"]["Nh"]).apply(
+        null,
+        arguments,
+      );
     });
     var _free = (Module["_free"] = function () {
-      return (_free = Module["_free"] = Module["asm"]["Oh"]).apply(null, arguments);
-    });
-    var _emscripten_builtin_memalign = (Module["_emscripten_builtin_memalign"] = function () {
-      return (_emscripten_builtin_memalign = Module["_emscripten_builtin_memalign"] = Module["asm"]["Ph"]).apply(
+      return (_free = Module["_free"] = Module["asm"]["Oh"]).apply(
         null,
-        arguments
+        arguments,
       );
     });
+    var _emscripten_builtin_memalign = (Module["_emscripten_builtin_memalign"] =
+      function () {
+        return (_emscripten_builtin_memalign = Module[
+          "_emscripten_builtin_memalign"
+        ] =
+          Module["asm"]["Ph"]).apply(null, arguments);
+      });
     var _setThrew = (Module["_setThrew"] = function () {
-      return (_setThrew = Module["_setThrew"] = Module["asm"]["Qh"]).apply(null, arguments);
+      return (_setThrew = Module["_setThrew"] = Module["asm"]["Qh"]).apply(
+        null,
+        arguments,
+      );
     });
     var stackSave = (Module["stackSave"] = function () {
-      return (stackSave = Module["stackSave"] = Module["asm"]["Rh"]).apply(null, arguments);
+      return (stackSave = Module["stackSave"] = Module["asm"]["Rh"]).apply(
+        null,
+        arguments,
+      );
     });
     var stackRestore = (Module["stackRestore"] = function () {
-      return (stackRestore = Module["stackRestore"] = Module["asm"]["Sh"]).apply(null, arguments);
+      return (stackRestore = Module["stackRestore"] =
+        Module["asm"]["Sh"]).apply(null, arguments);
     });
     var stackAlloc = (Module["stackAlloc"] = function () {
-      return (stackAlloc = Module["stackAlloc"] = Module["asm"]["Th"]).apply(null, arguments);
+      return (stackAlloc = Module["stackAlloc"] = Module["asm"]["Th"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_iidiiii = (Module["dynCall_iidiiii"] = function () {
-      return (dynCall_iidiiii = Module["dynCall_iidiiii"] = Module["asm"]["Vh"]).apply(null, arguments);
+      return (dynCall_iidiiii = Module["dynCall_iidiiii"] =
+        Module["asm"]["Vh"]).apply(null, arguments);
     });
     var dynCall_vii = (Module["dynCall_vii"] = function () {
-      return (dynCall_vii = Module["dynCall_vii"] = Module["asm"]["Wh"]).apply(null, arguments);
+      return (dynCall_vii = Module["dynCall_vii"] = Module["asm"]["Wh"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_iiii = (Module["dynCall_iiii"] = function () {
-      return (dynCall_iiii = Module["dynCall_iiii"] = Module["asm"]["Xh"]).apply(null, arguments);
+      return (dynCall_iiii = Module["dynCall_iiii"] =
+        Module["asm"]["Xh"]).apply(null, arguments);
     });
     var dynCall_ii = (Module["dynCall_ii"] = function () {
-      return (dynCall_ii = Module["dynCall_ii"] = Module["asm"]["Yh"]).apply(null, arguments);
+      return (dynCall_ii = Module["dynCall_ii"] = Module["asm"]["Yh"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_jiji = (Module["dynCall_jiji"] = function () {
-      return (dynCall_jiji = Module["dynCall_jiji"] = Module["asm"]["Zh"]).apply(null, arguments);
+      return (dynCall_jiji = Module["dynCall_jiji"] =
+        Module["asm"]["Zh"]).apply(null, arguments);
     });
     var dynCall_vi = (Module["dynCall_vi"] = function () {
-      return (dynCall_vi = Module["dynCall_vi"] = Module["asm"]["_h"]).apply(null, arguments);
+      return (dynCall_vi = Module["dynCall_vi"] = Module["asm"]["_h"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_viiiiii = (Module["dynCall_viiiiii"] = function () {
-      return (dynCall_viiiiii = Module["dynCall_viiiiii"] = Module["asm"]["$h"]).apply(null, arguments);
+      return (dynCall_viiiiii = Module["dynCall_viiiiii"] =
+        Module["asm"]["$h"]).apply(null, arguments);
     });
     var dynCall_viiiii = (Module["dynCall_viiiii"] = function () {
-      return (dynCall_viiiii = Module["dynCall_viiiii"] = Module["asm"]["ai"]).apply(null, arguments);
+      return (dynCall_viiiii = Module["dynCall_viiiii"] =
+        Module["asm"]["ai"]).apply(null, arguments);
     });
     var dynCall_viiii = (Module["dynCall_viiii"] = function () {
-      return (dynCall_viiii = Module["dynCall_viiii"] = Module["asm"]["bi"]).apply(null, arguments);
+      return (dynCall_viiii = Module["dynCall_viiii"] =
+        Module["asm"]["bi"]).apply(null, arguments);
     });
     var dynCall_v = (Module["dynCall_v"] = function () {
-      return (dynCall_v = Module["dynCall_v"] = Module["asm"]["ci"]).apply(null, arguments);
+      return (dynCall_v = Module["dynCall_v"] = Module["asm"]["ci"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_iii = (Module["dynCall_iii"] = function () {
-      return (dynCall_iii = Module["dynCall_iii"] = Module["asm"]["di"]).apply(null, arguments);
+      return (dynCall_iii = Module["dynCall_iii"] = Module["asm"]["di"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_iiiii = (Module["dynCall_iiiii"] = function () {
-      return (dynCall_iiiii = Module["dynCall_iiiii"] = Module["asm"]["ei"]).apply(null, arguments);
+      return (dynCall_iiiii = Module["dynCall_iiiii"] =
+        Module["asm"]["ei"]).apply(null, arguments);
     });
     var dynCall_i = (Module["dynCall_i"] = function () {
-      return (dynCall_i = Module["dynCall_i"] = Module["asm"]["fi"]).apply(null, arguments);
+      return (dynCall_i = Module["dynCall_i"] = Module["asm"]["fi"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_viii = (Module["dynCall_viii"] = function () {
-      return (dynCall_viii = Module["dynCall_viii"] = Module["asm"]["gi"]).apply(null, arguments);
+      return (dynCall_viii = Module["dynCall_viii"] =
+        Module["asm"]["gi"]).apply(null, arguments);
     });
     var dynCall_iiiiii = (Module["dynCall_iiiiii"] = function () {
-      return (dynCall_iiiiii = Module["dynCall_iiiiii"] = Module["asm"]["hi"]).apply(null, arguments);
+      return (dynCall_iiiiii = Module["dynCall_iiiiii"] =
+        Module["asm"]["hi"]).apply(null, arguments);
     });
     var dynCall_iiiiiiii = (Module["dynCall_iiiiiiii"] = function () {
-      return (dynCall_iiiiiiii = Module["dynCall_iiiiiiii"] = Module["asm"]["ii"]).apply(null, arguments);
+      return (dynCall_iiiiiiii = Module["dynCall_iiiiiiii"] =
+        Module["asm"]["ii"]).apply(null, arguments);
     });
     var dynCall_iiijiii = (Module["dynCall_iiijiii"] = function () {
-      return (dynCall_iiijiii = Module["dynCall_iiijiii"] = Module["asm"]["ji"]).apply(null, arguments);
+      return (dynCall_iiijiii = Module["dynCall_iiijiii"] =
+        Module["asm"]["ji"]).apply(null, arguments);
     });
     var dynCall_iij = (Module["dynCall_iij"] = function () {
-      return (dynCall_iij = Module["dynCall_iij"] = Module["asm"]["ki"]).apply(null, arguments);
+      return (dynCall_iij = Module["dynCall_iij"] = Module["asm"]["ki"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_iiiiiii = (Module["dynCall_iiiiiii"] = function () {
-      return (dynCall_iiiiiii = Module["dynCall_iiiiiii"] = Module["asm"]["li"]).apply(null, arguments);
+      return (dynCall_iiiiiii = Module["dynCall_iiiiiii"] =
+        Module["asm"]["li"]).apply(null, arguments);
     });
     var dynCall_jii = (Module["dynCall_jii"] = function () {
-      return (dynCall_jii = Module["dynCall_jii"] = Module["asm"]["mi"]).apply(null, arguments);
+      return (dynCall_jii = Module["dynCall_jii"] = Module["asm"]["mi"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_viiiiiiii = (Module["dynCall_viiiiiiii"] = function () {
-      return (dynCall_viiiiiiii = Module["dynCall_viiiiiiii"] = Module["asm"]["ni"]).apply(null, arguments);
+      return (dynCall_viiiiiiii = Module["dynCall_viiiiiiii"] =
+        Module["asm"]["ni"]).apply(null, arguments);
     });
     var dynCall_viifi = (Module["dynCall_viifi"] = function () {
-      return (dynCall_viifi = Module["dynCall_viifi"] = Module["asm"]["oi"]).apply(null, arguments);
+      return (dynCall_viifi = Module["dynCall_viifi"] =
+        Module["asm"]["oi"]).apply(null, arguments);
     });
     var dynCall_iiifii = (Module["dynCall_iiifii"] = function () {
-      return (dynCall_iiifii = Module["dynCall_iiifii"] = Module["asm"]["pi"]).apply(null, arguments);
+      return (dynCall_iiifii = Module["dynCall_iiifii"] =
+        Module["asm"]["pi"]).apply(null, arguments);
     });
     var dynCall_iiiidii = (Module["dynCall_iiiidii"] = function () {
-      return (dynCall_iiiidii = Module["dynCall_iiiidii"] = Module["asm"]["qi"]).apply(null, arguments);
+      return (dynCall_iiiidii = Module["dynCall_iiiidii"] =
+        Module["asm"]["qi"]).apply(null, arguments);
     });
     var dynCall_vidi = (Module["dynCall_vidi"] = function () {
-      return (dynCall_vidi = Module["dynCall_vidi"] = Module["asm"]["ri"]).apply(null, arguments);
+      return (dynCall_vidi = Module["dynCall_vidi"] =
+        Module["asm"]["ri"]).apply(null, arguments);
     });
     var dynCall_viidi = (Module["dynCall_viidi"] = function () {
-      return (dynCall_viidi = Module["dynCall_viidi"] = Module["asm"]["si"]).apply(null, arguments);
+      return (dynCall_viidi = Module["dynCall_viidi"] =
+        Module["asm"]["si"]).apply(null, arguments);
     });
     var dynCall_iiiijii = (Module["dynCall_iiiijii"] = function () {
-      return (dynCall_iiiijii = Module["dynCall_iiiijii"] = Module["asm"]["ti"]).apply(null, arguments);
+      return (dynCall_iiiijii = Module["dynCall_iiiijii"] =
+        Module["asm"]["ti"]).apply(null, arguments);
     });
     var dynCall_iiiiiiiiii = (Module["dynCall_iiiiiiiiii"] = function () {
-      return (dynCall_iiiiiiiiii = Module["dynCall_iiiiiiiiii"] = Module["asm"]["ui"]).apply(null, arguments);
+      return (dynCall_iiiiiiiiii = Module["dynCall_iiiiiiiiii"] =
+        Module["asm"]["ui"]).apply(null, arguments);
     });
     var dynCall_viiffi = (Module["dynCall_viiffi"] = function () {
-      return (dynCall_viiffi = Module["dynCall_viiffi"] = Module["asm"]["vi"]).apply(null, arguments);
+      return (dynCall_viiffi = Module["dynCall_viiffi"] =
+        Module["asm"]["vi"]).apply(null, arguments);
     });
     var dynCall_iiiifii = (Module["dynCall_iiiifii"] = function () {
-      return (dynCall_iiiifii = Module["dynCall_iiiifii"] = Module["asm"]["wi"]).apply(null, arguments);
+      return (dynCall_iiiifii = Module["dynCall_iiiifii"] =
+        Module["asm"]["wi"]).apply(null, arguments);
     });
     var dynCall_viiiifii = (Module["dynCall_viiiifii"] = function () {
-      return (dynCall_viiiifii = Module["dynCall_viiiifii"] = Module["asm"]["xi"]).apply(null, arguments);
+      return (dynCall_viiiifii = Module["dynCall_viiiifii"] =
+        Module["asm"]["xi"]).apply(null, arguments);
     });
     var dynCall_vifi = (Module["dynCall_vifi"] = function () {
-      return (dynCall_vifi = Module["dynCall_vifi"] = Module["asm"]["yi"]).apply(null, arguments);
+      return (dynCall_vifi = Module["dynCall_vifi"] =
+        Module["asm"]["yi"]).apply(null, arguments);
     });
     var dynCall_viiiiiiiiii = (Module["dynCall_viiiiiiiiii"] = function () {
-      return (dynCall_viiiiiiiiii = Module["dynCall_viiiiiiiiii"] = Module["asm"]["zi"]).apply(null, arguments);
+      return (dynCall_viiiiiiiiii = Module["dynCall_viiiiiiiiii"] =
+        Module["asm"]["zi"]).apply(null, arguments);
     });
     var dynCall_iiiifi = (Module["dynCall_iiiifi"] = function () {
-      return (dynCall_iiiifi = Module["dynCall_iiiifi"] = Module["asm"]["Ai"]).apply(null, arguments);
+      return (dynCall_iiiifi = Module["dynCall_iiiifi"] =
+        Module["asm"]["Ai"]).apply(null, arguments);
     });
     var dynCall_iifi = (Module["dynCall_iifi"] = function () {
-      return (dynCall_iifi = Module["dynCall_iifi"] = Module["asm"]["Bi"]).apply(null, arguments);
+      return (dynCall_iifi = Module["dynCall_iifi"] =
+        Module["asm"]["Bi"]).apply(null, arguments);
     });
     var dynCall_fiii = (Module["dynCall_fiii"] = function () {
-      return (dynCall_fiii = Module["dynCall_fiii"] = Module["asm"]["Ci"]).apply(null, arguments);
+      return (dynCall_fiii = Module["dynCall_fiii"] =
+        Module["asm"]["Ci"]).apply(null, arguments);
     });
     var dynCall_ji = (Module["dynCall_ji"] = function () {
-      return (dynCall_ji = Module["dynCall_ji"] = Module["asm"]["Di"]).apply(null, arguments);
+      return (dynCall_ji = Module["dynCall_ji"] = Module["asm"]["Di"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_fffi = (Module["dynCall_fffi"] = function () {
-      return (dynCall_fffi = Module["dynCall_fffi"] = Module["asm"]["Ei"]).apply(null, arguments);
+      return (dynCall_fffi = Module["dynCall_fffi"] =
+        Module["asm"]["Ei"]).apply(null, arguments);
     });
     var dynCall_viifii = (Module["dynCall_viifii"] = function () {
-      return (dynCall_viifii = Module["dynCall_viifii"] = Module["asm"]["Fi"]).apply(null, arguments);
+      return (dynCall_viifii = Module["dynCall_viifii"] =
+        Module["asm"]["Fi"]).apply(null, arguments);
     });
     var dynCall_viiiji = (Module["dynCall_viiiji"] = function () {
-      return (dynCall_viiiji = Module["dynCall_viiiji"] = Module["asm"]["Gi"]).apply(null, arguments);
+      return (dynCall_viiiji = Module["dynCall_viiiji"] =
+        Module["asm"]["Gi"]).apply(null, arguments);
     });
     var dynCall_iiiiiiiiiji = (Module["dynCall_iiiiiiiiiji"] = function () {
-      return (dynCall_iiiiiiiiiji = Module["dynCall_iiiiiiiiiji"] = Module["asm"]["Hi"]).apply(null, arguments);
+      return (dynCall_iiiiiiiiiji = Module["dynCall_iiiiiiiiiji"] =
+        Module["asm"]["Hi"]).apply(null, arguments);
     });
     var dynCall_vji = (Module["dynCall_vji"] = function () {
-      return (dynCall_vji = Module["dynCall_vji"] = Module["asm"]["Ii"]).apply(null, arguments);
+      return (dynCall_vji = Module["dynCall_vji"] = Module["asm"]["Ii"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_fi = (Module["dynCall_fi"] = function () {
-      return (dynCall_fi = Module["dynCall_fi"] = Module["asm"]["Ji"]).apply(null, arguments);
+      return (dynCall_fi = Module["dynCall_fi"] = Module["asm"]["Ji"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_iiifi = (Module["dynCall_iiifi"] = function () {
-      return (dynCall_iiifi = Module["dynCall_iiifi"] = Module["asm"]["Ki"]).apply(null, arguments);
+      return (dynCall_iiifi = Module["dynCall_iiifi"] =
+        Module["asm"]["Ki"]).apply(null, arguments);
     });
     var dynCall_viiiifi = (Module["dynCall_viiiifi"] = function () {
-      return (dynCall_viiiifi = Module["dynCall_viiiifi"] = Module["asm"]["Li"]).apply(null, arguments);
+      return (dynCall_viiiifi = Module["dynCall_viiiifi"] =
+        Module["asm"]["Li"]).apply(null, arguments);
     });
     var dynCall_fii = (Module["dynCall_fii"] = function () {
-      return (dynCall_fii = Module["dynCall_fii"] = Module["asm"]["Mi"]).apply(null, arguments);
+      return (dynCall_fii = Module["dynCall_fii"] = Module["asm"]["Mi"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_iiiiiiiiiiii = (Module["dynCall_iiiiiiiiiiii"] = function () {
-      return (dynCall_iiiiiiiiiiii = Module["dynCall_iiiiiiiiiiii"] = Module["asm"]["Ni"]).apply(null, arguments);
+      return (dynCall_iiiiiiiiiiii = Module["dynCall_iiiiiiiiiiii"] =
+        Module["asm"]["Ni"]).apply(null, arguments);
     });
     var dynCall_fiiffi = (Module["dynCall_fiiffi"] = function () {
-      return (dynCall_fiiffi = Module["dynCall_fiiffi"] = Module["asm"]["Oi"]).apply(null, arguments);
+      return (dynCall_fiiffi = Module["dynCall_fiiffi"] =
+        Module["asm"]["Oi"]).apply(null, arguments);
     });
     var dynCall_viiififii = (Module["dynCall_viiififii"] = function () {
-      return (dynCall_viiififii = Module["dynCall_viiififii"] = Module["asm"]["Pi"]).apply(null, arguments);
+      return (dynCall_viiififii = Module["dynCall_viiififii"] =
+        Module["asm"]["Pi"]).apply(null, arguments);
     });
     var dynCall_vifii = (Module["dynCall_vifii"] = function () {
-      return (dynCall_vifii = Module["dynCall_vifii"] = Module["asm"]["Qi"]).apply(null, arguments);
+      return (dynCall_vifii = Module["dynCall_vifii"] =
+        Module["asm"]["Qi"]).apply(null, arguments);
     });
     var dynCall_ddiii = (Module["dynCall_ddiii"] = function () {
-      return (dynCall_ddiii = Module["dynCall_ddiii"] = Module["asm"]["Ri"]).apply(null, arguments);
+      return (dynCall_ddiii = Module["dynCall_ddiii"] =
+        Module["asm"]["Ri"]).apply(null, arguments);
     });
     var dynCall_viiiiiii = (Module["dynCall_viiiiiii"] = function () {
-      return (dynCall_viiiiiii = Module["dynCall_viiiiiii"] = Module["asm"]["Si"]).apply(null, arguments);
+      return (dynCall_viiiiiii = Module["dynCall_viiiiiii"] =
+        Module["asm"]["Si"]).apply(null, arguments);
     });
     var dynCall_didi = (Module["dynCall_didi"] = function () {
-      return (dynCall_didi = Module["dynCall_didi"] = Module["asm"]["Ti"]).apply(null, arguments);
+      return (dynCall_didi = Module["dynCall_didi"] =
+        Module["asm"]["Ti"]).apply(null, arguments);
     });
     var dynCall_fifi = (Module["dynCall_fifi"] = function () {
-      return (dynCall_fifi = Module["dynCall_fifi"] = Module["asm"]["Ui"]).apply(null, arguments);
+      return (dynCall_fifi = Module["dynCall_fifi"] =
+        Module["asm"]["Ui"]).apply(null, arguments);
     });
     var dynCall_diidi = (Module["dynCall_diidi"] = function () {
-      return (dynCall_diidi = Module["dynCall_diidi"] = Module["asm"]["Vi"]).apply(null, arguments);
+      return (dynCall_diidi = Module["dynCall_diidi"] =
+        Module["asm"]["Vi"]).apply(null, arguments);
     });
     var dynCall_jiiji = (Module["dynCall_jiiji"] = function () {
-      return (dynCall_jiiji = Module["dynCall_jiiji"] = Module["asm"]["Wi"]).apply(null, arguments);
+      return (dynCall_jiiji = Module["dynCall_jiiji"] =
+        Module["asm"]["Wi"]).apply(null, arguments);
     });
     var dynCall_fiifi = (Module["dynCall_fiifi"] = function () {
-      return (dynCall_fiifi = Module["dynCall_fiifi"] = Module["asm"]["Xi"]).apply(null, arguments);
+      return (dynCall_fiifi = Module["dynCall_fiifi"] =
+        Module["asm"]["Xi"]).apply(null, arguments);
     });
     var dynCall_iiffi = (Module["dynCall_iiffi"] = function () {
-      return (dynCall_iiffi = Module["dynCall_iiffi"] = Module["asm"]["Yi"]).apply(null, arguments);
+      return (dynCall_iiffi = Module["dynCall_iiffi"] =
+        Module["asm"]["Yi"]).apply(null, arguments);
     });
     var dynCall_jijii = (Module["dynCall_jijii"] = function () {
-      return (dynCall_jijii = Module["dynCall_jijii"] = Module["asm"]["Zi"]).apply(null, arguments);
+      return (dynCall_jijii = Module["dynCall_jijii"] =
+        Module["asm"]["Zi"]).apply(null, arguments);
     });
     var dynCall_jiiii = (Module["dynCall_jiiii"] = function () {
-      return (dynCall_jiiii = Module["dynCall_jiiii"] = Module["asm"]["_i"]).apply(null, arguments);
+      return (dynCall_jiiii = Module["dynCall_jiiii"] =
+        Module["asm"]["_i"]).apply(null, arguments);
     });
     var dynCall_fiiii = (Module["dynCall_fiiii"] = function () {
-      return (dynCall_fiiii = Module["dynCall_fiiii"] = Module["asm"]["$i"]).apply(null, arguments);
+      return (dynCall_fiiii = Module["dynCall_fiiii"] =
+        Module["asm"]["$i"]).apply(null, arguments);
     });
     var dynCall_diiii = (Module["dynCall_diiii"] = function () {
-      return (dynCall_diiii = Module["dynCall_diiii"] = Module["asm"]["aj"]).apply(null, arguments);
+      return (dynCall_diiii = Module["dynCall_diiii"] =
+        Module["asm"]["aj"]).apply(null, arguments);
     });
     var dynCall_dii = (Module["dynCall_dii"] = function () {
-      return (dynCall_dii = Module["dynCall_dii"] = Module["asm"]["bj"]).apply(null, arguments);
+      return (dynCall_dii = Module["dynCall_dii"] = Module["asm"]["bj"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_vijii = (Module["dynCall_vijii"] = function () {
-      return (dynCall_vijii = Module["dynCall_vijii"] = Module["asm"]["cj"]).apply(null, arguments);
+      return (dynCall_vijii = Module["dynCall_vijii"] =
+        Module["asm"]["cj"]).apply(null, arguments);
     });
     var dynCall_iijiii = (Module["dynCall_iijiii"] = function () {
-      return (dynCall_iijiii = Module["dynCall_iijiii"] = Module["asm"]["dj"]).apply(null, arguments);
+      return (dynCall_iijiii = Module["dynCall_iijiii"] =
+        Module["asm"]["dj"]).apply(null, arguments);
     });
     var dynCall_iidi = (Module["dynCall_iidi"] = function () {
-      return (dynCall_iidi = Module["dynCall_iidi"] = Module["asm"]["ej"]).apply(null, arguments);
+      return (dynCall_iidi = Module["dynCall_iidi"] =
+        Module["asm"]["ej"]).apply(null, arguments);
     });
     var dynCall_iiddi = (Module["dynCall_iiddi"] = function () {
-      return (dynCall_iiddi = Module["dynCall_iiddi"] = Module["asm"]["fj"]).apply(null, arguments);
+      return (dynCall_iiddi = Module["dynCall_iiddi"] =
+        Module["asm"]["fj"]).apply(null, arguments);
     });
     var dynCall_iijji = (Module["dynCall_iijji"] = function () {
-      return (dynCall_iijji = Module["dynCall_iijji"] = Module["asm"]["gj"]).apply(null, arguments);
+      return (dynCall_iijji = Module["dynCall_iijji"] =
+        Module["asm"]["gj"]).apply(null, arguments);
     });
     var dynCall_iiiiiiiii = (Module["dynCall_iiiiiiiii"] = function () {
-      return (dynCall_iiiiiiiii = Module["dynCall_iiiiiiiii"] = Module["asm"]["hj"]).apply(null, arguments);
+      return (dynCall_iiiiiiiii = Module["dynCall_iiiiiiiii"] =
+        Module["asm"]["hj"]).apply(null, arguments);
     });
     var dynCall_j = (Module["dynCall_j"] = function () {
-      return (dynCall_j = Module["dynCall_j"] = Module["asm"]["ij"]).apply(null, arguments);
+      return (dynCall_j = Module["dynCall_j"] = Module["asm"]["ij"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_iijii = (Module["dynCall_iijii"] = function () {
-      return (dynCall_iijii = Module["dynCall_iijii"] = Module["asm"]["jj"]).apply(null, arguments);
+      return (dynCall_iijii = Module["dynCall_iijii"] =
+        Module["asm"]["jj"]).apply(null, arguments);
     });
     var dynCall_jiii = (Module["dynCall_jiii"] = function () {
-      return (dynCall_jiii = Module["dynCall_jiii"] = Module["asm"]["kj"]).apply(null, arguments);
+      return (dynCall_jiii = Module["dynCall_jiii"] =
+        Module["asm"]["kj"]).apply(null, arguments);
     });
     var dynCall_ijji = (Module["dynCall_ijji"] = function () {
-      return (dynCall_ijji = Module["dynCall_ijji"] = Module["asm"]["lj"]).apply(null, arguments);
+      return (dynCall_ijji = Module["dynCall_ijji"] =
+        Module["asm"]["lj"]).apply(null, arguments);
     });
     var dynCall_iji = (Module["dynCall_iji"] = function () {
-      return (dynCall_iji = Module["dynCall_iji"] = Module["asm"]["mj"]).apply(null, arguments);
+      return (dynCall_iji = Module["dynCall_iji"] = Module["asm"]["mj"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_jjji = (Module["dynCall_jjji"] = function () {
-      return (dynCall_jjji = Module["dynCall_jjji"] = Module["asm"]["nj"]).apply(null, arguments);
+      return (dynCall_jjji = Module["dynCall_jjji"] =
+        Module["asm"]["nj"]).apply(null, arguments);
     });
     var dynCall_jiiiii = (Module["dynCall_jiiiii"] = function () {
-      return (dynCall_jiiiii = Module["dynCall_jiiiii"] = Module["asm"]["oj"]).apply(null, arguments);
+      return (dynCall_jiiiii = Module["dynCall_jiiiii"] =
+        Module["asm"]["oj"]).apply(null, arguments);
     });
     var dynCall_vijiii = (Module["dynCall_vijiii"] = function () {
-      return (dynCall_vijiii = Module["dynCall_vijiii"] = Module["asm"]["pj"]).apply(null, arguments);
+      return (dynCall_vijiii = Module["dynCall_vijiii"] =
+        Module["asm"]["pj"]).apply(null, arguments);
     });
     var dynCall_vjjjiiii = (Module["dynCall_vjjjiiii"] = function () {
-      return (dynCall_vjjjiiii = Module["dynCall_vjjjiiii"] = Module["asm"]["qj"]).apply(null, arguments);
+      return (dynCall_vjjjiiii = Module["dynCall_vjjjiiii"] =
+        Module["asm"]["qj"]).apply(null, arguments);
     });
     var dynCall_vjiiiii = (Module["dynCall_vjiiiii"] = function () {
-      return (dynCall_vjiiiii = Module["dynCall_vjiiiii"] = Module["asm"]["rj"]).apply(null, arguments);
+      return (dynCall_vjiiiii = Module["dynCall_vjiiiii"] =
+        Module["asm"]["rj"]).apply(null, arguments);
     });
     var dynCall_viiji = (Module["dynCall_viiji"] = function () {
-      return (dynCall_viiji = Module["dynCall_viiji"] = Module["asm"]["sj"]).apply(null, arguments);
+      return (dynCall_viiji = Module["dynCall_viiji"] =
+        Module["asm"]["sj"]).apply(null, arguments);
     });
     var dynCall_iiji = (Module["dynCall_iiji"] = function () {
-      return (dynCall_iiji = Module["dynCall_iiji"] = Module["asm"]["tj"]).apply(null, arguments);
+      return (dynCall_iiji = Module["dynCall_iiji"] =
+        Module["asm"]["tj"]).apply(null, arguments);
     });
     var dynCall_viffi = (Module["dynCall_viffi"] = function () {
-      return (dynCall_viffi = Module["dynCall_viffi"] = Module["asm"]["uj"]).apply(null, arguments);
+      return (dynCall_viffi = Module["dynCall_viffi"] =
+        Module["asm"]["uj"]).apply(null, arguments);
     });
     var dynCall_iiiji = (Module["dynCall_iiiji"] = function () {
-      return (dynCall_iiiji = Module["dynCall_iiiji"] = Module["asm"]["vj"]).apply(null, arguments);
+      return (dynCall_iiiji = Module["dynCall_iiiji"] =
+        Module["asm"]["vj"]).apply(null, arguments);
     });
     var dynCall_viji = (Module["dynCall_viji"] = function () {
-      return (dynCall_viji = Module["dynCall_viji"] = Module["asm"]["wj"]).apply(null, arguments);
+      return (dynCall_viji = Module["dynCall_viji"] =
+        Module["asm"]["wj"]).apply(null, arguments);
     });
-    var dynCall_viiiiiiiiiiiiii = (Module["dynCall_viiiiiiiiiiiiii"] = function () {
-      return (dynCall_viiiiiiiiiiiiii = Module["dynCall_viiiiiiiiiiiiii"] = Module["asm"]["xj"]).apply(null, arguments);
-    });
+    var dynCall_viiiiiiiiiiiiii = (Module["dynCall_viiiiiiiiiiiiii"] =
+      function () {
+        return (dynCall_viiiiiiiiiiiiii = Module["dynCall_viiiiiiiiiiiiii"] =
+          Module["asm"]["xj"]).apply(null, arguments);
+      });
     var dynCall_viiiiiiiiiii = (Module["dynCall_viiiiiiiiiii"] = function () {
-      return (dynCall_viiiiiiiiiii = Module["dynCall_viiiiiiiiiii"] = Module["asm"]["yj"]).apply(null, arguments);
+      return (dynCall_viiiiiiiiiii = Module["dynCall_viiiiiiiiiii"] =
+        Module["asm"]["yj"]).apply(null, arguments);
     });
     var dynCall_iiiiiiiiiii = (Module["dynCall_iiiiiiiiiii"] = function () {
-      return (dynCall_iiiiiiiiiii = Module["dynCall_iiiiiiiiiii"] = Module["asm"]["zj"]).apply(null, arguments);
+      return (dynCall_iiiiiiiiiii = Module["dynCall_iiiiiiiiiii"] =
+        Module["asm"]["zj"]).apply(null, arguments);
     });
     var dynCall_iiiiiiiiiiiii = (Module["dynCall_iiiiiiiiiiiii"] = function () {
-      return (dynCall_iiiiiiiiiiiii = Module["dynCall_iiiiiiiiiiiii"] = Module["asm"]["Aj"]).apply(null, arguments);
+      return (dynCall_iiiiiiiiiiiii = Module["dynCall_iiiiiiiiiiiii"] =
+        Module["asm"]["Aj"]).apply(null, arguments);
     });
     var dynCall_viiiiiiiii = (Module["dynCall_viiiiiiiii"] = function () {
-      return (dynCall_viiiiiiiii = Module["dynCall_viiiiiiiii"] = Module["asm"]["Bj"]).apply(null, arguments);
+      return (dynCall_viiiiiiiii = Module["dynCall_viiiiiiiii"] =
+        Module["asm"]["Bj"]).apply(null, arguments);
     });
     var dynCall_viiijii = (Module["dynCall_viiijii"] = function () {
-      return (dynCall_viiijii = Module["dynCall_viiijii"] = Module["asm"]["Cj"]).apply(null, arguments);
+      return (dynCall_viiijii = Module["dynCall_viiijii"] =
+        Module["asm"]["Cj"]).apply(null, arguments);
     });
     var dynCall_ijjiii = (Module["dynCall_ijjiii"] = function () {
-      return (dynCall_ijjiii = Module["dynCall_ijjiii"] = Module["asm"]["Dj"]).apply(null, arguments);
+      return (dynCall_ijjiii = Module["dynCall_ijjiii"] =
+        Module["asm"]["Dj"]).apply(null, arguments);
     });
     var dynCall_ijiiii = (Module["dynCall_ijiiii"] = function () {
-      return (dynCall_ijiiii = Module["dynCall_ijiiii"] = Module["asm"]["Ej"]).apply(null, arguments);
+      return (dynCall_ijiiii = Module["dynCall_ijiiii"] =
+        Module["asm"]["Ej"]).apply(null, arguments);
     });
     var dynCall_diiiii = (Module["dynCall_diiiii"] = function () {
-      return (dynCall_diiiii = Module["dynCall_diiiii"] = Module["asm"]["Fj"]).apply(null, arguments);
+      return (dynCall_diiiii = Module["dynCall_diiiii"] =
+        Module["asm"]["Fj"]).apply(null, arguments);
     });
     var dynCall_vijji = (Module["dynCall_vijji"] = function () {
-      return (dynCall_vijji = Module["dynCall_vijji"] = Module["asm"]["Gj"]).apply(null, arguments);
+      return (dynCall_vijji = Module["dynCall_vijji"] =
+        Module["asm"]["Gj"]).apply(null, arguments);
     });
     var dynCall_viffffi = (Module["dynCall_viffffi"] = function () {
-      return (dynCall_viffffi = Module["dynCall_viffffi"] = Module["asm"]["Hj"]).apply(null, arguments);
+      return (dynCall_viffffi = Module["dynCall_viffffi"] =
+        Module["asm"]["Hj"]).apply(null, arguments);
     });
     var dynCall_vfffi = (Module["dynCall_vfffi"] = function () {
-      return (dynCall_vfffi = Module["dynCall_vfffi"] = Module["asm"]["Ij"]).apply(null, arguments);
+      return (dynCall_vfffi = Module["dynCall_vfffi"] =
+        Module["asm"]["Ij"]).apply(null, arguments);
     });
     var dynCall_vffi = (Module["dynCall_vffi"] = function () {
-      return (dynCall_vffi = Module["dynCall_vffi"] = Module["asm"]["Jj"]).apply(null, arguments);
+      return (dynCall_vffi = Module["dynCall_vffi"] =
+        Module["asm"]["Jj"]).apply(null, arguments);
     });
     var dynCall_vffffi = (Module["dynCall_vffffi"] = function () {
-      return (dynCall_vffffi = Module["dynCall_vffffi"] = Module["asm"]["Kj"]).apply(null, arguments);
+      return (dynCall_vffffi = Module["dynCall_vffffi"] =
+        Module["asm"]["Kj"]).apply(null, arguments);
     });
     var dynCall_viiifi = (Module["dynCall_viiifi"] = function () {
-      return (dynCall_viiifi = Module["dynCall_viiifi"] = Module["asm"]["Lj"]).apply(null, arguments);
+      return (dynCall_viiifi = Module["dynCall_viiifi"] =
+        Module["asm"]["Lj"]).apply(null, arguments);
     });
     var dynCall_viiiiffi = (Module["dynCall_viiiiffi"] = function () {
-      return (dynCall_viiiiffi = Module["dynCall_viiiiffi"] = Module["asm"]["Mj"]).apply(null, arguments);
+      return (dynCall_viiiiffi = Module["dynCall_viiiiffi"] =
+        Module["asm"]["Mj"]).apply(null, arguments);
     });
     var dynCall_viiiffii = (Module["dynCall_viiiffii"] = function () {
-      return (dynCall_viiiffii = Module["dynCall_viiiffii"] = Module["asm"]["Nj"]).apply(null, arguments);
+      return (dynCall_viiiffii = Module["dynCall_viiiffii"] =
+        Module["asm"]["Nj"]).apply(null, arguments);
     });
     var dynCall_vifffi = (Module["dynCall_vifffi"] = function () {
-      return (dynCall_vifffi = Module["dynCall_vifffi"] = Module["asm"]["Oj"]).apply(null, arguments);
+      return (dynCall_vifffi = Module["dynCall_vifffi"] =
+        Module["asm"]["Oj"]).apply(null, arguments);
     });
     var dynCall_ifi = (Module["dynCall_ifi"] = function () {
-      return (dynCall_ifi = Module["dynCall_ifi"] = Module["asm"]["Pj"]).apply(null, arguments);
+      return (dynCall_ifi = Module["dynCall_ifi"] = Module["asm"]["Pj"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_vfiii = (Module["dynCall_vfiii"] = function () {
-      return (dynCall_vfiii = Module["dynCall_vfiii"] = Module["asm"]["Qj"]).apply(null, arguments);
+      return (dynCall_vfiii = Module["dynCall_vfiii"] =
+        Module["asm"]["Qj"]).apply(null, arguments);
     });
     var dynCall_ffi = (Module["dynCall_ffi"] = function () {
-      return (dynCall_ffi = Module["dynCall_ffi"] = Module["asm"]["Rj"]).apply(null, arguments);
+      return (dynCall_ffi = Module["dynCall_ffi"] = Module["asm"]["Rj"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_ffffi = (Module["dynCall_ffffi"] = function () {
-      return (dynCall_ffffi = Module["dynCall_ffffi"] = Module["asm"]["Sj"]).apply(null, arguments);
+      return (dynCall_ffffi = Module["dynCall_ffffi"] =
+        Module["asm"]["Sj"]).apply(null, arguments);
     });
     var dynCall_iffi = (Module["dynCall_iffi"] = function () {
-      return (dynCall_iffi = Module["dynCall_iffi"] = Module["asm"]["Tj"]).apply(null, arguments);
+      return (dynCall_iffi = Module["dynCall_iffi"] =
+        Module["asm"]["Tj"]).apply(null, arguments);
     });
     var dynCall_fffifffi = (Module["dynCall_fffifffi"] = function () {
-      return (dynCall_fffifffi = Module["dynCall_fffifffi"] = Module["asm"]["Uj"]).apply(null, arguments);
+      return (dynCall_fffifffi = Module["dynCall_fffifffi"] =
+        Module["asm"]["Uj"]).apply(null, arguments);
     });
     var dynCall_fdi = (Module["dynCall_fdi"] = function () {
-      return (dynCall_fdi = Module["dynCall_fdi"] = Module["asm"]["Vj"]).apply(null, arguments);
+      return (dynCall_fdi = Module["dynCall_fdi"] = Module["asm"]["Vj"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_idi = (Module["dynCall_idi"] = function () {
-      return (dynCall_idi = Module["dynCall_idi"] = Module["asm"]["Wj"]).apply(null, arguments);
+      return (dynCall_idi = Module["dynCall_idi"] = Module["asm"]["Wj"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_dddi = (Module["dynCall_dddi"] = function () {
-      return (dynCall_dddi = Module["dynCall_dddi"] = Module["asm"]["Xj"]).apply(null, arguments);
+      return (dynCall_dddi = Module["dynCall_dddi"] =
+        Module["asm"]["Xj"]).apply(null, arguments);
     });
     var dynCall_ddi = (Module["dynCall_ddi"] = function () {
-      return (dynCall_ddi = Module["dynCall_ddi"] = Module["asm"]["Yj"]).apply(null, arguments);
+      return (dynCall_ddi = Module["dynCall_ddi"] = Module["asm"]["Yj"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_vfii = (Module["dynCall_vfii"] = function () {
-      return (dynCall_vfii = Module["dynCall_vfii"] = Module["asm"]["Zj"]).apply(null, arguments);
+      return (dynCall_vfii = Module["dynCall_vfii"] =
+        Module["asm"]["Zj"]).apply(null, arguments);
     });
     var dynCall_ddddi = (Module["dynCall_ddddi"] = function () {
-      return (dynCall_ddddi = Module["dynCall_ddddi"] = Module["asm"]["_j"]).apply(null, arguments);
+      return (dynCall_ddddi = Module["dynCall_ddddi"] =
+        Module["asm"]["_j"]).apply(null, arguments);
     });
     var dynCall_jji = (Module["dynCall_jji"] = function () {
-      return (dynCall_jji = Module["dynCall_jji"] = Module["asm"]["$j"]).apply(null, arguments);
+      return (dynCall_jji = Module["dynCall_jji"] = Module["asm"]["$j"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_jjjji = (Module["dynCall_jjjji"] = function () {
-      return (dynCall_jjjji = Module["dynCall_jjjji"] = Module["asm"]["ak"]).apply(null, arguments);
+      return (dynCall_jjjji = Module["dynCall_jjjji"] =
+        Module["asm"]["ak"]).apply(null, arguments);
     });
     var dynCall_vjiiii = (Module["dynCall_vjiiii"] = function () {
-      return (dynCall_vjiiii = Module["dynCall_vjiiii"] = Module["asm"]["bk"]).apply(null, arguments);
+      return (dynCall_vjiiii = Module["dynCall_vjiiii"] =
+        Module["asm"]["bk"]).apply(null, arguments);
     });
     var dynCall_vfi = (Module["dynCall_vfi"] = function () {
-      return (dynCall_vfi = Module["dynCall_vfi"] = Module["asm"]["ck"]).apply(null, arguments);
+      return (dynCall_vfi = Module["dynCall_vfi"] = Module["asm"]["ck"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_vijjii = (Module["dynCall_vijjii"] = function () {
-      return (dynCall_vijjii = Module["dynCall_vijjii"] = Module["asm"]["dk"]).apply(null, arguments);
+      return (dynCall_vijjii = Module["dynCall_vijjii"] =
+        Module["asm"]["dk"]).apply(null, arguments);
     });
-    var dynCall_viiiiiiiijijiii = (Module["dynCall_viiiiiiiijijiii"] = function () {
-      return (dynCall_viiiiiiiijijiii = Module["dynCall_viiiiiiiijijiii"] = Module["asm"]["ek"]).apply(null, arguments);
-    });
+    var dynCall_viiiiiiiijijiii = (Module["dynCall_viiiiiiiijijiii"] =
+      function () {
+        return (dynCall_viiiiiiiijijiii = Module["dynCall_viiiiiiiijijiii"] =
+          Module["asm"]["ek"]).apply(null, arguments);
+      });
     var dynCall_viiiiiffii = (Module["dynCall_viiiiiffii"] = function () {
-      return (dynCall_viiiiiffii = Module["dynCall_viiiiiffii"] = Module["asm"]["fk"]).apply(null, arguments);
+      return (dynCall_viiiiiffii = Module["dynCall_viiiiiffii"] =
+        Module["asm"]["fk"]).apply(null, arguments);
     });
     var dynCall_viffffii = (Module["dynCall_viffffii"] = function () {
-      return (dynCall_viffffii = Module["dynCall_viffffii"] = Module["asm"]["gk"]).apply(null, arguments);
+      return (dynCall_viffffii = Module["dynCall_viffffii"] =
+        Module["asm"]["gk"]).apply(null, arguments);
     });
     var dynCall_iiiifiii = (Module["dynCall_iiiifiii"] = function () {
-      return (dynCall_iiiifiii = Module["dynCall_iiiifiii"] = Module["asm"]["hk"]).apply(null, arguments);
+      return (dynCall_iiiifiii = Module["dynCall_iiiifiii"] =
+        Module["asm"]["hk"]).apply(null, arguments);
     });
     var dynCall_iiifiii = (Module["dynCall_iiifiii"] = function () {
-      return (dynCall_iiifiii = Module["dynCall_iiifiii"] = Module["asm"]["ik"]).apply(null, arguments);
+      return (dynCall_iiifiii = Module["dynCall_iiifiii"] =
+        Module["asm"]["ik"]).apply(null, arguments);
     });
     var dynCall_viiifiii = (Module["dynCall_viiifiii"] = function () {
-      return (dynCall_viiifiii = Module["dynCall_viiifiii"] = Module["asm"]["jk"]).apply(null, arguments);
+      return (dynCall_viiifiii = Module["dynCall_viiifiii"] =
+        Module["asm"]["jk"]).apply(null, arguments);
     });
     var dynCall_viiifii = (Module["dynCall_viiifii"] = function () {
-      return (dynCall_viiifii = Module["dynCall_viiifii"] = Module["asm"]["kk"]).apply(null, arguments);
+      return (dynCall_viiifii = Module["dynCall_viiifii"] =
+        Module["asm"]["kk"]).apply(null, arguments);
     });
     var dynCall_viiififi = (Module["dynCall_viiififi"] = function () {
-      return (dynCall_viiififi = Module["dynCall_viiififi"] = Module["asm"]["lk"]).apply(null, arguments);
+      return (dynCall_viiififi = Module["dynCall_viiififi"] =
+        Module["asm"]["lk"]).apply(null, arguments);
     });
     var dynCall_viiififfi = (Module["dynCall_viiififfi"] = function () {
-      return (dynCall_viiififfi = Module["dynCall_viiififfi"] = Module["asm"]["mk"]).apply(null, arguments);
+      return (dynCall_viiififfi = Module["dynCall_viiififfi"] =
+        Module["asm"]["mk"]).apply(null, arguments);
     });
     var dynCall_iiiiifi = (Module["dynCall_iiiiifi"] = function () {
-      return (dynCall_iiiiifi = Module["dynCall_iiiiifi"] = Module["asm"]["nk"]).apply(null, arguments);
+      return (dynCall_iiiiifi = Module["dynCall_iiiiifi"] =
+        Module["asm"]["nk"]).apply(null, arguments);
     });
     var dynCall_iifii = (Module["dynCall_iifii"] = function () {
-      return (dynCall_iifii = Module["dynCall_iifii"] = Module["asm"]["ok"]).apply(null, arguments);
+      return (dynCall_iifii = Module["dynCall_iifii"] =
+        Module["asm"]["ok"]).apply(null, arguments);
     });
     var dynCall_iifiii = (Module["dynCall_iifiii"] = function () {
-      return (dynCall_iifiii = Module["dynCall_iifiii"] = Module["asm"]["pk"]).apply(null, arguments);
+      return (dynCall_iifiii = Module["dynCall_iifiii"] =
+        Module["asm"]["pk"]).apply(null, arguments);
     });
     var dynCall_iiiiifiii = (Module["dynCall_iiiiifiii"] = function () {
-      return (dynCall_iiiiifiii = Module["dynCall_iiiiifiii"] = Module["asm"]["qk"]).apply(null, arguments);
+      return (dynCall_iiiiifiii = Module["dynCall_iiiiifiii"] =
+        Module["asm"]["qk"]).apply(null, arguments);
     });
     var dynCall_iiifiiii = (Module["dynCall_iiifiiii"] = function () {
-      return (dynCall_iiifiiii = Module["dynCall_iiifiiii"] = Module["asm"]["rk"]).apply(null, arguments);
+      return (dynCall_iiifiiii = Module["dynCall_iiifiiii"] =
+        Module["asm"]["rk"]).apply(null, arguments);
     });
     var dynCall_vifffffi = (Module["dynCall_vifffffi"] = function () {
-      return (dynCall_vifffffi = Module["dynCall_vifffffi"] = Module["asm"]["sk"]).apply(null, arguments);
+      return (dynCall_vifffffi = Module["dynCall_vifffffi"] =
+        Module["asm"]["sk"]).apply(null, arguments);
     });
     var dynCall_viiiiifi = (Module["dynCall_viiiiifi"] = function () {
-      return (dynCall_viiiiifi = Module["dynCall_viiiiifi"] = Module["asm"]["tk"]).apply(null, arguments);
+      return (dynCall_viiiiifi = Module["dynCall_viiiiifi"] =
+        Module["asm"]["tk"]).apply(null, arguments);
     });
     var dynCall_viffiiii = (Module["dynCall_viffiiii"] = function () {
-      return (dynCall_viffiiii = Module["dynCall_viffiiii"] = Module["asm"]["uk"]).apply(null, arguments);
+      return (dynCall_viffiiii = Module["dynCall_viffiiii"] =
+        Module["asm"]["uk"]).apply(null, arguments);
     });
     var dynCall_viiiffffiiii = (Module["dynCall_viiiffffiiii"] = function () {
-      return (dynCall_viiiffffiiii = Module["dynCall_viiiffffiiii"] = Module["asm"]["vk"]).apply(null, arguments);
+      return (dynCall_viiiffffiiii = Module["dynCall_viiiffffiiii"] =
+        Module["asm"]["vk"]).apply(null, arguments);
     });
-    var dynCall_viifffffffiiiii = (Module["dynCall_viifffffffiiiii"] = function () {
-      return (dynCall_viifffffffiiiii = Module["dynCall_viifffffffiiiii"] = Module["asm"]["wk"]).apply(null, arguments);
-    });
+    var dynCall_viifffffffiiiii = (Module["dynCall_viifffffffiiiii"] =
+      function () {
+        return (dynCall_viifffffffiiiii = Module["dynCall_viifffffffiiiii"] =
+          Module["asm"]["wk"]).apply(null, arguments);
+      });
     var dynCall_fiiiii = (Module["dynCall_fiiiii"] = function () {
-      return (dynCall_fiiiii = Module["dynCall_fiiiii"] = Module["asm"]["xk"]).apply(null, arguments);
+      return (dynCall_fiiiii = Module["dynCall_fiiiii"] =
+        Module["asm"]["xk"]).apply(null, arguments);
     });
-    var dynCall_iiiiiiffiiiiiiiiiffffiiii = (Module["dynCall_iiiiiiffiiiiiiiiiffffiiii"] = function () {
-      return (dynCall_iiiiiiffiiiiiiiiiffffiiii = Module["dynCall_iiiiiiffiiiiiiiiiffffiiii"] =
+    var dynCall_iiiiiiffiiiiiiiiiffffiiii = (Module[
+      "dynCall_iiiiiiffiiiiiiiiiffffiiii"
+    ] = function () {
+      return (dynCall_iiiiiiffiiiiiiiiiffffiiii = Module[
+        "dynCall_iiiiiiffiiiiiiiiiffffiiii"
+      ] =
         Module["asm"]["yk"]).apply(null, arguments);
     });
-    var dynCall_iiiiiiffiiiiiiiiiiiiiii = (Module["dynCall_iiiiiiffiiiiiiiiiiiiiii"] = function () {
-      return (dynCall_iiiiiiffiiiiiiiiiiiiiii = Module["dynCall_iiiiiiffiiiiiiiiiiiiiii"] = Module["asm"]["zk"]).apply(
-        null,
-        arguments
-      );
+    var dynCall_iiiiiiffiiiiiiiiiiiiiii = (Module[
+      "dynCall_iiiiiiffiiiiiiiiiiiiiii"
+    ] = function () {
+      return (dynCall_iiiiiiffiiiiiiiiiiiiiii = Module[
+        "dynCall_iiiiiiffiiiiiiiiiiiiiii"
+      ] =
+        Module["asm"]["zk"]).apply(null, arguments);
     });
     var dynCall_viffii = (Module["dynCall_viffii"] = function () {
-      return (dynCall_viffii = Module["dynCall_viffii"] = Module["asm"]["Ak"]).apply(null, arguments);
+      return (dynCall_viffii = Module["dynCall_viffii"] =
+        Module["asm"]["Ak"]).apply(null, arguments);
     });
     var dynCall_vififiii = (Module["dynCall_vififiii"] = function () {
-      return (dynCall_vififiii = Module["dynCall_vififiii"] = Module["asm"]["Bk"]).apply(null, arguments);
+      return (dynCall_vififiii = Module["dynCall_vififiii"] =
+        Module["asm"]["Bk"]).apply(null, arguments);
     });
     var dynCall_viififii = (Module["dynCall_viififii"] = function () {
-      return (dynCall_viififii = Module["dynCall_viififii"] = Module["asm"]["Ck"]).apply(null, arguments);
+      return (dynCall_viififii = Module["dynCall_viififii"] =
+        Module["asm"]["Ck"]).apply(null, arguments);
     });
     var dynCall_fiffi = (Module["dynCall_fiffi"] = function () {
-      return (dynCall_fiffi = Module["dynCall_fiffi"] = Module["asm"]["Dk"]).apply(null, arguments);
+      return (dynCall_fiffi = Module["dynCall_fiffi"] =
+        Module["asm"]["Dk"]).apply(null, arguments);
     });
     var dynCall_viijji = (Module["dynCall_viijji"] = function () {
-      return (dynCall_viijji = Module["dynCall_viijji"] = Module["asm"]["Ek"]).apply(null, arguments);
+      return (dynCall_viijji = Module["dynCall_viijji"] =
+        Module["asm"]["Ek"]).apply(null, arguments);
     });
     var dynCall_diii = (Module["dynCall_diii"] = function () {
-      return (dynCall_diii = Module["dynCall_diii"] = Module["asm"]["Fk"]).apply(null, arguments);
+      return (dynCall_diii = Module["dynCall_diii"] =
+        Module["asm"]["Fk"]).apply(null, arguments);
     });
     var dynCall_viiidi = (Module["dynCall_viiidi"] = function () {
-      return (dynCall_viiidi = Module["dynCall_viiidi"] = Module["asm"]["Gk"]).apply(null, arguments);
+      return (dynCall_viiidi = Module["dynCall_viiidi"] =
+        Module["asm"]["Gk"]).apply(null, arguments);
     });
     var dynCall_jijji = (Module["dynCall_jijji"] = function () {
-      return (dynCall_jijji = Module["dynCall_jijji"] = Module["asm"]["Hk"]).apply(null, arguments);
+      return (dynCall_jijji = Module["dynCall_jijji"] =
+        Module["asm"]["Hk"]).apply(null, arguments);
     });
     var dynCall_viiffffi = (Module["dynCall_viiffffi"] = function () {
-      return (dynCall_viiffffi = Module["dynCall_viiffffi"] = Module["asm"]["Ik"]).apply(null, arguments);
+      return (dynCall_viiffffi = Module["dynCall_viiffffi"] =
+        Module["asm"]["Ik"]).apply(null, arguments);
     });
     var dynCall_fifffi = (Module["dynCall_fifffi"] = function () {
-      return (dynCall_fifffi = Module["dynCall_fifffi"] = Module["asm"]["Jk"]).apply(null, arguments);
+      return (dynCall_fifffi = Module["dynCall_fifffi"] =
+        Module["asm"]["Jk"]).apply(null, arguments);
     });
     var dynCall_ifffi = (Module["dynCall_ifffi"] = function () {
-      return (dynCall_ifffi = Module["dynCall_ifffi"] = Module["asm"]["Kk"]).apply(null, arguments);
+      return (dynCall_ifffi = Module["dynCall_ifffi"] =
+        Module["asm"]["Kk"]).apply(null, arguments);
     });
     var dynCall_fiifii = (Module["dynCall_fiifii"] = function () {
-      return (dynCall_fiifii = Module["dynCall_fiifii"] = Module["asm"]["Lk"]).apply(null, arguments);
+      return (dynCall_fiifii = Module["dynCall_fiifii"] =
+        Module["asm"]["Lk"]).apply(null, arguments);
     });
     var dynCall_fiifiii = (Module["dynCall_fiifiii"] = function () {
-      return (dynCall_fiifiii = Module["dynCall_fiifiii"] = Module["asm"]["Mk"]).apply(null, arguments);
+      return (dynCall_fiifiii = Module["dynCall_fiifiii"] =
+        Module["asm"]["Mk"]).apply(null, arguments);
     });
     var dynCall_viffiii = (Module["dynCall_viffiii"] = function () {
-      return (dynCall_viffiii = Module["dynCall_viffiii"] = Module["asm"]["Nk"]).apply(null, arguments);
+      return (dynCall_viffiii = Module["dynCall_viffiii"] =
+        Module["asm"]["Nk"]).apply(null, arguments);
     });
     var dynCall_viffifi = (Module["dynCall_viffifi"] = function () {
-      return (dynCall_viffifi = Module["dynCall_viffifi"] = Module["asm"]["Ok"]).apply(null, arguments);
+      return (dynCall_viffifi = Module["dynCall_viffifi"] =
+        Module["asm"]["Ok"]).apply(null, arguments);
     });
     var dynCall_fiffffi = (Module["dynCall_fiffffi"] = function () {
-      return (dynCall_fiffffi = Module["dynCall_fiffffi"] = Module["asm"]["Pk"]).apply(null, arguments);
+      return (dynCall_fiffffi = Module["dynCall_fiffffi"] =
+        Module["asm"]["Pk"]).apply(null, arguments);
     });
     var dynCall_fffffffi = (Module["dynCall_fffffffi"] = function () {
-      return (dynCall_fffffffi = Module["dynCall_fffffffi"] = Module["asm"]["Qk"]).apply(null, arguments);
+      return (dynCall_fffffffi = Module["dynCall_fffffffi"] =
+        Module["asm"]["Qk"]).apply(null, arguments);
     });
     var dynCall_viiffifi = (Module["dynCall_viiffifi"] = function () {
-      return (dynCall_viiffifi = Module["dynCall_viiffifi"] = Module["asm"]["Rk"]).apply(null, arguments);
+      return (dynCall_viiffifi = Module["dynCall_viiffifi"] =
+        Module["asm"]["Rk"]).apply(null, arguments);
     });
-    var dynCall_viiiffiiiiiiiii = (Module["dynCall_viiiffiiiiiiiii"] = function () {
-      return (dynCall_viiiffiiiiiiiii = Module["dynCall_viiiffiiiiiiiii"] = Module["asm"]["Sk"]).apply(null, arguments);
-    });
+    var dynCall_viiiffiiiiiiiii = (Module["dynCall_viiiffiiiiiiiii"] =
+      function () {
+        return (dynCall_viiiffiiiiiiiii = Module["dynCall_viiiffiiiiiiiii"] =
+          Module["asm"]["Sk"]).apply(null, arguments);
+      });
     var dynCall_viiiffiiiiii = (Module["dynCall_viiiffiiiiii"] = function () {
-      return (dynCall_viiiffiiiiii = Module["dynCall_viiiffiiiiii"] = Module["asm"]["Tk"]).apply(null, arguments);
+      return (dynCall_viiiffiiiiii = Module["dynCall_viiiffiiiiii"] =
+        Module["asm"]["Tk"]).apply(null, arguments);
     });
-    var dynCall_viiffiiiiiiiiii = (Module["dynCall_viiffiiiiiiiiii"] = function () {
-      return (dynCall_viiffiiiiiiiiii = Module["dynCall_viiffiiiiiiiiii"] = Module["asm"]["Uk"]).apply(null, arguments);
-    });
+    var dynCall_viiffiiiiiiiiii = (Module["dynCall_viiffiiiiiiiiii"] =
+      function () {
+        return (dynCall_viiffiiiiiiiiii = Module["dynCall_viiffiiiiiiiiii"] =
+          Module["asm"]["Uk"]).apply(null, arguments);
+      });
     var dynCall_viiffiiiiiii = (Module["dynCall_viiffiiiiiii"] = function () {
-      return (dynCall_viiffiiiiiii = Module["dynCall_viiffiiiiiii"] = Module["asm"]["Vk"]).apply(null, arguments);
+      return (dynCall_viiffiiiiiii = Module["dynCall_viiffiiiiiii"] =
+        Module["asm"]["Vk"]).apply(null, arguments);
     });
     var dynCall_viffffffi = (Module["dynCall_viffffffi"] = function () {
-      return (dynCall_viffffffi = Module["dynCall_viffffffi"] = Module["asm"]["Wk"]).apply(null, arguments);
+      return (dynCall_viffffffi = Module["dynCall_viffffffi"] =
+        Module["asm"]["Wk"]).apply(null, arguments);
     });
     var dynCall_iiiffiiii = (Module["dynCall_iiiffiiii"] = function () {
-      return (dynCall_iiiffiiii = Module["dynCall_iiiffiiii"] = Module["asm"]["Xk"]).apply(null, arguments);
+      return (dynCall_iiiffiiii = Module["dynCall_iiiffiiii"] =
+        Module["asm"]["Xk"]).apply(null, arguments);
     });
     var dynCall_fffffi = (Module["dynCall_fffffi"] = function () {
-      return (dynCall_fffffi = Module["dynCall_fffffi"] = Module["asm"]["Yk"]).apply(null, arguments);
+      return (dynCall_fffffi = Module["dynCall_fffffi"] =
+        Module["asm"]["Yk"]).apply(null, arguments);
     });
     var dynCall_iiiiffiiii = (Module["dynCall_iiiiffiiii"] = function () {
-      return (dynCall_iiiiffiiii = Module["dynCall_iiiiffiiii"] = Module["asm"]["Zk"]).apply(null, arguments);
+      return (dynCall_iiiiffiiii = Module["dynCall_iiiiffiiii"] =
+        Module["asm"]["Zk"]).apply(null, arguments);
     });
     var dynCall_fiiiffi = (Module["dynCall_fiiiffi"] = function () {
-      return (dynCall_fiiiffi = Module["dynCall_fiiiffi"] = Module["asm"]["_k"]).apply(null, arguments);
+      return (dynCall_fiiiffi = Module["dynCall_fiiiffi"] =
+        Module["asm"]["_k"]).apply(null, arguments);
     });
     var dynCall_ijii = (Module["dynCall_ijii"] = function () {
-      return (dynCall_ijii = Module["dynCall_ijii"] = Module["asm"]["$k"]).apply(null, arguments);
+      return (dynCall_ijii = Module["dynCall_ijii"] =
+        Module["asm"]["$k"]).apply(null, arguments);
     });
     var dynCall_vjii = (Module["dynCall_vjii"] = function () {
-      return (dynCall_vjii = Module["dynCall_vjii"] = Module["asm"]["al"]).apply(null, arguments);
+      return (dynCall_vjii = Module["dynCall_vjii"] =
+        Module["asm"]["al"]).apply(null, arguments);
     });
-    var dynCall_viiiiiiiijiiii = (Module["dynCall_viiiiiiiijiiii"] = function () {
-      return (dynCall_viiiiiiiijiiii = Module["dynCall_viiiiiiiijiiii"] = Module["asm"]["bl"]).apply(null, arguments);
-    });
-    var dynCall_viiiiiifiiiiii = (Module["dynCall_viiiiiifiiiiii"] = function () {
-      return (dynCall_viiiiiifiiiiii = Module["dynCall_viiiiiifiiiiii"] = Module["asm"]["cl"]).apply(null, arguments);
-    });
+    var dynCall_viiiiiiiijiiii = (Module["dynCall_viiiiiiiijiiii"] =
+      function () {
+        return (dynCall_viiiiiiiijiiii = Module["dynCall_viiiiiiiijiiii"] =
+          Module["asm"]["bl"]).apply(null, arguments);
+      });
+    var dynCall_viiiiiifiiiiii = (Module["dynCall_viiiiiifiiiiii"] =
+      function () {
+        return (dynCall_viiiiiifiiiiii = Module["dynCall_viiiiiifiiiiii"] =
+          Module["asm"]["cl"]).apply(null, arguments);
+      });
     var dynCall_viffffiii = (Module["dynCall_viffffiii"] = function () {
-      return (dynCall_viffffiii = Module["dynCall_viffffiii"] = Module["asm"]["dl"]).apply(null, arguments);
+      return (dynCall_viffffiii = Module["dynCall_viffffiii"] =
+        Module["asm"]["dl"]).apply(null, arguments);
     });
     var dynCall_viifiii = (Module["dynCall_viifiii"] = function () {
-      return (dynCall_viifiii = Module["dynCall_viifiii"] = Module["asm"]["el"]).apply(null, arguments);
+      return (dynCall_viifiii = Module["dynCall_viifiii"] =
+        Module["asm"]["el"]).apply(null, arguments);
     });
     var dynCall_viiiiiiiiiiii = (Module["dynCall_viiiiiiiiiiii"] = function () {
-      return (dynCall_viiiiiiiiiiii = Module["dynCall_viiiiiiiiiiii"] = Module["asm"]["fl"]).apply(null, arguments);
+      return (dynCall_viiiiiiiiiiii = Module["dynCall_viiiiiiiiiiii"] =
+        Module["asm"]["fl"]).apply(null, arguments);
     });
     var dynCall_vifiiiiii = (Module["dynCall_vifiiiiii"] = function () {
-      return (dynCall_vifiiiiii = Module["dynCall_vifiiiiii"] = Module["asm"]["gl"]).apply(null, arguments);
+      return (dynCall_vifiiiiii = Module["dynCall_vifiiiiii"] =
+        Module["asm"]["gl"]).apply(null, arguments);
     });
     var dynCall_ffii = (Module["dynCall_ffii"] = function () {
-      return (dynCall_ffii = Module["dynCall_ffii"] = Module["asm"]["hl"]).apply(null, arguments);
+      return (dynCall_ffii = Module["dynCall_ffii"] =
+        Module["asm"]["hl"]).apply(null, arguments);
     });
     var dynCall_viifiiii = (Module["dynCall_viifiiii"] = function () {
-      return (dynCall_viifiiii = Module["dynCall_viifiiii"] = Module["asm"]["il"]).apply(null, arguments);
+      return (dynCall_viifiiii = Module["dynCall_viifiiii"] =
+        Module["asm"]["il"]).apply(null, arguments);
     });
     var dynCall_fifii = (Module["dynCall_fifii"] = function () {
-      return (dynCall_fifii = Module["dynCall_fifii"] = Module["asm"]["jl"]).apply(null, arguments);
+      return (dynCall_fifii = Module["dynCall_fifii"] =
+        Module["asm"]["jl"]).apply(null, arguments);
     });
     var dynCall_vifffii = (Module["dynCall_vifffii"] = function () {
-      return (dynCall_vifffii = Module["dynCall_vifffii"] = Module["asm"]["kl"]).apply(null, arguments);
+      return (dynCall_vifffii = Module["dynCall_vifffii"] =
+        Module["asm"]["kl"]).apply(null, arguments);
     });
     var dynCall_viiiffi = (Module["dynCall_viiiffi"] = function () {
-      return (dynCall_viiiffi = Module["dynCall_viiiffi"] = Module["asm"]["ll"]).apply(null, arguments);
+      return (dynCall_viiiffi = Module["dynCall_viiiffi"] =
+        Module["asm"]["ll"]).apply(null, arguments);
     });
     var dynCall_viiifffi = (Module["dynCall_viiifffi"] = function () {
-      return (dynCall_viiifffi = Module["dynCall_viiifffi"] = Module["asm"]["ml"]).apply(null, arguments);
+      return (dynCall_viiifffi = Module["dynCall_viiifffi"] =
+        Module["asm"]["ml"]).apply(null, arguments);
     });
     var dynCall_iiiifiiii = (Module["dynCall_iiiifiiii"] = function () {
-      return (dynCall_iiiifiiii = Module["dynCall_iiiifiiii"] = Module["asm"]["nl"]).apply(null, arguments);
+      return (dynCall_iiiifiiii = Module["dynCall_iiiifiiii"] =
+        Module["asm"]["nl"]).apply(null, arguments);
     });
     var dynCall_viiiiiffi = (Module["dynCall_viiiiiffi"] = function () {
-      return (dynCall_viiiiiffi = Module["dynCall_viiiiiffi"] = Module["asm"]["ol"]).apply(null, arguments);
+      return (dynCall_viiiiiffi = Module["dynCall_viiiiiffi"] =
+        Module["asm"]["ol"]).apply(null, arguments);
     });
     var dynCall_iifffi = (Module["dynCall_iifffi"] = function () {
-      return (dynCall_iifffi = Module["dynCall_iifffi"] = Module["asm"]["pl"]).apply(null, arguments);
+      return (dynCall_iifffi = Module["dynCall_iifffi"] =
+        Module["asm"]["pl"]).apply(null, arguments);
     });
     var dynCall_viijjii = (Module["dynCall_viijjii"] = function () {
-      return (dynCall_viijjii = Module["dynCall_viijjii"] = Module["asm"]["ql"]).apply(null, arguments);
+      return (dynCall_viijjii = Module["dynCall_viijjii"] =
+        Module["asm"]["ql"]).apply(null, arguments);
     });
     var dynCall_viijii = (Module["dynCall_viijii"] = function () {
-      return (dynCall_viijii = Module["dynCall_viijii"] = Module["asm"]["rl"]).apply(null, arguments);
+      return (dynCall_viijii = Module["dynCall_viijii"] =
+        Module["asm"]["rl"]).apply(null, arguments);
     });
     var dynCall_idiiii = (Module["dynCall_idiiii"] = function () {
-      return (dynCall_idiiii = Module["dynCall_idiiii"] = Module["asm"]["sl"]).apply(null, arguments);
+      return (dynCall_idiiii = Module["dynCall_idiiii"] =
+        Module["asm"]["sl"]).apply(null, arguments);
     });
-    var dynCall_iiiiiiiiiiiiii = (Module["dynCall_iiiiiiiiiiiiii"] = function () {
-      return (dynCall_iiiiiiiiiiiiii = Module["dynCall_iiiiiiiiiiiiii"] = Module["asm"]["tl"]).apply(null, arguments);
-    });
+    var dynCall_iiiiiiiiiiiiii = (Module["dynCall_iiiiiiiiiiiiii"] =
+      function () {
+        return (dynCall_iiiiiiiiiiiiii = Module["dynCall_iiiiiiiiiiiiii"] =
+          Module["asm"]["tl"]).apply(null, arguments);
+      });
     var dynCall_jjii = (Module["dynCall_jjii"] = function () {
-      return (dynCall_jjii = Module["dynCall_jjii"] = Module["asm"]["ul"]).apply(null, arguments);
+      return (dynCall_jjii = Module["dynCall_jjii"] =
+        Module["asm"]["ul"]).apply(null, arguments);
     });
     var dynCall_vijiiiiiii = (Module["dynCall_vijiiiiiii"] = function () {
-      return (dynCall_vijiiiiiii = Module["dynCall_vijiiiiiii"] = Module["asm"]["vl"]).apply(null, arguments);
+      return (dynCall_vijiiiiiii = Module["dynCall_vijiiiiiii"] =
+        Module["asm"]["vl"]).apply(null, arguments);
     });
     var dynCall_vijiiiiiiii = (Module["dynCall_vijiiiiiiii"] = function () {
-      return (dynCall_vijiiiiiiii = Module["dynCall_vijiiiiiiii"] = Module["asm"]["wl"]).apply(null, arguments);
+      return (dynCall_vijiiiiiiii = Module["dynCall_vijiiiiiiii"] =
+        Module["asm"]["wl"]).apply(null, arguments);
     });
     var dynCall_jijiii = (Module["dynCall_jijiii"] = function () {
-      return (dynCall_jijiii = Module["dynCall_jijiii"] = Module["asm"]["xl"]).apply(null, arguments);
+      return (dynCall_jijiii = Module["dynCall_jijiii"] =
+        Module["asm"]["xl"]).apply(null, arguments);
     });
     var dynCall_jjiiii = (Module["dynCall_jjiiii"] = function () {
-      return (dynCall_jjiiii = Module["dynCall_jjiiii"] = Module["asm"]["yl"]).apply(null, arguments);
+      return (dynCall_jjiiii = Module["dynCall_jjiiii"] =
+        Module["asm"]["yl"]).apply(null, arguments);
     });
     var dynCall_jjiiiii = (Module["dynCall_jjiiiii"] = function () {
-      return (dynCall_jjiiiii = Module["dynCall_jjiiiii"] = Module["asm"]["zl"]).apply(null, arguments);
+      return (dynCall_jjiiiii = Module["dynCall_jjiiiii"] =
+        Module["asm"]["zl"]).apply(null, arguments);
     });
     var dynCall_viijiiiiii = (Module["dynCall_viijiiiiii"] = function () {
-      return (dynCall_viijiiiiii = Module["dynCall_viijiiiiii"] = Module["asm"]["Al"]).apply(null, arguments);
+      return (dynCall_viijiiiiii = Module["dynCall_viijiiiiii"] =
+        Module["asm"]["Al"]).apply(null, arguments);
     });
     var dynCall_iijiiiiii = (Module["dynCall_iijiiiiii"] = function () {
-      return (dynCall_iijiiiiii = Module["dynCall_iijiiiiii"] = Module["asm"]["Bl"]).apply(null, arguments);
+      return (dynCall_iijiiiiii = Module["dynCall_iijiiiiii"] =
+        Module["asm"]["Bl"]).apply(null, arguments);
     });
     var dynCall_iiiijjii = (Module["dynCall_iiiijjii"] = function () {
-      return (dynCall_iiiijjii = Module["dynCall_iiiijjii"] = Module["asm"]["Cl"]).apply(null, arguments);
+      return (dynCall_iiiijjii = Module["dynCall_iiiijjii"] =
+        Module["asm"]["Cl"]).apply(null, arguments);
     });
     var dynCall_jijjji = (Module["dynCall_jijjji"] = function () {
-      return (dynCall_jijjji = Module["dynCall_jijjji"] = Module["asm"]["Dl"]).apply(null, arguments);
+      return (dynCall_jijjji = Module["dynCall_jijjji"] =
+        Module["asm"]["Dl"]).apply(null, arguments);
     });
     var dynCall_jijjjii = (Module["dynCall_jijjjii"] = function () {
-      return (dynCall_jijjjii = Module["dynCall_jijjjii"] = Module["asm"]["El"]).apply(null, arguments);
+      return (dynCall_jijjjii = Module["dynCall_jijjjii"] =
+        Module["asm"]["El"]).apply(null, arguments);
     });
     var dynCall_jjiii = (Module["dynCall_jjiii"] = function () {
-      return (dynCall_jjiii = Module["dynCall_jjiii"] = Module["asm"]["Fl"]).apply(null, arguments);
+      return (dynCall_jjiii = Module["dynCall_jjiii"] =
+        Module["asm"]["Fl"]).apply(null, arguments);
     });
     var dynCall_ijijiiiii = (Module["dynCall_ijijiiiii"] = function () {
-      return (dynCall_ijijiiiii = Module["dynCall_ijijiiiii"] = Module["asm"]["Gl"]).apply(null, arguments);
+      return (dynCall_ijijiiiii = Module["dynCall_ijijiiiii"] =
+        Module["asm"]["Gl"]).apply(null, arguments);
     });
     var dynCall_ijjjiii = (Module["dynCall_ijjjiii"] = function () {
-      return (dynCall_ijjjiii = Module["dynCall_ijjjiii"] = Module["asm"]["Hl"]).apply(null, arguments);
+      return (dynCall_ijjjiii = Module["dynCall_ijjjiii"] =
+        Module["asm"]["Hl"]).apply(null, arguments);
     });
     var dynCall_ijiii = (Module["dynCall_ijiii"] = function () {
-      return (dynCall_ijiii = Module["dynCall_ijiii"] = Module["asm"]["Il"]).apply(null, arguments);
+      return (dynCall_ijiii = Module["dynCall_ijiii"] =
+        Module["asm"]["Il"]).apply(null, arguments);
     });
     var dynCall_vijjjiijii = (Module["dynCall_vijjjiijii"] = function () {
-      return (dynCall_vijjjiijii = Module["dynCall_vijjjiijii"] = Module["asm"]["Jl"]).apply(null, arguments);
+      return (dynCall_vijjjiijii = Module["dynCall_vijjjiijii"] =
+        Module["asm"]["Jl"]).apply(null, arguments);
     });
     var dynCall_ijjjiijii = (Module["dynCall_ijjjiijii"] = function () {
-      return (dynCall_ijjjiijii = Module["dynCall_ijjjiijii"] = Module["asm"]["Kl"]).apply(null, arguments);
+      return (dynCall_ijjjiijii = Module["dynCall_ijjjiijii"] =
+        Module["asm"]["Kl"]).apply(null, arguments);
     });
     var dynCall_vijiiiiii = (Module["dynCall_vijiiiiii"] = function () {
-      return (dynCall_vijiiiiii = Module["dynCall_vijiiiiii"] = Module["asm"]["Ll"]).apply(null, arguments);
+      return (dynCall_vijiiiiii = Module["dynCall_vijiiiiii"] =
+        Module["asm"]["Ll"]).apply(null, arguments);
     });
     var dynCall_vijiiii = (Module["dynCall_vijiiii"] = function () {
-      return (dynCall_vijiiii = Module["dynCall_vijiiii"] = Module["asm"]["Ml"]).apply(null, arguments);
+      return (dynCall_vijiiii = Module["dynCall_vijiiii"] =
+        Module["asm"]["Ml"]).apply(null, arguments);
     });
     var dynCall_jdi = (Module["dynCall_jdi"] = function () {
-      return (dynCall_jdi = Module["dynCall_jdi"] = Module["asm"]["Nl"]).apply(null, arguments);
+      return (dynCall_jdi = Module["dynCall_jdi"] = Module["asm"]["Nl"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_jfi = (Module["dynCall_jfi"] = function () {
-      return (dynCall_jfi = Module["dynCall_jfi"] = Module["asm"]["Ol"]).apply(null, arguments);
+      return (dynCall_jfi = Module["dynCall_jfi"] = Module["asm"]["Ol"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_fji = (Module["dynCall_fji"] = function () {
-      return (dynCall_fji = Module["dynCall_fji"] = Module["asm"]["Pl"]).apply(null, arguments);
+      return (dynCall_fji = Module["dynCall_fji"] = Module["asm"]["Pl"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_dji = (Module["dynCall_dji"] = function () {
-      return (dynCall_dji = Module["dynCall_dji"] = Module["asm"]["Ql"]).apply(null, arguments);
+      return (dynCall_dji = Module["dynCall_dji"] = Module["asm"]["Ql"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_dfi = (Module["dynCall_dfi"] = function () {
-      return (dynCall_dfi = Module["dynCall_dfi"] = Module["asm"]["Rl"]).apply(null, arguments);
+      return (dynCall_dfi = Module["dynCall_dfi"] = Module["asm"]["Rl"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_jidii = (Module["dynCall_jidii"] = function () {
-      return (dynCall_jidii = Module["dynCall_jidii"] = Module["asm"]["Sl"]).apply(null, arguments);
+      return (dynCall_jidii = Module["dynCall_jidii"] =
+        Module["asm"]["Sl"]).apply(null, arguments);
     });
     var dynCall_jidi = (Module["dynCall_jidi"] = function () {
-      return (dynCall_jidi = Module["dynCall_jidi"] = Module["asm"]["Tl"]).apply(null, arguments);
+      return (dynCall_jidi = Module["dynCall_jidi"] =
+        Module["asm"]["Tl"]).apply(null, arguments);
     });
     var dynCall_ijiijii = (Module["dynCall_ijiijii"] = function () {
-      return (dynCall_ijiijii = Module["dynCall_ijiijii"] = Module["asm"]["Ul"]).apply(null, arguments);
+      return (dynCall_ijiijii = Module["dynCall_ijiijii"] =
+        Module["asm"]["Ul"]).apply(null, arguments);
     });
     var dynCall_vjjiiiii = (Module["dynCall_vjjiiiii"] = function () {
-      return (dynCall_vjjiiiii = Module["dynCall_vjjiiiii"] = Module["asm"]["Vl"]).apply(null, arguments);
+      return (dynCall_vjjiiiii = Module["dynCall_vjjiiiii"] =
+        Module["asm"]["Vl"]).apply(null, arguments);
     });
     var dynCall_vjjii = (Module["dynCall_vjjii"] = function () {
-      return (dynCall_vjjii = Module["dynCall_vjjii"] = Module["asm"]["Wl"]).apply(null, arguments);
+      return (dynCall_vjjii = Module["dynCall_vjjii"] =
+        Module["asm"]["Wl"]).apply(null, arguments);
     });
     var dynCall_ijiiji = (Module["dynCall_ijiiji"] = function () {
-      return (dynCall_ijiiji = Module["dynCall_ijiiji"] = Module["asm"]["Xl"]).apply(null, arguments);
+      return (dynCall_ijiiji = Module["dynCall_ijiiji"] =
+        Module["asm"]["Xl"]).apply(null, arguments);
     });
     var dynCall_ijiiiii = (Module["dynCall_ijiiiii"] = function () {
-      return (dynCall_ijiiiii = Module["dynCall_ijiiiii"] = Module["asm"]["Yl"]).apply(null, arguments);
+      return (dynCall_ijiiiii = Module["dynCall_ijiiiii"] =
+        Module["asm"]["Yl"]).apply(null, arguments);
     });
     var dynCall_ijiiiiji = (Module["dynCall_ijiiiiji"] = function () {
-      return (dynCall_ijiiiiji = Module["dynCall_ijiiiiji"] = Module["asm"]["Zl"]).apply(null, arguments);
+      return (dynCall_ijiiiiji = Module["dynCall_ijiiiiji"] =
+        Module["asm"]["Zl"]).apply(null, arguments);
     });
-    var dynCall_viiiiiiiiiiiii = (Module["dynCall_viiiiiiiiiiiii"] = function () {
-      return (dynCall_viiiiiiiiiiiii = Module["dynCall_viiiiiiiiiiiii"] = Module["asm"]["_l"]).apply(null, arguments);
-    });
+    var dynCall_viiiiiiiiiiiii = (Module["dynCall_viiiiiiiiiiiii"] =
+      function () {
+        return (dynCall_viiiiiiiiiiiii = Module["dynCall_viiiiiiiiiiiii"] =
+          Module["asm"]["_l"]).apply(null, arguments);
+      });
     var dynCall_ddii = (Module["dynCall_ddii"] = function () {
-      return (dynCall_ddii = Module["dynCall_ddii"] = Module["asm"]["$l"]).apply(null, arguments);
+      return (dynCall_ddii = Module["dynCall_ddii"] =
+        Module["asm"]["$l"]).apply(null, arguments);
     });
     var dynCall_idiii = (Module["dynCall_idiii"] = function () {
-      return (dynCall_idiii = Module["dynCall_idiii"] = Module["asm"]["am"]).apply(null, arguments);
+      return (dynCall_idiii = Module["dynCall_idiii"] =
+        Module["asm"]["am"]).apply(null, arguments);
     });
     var dynCall_idiiiii = (Module["dynCall_idiiiii"] = function () {
-      return (dynCall_idiiiii = Module["dynCall_idiiiii"] = Module["asm"]["bm"]).apply(null, arguments);
+      return (dynCall_idiiiii = Module["dynCall_idiiiii"] =
+        Module["asm"]["bm"]).apply(null, arguments);
     });
     var dynCall_iidiii = (Module["dynCall_iidiii"] = function () {
-      return (dynCall_iidiii = Module["dynCall_iidiii"] = Module["asm"]["cm"]).apply(null, arguments);
+      return (dynCall_iidiii = Module["dynCall_iidiii"] =
+        Module["asm"]["cm"]).apply(null, arguments);
     });
     var dynCall_ifiii = (Module["dynCall_ifiii"] = function () {
-      return (dynCall_ifiii = Module["dynCall_ifiii"] = Module["asm"]["dm"]).apply(null, arguments);
+      return (dynCall_ifiii = Module["dynCall_ifiii"] =
+        Module["asm"]["dm"]).apply(null, arguments);
     });
     var dynCall_ifiiiii = (Module["dynCall_ifiiiii"] = function () {
-      return (dynCall_ifiiiii = Module["dynCall_ifiiiii"] = Module["asm"]["em"]).apply(null, arguments);
+      return (dynCall_ifiiiii = Module["dynCall_ifiiiii"] =
+        Module["asm"]["em"]).apply(null, arguments);
     });
     var dynCall_jjjii = (Module["dynCall_jjjii"] = function () {
-      return (dynCall_jjjii = Module["dynCall_jjjii"] = Module["asm"]["fm"]).apply(null, arguments);
+      return (dynCall_jjjii = Module["dynCall_jjjii"] =
+        Module["asm"]["fm"]).apply(null, arguments);
     });
     var dynCall_vdiii = (Module["dynCall_vdiii"] = function () {
-      return (dynCall_vdiii = Module["dynCall_vdiii"] = Module["asm"]["gm"]).apply(null, arguments);
+      return (dynCall_vdiii = Module["dynCall_vdiii"] =
+        Module["asm"]["gm"]).apply(null, arguments);
     });
     var dynCall_jdii = (Module["dynCall_jdii"] = function () {
-      return (dynCall_jdii = Module["dynCall_jdii"] = Module["asm"]["hm"]).apply(null, arguments);
+      return (dynCall_jdii = Module["dynCall_jdii"] =
+        Module["asm"]["hm"]).apply(null, arguments);
     });
     var dynCall_vijijji = (Module["dynCall_vijijji"] = function () {
-      return (dynCall_vijijji = Module["dynCall_vijijji"] = Module["asm"]["im"]).apply(null, arguments);
+      return (dynCall_vijijji = Module["dynCall_vijijji"] =
+        Module["asm"]["im"]).apply(null, arguments);
     });
     var dynCall_iijjji = (Module["dynCall_iijjji"] = function () {
-      return (dynCall_iijjji = Module["dynCall_iijjji"] = Module["asm"]["jm"]).apply(null, arguments);
+      return (dynCall_iijjji = Module["dynCall_iijjji"] =
+        Module["asm"]["jm"]).apply(null, arguments);
     });
     var dynCall_viijjji = (Module["dynCall_viijjji"] = function () {
-      return (dynCall_viijjji = Module["dynCall_viijjji"] = Module["asm"]["km"]).apply(null, arguments);
+      return (dynCall_viijjji = Module["dynCall_viijjji"] =
+        Module["asm"]["km"]).apply(null, arguments);
     });
     var dynCall_vdii = (Module["dynCall_vdii"] = function () {
-      return (dynCall_vdii = Module["dynCall_vdii"] = Module["asm"]["lm"]).apply(null, arguments);
+      return (dynCall_vdii = Module["dynCall_vdii"] =
+        Module["asm"]["lm"]).apply(null, arguments);
     });
     var dynCall_diddi = (Module["dynCall_diddi"] = function () {
-      return (dynCall_diddi = Module["dynCall_diddi"] = Module["asm"]["mm"]).apply(null, arguments);
+      return (dynCall_diddi = Module["dynCall_diddi"] =
+        Module["asm"]["mm"]).apply(null, arguments);
     });
     var dynCall_viiiijii = (Module["dynCall_viiiijii"] = function () {
-      return (dynCall_viiiijii = Module["dynCall_viiiijii"] = Module["asm"]["nm"]).apply(null, arguments);
+      return (dynCall_viiiijii = Module["dynCall_viiiijii"] =
+        Module["asm"]["nm"]).apply(null, arguments);
     });
     var dynCall_viiijji = (Module["dynCall_viiijji"] = function () {
-      return (dynCall_viiijji = Module["dynCall_viiijji"] = Module["asm"]["om"]).apply(null, arguments);
+      return (dynCall_viiijji = Module["dynCall_viiijji"] =
+        Module["asm"]["om"]).apply(null, arguments);
     });
     var dynCall_iijjii = (Module["dynCall_iijjii"] = function () {
-      return (dynCall_iijjii = Module["dynCall_iijjii"] = Module["asm"]["pm"]).apply(null, arguments);
+      return (dynCall_iijjii = Module["dynCall_iijjii"] =
+        Module["asm"]["pm"]).apply(null, arguments);
     });
     var dynCall_viijijii = (Module["dynCall_viijijii"] = function () {
-      return (dynCall_viijijii = Module["dynCall_viijijii"] = Module["asm"]["qm"]).apply(null, arguments);
+      return (dynCall_viijijii = Module["dynCall_viijijii"] =
+        Module["asm"]["qm"]).apply(null, arguments);
     });
     var dynCall_viijijiii = (Module["dynCall_viijijiii"] = function () {
-      return (dynCall_viijijiii = Module["dynCall_viijijiii"] = Module["asm"]["rm"]).apply(null, arguments);
+      return (dynCall_viijijiii = Module["dynCall_viijijiii"] =
+        Module["asm"]["rm"]).apply(null, arguments);
     });
     var dynCall_vijiji = (Module["dynCall_vijiji"] = function () {
-      return (dynCall_vijiji = Module["dynCall_vijiji"] = Module["asm"]["sm"]).apply(null, arguments);
+      return (dynCall_vijiji = Module["dynCall_vijiji"] =
+        Module["asm"]["sm"]).apply(null, arguments);
     });
     var dynCall_viijiijiii = (Module["dynCall_viijiijiii"] = function () {
-      return (dynCall_viijiijiii = Module["dynCall_viijiijiii"] = Module["asm"]["tm"]).apply(null, arguments);
+      return (dynCall_viijiijiii = Module["dynCall_viijiijiii"] =
+        Module["asm"]["tm"]).apply(null, arguments);
     });
     var dynCall_viiiijiiii = (Module["dynCall_viiiijiiii"] = function () {
-      return (dynCall_viiiijiiii = Module["dynCall_viiiijiiii"] = Module["asm"]["um"]).apply(null, arguments);
+      return (dynCall_viiiijiiii = Module["dynCall_viiiijiiii"] =
+        Module["asm"]["um"]).apply(null, arguments);
     });
     var dynCall_jiiiiii = (Module["dynCall_jiiiiii"] = function () {
-      return (dynCall_jiiiiii = Module["dynCall_jiiiiii"] = Module["asm"]["vm"]).apply(null, arguments);
+      return (dynCall_jiiiiii = Module["dynCall_jiiiiii"] =
+        Module["asm"]["vm"]).apply(null, arguments);
     });
     var dynCall_di = (Module["dynCall_di"] = function () {
-      return (dynCall_di = Module["dynCall_di"] = Module["asm"]["wm"]).apply(null, arguments);
+      return (dynCall_di = Module["dynCall_di"] = Module["asm"]["wm"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_vijjji = (Module["dynCall_vijjji"] = function () {
-      return (dynCall_vijjji = Module["dynCall_vijjji"] = Module["asm"]["xm"]).apply(null, arguments);
+      return (dynCall_vijjji = Module["dynCall_vijjji"] =
+        Module["asm"]["xm"]).apply(null, arguments);
     });
     var dynCall_jiiiiiiiiii = (Module["dynCall_jiiiiiiiiii"] = function () {
-      return (dynCall_jiiiiiiiiii = Module["dynCall_jiiiiiiiiii"] = Module["asm"]["ym"]).apply(null, arguments);
+      return (dynCall_jiiiiiiiiii = Module["dynCall_jiiiiiiiiii"] =
+        Module["asm"]["ym"]).apply(null, arguments);
     });
     var dynCall_iiiiidii = (Module["dynCall_iiiiidii"] = function () {
-      return (dynCall_iiiiidii = Module["dynCall_iiiiidii"] = Module["asm"]["zm"]).apply(null, arguments);
+      return (dynCall_iiiiidii = Module["dynCall_iiiiidii"] =
+        Module["asm"]["zm"]).apply(null, arguments);
     });
     var dynCall_iiiiijii = (Module["dynCall_iiiiijii"] = function () {
-      return (dynCall_iiiiijii = Module["dynCall_iiiiijii"] = Module["asm"]["Am"]).apply(null, arguments);
+      return (dynCall_iiiiijii = Module["dynCall_iiiiijii"] =
+        Module["asm"]["Am"]).apply(null, arguments);
     });
     var dynCall_iddi = (Module["dynCall_iddi"] = function () {
-      return (dynCall_iddi = Module["dynCall_iddi"] = Module["asm"]["Bm"]).apply(null, arguments);
+      return (dynCall_iddi = Module["dynCall_iddi"] =
+        Module["asm"]["Bm"]).apply(null, arguments);
     });
     var dynCall_iiidiii = (Module["dynCall_iiidiii"] = function () {
-      return (dynCall_iiidiii = Module["dynCall_iiidiii"] = Module["asm"]["Cm"]).apply(null, arguments);
+      return (dynCall_iiidiii = Module["dynCall_iiidiii"] =
+        Module["asm"]["Cm"]).apply(null, arguments);
     });
     var dynCall_iidii = (Module["dynCall_iidii"] = function () {
-      return (dynCall_iidii = Module["dynCall_iidii"] = Module["asm"]["Dm"]).apply(null, arguments);
+      return (dynCall_iidii = Module["dynCall_iidii"] =
+        Module["asm"]["Dm"]).apply(null, arguments);
     });
     var dynCall_viifffiii = (Module["dynCall_viifffiii"] = function () {
-      return (dynCall_viifffiii = Module["dynCall_viifffiii"] = Module["asm"]["Em"]).apply(null, arguments);
+      return (dynCall_viifffiii = Module["dynCall_viifffiii"] =
+        Module["asm"]["Em"]).apply(null, arguments);
     });
     var dynCall_iiiiffiiiji = (Module["dynCall_iiiiffiiiji"] = function () {
-      return (dynCall_iiiiffiiiji = Module["dynCall_iiiiffiiiji"] = Module["asm"]["Fm"]).apply(null, arguments);
+      return (dynCall_iiiiffiiiji = Module["dynCall_iiiiffiiiji"] =
+        Module["asm"]["Fm"]).apply(null, arguments);
     });
     var dynCall_iiiiffiiiii = (Module["dynCall_iiiiffiiiii"] = function () {
-      return (dynCall_iiiiffiiiii = Module["dynCall_iiiiffiiiii"] = Module["asm"]["Gm"]).apply(null, arguments);
+      return (dynCall_iiiiffiiiii = Module["dynCall_iiiiffiiiii"] =
+        Module["asm"]["Gm"]).apply(null, arguments);
     });
     var dynCall_diiiidi = (Module["dynCall_diiiidi"] = function () {
-      return (dynCall_diiiidi = Module["dynCall_diiiidi"] = Module["asm"]["Hm"]).apply(null, arguments);
+      return (dynCall_diiiidi = Module["dynCall_diiiidi"] =
+        Module["asm"]["Hm"]).apply(null, arguments);
     });
     var dynCall_jiiiiji = (Module["dynCall_jiiiiji"] = function () {
-      return (dynCall_jiiiiji = Module["dynCall_jiiiiji"] = Module["asm"]["Im"]).apply(null, arguments);
+      return (dynCall_jiiiiji = Module["dynCall_jiiiiji"] =
+        Module["asm"]["Im"]).apply(null, arguments);
     });
     var dynCall_fiiiifi = (Module["dynCall_fiiiifi"] = function () {
-      return (dynCall_fiiiifi = Module["dynCall_fiiiifi"] = Module["asm"]["Jm"]).apply(null, arguments);
+      return (dynCall_fiiiifi = Module["dynCall_fiiiifi"] =
+        Module["asm"]["Jm"]).apply(null, arguments);
     });
     var dynCall_iiidi = (Module["dynCall_iiidi"] = function () {
-      return (dynCall_iiidi = Module["dynCall_iiidi"] = Module["asm"]["Km"]).apply(null, arguments);
+      return (dynCall_iiidi = Module["dynCall_iiidi"] =
+        Module["asm"]["Km"]).apply(null, arguments);
     });
     var dynCall_vdi = (Module["dynCall_vdi"] = function () {
-      return (dynCall_vdi = Module["dynCall_vdi"] = Module["asm"]["Lm"]).apply(null, arguments);
+      return (dynCall_vdi = Module["dynCall_vdi"] = Module["asm"]["Lm"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_fff = (Module["dynCall_fff"] = function () {
-      return (dynCall_fff = Module["dynCall_fff"] = Module["asm"]["Mm"]).apply(null, arguments);
+      return (dynCall_fff = Module["dynCall_fff"] = Module["asm"]["Mm"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_vij = (Module["dynCall_vij"] = function () {
-      return (dynCall_vij = Module["dynCall_vij"] = Module["asm"]["Nm"]).apply(null, arguments);
+      return (dynCall_vij = Module["dynCall_vij"] = Module["asm"]["Nm"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_viif = (Module["dynCall_viif"] = function () {
-      return (dynCall_viif = Module["dynCall_viif"] = Module["asm"]["Om"]).apply(null, arguments);
+      return (dynCall_viif = Module["dynCall_viif"] =
+        Module["asm"]["Om"]).apply(null, arguments);
     });
     var dynCall_vid = (Module["dynCall_vid"] = function () {
-      return (dynCall_vid = Module["dynCall_vid"] = Module["asm"]["Pm"]).apply(null, arguments);
+      return (dynCall_vid = Module["dynCall_vid"] = Module["asm"]["Pm"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_vif = (Module["dynCall_vif"] = function () {
-      return (dynCall_vif = Module["dynCall_vif"] = Module["asm"]["Qm"]).apply(null, arguments);
+      return (dynCall_vif = Module["dynCall_vif"] = Module["asm"]["Qm"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_vjiiiiiii = (Module["dynCall_vjiiiiiii"] = function () {
-      return (dynCall_vjiiiiiii = Module["dynCall_vjiiiiiii"] = Module["asm"]["Rm"]).apply(null, arguments);
+      return (dynCall_vjiiiiiii = Module["dynCall_vjiiiiiii"] =
+        Module["asm"]["Rm"]).apply(null, arguments);
     });
     var dynCall_viiiiif = (Module["dynCall_viiiiif"] = function () {
-      return (dynCall_viiiiif = Module["dynCall_viiiiif"] = Module["asm"]["Sm"]).apply(null, arguments);
+      return (dynCall_viiiiif = Module["dynCall_viiiiif"] =
+        Module["asm"]["Sm"]).apply(null, arguments);
     });
     var dynCall_viiiif = (Module["dynCall_viiiif"] = function () {
-      return (dynCall_viiiif = Module["dynCall_viiiif"] = Module["asm"]["Tm"]).apply(null, arguments);
+      return (dynCall_viiiif = Module["dynCall_viiiif"] =
+        Module["asm"]["Tm"]).apply(null, arguments);
     });
     var dynCall_viiiiiif = (Module["dynCall_viiiiiif"] = function () {
-      return (dynCall_viiiiiif = Module["dynCall_viiiiiif"] = Module["asm"]["Um"]).apply(null, arguments);
+      return (dynCall_viiiiiif = Module["dynCall_viiiiiif"] =
+        Module["asm"]["Um"]).apply(null, arguments);
     });
     var dynCall_iiijii = (Module["dynCall_iiijii"] = function () {
-      return (dynCall_iiijii = Module["dynCall_iiijii"] = Module["asm"]["Vm"]).apply(null, arguments);
+      return (dynCall_iiijii = Module["dynCall_iiijii"] =
+        Module["asm"]["Vm"]).apply(null, arguments);
     });
     var dynCall_iiiijiii = (Module["dynCall_iiiijiii"] = function () {
-      return (dynCall_iiiijiii = Module["dynCall_iiiijiii"] = Module["asm"]["Wm"]).apply(null, arguments);
+      return (dynCall_iiiijiii = Module["dynCall_iiiijiii"] =
+        Module["asm"]["Wm"]).apply(null, arguments);
     });
     var dynCall_iiiij = (Module["dynCall_iiiij"] = function () {
-      return (dynCall_iiiij = Module["dynCall_iiiij"] = Module["asm"]["Xm"]).apply(null, arguments);
+      return (dynCall_iiiij = Module["dynCall_iiiij"] =
+        Module["asm"]["Xm"]).apply(null, arguments);
     });
     var dynCall_iiif = (Module["dynCall_iiif"] = function () {
-      return (dynCall_iiif = Module["dynCall_iiif"] = Module["asm"]["Ym"]).apply(null, arguments);
+      return (dynCall_iiif = Module["dynCall_iiif"] =
+        Module["asm"]["Ym"]).apply(null, arguments);
     });
     var dynCall_fif = (Module["dynCall_fif"] = function () {
-      return (dynCall_fif = Module["dynCall_fif"] = Module["asm"]["Zm"]).apply(null, arguments);
+      return (dynCall_fif = Module["dynCall_fif"] = Module["asm"]["Zm"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_viff = (Module["dynCall_viff"] = function () {
-      return (dynCall_viff = Module["dynCall_viff"] = Module["asm"]["_m"]).apply(null, arguments);
+      return (dynCall_viff = Module["dynCall_viff"] =
+        Module["asm"]["_m"]).apply(null, arguments);
     });
     var dynCall_iiiiiifff = (Module["dynCall_iiiiiifff"] = function () {
-      return (dynCall_iiiiiifff = Module["dynCall_iiiiiifff"] = Module["asm"]["$m"]).apply(null, arguments);
+      return (dynCall_iiiiiifff = Module["dynCall_iiiiiifff"] =
+        Module["asm"]["$m"]).apply(null, arguments);
     });
     var dynCall_iiiiiifiif = (Module["dynCall_iiiiiifiif"] = function () {
-      return (dynCall_iiiiiifiif = Module["dynCall_iiiiiifiif"] = Module["asm"]["an"]).apply(null, arguments);
+      return (dynCall_iiiiiifiif = Module["dynCall_iiiiiifiif"] =
+        Module["asm"]["an"]).apply(null, arguments);
     });
     var dynCall_iiiiiifiii = (Module["dynCall_iiiiiifiii"] = function () {
-      return (dynCall_iiiiiifiii = Module["dynCall_iiiiiifiii"] = Module["asm"]["bn"]).apply(null, arguments);
+      return (dynCall_iiiiiifiii = Module["dynCall_iiiiiifiii"] =
+        Module["asm"]["bn"]).apply(null, arguments);
     });
     var dynCall_iiiiiiifiif = (Module["dynCall_iiiiiiifiif"] = function () {
-      return (dynCall_iiiiiiifiif = Module["dynCall_iiiiiiifiif"] = Module["asm"]["cn"]).apply(null, arguments);
+      return (dynCall_iiiiiiifiif = Module["dynCall_iiiiiiifiif"] =
+        Module["asm"]["cn"]).apply(null, arguments);
     });
     var dynCall_fiff = (Module["dynCall_fiff"] = function () {
-      return (dynCall_fiff = Module["dynCall_fiff"] = Module["asm"]["dn"]).apply(null, arguments);
+      return (dynCall_fiff = Module["dynCall_fiff"] =
+        Module["asm"]["dn"]).apply(null, arguments);
     });
     var dynCall_fiiiiiifiifif = (Module["dynCall_fiiiiiifiifif"] = function () {
-      return (dynCall_fiiiiiifiifif = Module["dynCall_fiiiiiifiifif"] = Module["asm"]["en"]).apply(null, arguments);
+      return (dynCall_fiiiiiifiifif = Module["dynCall_fiiiiiifiifif"] =
+        Module["asm"]["en"]).apply(null, arguments);
     });
     var dynCall_fiiiiiifiiiif = (Module["dynCall_fiiiiiifiiiif"] = function () {
-      return (dynCall_fiiiiiifiiiif = Module["dynCall_fiiiiiifiiiif"] = Module["asm"]["fn"]).apply(null, arguments);
+      return (dynCall_fiiiiiifiiiif = Module["dynCall_fiiiiiifiiiif"] =
+        Module["asm"]["fn"]).apply(null, arguments);
     });
     var dynCall_vifiiii = (Module["dynCall_vifiiii"] = function () {
-      return (dynCall_vifiiii = Module["dynCall_vifiiii"] = Module["asm"]["gn"]).apply(null, arguments);
+      return (dynCall_vifiiii = Module["dynCall_vifiiii"] =
+        Module["asm"]["gn"]).apply(null, arguments);
     });
     var dynCall_iifiiiijii = (Module["dynCall_iifiiiijii"] = function () {
-      return (dynCall_iifiiiijii = Module["dynCall_iifiiiijii"] = Module["asm"]["hn"]).apply(null, arguments);
+      return (dynCall_iifiiiijii = Module["dynCall_iifiiiijii"] =
+        Module["asm"]["hn"]).apply(null, arguments);
     });
     var dynCall_vifif = (Module["dynCall_vifif"] = function () {
-      return (dynCall_vifif = Module["dynCall_vifif"] = Module["asm"]["jn"]).apply(null, arguments);
+      return (dynCall_vifif = Module["dynCall_vifif"] =
+        Module["asm"]["jn"]).apply(null, arguments);
     });
     var dynCall_vifijii = (Module["dynCall_vifijii"] = function () {
-      return (dynCall_vifijii = Module["dynCall_vifijii"] = Module["asm"]["kn"]).apply(null, arguments);
+      return (dynCall_vifijii = Module["dynCall_vifijii"] =
+        Module["asm"]["kn"]).apply(null, arguments);
     });
     var dynCall_iiiifffiii = (Module["dynCall_iiiifffiii"] = function () {
-      return (dynCall_iiiifffiii = Module["dynCall_iiiifffiii"] = Module["asm"]["ln"]).apply(null, arguments);
+      return (dynCall_iiiifffiii = Module["dynCall_iiiifffiii"] =
+        Module["asm"]["ln"]).apply(null, arguments);
     });
     var dynCall_iiiifffffi = (Module["dynCall_iiiifffffi"] = function () {
-      return (dynCall_iiiifffffi = Module["dynCall_iiiifffffi"] = Module["asm"]["mn"]).apply(null, arguments);
+      return (dynCall_iiiifffffi = Module["dynCall_iiiifffffi"] =
+        Module["asm"]["mn"]).apply(null, arguments);
     });
     var dynCall_viffiiiif = (Module["dynCall_viffiiiif"] = function () {
-      return (dynCall_viffiiiif = Module["dynCall_viffiiiif"] = Module["asm"]["nn"]).apply(null, arguments);
+      return (dynCall_viffiiiif = Module["dynCall_viffiiiif"] =
+        Module["asm"]["nn"]).apply(null, arguments);
     });
-    var dynCall_viffiifffffiii = (Module["dynCall_viffiifffffiii"] = function () {
-      return (dynCall_viffiifffffiii = Module["dynCall_viffiifffffiii"] = Module["asm"]["on"]).apply(null, arguments);
-    });
-    var dynCall_viffffiifffiiiiif = (Module["dynCall_viffffiifffiiiiif"] = function () {
-      return (dynCall_viffffiifffiiiiif = Module["dynCall_viffffiifffiiiiif"] = Module["asm"]["pn"]).apply(
-        null,
-        arguments
-      );
-    });
+    var dynCall_viffiifffffiii = (Module["dynCall_viffiifffffiii"] =
+      function () {
+        return (dynCall_viffiifffffiii = Module["dynCall_viffiifffffiii"] =
+          Module["asm"]["on"]).apply(null, arguments);
+      });
+    var dynCall_viffffiifffiiiiif = (Module["dynCall_viffffiifffiiiiif"] =
+      function () {
+        return (dynCall_viffffiifffiiiiif = Module[
+          "dynCall_viffffiifffiiiiif"
+        ] =
+          Module["asm"]["pn"]).apply(null, arguments);
+      });
     var dynCall_iiiifffffii = (Module["dynCall_iiiifffffii"] = function () {
-      return (dynCall_iiiifffffii = Module["dynCall_iiiifffffii"] = Module["asm"]["qn"]).apply(null, arguments);
+      return (dynCall_iiiifffffii = Module["dynCall_iiiifffffii"] =
+        Module["asm"]["qn"]).apply(null, arguments);
     });
-    var dynCall_viiiiiiiiiiifii = (Module["dynCall_viiiiiiiiiiifii"] = function () {
-      return (dynCall_viiiiiiiiiiifii = Module["dynCall_viiiiiiiiiiifii"] = Module["asm"]["rn"]).apply(null, arguments);
-    });
+    var dynCall_viiiiiiiiiiifii = (Module["dynCall_viiiiiiiiiiifii"] =
+      function () {
+        return (dynCall_viiiiiiiiiiifii = Module["dynCall_viiiiiiiiiiifii"] =
+          Module["asm"]["rn"]).apply(null, arguments);
+      });
     var dynCall_iiiifiiiii = (Module["dynCall_iiiifiiiii"] = function () {
-      return (dynCall_iiiifiiiii = Module["dynCall_iiiifiiiii"] = Module["asm"]["sn"]).apply(null, arguments);
+      return (dynCall_iiiifiiiii = Module["dynCall_iiiifiiiii"] =
+        Module["asm"]["sn"]).apply(null, arguments);
     });
     var dynCall_iiiiifiiiiif = (Module["dynCall_iiiiifiiiiif"] = function () {
-      return (dynCall_iiiiifiiiiif = Module["dynCall_iiiiifiiiiif"] = Module["asm"]["tn"]).apply(null, arguments);
+      return (dynCall_iiiiifiiiiif = Module["dynCall_iiiiifiiiiif"] =
+        Module["asm"]["tn"]).apply(null, arguments);
     });
     var dynCall_viiff = (Module["dynCall_viiff"] = function () {
-      return (dynCall_viiff = Module["dynCall_viiff"] = Module["asm"]["un"]).apply(null, arguments);
+      return (dynCall_viiff = Module["dynCall_viiff"] =
+        Module["asm"]["un"]).apply(null, arguments);
     });
     var dynCall_viifffi = (Module["dynCall_viifffi"] = function () {
-      return (dynCall_viifffi = Module["dynCall_viifffi"] = Module["asm"]["vn"]).apply(null, arguments);
+      return (dynCall_viifffi = Module["dynCall_viifffi"] =
+        Module["asm"]["vn"]).apply(null, arguments);
     });
     var dynCall_viiifiiiii = (Module["dynCall_viiifiiiii"] = function () {
-      return (dynCall_viiifiiiii = Module["dynCall_viiifiiiii"] = Module["asm"]["wn"]).apply(null, arguments);
+      return (dynCall_viiifiiiii = Module["dynCall_viiifiiiii"] =
+        Module["asm"]["wn"]).apply(null, arguments);
     });
     var dynCall_viiiifiiiiif = (Module["dynCall_viiiifiiiiif"] = function () {
-      return (dynCall_viiiifiiiiif = Module["dynCall_viiiifiiiiif"] = Module["asm"]["xn"]).apply(null, arguments);
+      return (dynCall_viiiifiiiiif = Module["dynCall_viiiifiiiiif"] =
+        Module["asm"]["xn"]).apply(null, arguments);
     });
     var dynCall_iifff = (Module["dynCall_iifff"] = function () {
-      return (dynCall_iifff = Module["dynCall_iifff"] = Module["asm"]["yn"]).apply(null, arguments);
+      return (dynCall_iifff = Module["dynCall_iifff"] =
+        Module["asm"]["yn"]).apply(null, arguments);
     });
     var dynCall_iif = (Module["dynCall_iif"] = function () {
-      return (dynCall_iif = Module["dynCall_iif"] = Module["asm"]["zn"]).apply(null, arguments);
+      return (dynCall_iif = Module["dynCall_iif"] = Module["asm"]["zn"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_viij = (Module["dynCall_viij"] = function () {
-      return (dynCall_viij = Module["dynCall_viij"] = Module["asm"]["An"]).apply(null, arguments);
+      return (dynCall_viij = Module["dynCall_viij"] =
+        Module["asm"]["An"]).apply(null, arguments);
     });
     var dynCall_viijijj = (Module["dynCall_viijijj"] = function () {
-      return (dynCall_viijijj = Module["dynCall_viijijj"] = Module["asm"]["Bn"]).apply(null, arguments);
+      return (dynCall_viijijj = Module["dynCall_viijijj"] =
+        Module["asm"]["Bn"]).apply(null, arguments);
     });
     var dynCall_viijj = (Module["dynCall_viijj"] = function () {
-      return (dynCall_viijj = Module["dynCall_viijj"] = Module["asm"]["Cn"]).apply(null, arguments);
+      return (dynCall_viijj = Module["dynCall_viijj"] =
+        Module["asm"]["Cn"]).apply(null, arguments);
     });
     var dynCall_viiiij = (Module["dynCall_viiiij"] = function () {
-      return (dynCall_viiiij = Module["dynCall_viiiij"] = Module["asm"]["Dn"]).apply(null, arguments);
+      return (dynCall_viiiij = Module["dynCall_viiiij"] =
+        Module["asm"]["Dn"]).apply(null, arguments);
     });
     var dynCall_iiijji = (Module["dynCall_iiijji"] = function () {
-      return (dynCall_iiijji = Module["dynCall_iiijji"] = Module["asm"]["En"]).apply(null, arguments);
+      return (dynCall_iiijji = Module["dynCall_iiijji"] =
+        Module["asm"]["En"]).apply(null, arguments);
     });
     var dynCall_ijjiiiii = (Module["dynCall_ijjiiiii"] = function () {
-      return (dynCall_ijjiiiii = Module["dynCall_ijjiiiii"] = Module["asm"]["Fn"]).apply(null, arguments);
+      return (dynCall_ijjiiiii = Module["dynCall_ijjiiiii"] =
+        Module["asm"]["Fn"]).apply(null, arguments);
     });
-    var dynCall_iiiiiifffiiifiii = (Module["dynCall_iiiiiifffiiifiii"] = function () {
-      return (dynCall_iiiiiifffiiifiii = Module["dynCall_iiiiiifffiiifiii"] = Module["asm"]["Gn"]).apply(
-        null,
-        arguments
-      );
-    });
+    var dynCall_iiiiiifffiiifiii = (Module["dynCall_iiiiiifffiiifiii"] =
+      function () {
+        return (dynCall_iiiiiifffiiifiii = Module["dynCall_iiiiiifffiiifiii"] =
+          Module["asm"]["Gn"]).apply(null, arguments);
+      });
     var dynCall_viid = (Module["dynCall_viid"] = function () {
-      return (dynCall_viid = Module["dynCall_viid"] = Module["asm"]["Hn"]).apply(null, arguments);
+      return (dynCall_viid = Module["dynCall_viid"] =
+        Module["asm"]["Hn"]).apply(null, arguments);
     });
     var dynCall_viidii = (Module["dynCall_viidii"] = function () {
-      return (dynCall_viidii = Module["dynCall_viidii"] = Module["asm"]["In"]).apply(null, arguments);
+      return (dynCall_viidii = Module["dynCall_viidii"] =
+        Module["asm"]["In"]).apply(null, arguments);
     });
     var dynCall_viiif = (Module["dynCall_viiif"] = function () {
-      return (dynCall_viiif = Module["dynCall_viiif"] = Module["asm"]["Jn"]).apply(null, arguments);
+      return (dynCall_viiif = Module["dynCall_viiif"] =
+        Module["asm"]["Jn"]).apply(null, arguments);
     });
     var dynCall_fiiiif = (Module["dynCall_fiiiif"] = function () {
-      return (dynCall_fiiiif = Module["dynCall_fiiiif"] = Module["asm"]["Kn"]).apply(null, arguments);
+      return (dynCall_fiiiif = Module["dynCall_fiiiif"] =
+        Module["asm"]["Kn"]).apply(null, arguments);
     });
     var dynCall_viiffiiii = (Module["dynCall_viiffiiii"] = function () {
-      return (dynCall_viiffiiii = Module["dynCall_viiffiiii"] = Module["asm"]["Ln"]).apply(null, arguments);
+      return (dynCall_viiffiiii = Module["dynCall_viiffiiii"] =
+        Module["asm"]["Ln"]).apply(null, arguments);
     });
     var dynCall_ff = (Module["dynCall_ff"] = function () {
-      return (dynCall_ff = Module["dynCall_ff"] = Module["asm"]["Mn"]).apply(null, arguments);
+      return (dynCall_ff = Module["dynCall_ff"] = Module["asm"]["Mn"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_iiiiiff = (Module["dynCall_iiiiiff"] = function () {
-      return (dynCall_iiiiiff = Module["dynCall_iiiiiff"] = Module["asm"]["Nn"]).apply(null, arguments);
+      return (dynCall_iiiiiff = Module["dynCall_iiiiiff"] =
+        Module["asm"]["Nn"]).apply(null, arguments);
     });
     var dynCall_iiij = (Module["dynCall_iiij"] = function () {
-      return (dynCall_iiij = Module["dynCall_iiij"] = Module["asm"]["On"]).apply(null, arguments);
+      return (dynCall_iiij = Module["dynCall_iiij"] =
+        Module["asm"]["On"]).apply(null, arguments);
     });
-    var dynCall_viffffffffffffiiii = (Module["dynCall_viffffffffffffiiii"] = function () {
-      return (dynCall_viffffffffffffiiii = Module["dynCall_viffffffffffffiiii"] = Module["asm"]["Pn"]).apply(
-        null,
-        arguments
-      );
-    });
+    var dynCall_viffffffffffffiiii = (Module["dynCall_viffffffffffffiiii"] =
+      function () {
+        return (dynCall_viffffffffffffiiii = Module[
+          "dynCall_viffffffffffffiiii"
+        ] =
+          Module["asm"]["Pn"]).apply(null, arguments);
+      });
     var dynCall_iid = (Module["dynCall_iid"] = function () {
-      return (dynCall_iid = Module["dynCall_iid"] = Module["asm"]["Qn"]).apply(null, arguments);
+      return (dynCall_iid = Module["dynCall_iid"] = Module["asm"]["Qn"]).apply(
+        null,
+        arguments,
+      );
     });
     var dynCall_vidii = (Module["dynCall_vidii"] = function () {
-      return (dynCall_vidii = Module["dynCall_vidii"] = Module["asm"]["Rn"]).apply(null, arguments);
+      return (dynCall_vidii = Module["dynCall_vidii"] =
+        Module["asm"]["Rn"]).apply(null, arguments);
     });
     var dynCall_vidd = (Module["dynCall_vidd"] = function () {
-      return (dynCall_vidd = Module["dynCall_vidd"] = Module["asm"]["Sn"]).apply(null, arguments);
+      return (dynCall_vidd = Module["dynCall_vidd"] =
+        Module["asm"]["Sn"]).apply(null, arguments);
     });
     var dynCall_viffff = (Module["dynCall_viffff"] = function () {
-      return (dynCall_viffff = Module["dynCall_viffff"] = Module["asm"]["Tn"]).apply(null, arguments);
+      return (dynCall_viffff = Module["dynCall_viffff"] =
+        Module["asm"]["Tn"]).apply(null, arguments);
     });
     var dynCall_ij = (Module["dynCall_ij"] = function () {
-      return (dynCall_ij = Module["dynCall_ij"] = Module["asm"]["Un"]).apply(null, arguments);
-    });
-    var dynCall_ijj = (Module["dynCall_ijj"] = function () {
-      return (dynCall_ijj = Module["dynCall_ijj"] = Module["asm"]["Vn"]).apply(null, arguments);
-    });
-    var dynCall_vjji = (Module["dynCall_vjji"] = function () {
-      return (dynCall_vjji = Module["dynCall_vjji"] = Module["asm"]["Wn"]).apply(null, arguments);
-    });
-    var dynCall_vf = (Module["dynCall_vf"] = function () {
-      return (dynCall_vf = Module["dynCall_vf"] = Module["asm"]["Xn"]).apply(null, arguments);
-    });
-    var dynCall_vffff = (Module["dynCall_vffff"] = function () {
-      return (dynCall_vffff = Module["dynCall_vffff"] = Module["asm"]["Yn"]).apply(null, arguments);
-    });
-    var dynCall_vff = (Module["dynCall_vff"] = function () {
-      return (dynCall_vff = Module["dynCall_vff"] = Module["asm"]["Zn"]).apply(null, arguments);
-    });
-    var dynCall_viiiiiiiiiiiiiiiiii = (Module["dynCall_viiiiiiiiiiiiiiiiii"] = function () {
-      return (dynCall_viiiiiiiiiiiiiiiiii = Module["dynCall_viiiiiiiiiiiiiiiiii"] = Module["asm"]["_n"]).apply(
+      return (dynCall_ij = Module["dynCall_ij"] = Module["asm"]["Un"]).apply(
         null,
-        arguments
+        arguments,
       );
     });
+    var dynCall_ijj = (Module["dynCall_ijj"] = function () {
+      return (dynCall_ijj = Module["dynCall_ijj"] = Module["asm"]["Vn"]).apply(
+        null,
+        arguments,
+      );
+    });
+    var dynCall_vjji = (Module["dynCall_vjji"] = function () {
+      return (dynCall_vjji = Module["dynCall_vjji"] =
+        Module["asm"]["Wn"]).apply(null, arguments);
+    });
+    var dynCall_vf = (Module["dynCall_vf"] = function () {
+      return (dynCall_vf = Module["dynCall_vf"] = Module["asm"]["Xn"]).apply(
+        null,
+        arguments,
+      );
+    });
+    var dynCall_vffff = (Module["dynCall_vffff"] = function () {
+      return (dynCall_vffff = Module["dynCall_vffff"] =
+        Module["asm"]["Yn"]).apply(null, arguments);
+    });
+    var dynCall_vff = (Module["dynCall_vff"] = function () {
+      return (dynCall_vff = Module["dynCall_vff"] = Module["asm"]["Zn"]).apply(
+        null,
+        arguments,
+      );
+    });
+    var dynCall_viiiiiiiiiiiiiiiiii = (Module["dynCall_viiiiiiiiiiiiiiiiii"] =
+      function () {
+        return (dynCall_viiiiiiiiiiiiiiiiii = Module[
+          "dynCall_viiiiiiiiiiiiiiiiii"
+        ] =
+          Module["asm"]["_n"]).apply(null, arguments);
+      });
     var dynCall_vifff = (Module["dynCall_vifff"] = function () {
-      return (dynCall_vifff = Module["dynCall_vifff"] = Module["asm"]["$n"]).apply(null, arguments);
+      return (dynCall_vifff = Module["dynCall_vifff"] =
+        Module["asm"]["$n"]).apply(null, arguments);
     });
     var dynCall_viifff = (Module["dynCall_viifff"] = function () {
-      return (dynCall_viifff = Module["dynCall_viifff"] = Module["asm"]["ao"]).apply(null, arguments);
+      return (dynCall_viifff = Module["dynCall_viifff"] =
+        Module["asm"]["ao"]).apply(null, arguments);
     });
     var dynCall_vfff = (Module["dynCall_vfff"] = function () {
-      return (dynCall_vfff = Module["dynCall_vfff"] = Module["asm"]["bo"]).apply(null, arguments);
+      return (dynCall_vfff = Module["dynCall_vfff"] =
+        Module["asm"]["bo"]).apply(null, arguments);
     });
     var dynCall_f = (Module["dynCall_f"] = function () {
-      return (dynCall_f = Module["dynCall_f"] = Module["asm"]["co"]).apply(null, arguments);
+      return (dynCall_f = Module["dynCall_f"] = Module["asm"]["co"]).apply(
+        null,
+        arguments,
+      );
     });
-    var dynCall_iiiiiiffiiiiiiiiiffffiii = (Module["dynCall_iiiiiiffiiiiiiiiiffffiii"] = function () {
-      return (dynCall_iiiiiiffiiiiiiiiiffffiii = Module["dynCall_iiiiiiffiiiiiiiiiffffiii"] =
+    var dynCall_iiiiiiffiiiiiiiiiffffiii = (Module[
+      "dynCall_iiiiiiffiiiiiiiiiffffiii"
+    ] = function () {
+      return (dynCall_iiiiiiffiiiiiiiiiffffiii = Module[
+        "dynCall_iiiiiiffiiiiiiiiiffffiii"
+      ] =
         Module["asm"]["eo"]).apply(null, arguments);
     });
     var dynCall_viififi = (Module["dynCall_viififi"] = function () {
-      return (dynCall_viififi = Module["dynCall_viififi"] = Module["asm"]["fo"]).apply(null, arguments);
+      return (dynCall_viififi = Module["dynCall_viififi"] =
+        Module["asm"]["fo"]).apply(null, arguments);
     });
-    var dynCall_viiffiiiiiiiii = (Module["dynCall_viiffiiiiiiiii"] = function () {
-      return (dynCall_viiffiiiiiiiii = Module["dynCall_viiffiiiiiiiii"] = Module["asm"]["go"]).apply(null, arguments);
-    });
+    var dynCall_viiffiiiiiiiii = (Module["dynCall_viiffiiiiiiiii"] =
+      function () {
+        return (dynCall_viiffiiiiiiiii = Module["dynCall_viiffiiiiiiiii"] =
+          Module["asm"]["go"]).apply(null, arguments);
+      });
     var dynCall_viiffiiiiii = (Module["dynCall_viiffiiiiii"] = function () {
-      return (dynCall_viiffiiiiii = Module["dynCall_viiffiiiiii"] = Module["asm"]["ho"]).apply(null, arguments);
+      return (dynCall_viiffiiiiii = Module["dynCall_viiffiiiiii"] =
+        Module["asm"]["ho"]).apply(null, arguments);
     });
     var dynCall_viiiiiiiijiii = (Module["dynCall_viiiiiiiijiii"] = function () {
-      return (dynCall_viiiiiiiijiii = Module["dynCall_viiiiiiiijiii"] = Module["asm"]["io"]).apply(null, arguments);
+      return (dynCall_viiiiiiiijiii = Module["dynCall_viiiiiiiijiii"] =
+        Module["asm"]["io"]).apply(null, arguments);
     });
     function invoke_vi(index, a1) {
       var sp = stackSave();
@@ -14304,7 +16871,19 @@ var unityFramework = (() => {
         _setThrew(1, 0);
       }
     }
-    function invoke_viiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10) {
+    function invoke_viiiiiiiiii(
+      index,
+      a1,
+      a2,
+      a3,
+      a4,
+      a5,
+      a6,
+      a7,
+      a8,
+      a9,
+      a10,
+    ) {
       var sp = stackSave();
       try {
         dynCall_viiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
@@ -14344,10 +16923,36 @@ var unityFramework = (() => {
         _setThrew(1, 0);
       }
     }
-    function invoke_iiiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11) {
+    function invoke_iiiiiiiiiiii(
+      index,
+      a1,
+      a2,
+      a3,
+      a4,
+      a5,
+      a6,
+      a7,
+      a8,
+      a9,
+      a10,
+      a11,
+    ) {
       var sp = stackSave();
       try {
-        return dynCall_iiiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+        return dynCall_iiiiiiiiiiii(
+          index,
+          a1,
+          a2,
+          a3,
+          a4,
+          a5,
+          a6,
+          a7,
+          a8,
+          a9,
+          a10,
+          a11,
+        );
       } catch (e) {
         stackRestore(sp);
         if (e !== e + 0) throw e;
@@ -14394,10 +16999,34 @@ var unityFramework = (() => {
         _setThrew(1, 0);
       }
     }
-    function invoke_iiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10) {
+    function invoke_iiiiiiiiiii(
+      index,
+      a1,
+      a2,
+      a3,
+      a4,
+      a5,
+      a6,
+      a7,
+      a8,
+      a9,
+      a10,
+    ) {
       var sp = stackSave();
       try {
-        return dynCall_iiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+        return dynCall_iiiiiiiiiii(
+          index,
+          a1,
+          a2,
+          a3,
+          a4,
+          a5,
+          a6,
+          a7,
+          a8,
+          a9,
+          a10,
+        );
       } catch (e) {
         stackRestore(sp);
         if (e !== e + 0) throw e;
@@ -14524,10 +17153,36 @@ var unityFramework = (() => {
         _setThrew(1, 0);
       }
     }
-    function invoke_iiiiiiiiiji(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11) {
+    function invoke_iiiiiiiiiji(
+      index,
+      a1,
+      a2,
+      a3,
+      a4,
+      a5,
+      a6,
+      a7,
+      a8,
+      a9,
+      a10,
+      a11,
+    ) {
       var sp = stackSave();
       try {
-        return dynCall_iiiiiiiiiji(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+        return dynCall_iiiiiiiiiji(
+          index,
+          a1,
+          a2,
+          a3,
+          a4,
+          a5,
+          a6,
+          a7,
+          a8,
+          a9,
+          a10,
+          a11,
+        );
       } catch (e) {
         stackRestore(sp);
         if (e !== e + 0) throw e;
@@ -14584,10 +17239,34 @@ var unityFramework = (() => {
         _setThrew(1, 0);
       }
     }
-    function invoke_jiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10) {
+    function invoke_jiiiiiiiiii(
+      index,
+      a1,
+      a2,
+      a3,
+      a4,
+      a5,
+      a6,
+      a7,
+      a8,
+      a9,
+      a10,
+    ) {
       var sp = stackSave();
       try {
-        return dynCall_jiiiiiiiiii(index, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+        return dynCall_jiiiiiiiiii(
+          index,
+          a1,
+          a2,
+          a3,
+          a4,
+          a5,
+          a6,
+          a7,
+          a8,
+          a9,
+          a10,
+        );
       } catch (e) {
         stackRestore(sp);
         if (e !== e + 0) throw e;
@@ -14780,7 +17459,8 @@ var unityFramework = (() => {
       quit_(code, new ExitStatus(code));
     }
     if (Module["preInit"]) {
-      if (typeof Module["preInit"] == "function") Module["preInit"] = [Module["preInit"]];
+      if (typeof Module["preInit"] == "function")
+        Module["preInit"] = [Module["preInit"]];
       while (Module["preInit"].length > 0) {
         Module["preInit"].pop()();
       }
@@ -14792,9 +17472,11 @@ var unityFramework = (() => {
     return unityFramework.ready;
   };
 })();
-if (typeof exports === "object" && typeof module === "object") module.exports = unityFramework;
+if (typeof exports === "object" && typeof module === "object")
+  module.exports = unityFramework;
 else if (typeof define === "function" && define["amd"])
   define([], function () {
     return unityFramework;
   });
-else if (typeof exports === "object") exports["unityFramework"] = unityFramework;
+else if (typeof exports === "object")
+  exports["unityFramework"] = unityFramework;

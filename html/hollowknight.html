@@ -83,7 +83,9 @@
     <div id="loading-text">truffed.lol</div>
     <div id="unity-mobile-warning">WebGL not supported on mobile</div>
     <canvas id="unity-canvas"></canvas>
-    <div id="fps-graph" style="display: none"><canvas id="fps-canvas"></canvas></div>
+    <div id="fps-graph" style="display: none">
+      <canvas id="fps-canvas"></canvas>
+    </div>
 
     <script>
       const lt = document.getElementById("loading-text"),
@@ -148,7 +150,8 @@
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         const m = document.createElement("meta");
         m.name = "viewport";
-        m.content = "width=device-width,height=device-height,initial-scale=1,user-scalable=no,shrink-to-fit=yes";
+        m.content =
+          "width=device-width,height=device-height,initial-scale=1,user-scalable=no,shrink-to-fit=yes";
         document.head.appendChild(m);
         mw.style.display = "block";
         setTimeout(() => (mw.style.display = "none"), 5000);
@@ -177,7 +180,7 @@
       (async () => {
         const [du, wu] = await Promise.all([
             mf(gp("Build/hktruffled.data", 1, 45)),
-            mf(gp("Build/hktruffled.wasm", 1, 2))
+            mf(gp("Build/hktruffled.wasm", 1, 2)),
           ]),
           sc = document.createElement("script");
         sc.src = "Build/hktruffled.loader.js";
@@ -189,7 +192,7 @@
             streamingAssetsUrl: "StreamingAssets",
             companyName: "Team Cherry",
             productName: "Hollow Knight",
-            productVersion: "1.0"
+            productVersion: "1.0",
           })
             .then(() => {
               lt.remove();

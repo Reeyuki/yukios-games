@@ -1,7 +1,9 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/Stinkalistic/UGS@main/MISC/brotato/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/Stinkalistic/UGS@main/MISC/brotato/"
+    />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <title>Brotato</title>
@@ -145,8 +147,16 @@
         position: absolute;
         inset: 0;
         background:
-          radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 80, 0, 0.12) 0%, transparent 70%),
-          radial-gradient(ellipse 40% 30% at 20% 100%, rgba(180, 30, 30, 0.08) 0%, transparent 60%);
+          radial-gradient(
+            ellipse 60% 40% at 50% 0%,
+            rgba(255, 80, 0, 0.12) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 40% 30% at 20% 100%,
+            rgba(180, 30, 30, 0.08) 0%,
+            transparent 60%
+          );
         pointer-events: none;
       }
 
@@ -154,7 +164,8 @@
         width: min(420px, 85vw);
         height: auto;
         image-rendering: pixelated;
-        filter: drop-shadow(0 0 40px rgba(255, 100, 0, 0.35)) drop-shadow(0 0 80px rgba(255, 50, 0, 0.15));
+        filter: drop-shadow(0 0 40px rgba(255, 100, 0, 0.35))
+          drop-shadow(0 0 80px rgba(255, 50, 0, 0.15));
         animation: floatImg 3.5s ease-in-out infinite;
         margin-bottom: 36px;
         position: relative;
@@ -243,7 +254,12 @@
         letter-spacing: 0.08em;
       }
     </style>
-    <link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
+    <link
+      id="-gd-engine-icon"
+      rel="icon"
+      type="image/png"
+      href="index.icon.png"
+    />
     <link rel="apple-touch-icon" href="index.apple-touch-icon.png" />
   </head>
   <body>
@@ -264,10 +280,18 @@
     </canvas>
 
     <div id="status">
-      <div id="status-progress" style="display: none" oncontextmenu="event.preventDefault()">
+      <div
+        id="status-progress"
+        style="display: none"
+        oncontextmenu="event.preventDefault()"
+      >
         <div id="status-progress-inner"></div>
       </div>
-      <div id="status-indeterminate" style="display: none" oncontextmenu="event.preventDefault()">
+      <div
+        id="status-indeterminate"
+        style="display: none"
+        oncontextmenu="event.preventDefault()"
+      >
         <div></div>
         <div></div>
         <div></div>
@@ -281,14 +305,16 @@
     </div>
 
     <script>
-      document.getElementById("loading-game-image").src = window.location.origin + "/static/icons/brotato.webp";
+      document.getElementById("loading-game-image").src =
+        window.location.origin + "/static/icons/brotato.webp";
       var _fakeRaf = null;
       var _fakeStart = performance.now();
       var _fakeDuration = 30000;
       (function tick(now) {
         var pct = Math.min(((now - _fakeStart) / _fakeDuration) * 90, 90);
         document.getElementById("loading-bar-fill").style.width = pct + "%";
-        document.getElementById("loading-pct").textContent = Math.floor(pct) + "%";
+        document.getElementById("loading-pct").textContent =
+          Math.floor(pct) + "%";
         _fakeRaf = requestAnimationFrame(tick);
       })(performance.now());
     </script>
@@ -305,15 +331,19 @@
           experimentalVK: false,
           fileSizes: { "index.pck": 138330272, "index.wasm": 25658069 },
           focusCanvas: true,
-          gdnativeLibs: []
+          gdnativeLibs: [],
         };
         var engine = new Engine(GODOT_CONFIG);
 
         (function () {
           const INDETERMINATE_STATUS_STEP_MS = 100;
           var statusProgress = document.getElementById("status-progress");
-          var statusProgressInner = document.getElementById("status-progress-inner");
-          var statusIndeterminate = document.getElementById("status-indeterminate");
+          var statusProgressInner = document.getElementById(
+            "status-progress-inner",
+          );
+          var statusIndeterminate = document.getElementById(
+            "status-indeterminate",
+          );
           var statusNotice = document.getElementById("status-notice");
 
           var loadingOverlay = document.getElementById("loading-overlay");
@@ -341,10 +371,14 @@
 
           function setStatusMode(mode) {
             if (statusMode === mode || !initializing) return;
-            [statusProgress, statusIndeterminate, statusNotice].forEach((elem) => {
-              elem.style.display = "none";
-            });
-            animationCallbacks = animationCallbacks.filter((v) => v != animateStatusIndeterminate);
+            [statusProgress, statusIndeterminate, statusNotice].forEach(
+              (elem) => {
+                elem.style.display = "none";
+              },
+            );
+            animationCallbacks = animationCallbacks.filter(
+              (v) => v != animateStatusIndeterminate,
+            );
             switch (mode) {
               case "progress":
                 statusProgress.style.display = "block";
@@ -368,9 +402,11 @@
           function animateStatusIndeterminate(ms) {
             var i = Math.floor((ms / INDETERMINATE_STATUS_STEP_MS) % 8);
             if (statusIndeterminate.children[i].style.borderTopColor == "") {
-              Array.prototype.slice.call(statusIndeterminate.children).forEach((child) => {
-                child.style.borderTopColor = "";
-              });
+              Array.prototype.slice
+                .call(statusIndeterminate.children)
+                .forEach((child) => {
+                  child.style.borderTopColor = "";
+                });
               statusIndeterminate.children[i].style.borderTopColor = "#dfdfdf";
             }
           }
@@ -402,10 +438,11 @@
               .startGame({
                 onProgress: function (current, total) {
                   if (total > 0) {
-                    statusProgressInner.style.width = (current / total) * 100 + "%";
+                    statusProgressInner.style.width =
+                      (current / total) * 100 + "%";
                     setStatusMode("progress");
                   }
-                }
+                },
               })
               .then(
                 () => {
@@ -416,7 +453,10 @@
                   setTimeout(() => {
                     loadingOverlay.style.transition = "opacity 0.6s ease";
                     loadingOverlay.style.opacity = "0";
-                    setTimeout(() => (loadingOverlay.style.display = "none"), 620);
+                    setTimeout(
+                      () => (loadingOverlay.style.display = "none"),
+                      620,
+                    );
                   }, 300);
                   setStatusMode("hidden");
                   initializing = false;
@@ -424,7 +464,7 @@
                 function (err) {
                   stopFakeProgress();
                   displayFailureNotice(err);
-                }
+                },
               );
           }
         })();

@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/Reeyuki/web-port@master/yandere-simulator/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/Reeyuki/web-port@master/yandere-simulator/"
+    />
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -65,7 +67,8 @@
               .then((b) => {
                 buffers.push(b);
                 done++;
-                document.querySelector("#loading-text").textContent = `LOADING... (${done}/${max})`;
+                document.querySelector("#loading-text").textContent =
+                  `LOADING... (${done}/${max})`;
                 fetchPart(index + 1);
               })
               .catch(reject);
@@ -81,7 +84,9 @@
         return parts;
       }
 
-      Promise.all([mergeFiles(getParts("Build/YandereSim.data.unityweb", 1, 5))]).then(([dataUrl]) => {
+      Promise.all([
+        mergeFiles(getParts("Build/YandereSim.data.unityweb", 1, 5)),
+      ]).then(([dataUrl]) => {
         const json = {
           companyName: "YandereDev",
           productName: "YandereSimulator",
@@ -91,17 +96,17 @@
           TOTAL_MEMORY: 268435456,
           graphicsAPI: ["WebGL 2.0", "WebGL 1.0"],
           webglContextAttributes: {
-            preserveDrawingBuffer: false
+            preserveDrawingBuffer: false,
           },
           splashScreenStyle: "Dark",
           backgroundColor: "#000000",
           cacheControl: {
-            default: "must-revalidate"
-          }
+            default: "must-revalidate",
+          },
         };
 
         const blob = new Blob([JSON.stringify(json)], {
-          type: "application/json"
+          type: "application/json",
         });
         const blobUrl = URL.createObjectURL(blob);
 
@@ -111,8 +116,8 @@
             onRuntimeInitialized: () => {
               const loadingText = document.querySelector("#loading-text");
               if (loadingText) loadingText.remove();
-            }
-          }
+            },
+          },
         });
 
         const resize = () => {

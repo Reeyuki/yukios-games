@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stardew Valley</title>
-    <base href="https://cdn.jsdelivr.net/gh/degloved-net/stardew-wasm@master/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/degloved-net/stardew-wasm@master/"
+    />
     <style>
       *,
       *::before,
@@ -70,8 +72,12 @@
     <div id="loading">
       <div id="music-choice">
         <div>Download options</div>
-        <button id="btn-no-music">Play without music <span class="hint">(~64 MB)</span></button>
-        <button id="btn-with-music">Play with music <span class="hint">(~540 MB)</span></button>
+        <button id="btn-no-music">
+          Play without music <span class="hint">(~64 MB)</span>
+        </button>
+        <button id="btn-with-music">
+          Play with music <span class="hint">(~540 MB)</span>
+        </button>
       </div>
     </div>
     <script>
@@ -138,7 +144,11 @@
           var chunks = [];
           return {
             write: function (data) {
-              chunks.push(data instanceof Uint8Array ? data.slice() : new Uint8Array(data));
+              chunks.push(
+                data instanceof Uint8Array
+                  ? data.slice()
+                  : new Uint8Array(data),
+              );
               return Promise.resolve();
             },
             close: function () {
@@ -153,7 +163,7 @@
                 off += c.length;
               });
               return idbPut(db, name, merged);
-            }
+            },
           };
         }
 
@@ -169,21 +179,22 @@
                   },
                   createWritable: function () {
                     return Promise.resolve(makeWritable(db, name));
-                  }
+                  },
                 });
               }
               return idbGet(db, name).then(function (data) {
-                if (data === undefined) throw new DOMException("Not found", "NotFoundError");
+                if (data === undefined)
+                  throw new DOMException("Not found", "NotFoundError");
                 return {
                   getFile: function () {
                     return Promise.resolve(new Blob([data]));
                   },
                   createWritable: function () {
                     return Promise.resolve(makeWritable(db, name));
-                  }
+                  },
                 };
               });
-            }
+            },
           };
         }
 
@@ -219,10 +230,16 @@
           }
         }
         async function storageRead(name) {
-          return new Uint8Array(await (await (await storage.getFileHandle(name)).getFile()).arrayBuffer());
+          return new Uint8Array(
+            await (
+              await (await storage.getFileHandle(name)).getFile()
+            ).arrayBuffer(),
+          );
         }
         async function storageWrite(name, data) {
-          const w = await (await storage.getFileHandle(name, { create: true })).createWritable();
+          const w = await (
+            await storage.getFileHandle(name, { create: true })
+          ).createWritable();
           await w.write(data);
           await w.close();
         }
@@ -284,7 +301,9 @@
         musicChoice.style.display = "none";
 
         const contentP = getTar("Content.tar", "game content", "Content.tar");
-        const audioP = wantMusic ? getTar("ContentAudio.tar", "music", "ContentAudio.tar") : Promise.resolve(null);
+        const audioP = wantMusic
+          ? getTar("ContentAudio.tar", "music", "ContentAudio.tar")
+          : Promise.resolve(null);
         const runtimeP = (async () => {
           const { dotnet } = await import(BASE + "_framework/dotnet.js");
           return dotnet
@@ -295,42 +314,53 @@
               `--jiterpreter-trace-monitoring-period=${100}`,
               `--jiterpreter-trace-monitoring-max-average-penalty=${150}`,
               `--jiterpreter-wasm-bytes-limit=${64 * 1024 * 1024}`,
-              `--jiterpreter-table-size=${32 * 1024}`
+              `--jiterpreter-table-size=${32 * 1024}`,
             ])
-            .withResourceLoader((type, _name, defaultUri, _integrity, behavior) => {
-              if (type === "dotnetwasm" && behavior === "dotnetwasm") {
-                return (async () => {
-                  const count = parseInt(await (await fetch(defaultUri + ".count")).text());
-                  let idx = 0;
-                  const fetchNext = async () => {
-                    if (idx >= count) return null;
-                    const res = await fetch(defaultUri + idx);
-                    idx++;
-                    return res.ok ? res.body.getReader() : null;
-                  };
-                  let current = await fetchNext();
-                  if (!current) throw new Error("failed to fetch first wasm chunk");
-                  return new Response(
-                    new ReadableStream({
-                      async pull(controller) {
-                        const { value, done } = await current.read();
-                        if (done || !value) {
-                          current = await fetchNext();
-                          if (current) await this.pull(controller);
-                          else controller.close();
-                        } else controller.enqueue(value);
-                      }
-                    }),
-                    { headers: { "Content-Type": "application/wasm" } }
-                  );
-                })();
-              }
-            })
+            .withResourceLoader(
+              (type, _name, defaultUri, _integrity, behavior) => {
+                if (type === "dotnetwasm" && behavior === "dotnetwasm") {
+                  return (async () => {
+                    const count = parseInt(
+                      await (await fetch(defaultUri + ".count")).text(),
+                    );
+                    let idx = 0;
+                    const fetchNext = async () => {
+                      if (idx >= count) return null;
+                      const res = await fetch(defaultUri + idx);
+                      idx++;
+                      return res.ok ? res.body.getReader() : null;
+                    };
+                    let current = await fetchNext();
+                    if (!current)
+                      throw new Error("failed to fetch first wasm chunk");
+                    return new Response(
+                      new ReadableStream({
+                        async pull(controller) {
+                          const { value, done } = await current.read();
+                          if (done || !value) {
+                            current = await fetchNext();
+                            if (current) await this.pull(controller);
+                            else controller.close();
+                          } else controller.enqueue(value);
+                        },
+                      }),
+                      { headers: { "Content-Type": "application/wasm" } },
+                    );
+                  })();
+                }
+              },
+            )
             .create();
         })();
 
-        const [contentTar, audioTar, runtime] = await Promise.all([contentP, audioP, runtimeP]);
-        const exports = await runtime.getAssemblyExports(runtime.getConfig().mainAssemblyName);
+        const [contentTar, audioTar, runtime] = await Promise.all([
+          contentP,
+          audioP,
+          runtimeP,
+        ]);
+        const exports = await runtime.getAssemblyExports(
+          runtime.getConfig().mainAssemblyName,
+        );
 
         function extractTar(tar, prefix) {
           let pos = 0,
@@ -357,7 +387,10 @@
             if (type === 53 || name.endsWith("/")) {
               exports.WasmBootstrap.CreateContentDirectory(prefix + full);
             } else if (type === 48 || type === 0) {
-              exports.WasmBootstrap.WriteContentFile(prefix + full, tar.subarray(pos, pos + size));
+              exports.WasmBootstrap.WriteContentFile(
+                prefix + full,
+                tar.subarray(pos, pos + size),
+              );
               count++;
             }
             pos += Math.ceil(size / 512) * 512;
@@ -402,7 +435,17 @@
           navigator.keyboard?.lock();
         } catch {}
         document.addEventListener("keydown", (e) => {
-          if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Tab"].includes(e.code)) e.preventDefault();
+          if (
+            [
+              "Space",
+              "ArrowUp",
+              "ArrowDown",
+              "ArrowLeft",
+              "ArrowRight",
+              "Tab",
+            ].includes(e.code)
+          )
+            e.preventDefault();
         });
 
         await exports.WasmBootstrap.MainLoop();

@@ -100,7 +100,8 @@
         for (const v of bytesReceived.values()) total += v;
         const pct = Math.min(100, (total / TOTAL_BYTES) * 100);
         elBar.style.width = pct + "%";
-        elMb.textContent = (total / (1024 * 1024)).toFixed(1) + " MB / " + TOTAL_MB + " MB";
+        elMb.textContent =
+          (total / (1024 * 1024)).toFixed(1) + " MB / " + TOTAL_MB + " MB";
       }
 
       function sleep(ms) {
@@ -111,7 +112,8 @@
         for (let attempt = 0; attempt <= retries; attempt++) {
           try {
             const resp = await fetch(url);
-            if (!resp.ok) throw new Error("HTTP " + resp.status + " for " + url);
+            if (!resp.ok)
+              throw new Error("HTTP " + resp.status + " for " + url);
             const reader = resp.body.getReader();
             const chunks = [];
             let received = 0;
@@ -133,10 +135,15 @@
             return merged.buffer;
           } catch (err) {
             if (attempt < retries) {
-              console.warn(`Retry ${attempt + 1}/${retries} for ${url}:`, err.message);
+              console.warn(
+                `Retry ${attempt + 1}/${retries} for ${url}:`,
+                err.message,
+              );
               await sleep(RETRY_DELAY_MS * (attempt + 1));
             } else {
-              throw new Error("Failed after " + (retries + 1) + " attempts: " + url);
+              throw new Error(
+                "Failed after " + (retries + 1) + " attempts: " + url,
+              );
             }
           }
         }
@@ -168,7 +175,10 @@
             return resp.text();
           } catch (err) {
             if (attempt < retries) {
-              console.warn(`Retry ${attempt + 1}/${retries} for ${path}:`, err.message);
+              console.warn(
+                `Retry ${attempt + 1}/${retries} for ${path}:`,
+                err.message,
+              );
               await sleep(RETRY_DELAY_MS * (attempt + 1));
             } else {
               throw new Error("Failed to fetch " + path);
@@ -181,12 +191,14 @@
         elStatus.textContent = "Downloading...";
 
         // All 4 assets fetched in parallel; parts within each asset also parallel
-        const [loaderText, frameworkText, dataBuf, wasmBuf] = await Promise.all([
-          fetchText("Build/bb0d9ecdb05db3e84da20bd14a4f84dc.loader.js"),
-          fetchText("Build/5eb531593953ed3f9d46bf9232472a14.framework.js"),
-          fetchAllParts("1be89627d83a99b9ed0f73daf7c701b0.data", DATA_PARTS),
-          fetchAllParts("d50f42928f17ee1efc318f292db2df90.wasm", WASM_PARTS)
-        ]);
+        const [loaderText, frameworkText, dataBuf, wasmBuf] = await Promise.all(
+          [
+            fetchText("Build/bb0d9ecdb05db3e84da20bd14a4f84dc.loader.js"),
+            fetchText("Build/5eb531593953ed3f9d46bf9232472a14.framework.js"),
+            fetchAllParts("1be89627d83a99b9ed0f73daf7c701b0.data", DATA_PARTS),
+            fetchAllParts("d50f42928f17ee1efc318f292db2df90.wasm", WASM_PARTS),
+          ],
+        );
 
         elStatus.textContent = "Starting...";
         elBar.style.width = "100%";
@@ -195,9 +207,15 @@
         scriptEl.textContent = loaderText;
         document.head.appendChild(scriptEl);
 
-        const dataUrl = URL.createObjectURL(new Blob([dataBuf], { type: "application/octet-stream" }));
-        const wasmUrl = URL.createObjectURL(new Blob([wasmBuf], { type: "application/wasm" }));
-        const frameworkUrl = URL.createObjectURL(new Blob([frameworkText], { type: "application/javascript" }));
+        const dataUrl = URL.createObjectURL(
+          new Blob([dataBuf], { type: "application/octet-stream" }),
+        );
+        const wasmUrl = URL.createObjectURL(
+          new Blob([wasmBuf], { type: "application/wasm" }),
+        );
+        const frameworkUrl = URL.createObjectURL(
+          new Blob([frameworkText], { type: "application/javascript" }),
+        );
 
         createUnityInstance(document.querySelector("#unity-canvas"), {
           dataUrl: dataUrl,
@@ -206,7 +224,7 @@
           streamingAssetsUrl: CDN + "/StreamingAssets",
           companyName: "Infinite Fall",
           productName: "Night in the Woods",
-          productVersion: "1.0"
+          productVersion: "1.0",
         }).then(function () {
           document.getElementById("loading-screen").style.display = "none";
           URL.revokeObjectURL(dataUrl);

@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/web-ports/hollow-knight-silksong@master/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/web-ports/hollow-knight-silksong@master/"
+    />
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Unity Web Player | Hollow Knight SilkSong</title>
@@ -31,13 +33,24 @@
     <div id="overlay">
       <div
         id="loading-text"
-        style="color: white; font-size: 48px; font-family: cursive; text-align: center; margin-top: 20px"
+        style="
+          color: white;
+          font-size: 48px;
+          font-family: cursive;
+          text-align: center;
+          margin-top: 20px;
+        "
       >
         LOADING...
       </div>
 
       <div id="unity-container">
-        <canvas id="unity-canvas" width="960" height="600" tabindex="-1"></canvas>
+        <canvas
+          id="unity-canvas"
+          width="960"
+          height="600"
+          tabindex="-1"
+        ></canvas>
 
         <div id="unity-loading-bar">
           <div id="unity-logo"></div>
@@ -100,7 +113,7 @@
             if (name !== CACHE_NAME && name.includes("hksilksong")) {
               return caches.delete(name);
             }
-          })
+          }),
         );
       }
 
@@ -132,7 +145,7 @@
 
               processed++;
               loadingText.textContent = `EXTRACTING ASSETS... (${processed}/${total})`;
-            })
+            }),
           );
 
           await new Promise((r) => setTimeout(r, 0));
@@ -180,7 +193,9 @@
       }
 
       async function mergeFiles(parts) {
-        const buffers = await Promise.all(parts.map((part) => fetchWithProgress(part)));
+        const buffers = await Promise.all(
+          parts.map((part) => fetchWithProgress(part)),
+        );
         return new Blob(buffers);
       }
 
@@ -198,7 +213,9 @@
           if (!(await isCached())) {
             loadingText.textContent = "DOWNLOADING ASSETS...";
 
-            const webglzip = await mergeFiles(getParts("StreamingAssets/aa/WebGL.zip", 1, 100));
+            const webglzip = await mergeFiles(
+              getParts("StreamingAssets/aa/WebGL.zip", 1, 100),
+            );
 
             await unzipAndStore(webglzip);
           } else {
@@ -207,12 +224,16 @@
 
           const canvas = document.querySelector("#unity-canvas");
           const loadingBar = document.querySelector("#unity-loading-bar");
-          const progressBarFull = document.querySelector("#unity-progress-bar-full");
+          const progressBarFull = document.querySelector(
+            "#unity-progress-bar-full",
+          );
           const warningBanner = document.querySelector("#unity-warning");
 
           function unityShowBanner(msg, type) {
             function update() {
-              warningBanner.style.display = warningBanner.children.length ? "block" : "none";
+              warningBanner.style.display = warningBanner.children.length
+                ? "block"
+                : "none";
             }
 
             let div = document.createElement("div");
@@ -244,13 +265,14 @@
             companyName: "EDUrocks Group, Truffled, GN-Math",
             productName: "Hollow Knight SilkSong",
             productVersion: "1.0",
-            showBanner: unityShowBanner
+            showBanner: unityShowBanner,
           };
 
           loadingBar.style.display = "block";
 
           const script = document.createElement("script");
-          script.src = "https://cdn.jsdelivr.net/gh/web-ports/hollow-knight-silksong@latest/Build/w-pt.loader.js";
+          script.src =
+            "https://cdn.jsdelivr.net/gh/web-ports/hollow-knight-silksong@latest/Build/w-pt.loader.js";
 
           script.onload = () => {
             createUnityInstance(canvas, config, (progress) => {

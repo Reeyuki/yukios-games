@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/67-Factory/web-ports@main/badpiggies/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/67-Factory/web-ports@main/badpiggies/"
+    />
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Unity WebGL Player | Bad Piggies</title>
@@ -31,9 +33,13 @@
       }
     </style>
     <script>
-      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/Bad Piggies.json", {
-        onProgress: UnityProgress
-      });
+      var gameInstance = UnityLoader.instantiate(
+        "gameContainer",
+        "Build/Bad Piggies.json",
+        {
+          onProgress: UnityProgress,
+        },
+      );
     </script>
   </head>
 

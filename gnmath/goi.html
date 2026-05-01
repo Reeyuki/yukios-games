@@ -1,6 +1,8 @@
 <html lang="en-us">
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@main/getting-over-it/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/genizy/web-port@main/getting-over-it/"
+    />
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Unity WebGL Player | Getting Over It</title>
@@ -29,7 +31,13 @@
   <body>
     <div
       id="loading-text"
-      style="color: white; font-size: 48px; font-family: cursive; text-align: center; margin-top: 20px"
+      style="
+        color: white;
+        font-size: 48px;
+        font-family: cursive;
+        text-align: center;
+        margin-top: 20px;
+      "
     >
       LOADING... 98.18 MB / 659.69 MB (14.9%)
     </div>
@@ -72,7 +80,10 @@
           chunks.push(value);
           const doneText = formatSize(loadedBytes);
           const totalText = formatSize(totalBytes);
-          const percent = totalBytes > 0 ? ((loadedBytes / totalBytes) * 100).toFixed(1) : "?";
+          const percent =
+            totalBytes > 0
+              ? ((loadedBytes / totalBytes) * 100).toFixed(1)
+              : "?";
           loadingText.textContent = `LOADING... ${doneText} / ${totalText} (${percent}%)`;
         }
         let fullBuffer = new Uint8Array(received);
@@ -100,11 +111,16 @@
         const wasmParts = getParts("Build/GettingOverIt.wasm", 2);
         const allParts = [...dataParts, ...wasmParts];
         totalBytes = 691732588;
-        const [dataUrl, wasmUrl] = await Promise.all([mergeFiles(dataParts), mergeFiles(wasmParts)]);
+        const [dataUrl, wasmUrl] = await Promise.all([
+          mergeFiles(dataParts),
+          mergeFiles(wasmParts),
+        ]);
         var container = document.querySelector("#unity-container");
         var canvas = document.querySelector("#unity-canvas");
         var loadingBar = document.querySelector("#unity-loading-bar");
-        var progressBarFull = document.querySelector("#unity-progress-bar-full");
+        var progressBarFull = document.querySelector(
+          "#unity-progress-bar-full",
+        );
         var warningBanner = document.querySelector("#unity-warning");
 
         function unityShowBanner(msg, type) {}
@@ -119,7 +135,7 @@
           companyName: "Bennett Foddy",
           productName: "Getting Over It",
           productVersion: "1.7",
-          showBanner: unityShowBanner
+          showBanner: unityShowBanner,
         };
 
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {

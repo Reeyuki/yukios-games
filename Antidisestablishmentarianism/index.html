@@ -3,10 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>Antidisestablishmentanarisanism</title>
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/reeyuki/yukios@main/favicon.ico" />
-    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/reeyuki/yukios@main/favicon.ico" />
+    <link
+      rel="icon"
+      href="https://cdn.jsdelivr.net/gh/reeyuki/yukios@main/favicon.ico"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://cdn.jsdelivr.net/gh/reeyuki/yukios@main/favicon.ico"
+    />
     <style>
       * {
         box-sizing: border-box;
@@ -160,7 +169,13 @@
       <div>
         <h1>Antidisestablishmentanarisanism</h1>
         <span class="by"
-          >by <a href="https://reeyuki.nekoweb.org" target="_blank" rel="noreferrer noopener">reeyuki</a></span
+          >by
+          <a
+            href="https://reeyuki.nekoweb.org"
+            target="_blank"
+            rel="noreferrer noopener"
+            >reeyuki</a
+          ></span
         >
       </div>
       <button id="btn-fullscreen" type="button">Fullscreen</button>
@@ -182,7 +197,8 @@
     </div>
 
     <script>
-      const cdnBase = "https://cdn.jsdelivr.net/gh/reeyuki/yukios@main/static/games/Antidisestablishmentarianism/";
+      const cdnBase =
+        "https://cdn.jsdelivr.net/gh/reeyuki/yukios@main/static/games/Antidisestablishmentarianism/";
       const buildUrl = cdnBase + "Build";
       const loaderUrl = buildUrl + "/antidis.loader.js";
 
@@ -211,14 +227,22 @@
         return `${v.toFixed(u === 0 ? 0 : 1)} ${units[u]}`;
       }
 
-      async function fetchSplitToObjectUrl({ urlPrefix, partCount, mimeType, onProgress }) {
+      async function fetchSplitToObjectUrl({
+        urlPrefix,
+        partCount,
+        mimeType,
+        onProgress,
+      }) {
         const chunks = [];
         let downloaded = 0,
           expectedTotal = 0;
         for (let i = 0; i < partCount; i++) {
           const url = `${urlPrefix}.${String(i).padStart(2, "0")}`;
           const res = await fetch(url, { cache: "force-cache" });
-          if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+          if (!res.ok)
+            throw new Error(
+              `Failed to fetch ${url}: ${res.status} ${res.statusText}`,
+            );
           expectedTotal += Number(res.headers.get("content-length") || "0");
           const buf = await res.arrayBuffer();
           downloaded += buf.byteLength;
@@ -235,13 +259,15 @@
         streamingAssetsUrl: buildUrl + "/StreamingAssets",
         companyName: "antidisestablishmentanarisanism",
         productName: "antidisestablishmentanarisanism",
-        productVersion: "antidisestablishmentanarisanism"
+        productVersion: "antidisestablishmentanarisanism",
       };
 
       let unityInstance = null;
 
       function syncFullscreenButton() {
-        fullscreenBtn.textContent = document.fullscreenElement ? "Exit fullscreen" : "Fullscreen";
+        fullscreenBtn.textContent = document.fullscreenElement
+          ? "Exit fullscreen"
+          : "Fullscreen";
       }
 
       document.addEventListener("fullscreenchange", syncFullscreenButton);
@@ -273,7 +299,8 @@
 
         function refreshProgress() {
           const dl = dataDownloaded + wasmDownloaded;
-          const total = (dataExpected || dataSizeHint) + (wasmExpected || wasmSizeHint);
+          const total =
+            (dataExpected || dataSizeHint) + (wasmExpected || wasmSizeHint);
           statusEl.textContent = `${formatBytes(dl)} / ${formatBytes(total)}`;
           setProgress(Math.min(0.75, total > 0 ? (dl / total) * 0.75 : 0.02));
         }
@@ -287,7 +314,7 @@
               dataDownloaded = downloaded;
               dataExpected = expectedTotal;
               refreshProgress();
-            }
+            },
           }),
           fetchSplitToObjectUrl({
             urlPrefix: buildUrl + "/antidis.wasm",
@@ -297,8 +324,8 @@
               wasmDownloaded = downloaded;
               wasmExpected = expectedTotal;
               refreshProgress();
-            }
-          })
+            },
+          }),
         ]);
 
         config.dataUrl = dataObjectUrl;
@@ -312,15 +339,20 @@
           script.src = loaderUrl;
           script.async = true;
           script.onload = resolve;
-          script.onerror = () => reject(new Error(`Failed to load ${loaderUrl}`));
+          script.onerror = () =>
+            reject(new Error(`Failed to load ${loaderUrl}`));
           document.body.appendChild(script);
         });
 
         try {
-          unityInstance = await createUnityInstance(canvas, config, (progress) => {
-            setProgress(0.78 + Math.max(0, Math.min(1, progress)) * 0.22);
-            statusEl.textContent = "Initializing…";
-          });
+          unityInstance = await createUnityInstance(
+            canvas,
+            config,
+            (progress) => {
+              setProgress(0.78 + Math.max(0, Math.min(1, progress)) * 0.22);
+              statusEl.textContent = "Initializing…";
+            },
+          );
           overlay.style.display = "none";
         } catch (e) {
           console.error(e);

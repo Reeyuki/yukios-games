@@ -1,7 +1,9 @@
 var Module;
 
 if (typeof Module === "undefined")
-  Module = eval("(function() { try { return Module || {} } catch(e) { return {} } })()");
+  Module = eval(
+    "(function() { try { return Module || {} } catch(e) { return {} } })()",
+  );
 
 if (!Module.expectedDataFileDownloads) {
   Module.expectedDataFileDownloads = 0;
@@ -13,22 +15,30 @@ Module.expectedDataFileDownloads++;
     var PACKAGE_PATH;
     if (typeof window === "object") {
       PACKAGE_PATH = window["encodeURIComponent"](
-        window.location.pathname.toString().substring(0, window.location.pathname.toString().lastIndexOf("/")) + "/"
+        window.location.pathname
+          .toString()
+          .substring(0, window.location.pathname.toString().lastIndexOf("/")) +
+          "/",
       );
     } else if (typeof location !== "undefined") {
       // worker
       PACKAGE_PATH = encodeURIComponent(
-        location.pathname.toString().substring(0, location.pathname.toString().lastIndexOf("/")) + "/"
+        location.pathname
+          .toString()
+          .substring(0, location.pathname.toString().lastIndexOf("/")) + "/",
       );
     } else {
       throw "using preloaded data can only be done on a web page or in a web worker";
     }
     var PACKAGE_NAME = "game.data";
     var REMOTE_PACKAGE_BASE = "game.data";
-    if (typeof Module["locateFilePackage"] === "function" && !Module["locateFile"]) {
+    if (
+      typeof Module["locateFilePackage"] === "function" &&
+      !Module["locateFile"]
+    ) {
       Module["locateFile"] = Module["locateFilePackage"];
       Module.printErr(
-        "warning: you defined Module.locateFilePackage, that has been renamed to Module.locateFile (using your locateFilePackage for now)"
+        "warning: you defined Module.locateFilePackage, that has been renamed to Module.locateFile (using your locateFilePackage for now)",
       );
     }
     var REMOTE_PACKAGE_NAME =
@@ -53,7 +63,7 @@ Module.expectedDataFileDownloads++;
             if (!Module.dataFileDownloads) Module.dataFileDownloads = {};
             Module.dataFileDownloads[url] = {
               loaded: event.loaded,
-              total: size
+              total: size,
             };
           } else {
             Module.dataFileDownloads[url].loaded = event.loaded;
@@ -70,7 +80,11 @@ Module.expectedDataFileDownloads++;
           total = Math.ceil((total * Module.expectedDataFileDownloads) / num);
           if (Module["setStatus"])
             Module["setStatus"](
-              "Downloading data... (" + Math.floor(loaded / 1024 / 1024) + "/" + Math.floor(total / 1024 / 1024) + "M)"
+              "Downloading data... (" +
+                Math.floor(loaded / 1024 / 1024) +
+                "/" +
+                Math.floor(total / 1024 / 1024) +
+                "M)",
             );
         } else if (!Module.dataFileDownloads) {
           if (Module["setStatus"]) Module["setStatus"]("Downloading data...");
@@ -80,7 +94,12 @@ Module.expectedDataFileDownloads++;
         throw new Error("NetworkError for: " + packageName);
       };
       xhr.onload = function (event) {
-        if (xhr.status == 200 || xhr.status == 304 || xhr.status == 206 || (xhr.status == 0 && xhr.response)) {
+        if (
+          xhr.status == 200 ||
+          xhr.status == 304 ||
+          xhr.status == 206 ||
+          (xhr.status == 0 && xhr.response)
+        ) {
           // file URLs can return 0
           var packageData = xhr.response;
           callback(packageData);
@@ -122,19 +141,35 @@ Module.expectedDataFileDownloads++;
         finish: function (byteArray) {
           var that = this;
 
-          Module["FS_createDataFile"](this.name, null, byteArray, true, true, true); // canOwn this data in the filesystem, it is a slide into the heap that will never change
+          Module["FS_createDataFile"](
+            this.name,
+            null,
+            byteArray,
+            true,
+            true,
+            true,
+          ); // canOwn this data in the filesystem, it is a slide into the heap that will never change
           Module["removeRunDependency"]("fp " + that.name);
 
           this.requests[this.name] = null;
-        }
+        },
       };
 
       var files = metadata.files;
       for (i = 0; i < files.length; ++i) {
-        new DataRequest(files[i].start, files[i].end, files[i].crunched, files[i].audio).open("GET", files[i].filename);
+        new DataRequest(
+          files[i].start,
+          files[i].end,
+          files[i].crunched,
+          files[i].audio,
+        ).open("GET", files[i].filename);
       }
 
-      var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+      var indexedDB =
+        window.indexedDB ||
+        window.mozIndexedDB ||
+        window.webkitIndexedDB ||
+        window.msIndexedDB;
       var IDB_RO = "readonly";
       var IDB_RW = "readwrite";
       var DB_NAME = "EM_PRELOAD_CACHE";
@@ -202,15 +237,31 @@ Module.expectedDataFileDownloads++;
         };
       }
 
-      function cacheRemotePackage(db, packageName, packageData, packageMeta, callback, errback) {
+      function cacheRemotePackage(
+        db,
+        packageName,
+        packageData,
+        packageMeta,
+        callback,
+        errback,
+      ) {
         var transaction_packages = db.transaction([PACKAGE_STORE_NAME], IDB_RW);
         var packages = transaction_packages.objectStore(PACKAGE_STORE_NAME);
 
-        var putPackageRequest = packages.put(packageData, "package/" + packageName);
+        var putPackageRequest = packages.put(
+          packageData,
+          "package/" + packageName,
+        );
         putPackageRequest.onsuccess = function (event) {
-          var transaction_metadata = db.transaction([METADATA_STORE_NAME], IDB_RW);
+          var transaction_metadata = db.transaction(
+            [METADATA_STORE_NAME],
+            IDB_RW,
+          );
           var metadata = transaction_metadata.objectStore(METADATA_STORE_NAME);
-          var putMetadataRequest = metadata.put(packageMeta, "metadata/" + packageName);
+          var putMetadataRequest = metadata.put(
+            packageMeta,
+            "metadata/" + packageName,
+          );
           putMetadataRequest.onsuccess = function (event) {
             callback(packageData);
           };
@@ -226,7 +277,10 @@ Module.expectedDataFileDownloads++;
       function processPackageData(arrayBuffer) {
         Module.finishedDataFileDownloads++;
         assert(arrayBuffer, "Loading data file failed.");
-        assert(arrayBuffer instanceof ArrayBuffer, "bad input to processPackageData");
+        assert(
+          arrayBuffer instanceof ArrayBuffer,
+          "bad input to processPackageData",
+        );
         var byteArray = new Uint8Array(arrayBuffer);
         var curr;
 
@@ -234,11 +288,14 @@ Module.expectedDataFileDownloads++;
         // (we may be allocating before malloc is ready, during startup).
         if (Module["SPLIT_MEMORY"])
           Module.printErr(
-            "warning: you should run the file packager with --no-heap-copy when SPLIT_MEMORY is used, otherwise copying into the heap may fail due to the splitting"
+            "warning: you should run the file packager with --no-heap-copy when SPLIT_MEMORY is used, otherwise copying into the heap may fail due to the splitting",
           );
         var ptr = Module["getMemory"](byteArray.length);
         Module["HEAPU8"].set(byteArray, ptr);
-        DataRequest.prototype.byteArray = Module["HEAPU8"].subarray(ptr, ptr + byteArray.length);
+        DataRequest.prototype.byteArray = Module["HEAPU8"].subarray(
+          ptr,
+          ptr + byteArray.length,
+        );
 
         var files = metadata.files;
         for (i = 0; i < files.length; ++i) {
@@ -253,7 +310,12 @@ Module.expectedDataFileDownloads++;
       function preloadFallback(error) {
         console.error(error);
         console.error("falling back to default preload behavior");
-        fetchRemotePackage(REMOTE_PACKAGE_NAME, REMOTE_PACKAGE_SIZE, processPackageData, handleError);
+        fetchRemotePackage(
+          REMOTE_PACKAGE_NAME,
+          REMOTE_PACKAGE_SIZE,
+          processPackageData,
+          handleError,
+        );
       }
 
       openDatabase(function (db) {
@@ -264,7 +326,12 @@ Module.expectedDataFileDownloads++;
             Module.preloadResults[PACKAGE_NAME] = { fromCache: useCached };
             if (useCached) {
               console.info("loading " + PACKAGE_NAME + " from cache");
-              fetchCachedPackage(db, PACKAGE_PATH + PACKAGE_NAME, processPackageData, preloadFallback);
+              fetchCachedPackage(
+                db,
+                PACKAGE_PATH + PACKAGE_NAME,
+                processPackageData,
+                preloadFallback,
+              );
             } else {
               console.info("loading " + PACKAGE_NAME + " from remote");
               fetchRemotePackage(
@@ -280,14 +347,14 @@ Module.expectedDataFileDownloads++;
                     function (error) {
                       console.error(error);
                       processPackageData(packageData);
-                    }
+                    },
                   );
                 },
-                preloadFallback
+                preloadFallback,
               );
             }
           },
-          preloadFallback
+          preloadFallback,
         );
       }, preloadFallback);
 
@@ -303,6 +370,14 @@ Module.expectedDataFileDownloads++;
   loadPackage({
     package_uuid: "d7e34743-2fea-4de6-8a0e-1103b5fcf07f",
     remote_package_size: 10642513,
-    files: [{ filename: "/game.love", crunched: 0, start: 0, end: 10642513, audio: false }]
+    files: [
+      {
+        filename: "/game.love",
+        crunched: 0,
+        start: 0,
+        end: 10642513,
+        audio: false,
+      },
+    ],
   });
 })();

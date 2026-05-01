@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/Reeyuki/web-port@master/ultrakill/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/Reeyuki/web-port@master/ultrakill/"
+    />
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Unity WebGL Player | ULTRAKILL</title>
@@ -28,7 +30,13 @@
   <body style="text-align: center; padding: 0; border: 0; margin: 0">
     <div
       id="loading-text"
-      style="color: black; font-family: cursive; font-size: 48px; text-align: center; margin-top: 20px"
+      style="
+        color: black;
+        font-family: cursive;
+        font-size: 48px;
+        text-align: center;
+        margin-top: 20px;
+      "
     >
       LOADING...
     </div>
@@ -90,7 +98,7 @@
       }
       Promise.all([
         mergeFiles(getParts("Build/ultrakill.data.unityweb", 1, 4)),
-        mergeFiles(getParts("Build/ultrakill.wasm.unityweb", 1, 2))
+        mergeFiles(getParts("Build/ultrakill.wasm.unityweb", 1, 2)),
       ]).then(([dataUrl, wasmurl]) => {
         document.querySelector("#unity-canvas").hidden = false;
         createUnityInstance(document.querySelector("#unity-canvas"), {
@@ -100,7 +108,7 @@
           streamingAssetsUrl: "StreamingAssets",
           companyName: "Hakita and Cake Logic",
           productName: "ULTRAKILL",
-          productVersion: "1.4"
+          productVersion: "1.4",
           // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
           // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
         }).then((e) => {

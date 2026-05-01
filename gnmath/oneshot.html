@@ -22,7 +22,8 @@
 
       body {
         font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif,
+          "Apple Color Emoji", "Segoe UI Emoji";
         margin: 0;
         color: white;
         background: black;
@@ -188,8 +189,17 @@
     <script async="" type="text/javascript" src="index.js"></script>
 
     <script>
-      const hasTouchscreen = window.matchMedia("(hover: none), (pointer: coarse)").matches;
-      const preventNativeKeys = ["ArrowUp", "ArrowDown", "ArrowRight", "ArrowLeft", " ", "F12"];
+      const hasTouchscreen = window.matchMedia(
+        "(hover: none), (pointer: coarse)",
+      ).matches;
+      const preventNativeKeys = [
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowRight",
+        "ArrowLeft",
+        " ",
+        "F12",
+      ];
       const keys = new Map();
       const keysDown = new Map();
       const canvas = document.getElementById("canvas");
@@ -200,7 +210,7 @@
       window.addEventListener("load", (event) => {
         createEasyRpgPlayer({
           game: undefined,
-          saveFs: undefined
+          saveFs: undefined,
         }).then(function (Module) {
           // Module is ready
           easyrpgPlayer = Module;
@@ -216,12 +226,14 @@
       canvas.addEventListener("click", () => canvas.focus());
 
       // Handle clicking on the fullscreen button
-      document.querySelector("#controls-fullscreen").addEventListener("click", () => {
-        const viewport = document.getElementById("viewport");
-        if (viewport.requestFullscreen) {
-          viewport.requestFullscreen();
-        }
-      });
+      document
+        .querySelector("#controls-fullscreen")
+        .addEventListener("click", () => {
+          const viewport = document.getElementById("viewport");
+          if (viewport.requestFullscreen) {
+            viewport.requestFullscreen();
+          }
+        });
 
       /**
        * Simulate a keyboard event on the emscripten canvas

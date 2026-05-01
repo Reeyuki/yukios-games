@@ -5,10 +5,12 @@ const request = `static/games/${new URLSearchParams(window.location.search).get(
 const fallbackRequest = `static/games/flashpointarchive/infinity.unstable.life/Flashpoint/Legacy/htdocs/miniclip.com/games/${new URLSearchParams(window.location.search).get("fpGameName")}/metadata.json`;
 const zipURL = new URL(
   "static/games/flashpointarchive/download.unstable.life/gib-roms/Games/",
-  window.location.origin
+  window.location.origin,
 );
 
-const legacyURL = new URL("https://infinity.unstable.life/Flashpoint/Legacy/htdocs/");
+const legacyURL = new URL(
+  "https://infinity.unstable.life/Flashpoint/Legacy/htdocs/",
+);
 
 // Create copy of unmodified fetch method
 const _fetch = window.fetch;
@@ -18,19 +20,25 @@ const redirect = async (request) => {
   let url = {
     // The requested URL, adjusted to use the launch command as the base rather than the current domain or database API
     original: new URL(
-      [location.origin, zipURL.origin, legacyURL.origin].some((origin) => origin == request.origin)
+      [location.origin, zipURL.origin, legacyURL.origin].some(
+        (origin) => origin == request.origin,
+      )
         ? request.pathname.substring(1)
         : request.href,
-      entry.launchCommand
+      entry.launchCommand,
     ),
     // The actual URL from which the requested file will be retrieved
-    redirect: ""
+    redirect: "",
   };
 
   // If the entry is zipped and requested file exists inside zip, return object URL of file
   if (gameZip != null) {
-    const cleanUrl = decodeURIComponent("content/" + url.original.hostname + url.original.pathname).toLowerCase();
-    const entry = Object.entries(gameZip.files).find((entry) => entry[0].toLowerCase() === cleanUrl);
+    const cleanUrl = decodeURIComponent(
+      "content/" + url.original.hostname + url.original.pathname,
+    ).toLowerCase();
+    const entry = Object.entries(gameZip.files).find(
+      (entry) => entry[0].toLowerCase() === cleanUrl,
+    );
     if (entry !== undefined) {
       const file = entry[1];
       if (file && !file.dir) {
@@ -57,7 +65,11 @@ const players = [
       const player = window.RufflePlayer;
       if (window.RufflePlayer != null) {
         const extension = player.sources.extension;
-        return extension != null && Date.now() - new Date(extension.version.split("+")[1]).getTime() < 86400000;
+        return (
+          extension != null &&
+          Date.now() - new Date(extension.version.split("+")[1]).getTime() <
+            86400000
+        );
       }
       return false;
     },
@@ -90,8 +102,14 @@ const players = [
         }
 
         // Skip URLs that belong to this player or are non-http
-        if (!resourceURL.protocol.startsWith("http") || this.source.startsWith(resourceURL.origin)) {
-          console.log("url belongs to this player or is non-http, skipping: ", resource);
+        if (
+          !resourceURL.protocol.startsWith("http") ||
+          this.source.startsWith(resourceURL.origin)
+        ) {
+          console.log(
+            "url belongs to this player or is non-http, skipping: ",
+            resource,
+          );
           return _fetch(resource, options);
         }
 
@@ -101,7 +119,10 @@ const players = [
 
         // If redirect returns a blob, just fetch it directly
         if (redirected.startsWith("blob:") || redirected.startsWith("data:")) {
-          console.log("Redirected to blob/data URL, fetching as-is: ", redirected);
+          console.log(
+            "Redirected to blob/data URL, fetching as-is: ",
+            redirected,
+          );
           return _fetch(redirected, options);
         }
 
@@ -113,21 +134,30 @@ const players = [
         console.log("Original pathname:", pathname);
 
         // Rewrite Flashpoint paths
-        if (pathname.startsWith("/Flashpoint/Legacy/htdocs/") || /^\/games\/[^/]+\/.+/.test(pathname)) {
-          pathname = "static/games/flashpointarchive/" + original.host + pathname;
+        if (
+          pathname.startsWith("/Flashpoint/Legacy/htdocs/") ||
+          /^\/games\/[^/]+\/.+/.test(pathname)
+        ) {
+          pathname =
+            "static/games/flashpointarchive/" + original.host + pathname;
         }
 
         console.log("Generated pathname:", pathname);
 
         const response = await _fetch(pathname, options);
-        Object.defineProperty(response, "url", { value: redirectInfo.original.href });
+        Object.defineProperty(response, "url", {
+          value: redirectInfo.original.href,
+        });
         return response;
       };
 
       // Create instance of player
       let player = window.RufflePlayer.newest().createPlayer();
       // Set base URL to path of launch command
-      player.config.base = entry.launchCommand.substring(0, entry.launchCommand.lastIndexOf("/") + 1);
+      player.config.base = entry.launchCommand.substring(
+        0,
+        entry.launchCommand.lastIndexOf("/") + 1,
+      );
       // Allow entries that use ExternalInterface to work
       player.config.allowScriptAccess = true;
 
@@ -142,7 +172,7 @@ const players = [
           player.style.height = player.metadata.height + "px";
         }
       });
-    }
+    },
   },
   {
     source: "https://create3000.github.io/code/x_ite/latest/x_ite.min.js",
@@ -162,15 +192,25 @@ const players = [
         let observer = new MutationObserver(async (records) => {
           // Only redirect requests that haven't already been redirected yet
           let r = records.findIndex(
-            (record) => !["blob:", zipURL.href, legacyURL.href].some((prefix) => record.target.src.startsWith(prefix))
+            (record) =>
+              !["blob:", zipURL.href, legacyURL.href].some((prefix) =>
+                record.target.src.startsWith(prefix),
+              ),
           );
-          if (r != -1) records[r].target.src = (await redirect(new URL(records[r].target.src))).redirect;
+          if (r != -1)
+            records[r].target.src = (
+              await redirect(new URL(records[r].target.src))
+            ).redirect;
         });
 
         // Create the element
         let element = _createElement.apply(this, args);
         // If created element is an <img> element, observe changes to source value
-        if (element.tagName == "IMG") observer.observe(element, { attributes: true, attributeFilter: ["src"] });
+        if (element.tagName == "IMG")
+          observer.observe(element, {
+            attributes: true,
+            attributeFilter: ["src"],
+          });
 
         return element;
       };
@@ -181,13 +221,20 @@ const players = [
       player.style.width = "900px";
       player.style.height = "600px";
       // Set base URL to path of launch command
-      player.browser.baseURL = entry.launchCommand.substring(0, entry.launchCommand.lastIndexOf("/") + 1);
+      player.browser.baseURL = entry.launchCommand.substring(
+        0,
+        entry.launchCommand.lastIndexOf("/") + 1,
+      );
 
       // Add player to DOM and load
       document.querySelector(".player").append(player);
-      player.browser.loadURL(new X3D.MFString((await redirect(new URL(entry.launchCommand))).redirect));
-    }
-  }
+      player.browser.loadURL(
+        new X3D.MFString(
+          (await redirect(new URL(entry.launchCommand))).redirect,
+        ),
+      );
+    },
+  },
 ];
 
 // Fetch API request
@@ -231,13 +278,15 @@ async function loadEntry(request) {
 
   // Update right-hand footer links
   document.querySelector(".info").href =
-    "https://flashpointproject.github.io/flashpoint-database/search/#" + entry.uuid;
+    "https://flashpointproject.github.io/flashpoint-database/search/#" +
+    entry.uuid;
   document.querySelector(".link").href = "./?" + entry.uuid;
 
   // Calculate rating and total votes
   let total = entry.votesWorking + entry.votesBroken;
   if (total > 0) {
-    document.querySelector(".fraction").textContent = Math.round((entry.votesWorking / total) * 100) / 10 + "/10";
+    document.querySelector(".fraction").textContent =
+      Math.round((entry.votesWorking / total) * 100) / 10 + "/10";
     document.querySelector(".total").textContent = total;
   }
 
@@ -245,17 +294,19 @@ async function loadEntry(request) {
   document.querySelectorAll(".button").forEach((elem) =>
     elem.addEventListener("click", () => {
       document.querySelector(".vote").textContent = "Thank you.";
-      _fetch(`${oooo}/${elem.classList[1]}?id=${entry.uuid}`, { method: "POST" });
-    })
+      _fetch(`${oooo}/${elem.classList[1]}?id=${entry.uuid}`, {
+        method: "POST",
+      });
+    }),
   );
-  
+
   // Identify appropriate player based on launch command
   let p = Math.max(
     0,
     ((launchPath) =>
-      players.findIndex((player) => player.extensions.some((ext) => launchPath.toLowerCase().endsWith(ext))))(
-      new URL(entry.launchCommand).pathname
-    )
+      players.findIndex((player) =>
+        player.extensions.some((ext) => launchPath.toLowerCase().endsWith(ext)),
+      ))(new URL(entry.launchCommand).pathname),
   );
 
   // Don't load a second instance of player if it's already active (ie. by using an extension)
@@ -274,7 +325,9 @@ async function loadEntry(request) {
       // If the entry is zipped, retrieve zip from API and load into JSZip
       try {
         gameZip = await new JSZip().loadAsync(
-          await fetch(new URL(`${zipURL.toString()}${entry.uuid}-${entry.utcMilli}.zip`)).then((r) => r.blob())
+          await fetch(
+            new URL(`${zipURL.toString()}${entry.uuid}-${entry.utcMilli}.zip`),
+          ).then((r) => r.blob()),
         );
         console.log("Loaded GameZIP");
         window.gameZip = gameZip;
@@ -283,7 +336,8 @@ async function loadEntry(request) {
         let player = document.querySelector(".player");
         player.style.fontSize = "12px";
         player.style.padding = "16px 0 20px";
-        player.textContent = "Failed to load entry. This is not an emulator issue.";
+        player.textContent =
+          "Failed to load entry. This is not an emulator issue.";
         return;
       }
     }

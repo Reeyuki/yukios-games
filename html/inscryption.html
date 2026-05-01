@@ -81,7 +81,7 @@
       const state = {
         total: 0,
         loaded: 0,
-        done: false
+        done: false,
       };
       const EXPECTED_DATA_TOTAL_BYTES = 1448 * 1048576;
       const DATA_DOWNLOAD_CONCURRENCY = 8;
@@ -95,7 +95,8 @@
         document.getElementById("slider").value = percent;
         const text = document.getElementById("text");
         if (state.done) {
-          text.textContent = "Download complete (" + mb(state.total).toFixed(2) + " MB)";
+          text.textContent =
+            "Download complete (" + mb(state.total).toFixed(2) + " MB)";
           return;
         }
         text.textContent =
@@ -123,10 +124,15 @@
             return res.arrayBuffer();
           } catch (err) {
             if (attempt < retries) {
-              console.warn(`Retry ${attempt + 1}/${retries} for ${url}:`, err.message);
+              console.warn(
+                `Retry ${attempt + 1}/${retries} for ${url}:`,
+                err.message,
+              );
               await sleep(RETRY_DELAY_MS * (attempt + 1));
             } else {
-              throw new Error("Failed after " + (retries + 1) + " attempts: " + url);
+              throw new Error(
+                "Failed after " + (retries + 1) + " attempts: " + url,
+              );
             }
           }
         }
@@ -142,7 +148,9 @@
         }
 
         // All wasm parts fetched in parallel with retry
-        const buffers = await Promise.all(partUrls.map((url) => fetchBufferWithRetry(url)));
+        const buffers = await Promise.all(
+          partUrls.map((url) => fetchBufferWithRetry(url)),
+        );
 
         if (trackProgress) {
           let size = 0;
@@ -153,10 +161,13 @@
           render();
         }
 
-        const blob = new Blob(buffers, contentType ? { type: contentType } : {});
+        const blob = new Blob(
+          buffers,
+          contentType ? { type: contentType } : {},
+        );
         return new Response(blob, {
           status: 200,
-          headers: contentType ? { "Content-Type": contentType } : {}
+          headers: contentType ? { "Content-Type": contentType } : {},
         });
       }
 
@@ -209,10 +220,15 @@
             return out.buffer;
           } catch (err) {
             if (attempt < retries) {
-              console.warn(`Retry ${attempt + 1}/${retries} for ${url}:`, err.message);
+              console.warn(
+                `Retry ${attempt + 1}/${retries} for ${url}:`,
+                err.message,
+              );
               await sleep(RETRY_DELAY_MS * (attempt + 1));
             } else {
-              throw new Error("Failed after " + (retries + 1) + " attempts: " + url);
+              throw new Error(
+                "Failed after " + (retries + 1) + " attempts: " + url,
+              );
             }
           }
         }
@@ -278,7 +294,10 @@
         const url = typeof input === "string" ? input : input.url;
 
         if (url.includes("473b9593aa93436d0dfd3c30217f126b.data")) {
-          return fetchByAlphabetParts("Build/473b9593aa93436d0dfd3c30217f126b.data.part_", true);
+          return fetchByAlphabetParts(
+            "Build/473b9593aa93436d0dfd3c30217f126b.data.part_",
+            true,
+          );
         }
 
         if (url.includes("2a21aa2df9743ada0aa5cac7d789934d.wasm")) {
@@ -288,10 +307,10 @@
               "Build/2a21aa2df9743ada0aa5cac7d789934d.wasm.part_01",
               "Build/2a21aa2df9743ada0aa5cac7d789934d.wasm.part_02",
               "Build/2a21aa2df9743ada0aa5cac7d789934d.wasm.part_03",
-              "Build/2a21aa2df9743ada0aa5cac7d789934d.wasm.part_04"
+              "Build/2a21aa2df9743ada0aa5cac7d789934d.wasm.part_04",
             ],
             "application/wasm",
-            false
+            false,
           );
         }
 
@@ -302,7 +321,8 @@
 
       document.getElementById("fsBtn").onclick = function () {
         if (canvas.requestFullscreen) canvas.requestFullscreen();
-        else if (canvas.webkitRequestFullscreen) canvas.webkitRequestFullscreen();
+        else if (canvas.webkitRequestFullscreen)
+          canvas.webkitRequestFullscreen();
         else if (canvas.mozRequestFullScreen) canvas.mozRequestFullScreen();
         else if (canvas.msRequestFullscreen) canvas.msRequestFullscreen();
       };
@@ -310,7 +330,8 @@
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         const meta = document.createElement("meta");
         meta.name = "viewport";
-        meta.content = "width=device-width, height=device-height, initial-scale=1.0, user-scalable=no";
+        meta.content =
+          "width=device-width, height=device-height, initial-scale=1.0, user-scalable=no";
         document.head.appendChild(meta);
         canvas.style.width = "100%";
         canvas.style.height = "100%";
@@ -324,7 +345,7 @@
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Daniel Mullins Games",
         productName: "Inscryption",
-        productVersion: "Release"
+        productVersion: "Release",
       }).then(() => {
         document.getElementById("loader").style.display = "none";
       });

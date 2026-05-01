@@ -17,9 +17,14 @@
             for (var _i = 0; _i < arguments.length; _i++) {
               data[_i] = arguments[_i];
             }
-            if (data.length == 1) //Start looking for api's (And dont show anything)
+            if (
+              data.length == 1
+            ) //Start looking for api's (And dont show anything)
             {
-              if (typeof data[0] == "string" && data[0].indexOf("callJavascriptFunction") != -1) //Contains function
+              if (
+                typeof data[0] == "string" &&
+                data[0].indexOf("callJavascriptFunction") != -1
+              ) //Contains function
               {
                 // oldConsole.log(data[0]);
                 try {
@@ -30,7 +35,7 @@
                       data[0].split("callJavascriptFunction ")[1] +
                       "\nError: '" +
                       e.message +
-                      "'"
+                      "'",
                   );
                   return null;
                 }
@@ -88,7 +93,7 @@
           },
           groupEnd: function () {
             oldConsole.groupEnd();
-          }
+          },
         };
       })(window.console);
       window.console = newConsole;
@@ -166,8 +171,16 @@
   </head>
   <body>
     <div id="game-wrapper">
-      <canvas id="loadingCanvas" oncontextmenu="event.preventDefault()"></canvas>
-      <canvas id="canvas" oncontextmenu="event.preventDefault()" width="100%" height="100%"></canvas>
+      <canvas
+        id="loadingCanvas"
+        oncontextmenu="event.preventDefault()"
+      ></canvas>
+      <canvas
+        id="canvas"
+        oncontextmenu="event.preventDefault()"
+        width="100%"
+        height="100%"
+      ></canvas>
 
       <div id="loading-overlay">
         <div id="loading-status">Loading...</div>
@@ -175,7 +188,6 @@
           <div id="progress-fill"></div>
         </div>
       </div>
-
     </div>
 
     <script type="text/javascript">
@@ -184,11 +196,18 @@
       };
 
       var canvas = document.getElementById("loadingCanvas");
-      canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-      canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      canvas.width =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
+      canvas.height =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight;
 
       document.getElementById("game-wrapper").style.width = canvas.width + "px";
-      document.getElementById("game-wrapper").style.height = canvas.height + "px";
+      document.getElementById("game-wrapper").style.height =
+        canvas.height + "px";
 
       window.onload = function () {
         window.focus();
@@ -204,7 +223,7 @@
             e.preventDefault();
           }
         },
-        false
+        false,
       );
 
       var Module = {
@@ -219,7 +238,7 @@
               alert("WebGL context lost. You will need to reload the page.");
               e.preventDefault();
             },
-            false
+            false,
           );
           return c;
         })(),
@@ -243,16 +262,21 @@
 
           var fill = document.getElementById("progress-fill");
           if (this.totalDependencies > 0) {
-            var pct = ((this.totalDependencies - left) / this.totalDependencies) * 100;
+            var pct =
+              ((this.totalDependencies - left) / this.totalDependencies) * 100;
             fill.style.width = pct + "%";
           }
 
           Module.setStatus(
             left
-              ? "Preparing... (" + (this.totalDependencies - left) + "/" + this.totalDependencies + ")"
-              : "All downloads complete."
+              ? "Preparing... (" +
+                  (this.totalDependencies - left) +
+                  "/" +
+                  this.totalDependencies +
+                  ")"
+              : "All downloads complete.",
           );
-        }
+        },
       };
 
       Module.setStatus("Downloading...");
@@ -269,6 +293,11 @@
       };
     </script>
     <script type="text/javascript" src="game.js"></script>
-    <script async type="text/javascript" src="love.js" onload="applicationLoad(this)"></script>
+    <script
+      async
+      type="text/javascript"
+      src="love.js"
+      onload="applicationLoad(this)"
+    ></script>
   </body>
 </html>

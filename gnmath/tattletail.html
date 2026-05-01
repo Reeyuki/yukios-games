@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@latest/tattletail/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/genizy/web-port@latest/tattletail/"
+    />
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Tattletail</title>
@@ -36,7 +38,13 @@
   <body>
     <div
       id="loading-text"
-      style="color: white; font-size: 48px; font-family: cursive; text-align: center; margin-top: 20px"
+      style="
+        color: white;
+        font-size: 48px;
+        font-family: cursive;
+        text-align: center;
+        margin-top: 20px;
+      "
     >
       LOADING...
     </div>
@@ -70,7 +78,10 @@
           chunks.push(value);
           const doneText = formatSize(loadedBytes);
           const totalText = formatSize(totalBytes);
-          const percent = totalBytes > 0 ? ((loadedBytes / totalBytes) * 100).toFixed(1) : "?";
+          const percent =
+            totalBytes > 0
+              ? ((loadedBytes / totalBytes) * 100).toFixed(1)
+              : "?";
           loadingText.textContent = `LOADING... ${doneText} / ${totalText} (${percent}%)`;
         }
         let fullBuffer = new Uint8Array(received);
@@ -112,10 +123,10 @@
           graphicsAPI: ["WebGL 2.0", "WebGL 1.0"],
           webglContextAttributes: { preserveDrawingBuffer: false },
           splashScreenStyle: "Dark",
-          backgroundColor: "#000000"
+          backgroundColor: "#000000",
         };
         let blob = new Blob([JSON.stringify(json)], {
-          type: "application/json"
+          type: "application/json",
         });
         let blobUrl = URL.createObjectURL(blob);
         document.querySelector("#gameContainer").hidden = false;
@@ -128,8 +139,8 @@
                 resizeUnityContainer();
               };
               document.querySelector("#loading-text").remove();
-            }
-          }
+            },
+          },
         });
       })();
     </script>

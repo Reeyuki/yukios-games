@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/Reeyuki/web-port@main/kindergarten/2/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/Reeyuki/web-port@main/kindergarten/2/"
+    />
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>gn-math.github.io | Kindergarten2</title>
@@ -30,7 +32,13 @@
   <body>
     <div
       id="loading-text"
-      style="color: black; font-family: cursive; font-size: 48px; text-align: center; margin-top: 20px"
+      style="
+        color: black;
+        font-family: cursive;
+        font-size: 48px;
+        text-align: center;
+        margin-top: 20px;
+      "
     >
       LOADING...
     </div>
@@ -86,7 +94,7 @@
       }
       Promise.all([
         mergeFiles(getParts("Build/Build.data", 1, 2)),
-        mergeFiles(getParts("Build/Build.wasm", 1, 3))
+        mergeFiles(getParts("Build/Build.wasm", 1, 3)),
       ]).then(([dataUrl, wasmUrl]) => {
         container.hidden = false;
         var buildUrl = "Build";
@@ -99,7 +107,7 @@
           companyName: "SmashGames",
           productName: "Kindergarten2",
           productVersion: "2.00",
-          showBanner: unityShowBanner
+          showBanner: unityShowBanner,
         };
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
           var meta = document.createElement("meta");

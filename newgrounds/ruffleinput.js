@@ -101,7 +101,7 @@ var NgRuffle = (function () {
     BracketLeft: { key: "[", keyCode: 219, location: 0 },
     Backslash: { key: "\\", keyCode: 220, location: 0 },
     BracketRight: { key: "]", keyCode: 221, location: 0 },
-    Quote: { key: "'", keyCode: 222, location: 0 }
+    Quote: { key: "'", keyCode: 222, location: 0 },
   };
   class u {
     constructor(o) {
@@ -116,7 +116,7 @@ var NgRuffle = (function () {
           code: o,
           keyCode: t.keyCode,
           which: t.keyCode,
-          location: t.location
+          location: t.location,
         });
       (this.playerElement.focus(), this.playerElement.dispatchEvent(y));
     }
@@ -139,9 +139,12 @@ var NgRuffle = (function () {
       12: "DU",
       13: "DD",
       14: "DL",
-      15: "DR"
+      15: "DR",
     };
-    #a = { LS: { axes: [0, 1], dirs: ["L", "R", "U", "D"] }, RS: { axes: [2, 3], dirs: ["L", "R", "U", "D"] } };
+    #a = {
+      LS: { axes: [0, 1], dirs: ["L", "R", "U", "D"] },
+      RS: { axes: [2, 3], dirs: ["L", "R", "U", "D"] },
+    };
     #e = [];
     #o = [];
     #t = [];
@@ -154,10 +157,12 @@ var NgRuffle = (function () {
     }
     setInputMaps(o) {
       if (o) {
-        ((this.#e = o || this.#e), Array.isArray(this.#e) || (this.#e = [this.#e]));
+        ((this.#e = o || this.#e),
+          Array.isArray(this.#e) || (this.#e = [this.#e]));
         for (let e = 0; e < this.#e.length; e++)
           if (this.#e[e])
-            for (const [t, y] of Object.entries(this.#e[e])) typeof y == "object" && y.key && (this.#e[e][t] = y.key);
+            for (const [t, y] of Object.entries(this.#e[e]))
+              typeof y == "object" && y.key && (this.#e[e][t] = y.key);
       }
     }
     checkStatus() {
@@ -167,7 +172,11 @@ var NgRuffle = (function () {
         if (!o[e]) continue;
         const t = o[e];
         let y = this.#t.indexOf(e);
-        if ((y === -1 && (this.#t.push(e), (y = this.#t.length - 1)), y >= this.#e.length)) break;
+        if (
+          (y === -1 && (this.#t.push(e), (y = this.#t.length - 1)),
+          y >= this.#e.length)
+        )
+          break;
         if (t) {
           this.#o[y] || (this.#o[y] = {});
           const C = this.#e[y],
@@ -186,7 +195,11 @@ var NgRuffle = (function () {
               ) {
                 let i = t.axes[n[0]],
                   c = t.axes[n[1]];
-                if ((Math.abs(i) < this.#y && (i = 0), Math.abs(c) < this.#y && (c = 0), i || c)) {
+                if (
+                  (Math.abs(i) < this.#y && (i = 0),
+                  Math.abs(c) < this.#y && (c = 0),
+                  i || c)
+                ) {
                   const a = Math.round(Math.atan2(c, i) * (180 / Math.PI));
                   (a >= 135 - d || a <= -135 + d
                     ? (s[`${k}${l[0]}`] = !0)
@@ -207,7 +220,8 @@ var NgRuffle = (function () {
               const n = this.#i[h];
               if (!C[n]) return;
               const l = r[n] || !1;
-              k.pressed !== l && ((r[n] = k.pressed), this.dispatch(C[n], k.pressed));
+              k.pressed !== l &&
+                ((r[n] = k.pressed), this.dispatch(C[n], k.pressed));
             });
         }
       }

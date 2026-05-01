@@ -118,7 +118,7 @@
         xhr.open(
           "GET",
           "https://nostaligafun.pages.dev/games/games-accualy/OTHER/MinecraftLegacyConsoleEdition_Data/Minecraft.Client.data",
-          true
+          true,
         );
         xhr.responseType = "arraybuffer";
 
@@ -162,12 +162,18 @@
         monitorRunDependencies(left) {
           this.totalDependencies = Math.max(this.totalDependencies || 0, left);
           setStatus(
-            left ? "Preparing... (" + (this.totalDependencies - left) + "/" + this.totalDependencies + ")" : ""
+            left
+              ? "Preparing... (" +
+                  (this.totalDependencies - left) +
+                  "/" +
+                  this.totalDependencies +
+                  ")"
+              : "",
           );
         },
         getPreloadedPackage() {
           return cachedData;
-        }
+        },
       };
 
       hardResize();

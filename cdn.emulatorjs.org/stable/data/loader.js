@@ -7,10 +7,11 @@
     "gamepad.js",
     "GameManager.js",
     "socket.io.min.js",
-    "compression.js"
+    "compression.js",
   ];
 
-  const folderPath = (path) => path.substring(0, path.length - path.split("/").pop().length);
+  const folderPath = (path) =>
+    path.substring(0, path.length - path.split("/").pop().length);
   let scriptPath =
     typeof window.EJS_pathtodata === "string"
       ? window.EJS_pathtodata
@@ -21,7 +22,10 @@
     return new Promise(function (resolve) {
       let script = document.createElement("script");
       script.src = (function () {
-        if ("undefined" != typeof EJS_paths && typeof EJS_paths[file] === "string") {
+        if (
+          "undefined" != typeof EJS_paths &&
+          typeof EJS_paths[file] === "string"
+        ) {
           return EJS_paths[file];
         } else if (file.endsWith("emulator.min.js")) {
           return scriptPath + file;
@@ -42,7 +46,10 @@
       let css = document.createElement("link");
       css.rel = "stylesheet";
       css.href = (function () {
-        if ("undefined" != typeof EJS_paths && typeof EJS_paths[file] === "string") {
+        if (
+          "undefined" != typeof EJS_paths &&
+          typeof EJS_paths[file] === "string"
+        ) {
           return EJS_paths[file];
         } else {
           return scriptPath + file;
@@ -62,7 +69,7 @@
     console[minifiedFailed ? "warn" : "error"](
       "Failed to load " +
         file +
-        " beacuse it's likly that the minified files are missing.\nTo fix this you have 3 options:\n1. You can download the zip from the latest release here: https://github.com/EmulatorJS/EmulatorJS/releases/latest - Stable\n2. You can download the zip from here: https://cdn.emulatorjs.org/latest/data/emulator.min.zip and extract it to the data/ folder. (easiest option) - Beta\n3. You can build the files by running `npm i && npm run build` in the data/minify folder. (hardest option) - Beta\nNote: you will probably need to do the same for the cores, extract them to the data/cores/ folder."
+        " beacuse it's likly that the minified files are missing.\nTo fix this you have 3 options:\n1. You can download the zip from the latest release here: https://github.com/EmulatorJS/EmulatorJS/releases/latest - Stable\n2. You can download the zip from here: https://cdn.emulatorjs.org/latest/data/emulator.min.zip and extract it to the data/ folder. (easiest option) - Beta\n3. You can build the files by running `npm i && npm run build` in the data/minify folder. (hardest option) - Beta\nNote: you will probably need to do the same for the cores, extract them to the data/cores/ folder.",
     );
     if (minifiedFailed) {
       console.log("Attempting to load non-minified files");
@@ -129,21 +136,29 @@
   config.noAutoFocus = window.EJS_noAutoFocus;
   config.videoRotation = window.EJS_videoRotation;
   config.hideSettings = window.EJS_hideSettings;
-  config.shaders = Object.assign({}, window.EJS_SHADERS, window.EJS_shaders ? window.EJS_shaders : {});
+  config.shaders = Object.assign(
+    {},
+    window.EJS_SHADERS,
+    window.EJS_shaders ? window.EJS_shaders : {},
+  );
 
   let systemLang;
   try {
     systemLang = Intl.DateTimeFormat().resolvedOptions().locale;
   } catch (e) {} //Ignore
   if (
-    (typeof window.EJS_language === "string" && window.EJS_language !== "en-US") ||
+    (typeof window.EJS_language === "string" &&
+      window.EJS_language !== "en-US") ||
     (systemLang && window.EJS_disableAutoLang !== false)
   ) {
     const language = window.EJS_language || systemLang;
     try {
       let path;
       console.log("Loading language", language);
-      if ("undefined" != typeof EJS_paths && typeof EJS_paths[language] === "string") {
+      if (
+        "undefined" != typeof EJS_paths &&
+        typeof EJS_paths[language] === "string"
+      ) {
         path = EJS_paths[language];
       } else {
         path = scriptPath + "localization/" + language + ".json";
@@ -153,7 +168,9 @@
     } catch (e) {
       console.log("Missing language", language, "!! Falling back to English.");
       config.language = "en-US";
-      config.langJson = JSON.parse(await (await fetch(scriptPath + "localization/en-US.json")).text());
+      config.langJson = JSON.parse(
+        await (await fetch(scriptPath + "localization/en-US.json")).text(),
+      );
     }
   }
 

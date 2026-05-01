@@ -1,6 +1,7 @@
 function createUnityInstance(r, n, l) {
   function s(e, r) {
-    if (!s.aborted && n.showBanner) return ("error" == r && (s.aborted = !0), n.showBanner(e, r));
+    if (!s.aborted && n.showBanner)
+      return ("error" == r && (s.aborted = !0), n.showBanner(e, r));
     switch (r) {
       case "error":
         console.error(e);
@@ -19,7 +20,11 @@ function createUnityInstance(r, n, l) {
     (n += "\n" + (t = t.startsWith(n) ? t.substring(n.length) : t).trim()) &&
       c.stackTraceRegExp &&
       c.stackTraceRegExp.test(n) &&
-      g(n, e.filename || (r && (r.fileName || r.sourceURL)) || "", e.lineno || (r && (r.lineNumber || r.line)) || 0);
+      g(
+        n,
+        e.filename || (r && (r.fileName || r.sourceURL)) || "",
+        e.lineno || (r && (r.lineNumber || r.line)) || 0,
+      );
   }
   function e(e, r, n) {
     var t = e[r];
@@ -29,7 +34,7 @@ function createUnityInstance(r, n, l) {
           r +
           '" is missing or empty. Falling back to default value: "' +
           n +
-          '". Consider updating your WebGL template to include the missing config option.'
+          '". Consider updating your WebGL template to include the missing config option.',
       ),
       (e[r] = n));
   }
@@ -63,21 +68,24 @@ function createUnityInstance(r, n, l) {
                   'HTTP Response Header "Content-Type" configured incorrectly on the server for file ' +
                     c.codeUrl +
                     ' , should be "application/wasm". Startup time performance will suffer.',
-                  "warning"
+                  "warning",
                 )
               : s(
                   'WebAssembly streaming compilation failed! This can happen for example if "Content-Encoding" HTTP header is incorrectly enabled on the server for file ' +
                     c.codeUrl +
                     ", but the file is not pre-compressed on disk (or vice versa). Check the Network tab in browser Devtools to debug server header configuration.",
-                  "warning"
+                  "warning",
                 )));
       },
       locateFile: function (e) {
         return "build.wasm" == e ? this.codeUrl : e;
       },
-      disabledCanvasEvents: ["contextmenu", "dragstart"]
+      disabledCanvasEvents: ["contextmenu", "dragstart"],
     };
-  for (o in (e(n, "companyName", "Unity"), e(n, "productName", "WebGL Player"), e(n, "productVersion", "1.0"), n))
+  for (o in (e(n, "companyName", "Unity"),
+  e(n, "productName", "WebGL Player"),
+  e(n, "productVersion", "1.0"),
+  n))
     c[o] = n[o];
   c.streamingAssetsUrl = new URL(c.streamingAssetsUrl, document.URL).href;
   var a = c.disabledCanvasEvents.slice();
@@ -94,7 +102,10 @@ function createUnityInstance(r, n, l) {
   function f(e) {
     document.webkitCurrentFullScreenElement === r
       ? r.style.width &&
-        ((d = r.style.width), (u = r.style.height), (r.style.width = "100%"), (r.style.height = "100%"))
+        ((d = r.style.width),
+        (u = r.style.height),
+        (r.style.width = "100%"),
+        (r.style.height = "100%"))
       : d && ((r.style.width = d), (r.style.height = u), (u = d = ""));
   }
   (document.addEventListener("webkitfullscreenchange", f),
@@ -135,9 +146,9 @@ function createUnityInstance(r, n, l) {
         totalWASMHeapSize: c.HEAPU32[e >> 2],
         usedWASMHeapSize: c.HEAPU32[1 + (e >> 2)],
         totalJSHeapSize: c.HEAPF64[1 + (e >> 3)],
-        usedJSHeapSize: c.HEAPF64[2 + (e >> 3)]
+        usedJSHeapSize: c.HEAPF64[2 + (e >> 3)],
       };
-    }
+    },
   };
   function g(e, r, n) {
     -1 == e.indexOf("fullscreen error") &&
@@ -145,7 +156,8 @@ function createUnityInstance(r, n, l) {
         ? c.startupErrorHandler(e, r, n)
         : (c.errorHandler && c.errorHandler(e, r, n)) ||
           (console.log("Invoking error handler due to\n" + e),
-          "function" == typeof dump && dump("Invoking error handler due to\n" + e),
+          "function" == typeof dump &&
+            dump("Invoking error handler due to\n" + e),
           g.didShowErrorMessage ||
             (-1 !=
             (e =
@@ -170,10 +182,18 @@ function createUnityInstance(r, n, l) {
       var n = c.downloadProgress[e],
         t =
           ((n =
-            n || (c.downloadProgress[e] = { started: !1, finished: !1, lengthComputable: !1, total: 0, loaded: 0 })),
+            n ||
+            (c.downloadProgress[e] = {
+              started: !1,
+              finished: !1,
+              lengthComputable: !1,
+              total: 0,
+              loaded: 0,
+            })),
           "object" != typeof r ||
             ("progress" != r.type && "load" != r.type) ||
-            (n.started || ((n.started = !0), (n.lengthComputable = r.lengthComputable)),
+            (n.started ||
+              ((n.started = !0), (n.lengthComputable = r.lengthComputable)),
             (n.total = r.total),
             (n.loaded = r.loaded),
             "load" == r.type && (n.finished = !0)),
@@ -184,7 +204,10 @@ function createUnityInstance(r, n, l) {
         s = 0;
       for (e in c.downloadProgress) {
         if (!(n = c.downloadProgress[e]).started) return;
-        (a++, n.lengthComputable ? ((t += n.loaded), (o += n.total), i++) : n.finished || s++);
+        (a++,
+          n.lengthComputable
+            ? ((t += n.loaded), (o += n.total), i++)
+            : n.finished || s++);
       }
       l(0.9 * (a ? (a - s - (o ? (i * (o - t)) / o : 0)) / a : 0));
     }
@@ -198,7 +221,7 @@ function createUnityInstance(r, n, l) {
             var e,
               r = [
                 ["br", "br"],
-                ["gz", "gzip"]
+                ["gz", "gzip"],
               ];
             for (e in r) {
               var n,
@@ -210,7 +233,7 @@ function createUnityInstance(r, n, l) {
                     ? void s(
                         n +
                           " Loading pre-compressed (brotli or gzip) content via a file:// URL without a web server is not supported by this browser. Please use a local development web server to host compressed Unity content, or use the Unity Build and Run option.",
-                        "error"
+                        "error",
                       )
                     : ((n +=
                         ' This can happen if build compression was enabled but web server hosting the content was misconfigured to not serve the file with HTTP Response Header "Content-Encoding: ' +
@@ -219,7 +242,8 @@ function createUnityInstance(r, n, l) {
                       "br" == t[0] &&
                         "http:" == location.protocol &&
                         ((t =
-                          -1 != ["localhost", "127.0.0.1"].indexOf(location.hostname)
+                          -1 !=
+                          ["localhost", "127.0.0.1"].indexOf(location.hostname)
                             ? ""
                             : "Migrate your server to use HTTPS."),
                         (n = /Firefox/.test(navigator.userAgent)
@@ -238,7 +262,7 @@ function createUnityInstance(r, n, l) {
               "Unable to parse " +
                 c.frameworkUrl +
                 "! The file is corrupt, or compression was misconfigured? (check Content-Encoding HTTP Response Header on web server)",
-              "error"
+              "error",
             );
           }
           var o = unityFramework;
@@ -249,7 +273,7 @@ function createUnityInstance(r, n, l) {
             "Unable to load file " +
               c.frameworkUrl +
               "! Check that the file exists on the remote server. (also check browser Console and Devtools Network tab to debug)",
-            "error"
+            "error",
           );
         }),
         document.body.appendChild(i),
@@ -259,7 +283,10 @@ function createUnityInstance(r, n, l) {
     }).then(function (e) {
       e(c);
     });
-    (p((n = "dataUrl")), (e = c.fetchWithProgress), (r = c[n]), (r = /file:\/\//.exec(r) ? "same-origin" : void 0));
+    (p((n = "dataUrl")),
+      (e = c.fetchWithProgress),
+      (r = c[n]),
+      (r = /file:\/\//.exec(r) ? "same-origin" : void 0));
     var n,
       e,
       r,
@@ -272,7 +299,7 @@ function createUnityInstance(r, n, l) {
         mode: r,
         onProgress: function (e) {
           p(n, e);
-        }
+        },
       })
         .then(function (e) {
           return e.parsedBody;
@@ -283,7 +310,7 @@ function createUnityInstance(r, n, l) {
             ? s(
                 r +
                   ". Loading web pages via a file:// URL without a web server is not supported by this browser. Please use a local development web server to host Unity content, or use the Unity Build and Run option.",
-                "error"
+                "error",
               )
             : console.error(r);
         });
@@ -293,15 +320,24 @@ function createUnityInstance(r, n, l) {
           var r = new DataView(e.buffer, e.byteOffset, e.byteLength),
             n = 0,
             t = "UnityWebData1.0\0";
-          if (!String.fromCharCode.apply(null, e.subarray(n, n + t.length)) == t) throw "unknown data format";
+          if (
+            !String.fromCharCode.apply(null, e.subarray(n, n + t.length)) == t
+          )
+            throw "unknown data format";
           var o = r.getUint32((n += t.length), !0);
           for (n += 4; n < o; ) {
             var a = r.getUint32(n, !0),
               i = ((n += 4), r.getUint32(n, !0)),
               s = ((n += 4), r.getUint32(n, !0)),
-              l = ((n += 4), String.fromCharCode.apply(null, e.subarray(n, n + s)));
+              l =
+                ((n += 4),
+                String.fromCharCode.apply(null, e.subarray(n, n + s)));
             n += s;
-            for (var d = 0, u = l.indexOf("/", d) + 1; 0 < u; d = u, u = l.indexOf("/", d) + 1)
+            for (
+              var d = 0, u = l.indexOf("/", d) + 1;
+              0 < u;
+              d = u, u = l.indexOf("/", d) + 1
+            )
               c.FS_createPath(l.substring(0, d), l.substring(d, u - 1), !0, !0);
             c.FS_createDataFile(l, null, e.subarray(a, a + i), !0, !0, !0);
           }
@@ -326,7 +362,7 @@ function createUnityInstance(r, n, l) {
           ["Chrome", "Chrome"],
           ["CriOS", "Chrome on iOS Safari"],
           ["FxiOS", "Firefox on iOS Safari"],
-          ["Safari", "Safari"]
+          ["Safari", "Safari"],
         ];
       function i(e, r, n) {
         return (e = RegExp(e, "i").exec(r)) && e[n];
@@ -348,7 +384,7 @@ function createUnityInstance(r, n, l) {
             ["OpenBSD( )", "OpenBSD"],
             ["Linux|X11()", "Linux"],
             ["Mac OS X ([0-9_\\.]+)", "MacOS"],
-            ["bot|google|baidu|bing|msn|teoma|slurp|yandex", "Search Bot"]
+            ["bot|google|baidu|bing|msn|teoma|slurp|yandex", "Search Bot"],
           ],
           d = 0;
         d < l.length;
@@ -368,15 +404,21 @@ function createUnityInstance(r, n, l) {
             "NT 6.1": "7",
             "NT 6.2": "8",
             "NT 6.3": "8.1",
-            "NT 10.0": "10"
+            "NT 10.0": "10",
           }[c] || c,
         f =
           ((f = document.createElement("canvas")) &&
             ((u = (h = f.getContext("webgl2")) ? 2 : 0),
             h || ((h = f && f.getContext("webgl")) && (u = 1)),
-            h && (t = (h.getExtension("WEBGL_debug_renderer_info") && h.getParameter(37446)) || h.getParameter(7937))),
+            h &&
+              (t =
+                (h.getExtension("WEBGL_debug_renderer_info") &&
+                  h.getParameter(37446)) ||
+                h.getParameter(7937))),
           "undefined" != typeof SharedArrayBuffer),
-        h = "object" == typeof WebAssembly && "function" == typeof WebAssembly.compile;
+        h =
+          "object" == typeof WebAssembly &&
+          "function" == typeof WebAssembly.compile;
       return {
         width: screen.width,
         height: screen.height,
@@ -390,10 +432,12 @@ function createUnityInstance(r, n, l) {
         language: navigator.userLanguage || navigator.language,
         hasWebGL: u,
         hasCursorLock: !!document.body.requestPointerLock,
-        hasFullscreen: !!document.body.requestFullscreen || !!document.body.webkitRequestFullscreen,
+        hasFullscreen:
+          !!document.body.requestFullscreen ||
+          !!document.body.webkitRequestFullscreen,
         hasThreads: f,
         hasWasm: h,
-        hasWasmThreads: !1
+        hasWasmThreads: !1,
       };
     })()),
     (c.abortHandler = function (e) {
@@ -423,7 +467,7 @@ function createUnityInstance(r, n, l) {
       return (
         l ||
           console.warn(
-            "[UnityCache] Response is served without Content-Length header. Please reconfigure server to include valid Content-Length for better download performance."
+            "[UnityCache] Response is served without Content-Length header. Please reconfigure server to include valid Content-Length for better download performance.",
           ),
         (function o() {
           return void 0 === e
@@ -436,7 +480,7 @@ function createUnityInstance(r, n, l) {
                     total: e.length,
                     loaded: 0,
                     lengthComputable: l,
-                    chunk: s ? r : null
+                    chunk: s ? r : null,
                   }),
                   r
                 );
@@ -445,12 +489,18 @@ function createUnityInstance(r, n, l) {
                 if (e.done) {
                   if (f === d) return u;
                   if (f < d) return u.slice(0, f);
-                  for (var r = new Uint8Array(f), n = (r.set(u, 0), h), t = 0; t < c.length; ++t)
+                  for (
+                    var r = new Uint8Array(f), n = (r.set(u, 0), h), t = 0;
+                    t < c.length;
+                    ++t
+                  )
                     (r.set(c[t], n), (n += c[t].length));
                   return r;
                 }
                 return (
-                  f + e.value.length <= u.length ? (u.set(e.value, f), (h = f + e.value.length)) : c.push(e.value),
+                  f + e.value.length <= u.length
+                    ? (u.set(e.value, f), (h = f + e.value.length))
+                    : c.push(e.value),
                   (f += e.value.length),
                   i({
                     type: "progress",
@@ -458,14 +508,21 @@ function createUnityInstance(r, n, l) {
                     total: Math.max(d, f),
                     loaded: f,
                     lengthComputable: l,
-                    chunk: s ? e.value : null
+                    chunk: s ? e.value : null,
                   }),
                   o()
                 );
               });
         })().then(function (e) {
           return (
-            i({ type: "load", response: a, total: e.length, loaded: e.length, lengthComputable: l, chunk: null }),
+            i({
+              type: "load",
+              response: a,
+              total: e.length,
+              loaded: e.length,
+              lengthComputable: l,
+              chunk: null,
+            }),
             (a.parsedBody = e),
             a
           );
@@ -485,7 +542,8 @@ function createUnityInstance(r, n, l) {
       var n;
       c.SystemInfo.hasWebGL
         ? 1 == c.SystemInfo.hasWebGL
-          ? ((n = 'Your browser does not support graphics API "WebGL 2" which is required for this content.'),
+          ? ((n =
+              'Your browser does not support graphics API "WebGL 2" which is required for this content.'),
             "Safari" == c.SystemInfo.browser &&
               parseInt(c.SystemInfo.browserVersion) < 15 &&
               (c.SystemInfo.mobile || 1 < navigator.maxTouchPoints

@@ -1,27 +1,109 @@
 <html lang="en-us">
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/web-ports/milk-bag-games@main/inside/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/web-ports/milk-bag-games@main/inside/"
+    />
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>PMKM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="manifest" href="manifest.json" crossorigin="use-credentials" />
-    <link rel="icon" href="icons/icon-72x72.png" sizes="72x72" type="image/png" />
-    <link rel="icon" href="icons/icon-96x96.png" sizes="96x96" type="image/png" />
-    <link rel="icon" href="icons/icon-128x128.png" sizes="128x128" type="image/png" />
-    <link rel="icon" href="icons/icon-144x144.png" sizes="144x144" type="image/png" />
-    <link rel="icon" href="icons/icon-152x152.png" sizes="152x152" type="image/png" />
-    <link rel="icon" href="icons/icon-192x192.png" sizes="192x192" type="image/png" />
-    <link rel="icon" href="icons/icon-384x384.png" sizes="384x384" type="image/png" />
-    <link rel="icon" href="icons/icon-512x512.png" sizes="512x512" type="image/png" />
-    <link rel="apple-touch-icon" href="icons/icon-72x72.png" sizes="72x72" type="image/png" />
-    <link rel="apple-touch-icon" href="icons/icon-96x96.png" sizes="96x96" type="image/png" />
-    <link rel="apple-touch-icon" href="icons/icon-128x128.png" sizes="128x128" type="image/png" />
-    <link rel="apple-touch-icon" href="icons/icon-144x144.png" sizes="144x144" type="image/png" />
-    <link rel="apple-touch-icon" href="icons/icon-152x152.png" sizes="152x152" type="image/png" />
-    <link rel="apple-touch-icon" href="icons/icon-192x192.png" sizes="192x192" type="image/png" />
-    <link rel="apple-touch-icon" href="icons/icon-384x384.png" sizes="384x384" type="image/png" />
-    <link rel="apple-touch-icon" href="icons/icon-512x512.png" sizes="512x512" type="image/png" />
+    <link
+      rel="icon"
+      href="icons/icon-72x72.png"
+      sizes="72x72"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="icons/icon-96x96.png"
+      sizes="96x96"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="icons/icon-128x128.png"
+      sizes="128x128"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="icons/icon-144x144.png"
+      sizes="144x144"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="icons/icon-152x152.png"
+      sizes="152x152"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="icons/icon-192x192.png"
+      sizes="192x192"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="icons/icon-384x384.png"
+      sizes="384x384"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="icons/icon-512x512.png"
+      sizes="512x512"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="icons/icon-72x72.png"
+      sizes="72x72"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="icons/icon-96x96.png"
+      sizes="96x96"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="icons/icon-128x128.png"
+      sizes="128x128"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="icons/icon-144x144.png"
+      sizes="144x144"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="icons/icon-152x152.png"
+      sizes="152x152"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="icons/icon-192x192.png"
+      sizes="192x192"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="icons/icon-384x384.png"
+      sizes="384x384"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="icons/icon-512x512.png"
+      sizes="512x512"
+      type="image/png"
+    />
     <meta name="theme-color" content="#000" />
     <style>
       html {
@@ -175,7 +257,14 @@
       id="loading-bar"
       value="0"
       max="100"
-      style="position: relative; z-index: 1; width: 50%; display: block; margin: 20px auto; height: 25px"
+      style="
+        position: relative;
+        z-index: 1;
+        width: 50%;
+        display: block;
+        margin: 20px auto;
+        height: 25px;
+      "
     ></progress>
     <script>
       let loadingtext = document.getElementById("loading-text");
@@ -211,7 +300,8 @@
               .then((data) => {
                 buffers.push(data);
                 doneparts++;
-                loadingtext.textContent = `LOADING... (${doneparts}/${maxparts})`;
+                if (loadingtext)
+                  loadingtext.textContent = `LOADING... (${doneparts}/${maxparts})`;
                 loadingbar.value = (doneparts / maxparts) * 100;
                 fetchPart(index + 1);
               })
@@ -225,7 +315,8 @@
         let parts = [];
         for (let i = start; i <= end; i++) parts.push(file + ".part" + i);
         maxparts = parts.length + maxparts;
-        loadingtext.textContent = `LOADING... (${doneparts}/${maxparts})`;
+        if (loadingtext)
+          loadingtext.textContent = `LOADING... (${doneparts}/${maxparts})`;
         loadingbar.value = (doneparts / maxparts) * 100;
         return parts;
       }
@@ -242,11 +333,16 @@
         loadingbar.remove();
       });
     </script>
-    <canvas id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1"></canvas>
+    <canvas
+      id="canvas"
+      oncontextmenu="event.preventDefault()"
+      tabindex="-1"
+    ></canvas>
     <div id="overlayDiv"></div>
     <img id="presplash" src="" />
     <script>
-      document.getElementById("presplash").src = document.location.origin + "static/icons/inside.webp";
+      document.getElementById("presplash").src =
+        document.location.origin + "static/icons/inside.webp";
     </script>
     <div id="ContextContainer">
       <a id="ContextButton">≡</a><br />
@@ -258,10 +354,17 @@
           accept="application/zip"
           style="display: none"
         />
-        <a href="javascript:document.getElementById('ID_SavegamesImport').click();">Import Saves</a>
+        <a
+          href="javascript:document.getElementById('ID_SavegamesImport').click();"
+          >Import Saves</a
+        >
         <a href="javascript:onSavegamesExport();">Export Saves</a>
-        <a href="javascript:FSDownload('/log.txt','text/plain');">Download Log</a>
-        <a href="https://gn-math.github.io/" target="_blank"> gn-math.github.io </a>
+        <a href="javascript:FSDownload('/log.txt','text/plain');"
+          >Download Log</a
+        >
+        <a href="https://gn-math.github.io/" target="_blank">
+          gn-math.github.io
+        </a>
       </div>
     </div>
     <div id="statusDiv" class="hidden">

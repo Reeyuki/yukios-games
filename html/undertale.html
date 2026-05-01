@@ -22,7 +22,9 @@
         --text-on-dark: #e8eaed;
         --text-on-light: #1a2540;
         --accent-glow: rgba(86, 120, 177, 0.4);
-        --font-mono: "Share Tech Mono", "Courier Prime", "Lucida Console", Monaco, monospace;
+        --font-mono:
+          "Share Tech Mono", "Courier Prime", "Lucida Console", Monaco,
+          monospace;
       }
 
       @keyframes rotation {
@@ -85,7 +87,11 @@
         min-width: 100vw;
         background-color: var(--bg);
         background-image:
-          radial-gradient(ellipse 80% 60% at 50% 40%, rgba(86, 120, 177, 0.07) 0%, transparent 70%),
+          radial-gradient(
+            ellipse 80% 60% at 50% 40%,
+            rgba(86, 120, 177, 0.07) 0%,
+            transparent 70%
+          ),
           repeating-linear-gradient(
             0deg,
             transparent,
@@ -107,7 +113,13 @@
         left: 0;
         right: 0;
         height: 2px;
-        background: linear-gradient(90deg, transparent, var(--primary), var(--primary-light), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--primary),
+          var(--primary-light),
+          transparent
+        );
         opacity: 0.6;
         z-index: 9999;
         pointer-events: none;
@@ -294,7 +306,12 @@
       }
 
       #pauseMenuBorder {
-        background: linear-gradient(135deg, var(--primary), rgba(86, 120, 177, 0.2) 60%, transparent);
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          rgba(86, 120, 177, 0.2) 60%,
+          transparent
+        );
         padding: 1px;
         border-radius: 6px;
         clip-path: polygon(10.5px 0, 100% 0, 100% 100%, 0 100%, 0 10.5px);
@@ -348,7 +365,11 @@
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--surface);
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
         border: 1px solid var(--primary-light);
         border-radius: 4px;
         padding: 13px 24px;
@@ -362,7 +383,11 @@
       }
 
       #pauseMenu button:hover {
-        background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        background: linear-gradient(
+          135deg,
+          var(--primary-light),
+          var(--primary)
+        );
         box-shadow: 0 0 16px var(--accent-glow);
         transform: translateY(-1px);
       }
@@ -460,7 +485,11 @@
       }
 
       #downloadModalContent {
-        background: linear-gradient(160deg, rgba(20, 27, 39, 0.99) 0%, rgba(15, 21, 34, 0.97) 100%);
+        background: linear-gradient(
+          160deg,
+          rgba(20, 27, 39, 0.99) 0%,
+          rgba(15, 21, 34, 0.97) 100%
+        );
         border: 1px solid rgba(86, 120, 177, 0.45);
         border-radius: 10px;
         padding: 48px 44px;
@@ -482,7 +511,13 @@
         left: 0;
         right: 0;
         height: 1px;
-        background: linear-gradient(90deg, transparent, var(--primary), var(--primary-light), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--primary),
+          var(--primary-light),
+          transparent
+        );
         opacity: 0.8;
       }
 
@@ -525,7 +560,11 @@
       }
 
       .modal-button {
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
         color: var(--surface-bright);
         border: 1px solid var(--primary-light);
         border-radius: 5px;
@@ -541,7 +580,11 @@
       }
 
       .modal-button:hover {
-        background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        background: linear-gradient(
+          135deg,
+          var(--primary-light),
+          var(--primary)
+        );
         box-shadow: 0 0 20px var(--accent-glow);
         transform: translateY(-2px);
       }
@@ -663,12 +706,19 @@
           </button>
         </div>
         <div class="modal-buttons" style="margin-top: 12px">
-          <button class="modal-button secondary" onclick="hideDownloadModal()">Cancel</button>
+          <button class="modal-button secondary" onclick="hideDownloadModal()">
+            Cancel
+          </button>
         </div>
       </div>
     </div>
 
-    <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1"></canvas>
+    <canvas
+      class="emscripten"
+      id="canvas"
+      oncontextmenu="event.preventDefault()"
+      tabindex="-1"
+    ></canvas>
 
     <div id="pauseMenuContainer" hidden>
       <div id="pauseMenuBorder">
@@ -689,7 +739,11 @@
       <div id="messages"></div>
     </div>
 
-    <button id="fullscreenBtn" title="Toggle Fullscreen" onclick="toggleFullscreen()">
+    <button
+      id="fullscreenBtn"
+      title="Toggle Fullscreen"
+      onclick="toggleFullscreen()"
+    >
       <svg class="icon-expand" viewBox="0 0 24 24">
         <polyline points="15 3 21 3 21 9"></polyline>
         <polyline points="9 21 3 21 3 15"></polyline>
@@ -935,7 +989,7 @@
         "audio-worklet.js",
         "runner.json",
         "runnerLocal.svg",
-        "runner.svg"
+        "runner.svg",
       ];
 
       const coreFiles = [
@@ -953,7 +1007,7 @@
         "audio-worklet.js",
         "runner.json",
         "runnerLocal.svg",
-        "runner.svg"
+        "runner.svg",
       ];
 
       function showDownloadModal() {
@@ -989,7 +1043,13 @@
             return;
           }
 
-          const swUrls = ["/pinned/undertale/cachesw.js", "cachesw.js", "./cachesw.js", "../cachesw.js", "/cachesw.js"];
+          const swUrls = [
+            "/pinned/undertale/cachesw.js",
+            "cachesw.js",
+            "./cachesw.js",
+            "../cachesw.js",
+            "/cachesw.js",
+          ];
 
           let registration;
           for (const swUrl of swUrls) {
@@ -1000,7 +1060,9 @@
           }
 
           if (!registration) {
-            throw new Error("Failed to register service worker from all sources");
+            throw new Error(
+              "Failed to register service worker from all sources",
+            );
           }
 
           await navigator.serviceWorker.ready;
@@ -1044,12 +1106,21 @@
     <script>
       function toggleFullscreen() {
         const btn = document.getElementById("fullscreenBtn");
-        const target = document.getElementById("canvas") || document.documentElement;
+        const target =
+          document.getElementById("canvas") || document.documentElement;
 
         if (!document.fullscreenElement) {
-          (target.requestFullscreen || target.webkitRequestFullscreen || target.mozRequestFullScreen).call(target);
+          (
+            target.requestFullscreen ||
+            target.webkitRequestFullscreen ||
+            target.mozRequestFullScreen
+          ).call(target);
         } else {
-          (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen).call(document);
+          (
+            document.exitFullscreen ||
+            document.webkitExitFullscreen ||
+            document.mozCancelFullScreen
+          ).call(document);
         }
       }
 
@@ -1060,12 +1131,17 @@
 
       document.addEventListener("webkitfullscreenchange", () => {
         const btn = document.getElementById("fullscreenBtn");
-        btn.classList.toggle("is-fullscreen", !!document.webkitFullscreenElement);
+        btn.classList.toggle(
+          "is-fullscreen",
+          !!document.webkitFullscreenElement,
+        );
       });
     </script>
 
     <script>
-      const blob = new Blob([document.querySelector("#tick-worker").textContent]);
+      const blob = new Blob([
+        document.querySelector("#tick-worker").textContent,
+      ]);
       const worker = new Worker(window.URL.createObjectURL(blob));
 
       worker.onmessage = function () {
@@ -1166,11 +1242,17 @@
             }
             const saveDataString = JSON.stringify(saveData);
             if (event.source) {
-              event.source.postMessage({ type: "save-data-response", payload: saveDataString }, event.origin);
+              event.source.postMessage(
+                { type: "save-data-response", payload: saveDataString },
+                event.origin,
+              );
             }
           } catch (error) {
             if (event.source) {
-              event.source.postMessage({ type: "save-data-response", payload: null }, event.origin);
+              event.source.postMessage(
+                { type: "save-data-response", payload: null },
+                event.origin,
+              );
             }
           }
         }
@@ -1182,7 +1264,9 @@
             for (const key in saveData) {
               localStorage.setItem(key, saveData[key]);
             }
-            alert("Progress loaded! The game will now restart to apply the changes.");
+            alert(
+              "Progress loaded! The game will now restart to apply the changes.",
+            );
             location.reload();
           } catch (error) {
             alert("Failed to load save data. The file might be corrupted.");

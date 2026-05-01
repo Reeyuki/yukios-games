@@ -212,13 +212,34 @@
   <body>
     <div id="bg">
       <div class="sun"></div>
-      <div class="cloud" style="top: 8%; left: 8%; width: 64px; height: 16px"></div>
-      <div class="cloud" style="top: 8%; left: 10%; width: 32px; height: 32px"></div>
-      <div class="cloud" style="top: 7%; left: 14%; width: 48px; height: 16px"></div>
-      <div class="cloud" style="top: 14%; left: 38%; width: 80px; height: 16px"></div>
-      <div class="cloud" style="top: 14%; left: 40%; width: 48px; height: 32px"></div>
-      <div class="cloud" style="top: 18%; right: 28%; width: 64px; height: 16px"></div>
-      <div class="cloud" style="top: 18%; right: 30%; width: 32px; height: 32px"></div>
+      <div
+        class="cloud"
+        style="top: 8%; left: 8%; width: 64px; height: 16px"
+      ></div>
+      <div
+        class="cloud"
+        style="top: 8%; left: 10%; width: 32px; height: 32px"
+      ></div>
+      <div
+        class="cloud"
+        style="top: 7%; left: 14%; width: 48px; height: 16px"
+      ></div>
+      <div
+        class="cloud"
+        style="top: 14%; left: 38%; width: 80px; height: 16px"
+      ></div>
+      <div
+        class="cloud"
+        style="top: 14%; left: 40%; width: 48px; height: 32px"
+      ></div>
+      <div
+        class="cloud"
+        style="top: 18%; right: 28%; width: 64px; height: 16px"
+      ></div>
+      <div
+        class="cloud"
+        style="top: 18%; right: 30%; width: 32px; height: 32px"
+      ></div>
       <div class="grass-top"></div>
       <div class="pixel-tree" style="left: 7%">
         <div class="tree-leaves"></div>
@@ -227,7 +248,13 @@
       <div class="pixel-tree" style="left: 18%">
         <div
           class="tree-leaves"
-          style="width: 64px; height: 64px; margin-left: -24px; margin-top: -48px; background: #3d6e27"
+          style="
+            width: 64px;
+            height: 64px;
+            margin-left: -24px;
+            margin-top: -48px;
+            background: #3d6e27;
+          "
         ></div>
         <div class="tree-trunk" style="height: 40px"></div>
       </div>
@@ -238,7 +265,13 @@
       <div class="pixel-tree" style="right: 22%">
         <div
           class="tree-leaves"
-          style="width: 56px; height: 56px; margin-left: -20px; margin-top: -40px; background: #3d6e27"
+          style="
+            width: 56px;
+            height: 56px;
+            margin-left: -20px;
+            margin-top: -40px;
+            background: #3d6e27;
+          "
         ></div>
         <div class="tree-trunk" style="height: 36px"></div>
       </div>
@@ -249,12 +282,18 @@
         <div class="mc-title">MINECRAFT</div>
         <div class="mc-subtitle">select edition</div>
         <div class="mc-divider"></div>
-        <button class="mc-btn" onclick="loadGame('lce')">Legacy Console Edition</button>
-        <button class="mc-btn" onclick="loadGame('selenite')">All Versions (1.6.4–1.12)</button>
+        <button class="mc-btn" onclick="loadGame('lce')">
+          Legacy Console Edition
+        </button>
+        <button class="mc-btn" onclick="loadGame('selenite')">
+          All Versions (1.6.4–1.12)
+        </button>
       </div>
     </div>
 
-    <div class="disclaimer" id="disclaimer" style="display: none">powered by selenite.cc</div>
+    <div class="disclaimer" id="disclaimer" style="display: none">
+      powered by selenite.cc
+    </div>
     <iframe id="gameFrame" allowfullscreen></iframe>
 
     <script>
@@ -266,9 +305,20 @@
         menu.style.display = "none";
         document.getElementById("bg").style.display = "none";
         frame.style.display = "block";
+
         if (type === "lce") {
-          frame.src = "/static/games/minecraft/lce.html";
+          fetch(
+            "https://cdn.jsdelivr.net/gh/reeyuki/yukios-games@main/minecraft/lce.html",
+          )
+            .then((r) => r.text())
+            .then((html) => {
+              const blob = new Blob([html], { type: "text/html" });
+              const url = URL.createObjectURL(blob);
+              window.open(url, "_blank");
+            });
+          return;
         }
+
         if (type === "selenite") {
           frame.src = "https://selenite.cc/resources/semag/eag/index.html";
           disclaimer.style.display = "block";

@@ -111,7 +111,9 @@
     </style>
   </head>
   <body>
-    <h1 id="game-count" style="text-align: center; margin-bottom: 20px">Loading games...</h1>
+    <h1 id="game-count" style="text-align: center; margin-bottom: 20px">
+      Loading games...
+    </h1>
     <input id="search-bar" type="text" placeholder="Search games..." />
     <div id="game-container"></div>
     <div id="sentinel"></div>
@@ -139,13 +141,14 @@
       const GAMES_JSON_URLS = [
         "https://cdn.jsdelivr.net/gh/reeyuki/yukiosgames.json",
         "https://cdn.jsdelivr.net/gh/reeyuki/yukios@main/static/games/archive/games.json",
-        new URL("games.json", ARCHIVE_BASE).href
+        new URL("games.json", ARCHIVE_BASE).href,
       ];
       function resolveUrl(url) {
         if (/^https?:\/\//i.test(url) || /^\/\//.test(url)) {
           return url;
         }
-        if (url.startsWith("/")) return new URL(url.slice(1), ARCHIVE_BASE).href;
+        if (url.startsWith("/"))
+          return new URL(url.slice(1), ARCHIVE_BASE).href;
         return new URL(url, ARCHIVE_BASE).href;
       }
       function formatName(name, url) {
@@ -181,7 +184,8 @@
           if (!data) throw lastErr || new Error("Failed to load games list");
 
           const games = Array.isArray(data) ? data : data.games;
-          if (!Array.isArray(games)) throw new Error("Invalid games list format");
+          if (!Array.isArray(games))
+            throw new Error("Invalid games list format");
 
           allGames = games;
           filteredGames = allGames;
@@ -192,7 +196,8 @@
           setupObserver();
         } catch (err) {
           console.error("Failed to load games:", err);
-          document.getElementById("game-count").innerText = "Error loading games";
+          document.getElementById("game-count").innerText =
+            "Error loading games";
         }
       }
 
@@ -202,7 +207,10 @@
       }
 
       function loadMore() {
-        const nextBatch = filteredGames.slice(currentIndex, currentIndex + CHUNK_SIZE);
+        const nextBatch = filteredGames.slice(
+          currentIndex,
+          currentIndex + CHUNK_SIZE,
+        );
 
         nextBatch.forEach((game) => {
           const resolvedUrl = resolveUrl(game.url);
@@ -233,11 +241,14 @@
       function setupObserver() {
         const observer = new IntersectionObserver(
           (entries) => {
-            if (entries[0].isIntersecting && currentIndex < filteredGames.length) {
+            if (
+              entries[0].isIntersecting &&
+              currentIndex < filteredGames.length
+            ) {
               loadMore();
             }
           },
-          { threshold: 0.1 }
+          { threshold: 0.1 },
         );
 
         observer.observe(document.getElementById("sentinel"));

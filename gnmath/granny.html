@@ -5,7 +5,10 @@
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/TemplateData/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/TemplateData/style.css"
+    />
     <script src="https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/sdk.js"></script>
     <!-- GameMonetize SDK Entegrasyonu -->
     <script type="text/javascript">
@@ -29,7 +32,7 @@
               console.log("SDK hazır.");
               break;
           }
-        }
+        },
       };
       (function (a, b, c) {
         var d = a.getElementsByTagName(b)[0];
@@ -45,7 +48,8 @@
         margin: 0;
         padding: 0;
         overflow: hidden;
-        background: url("https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/background.png") no-repeat center center fixed;
+        background: url("https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/background.png")
+          no-repeat center center fixed;
         background-size: cover;
       }
       #unity-container {
@@ -109,10 +113,16 @@
   </head>
   <body>
     <div id="unity-container">
-      <canvas id="unity-canvas" style="position: absolute; width: 100%; height: 100%"></canvas>
+      <canvas
+        id="unity-canvas"
+        style="position: absolute; width: 100%; height: 100%"
+      ></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo">
-          <img src="https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/logo.png" alt="Granny Logo" />
+          <img
+            src="https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/logo.png"
+            alt="Granny Logo"
+          />
         </div>
         <div id="unity-progress-bar-empty">
           <div id="unity-progress-bar-full"></div>
@@ -121,7 +131,12 @@
       <div id="unity-warning"></div>
     </div>
     <script>
-      async function mergeUnityWebFiles(baseUrl, filePrefix, totalParts, extension) {
+      async function mergeUnityWebFiles(
+        baseUrl,
+        filePrefix,
+        totalParts,
+        extension,
+      ) {
         const partUrls = [];
         for (let i = 1; i <= totalParts; i++) {
           partUrls.push(`${baseUrl}/${filePrefix}_part${i}.${extension}`);
@@ -137,10 +152,14 @@
           buffers.push(buffer);
 
           const progress = ((i + 1) / totalParts) * 100;
-          document.querySelector("#unity-progress-bar-full").style.width = `${progress}%`;
+          document.querySelector("#unity-progress-bar-full").style.width =
+            `${progress}%`;
         }
 
-        const totalLength = buffers.reduce((acc, buffer) => acc + buffer.byteLength, 0);
+        const totalLength = buffers.reduce(
+          (acc, buffer) => acc + buffer.byteLength,
+          0,
+        );
         const combinedBuffer = new Uint8Array(totalLength);
         let offset = 0;
 
@@ -163,14 +182,17 @@
 
       function unityShowBanner(msg, type) {
         function updateBannerVisibility() {
-          warningBanner.style.display = warningBanner.children.length ? "block" : "none";
+          warningBanner.style.display = warningBanner.children.length
+            ? "block"
+            : "none";
         }
         var div = document.createElement("div");
         div.innerHTML = msg;
         warningBanner.appendChild(div);
         if (type == "error") div.style = "background: red; padding: 10px;";
         else {
-          if (type == "warning") div.style = "background: yellow; padding: 10px;";
+          if (type == "warning")
+            div.style = "background: yellow; padding: 10px;";
           setTimeout(function () {
             warningBanner.removeChild(div);
             updateBannerVisibility();
@@ -180,7 +202,11 @@
       }
 
       function showAdOnClick() {
-        if (!isAdShown && typeof sdk !== "undefined" && typeof sdk.showBanner !== "undefined") {
+        if (
+          !isAdShown &&
+          typeof sdk !== "undefined" &&
+          typeof sdk.showBanner !== "undefined"
+        ) {
           sdk.showBanner();
           isAdShown = true;
         }
@@ -191,21 +217,36 @@
 
       async function initializeGame() {
         try {
-          const dataBuffer = await mergeUnityWebFiles(buildUrl, "Granny", 2, "data");
-          const wasmBuffer = await mergeUnityWebFiles(buildUrl, "Granny", 2, "wasm");
+          const dataBuffer = await mergeUnityWebFiles(
+            buildUrl,
+            "Granny",
+            2,
+            "data",
+          );
+          const wasmBuffer = await mergeUnityWebFiles(
+            buildUrl,
+            "Granny",
+            2,
+            "wasm",
+          );
 
-          const dataBlobUrl = URL.createObjectURL(new Blob([dataBuffer], { type: "application/octet-stream" }));
-          const wasmBlobUrl = URL.createObjectURL(new Blob([wasmBuffer], { type: "application/octet-stream" }));
+          const dataBlobUrl = URL.createObjectURL(
+            new Blob([dataBuffer], { type: "application/octet-stream" }),
+          );
+          const wasmBlobUrl = URL.createObjectURL(
+            new Blob([wasmBuffer], { type: "application/octet-stream" }),
+          );
 
           var config = {
             dataUrl: dataBlobUrl,
             frameworkUrl: buildUrl + "/Granny.framework.js",
             codeUrl: wasmBlobUrl,
-            streamingAssetsUrl: "https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/StreamingAssets",
+            streamingAssetsUrl:
+              "https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/StreamingAssets",
             companyName: "Anastasia Kazantseva",
             productName: "Granny",
             productVersion: "1.0",
-            showBanner: unityShowBanner
+            showBanner: unityShowBanner,
           };
 
           var script = document.createElement("script");

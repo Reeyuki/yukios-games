@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/regedit-sys/web-port@bee69b8f59ea62007d9f023719ac92414cdb5a00/deltarune/" />
+    <base
+      href="https://cdn.jsdelivr.net/gh/regedit-sys/web-port@bee69b8f59ea62007d9f023719ac92414cdb5a00/deltarune/"
+    />
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -21,12 +23,18 @@
         <span class="title">A Cyber's World</span>
         <img src="icons/2.png" />
       </a>
-      <a href="javascript:alert('Chapter 3 not included in demo!')" class="disabled-row">
+      <a
+        href="javascript:alert('Chapter 3 not included in demo!')"
+        class="disabled-row"
+      >
         <span class="chapter">Chapter 3</span>
         <span class="title">--</span>
         <img src="icons/0.png" />
       </a>
-      <a href="javascript:alert('Chapter 4 not included in demo!')" class="disabled-row">
+      <a
+        href="javascript:alert('Chapter 4 not included in demo!')"
+        class="disabled-row"
+      >
         <span class="chapter">Chapter 4</span>
         <span class="title">--</span>
         <img src="icons/0.png" />
@@ -46,7 +54,10 @@
         <span class="disabled-title">--</span>
         <img src="icons/0.png" />
       </a>
-      <a href="javascript:window.open('https://truffled.lol', '_blank')" class="row">
+      <a
+        href="javascript:window.open('https://truffled.lol', '_blank')"
+        class="row"
+      >
         <span class="chapter"></span>
         <span class="title">made by bog</span>
         <span class="badge"></span>
@@ -83,15 +94,17 @@
           .then((html) => {
             gamestarted = true;
             document.documentElement.innerHTML = html;
-            document.documentElement.querySelectorAll("script").forEach((oldScript) => {
-              const newScript = document.createElement("script");
-              if (oldScript.src) {
-                newScript.src = oldScript.src;
-              } else {
-                newScript.textContent = oldScript.textContent;
-              }
-              document.body.appendChild(newScript);
-            });
+            document.documentElement
+              .querySelectorAll("script")
+              .forEach((oldScript) => {
+                const newScript = document.createElement("script");
+                if (oldScript.src) {
+                  newScript.src = oldScript.src;
+                } else {
+                  newScript.textContent = oldScript.textContent;
+                }
+                document.body.appendChild(newScript);
+              });
           });
       }
 
@@ -104,7 +117,9 @@
           if (!gamestarted) {
             menumoveaudio.play();
             if (selectedChapter) {
-              document.querySelectorAll(".row")[selectedChapter].classList.remove("selected");
+              document
+                .querySelectorAll(".row")
+                [selectedChapter].classList.remove("selected");
             }
           }
         });
@@ -124,12 +139,16 @@
               document.querySelectorAll(".row")[0].classList.add("selected");
               menumoveaudio.play();
             } else {
-              document.querySelectorAll(".row")[selectedChapter].classList.remove("selected");
+              document
+                .querySelectorAll(".row")
+                [selectedChapter].classList.remove("selected");
               selectedChapter--;
               if (selectedChapter < 0) {
                 selectedChapter = document.querySelectorAll(".row").length - 1;
               }
-              document.querySelectorAll(".row")[selectedChapter].classList.add("selected");
+              document
+                .querySelectorAll(".row")
+                [selectedChapter].classList.add("selected");
               menumoveaudio.play();
             }
           } else if (event.key === "ArrowDown") {
@@ -138,21 +157,31 @@
               document.querySelectorAll(".row")[0].classList.add("selected");
               menumoveaudio.play();
             } else {
-              if (selectedChapter + 1 >= document.querySelectorAll(".row").length) {
-                document.querySelectorAll(".row")[selectedChapter].classList.remove("selected");
+              if (
+                selectedChapter + 1 >=
+                document.querySelectorAll(".row").length
+              ) {
+                document
+                  .querySelectorAll(".row")
+                  [selectedChapter].classList.remove("selected");
                 selectedChapter = 0;
                 document.querySelectorAll(".row")[0].classList.add("selected");
                 menumoveaudio.play();
               } else {
-                document.querySelectorAll(".row")[selectedChapter].classList.remove("selected");
+                document
+                  .querySelectorAll(".row")
+                  [selectedChapter].classList.remove("selected");
                 selectedChapter++;
-                document.querySelectorAll(".row")[selectedChapter].classList.add("selected");
+                document
+                  .querySelectorAll(".row")
+                  [selectedChapter].classList.add("selected");
                 menumoveaudio.play();
               }
             }
           } else if (event.key === "Enter") {
             if (selectedChapter !== null) {
-              window.location.href = document.querySelectorAll(".row")[selectedChapter].href;
+              window.location.href =
+                document.querySelectorAll(".row")[selectedChapter].href;
               menuselectaudio.play();
             }
           }

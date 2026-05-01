@@ -94,7 +94,9 @@
         container.style.width = window.innerWidth + "px";
         container.style.height = window.innerHeight + "px";
       }
-      Promise.all([mergeFiles(getParts("Build/BATIM.data.unityweb", 1, 7))]).then(([dataUrl]) => {
+      Promise.all([
+        mergeFiles(getParts("Build/BATIM.data.unityweb", 1, 7)),
+      ]).then(([dataUrl]) => {
         window.dataUrll = dataUrl;
         var json = {
           companyName: "DefaultCompany",
@@ -105,16 +107,16 @@
           wasmFrameworkUrl: "BATIM.wasm.framework.unityweb",
           graphicsAPI: ["WebGL 2.0", "WebGL 1.0"],
           webglContextAttributes: {
-            preserveDrawingBuffer: false
+            preserveDrawingBuffer: false,
           },
           splashScreenStyle: "Dark",
           backgroundColor: "#231F20",
           developmentBuild: false,
           multithreading: false,
-          unityVersion: "2019.4.17f1"
+          unityVersion: "2019.4.17f1",
         };
         let blob = new Blob([JSON.stringify(json)], {
-          type: "application/json"
+          type: "application/json",
         });
         let blobUrl = URL.createObjectURL(blob);
         window.addEventListener("resize", resizeUnityContainer);
@@ -125,8 +127,8 @@
             onRuntimeInitialized: function () {
               resizeUnityContainer();
               document.querySelector("#loading-text").remove();
-            }
-          }
+            },
+          },
         });
       });
     </script>
@@ -136,7 +138,13 @@
     <div class="webgl-content">
       <div
         id="loading-text"
-        style="color: white; font-size: 48px; font-family: cursive; text-align: center; margin-top: 20px"
+        style="
+          color: white;
+          font-size: 48px;
+          font-family: cursive;
+          text-align: center;
+          margin-top: 20px;
+        "
       >
         LOADING...
       </div>

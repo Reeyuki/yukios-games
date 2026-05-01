@@ -17,12 +17,15 @@ function swfUrlToLocalPath(url) {
               ? function (e, n, a, t) {
                   void 0 === t && (t = a);
                   var r = Object.getOwnPropertyDescriptor(n, a);
-                  ((r && !("get" in r ? !n.__esModule : r.writable || r.configurable)) ||
+                  ((r &&
+                    !("get" in r
+                      ? !n.__esModule
+                      : r.writable || r.configurable)) ||
                     (r = {
                       enumerable: !0,
                       get: function () {
                         return n[a];
-                      }
+                      },
                     }),
                     Object.defineProperty(e, t, r));
                 }
@@ -32,22 +35,35 @@ function swfUrlToLocalPath(url) {
           r =
             (this && this.__exportStar) ||
             function (e, n) {
-              for (var a in e) "default" === a || Object.prototype.hasOwnProperty.call(n, a) || t(n, e, a);
+              for (var a in e)
+                "default" === a ||
+                  Object.prototype.hasOwnProperty.call(n, a) ||
+                  t(n, e, a);
             };
-        (Object.defineProperty(n, "__esModule", { value: !0 }), r(a(53), n), r(a(325), n), r(a(553), n), r(a(836), n));
+        (Object.defineProperty(n, "__esModule", { value: !0 }),
+          r(a(53), n),
+          r(a(325), n),
+          r(a(553), n),
+          r(a(836), n));
       },
       48(e, n) {
         Object.defineProperty(n, "__esModule", { value: !0 });
       },
       53(e, n, a) {
-        (Object.defineProperty(n, "__esModule", { value: !0 }), (n.createRef = n.h = void 0), (n.createElement = o));
+        (Object.defineProperty(n, "__esModule", { value: !0 }),
+          (n.createRef = n.h = void 0),
+          (n.createElement = o));
         const t = a(136),
           r = a(56);
         function o(e, n, ...a) {
           if ("function" == typeof e) return e({ ...n, children: a });
           const { finalTag: o, finalAttrs: i } = (0, r.applyTsxTag)(e, n),
             s = (0, r.createDomElement)(o, i);
-          return (i && (0, t.setAttributes)(s, i), (0, r.applyChildren)(s, a), s);
+          return (
+            i && (0, t.setAttributes)(s, i),
+            (0, r.applyChildren)(s, a),
+            s
+          );
         }
         n.h = o;
         n.createRef = () => ({ current: null });
@@ -62,16 +78,22 @@ function swfUrlToLocalPath(url) {
         }
         (Object.defineProperty(n, "__esModule", { value: !0 }),
           (n.applyChildren = function e(n, t) {
-            for (const r of t) (r || 0 === r) && (Array.isArray(r) ? e(n, r) : a(n, r));
+            for (const r of t)
+              (r || 0 === r) && (Array.isArray(r) ? e(n, r) : a(n, r));
           }),
           (n.createDomElement = function (e, n) {
             const a = n?.is ? { is: n.is } : void 0;
-            return n?.xmlns ? document.createElementNS(n.xmlns, e, a) : document.createElement(e, a);
+            return n?.xmlns
+              ? document.createElementNS(n.xmlns, e, a)
+              : document.createElement(e, a);
           }),
           (n.applyTsxTag = function (e, n) {
             let a = e,
               t = n;
-            t && "tsxTag" in t && ((a = t.tsxTag), !t.is && e.includes("-") && (t = { ...t, is: e }));
+            t &&
+              "tsxTag" in t &&
+              ((a = t.tsxTag),
+              !t.is && e.includes("-") && (t = { ...t, is: e }));
             return { finalTag: a, finalAttrs: t };
           }));
       },
@@ -105,7 +127,8 @@ function swfUrlToLocalPath(url) {
         (Object.defineProperty(n, "__esModule", { value: !0 }),
           (n.setAttributes = function (e, n) {
             for (const a of Object.keys(n)) {
-              if ("__source" === a || "__self" === a || "tsxTag" === a) continue;
+              if ("__source" === a || "__self" === a || "tsxTag" === a)
+                continue;
               const i = n[a];
               if ("class" === a) {
                 const n = (0, t.classnames)(i);
@@ -123,7 +146,8 @@ function swfUrlToLocalPath(url) {
                     ? (e.innerHTML = i)
                     : !0 === i
                       ? e.setAttribute(a, a)
-                      : (i || 0 === i || "" === i) && e.setAttribute(a, i.toString());
+                      : (i || 0 === i || "" === i) &&
+                        e.setAttribute(a, i.toString());
             }
           }));
         const t = a(665);
@@ -146,7 +170,10 @@ function swfUrlToLocalPath(url) {
         Object.defineProperty(n, "__esModule", { value: !0 });
       },
       553(e, n, a) {
-        (Object.defineProperty(n, "__esModule", { value: !0 }), (n.jsx = o), (n.jsxs = o), (n.jsxDEV = o));
+        (Object.defineProperty(n, "__esModule", { value: !0 }),
+          (n.jsx = o),
+          (n.jsxs = o),
+          (n.jsxDEV = o));
         const t = a(136),
           r = a(56);
         function o(e, n) {
@@ -164,12 +191,15 @@ function swfUrlToLocalPath(url) {
               ? function (e, n, a, t) {
                   void 0 === t && (t = a);
                   var r = Object.getOwnPropertyDescriptor(n, a);
-                  ((r && !("get" in r ? !n.__esModule : r.writable || r.configurable)) ||
+                  ((r &&
+                    !("get" in r
+                      ? !n.__esModule
+                      : r.writable || r.configurable)) ||
                     (r = {
                       enumerable: !0,
                       get: function () {
                         return n[a];
-                      }
+                      },
                     }),
                     Object.defineProperty(e, t, r));
                 }
@@ -179,7 +209,10 @@ function swfUrlToLocalPath(url) {
           r =
             (this && this.__exportStar) ||
             function (e, n) {
-              for (var a in e) "default" === a || Object.prototype.hasOwnProperty.call(n, a) || t(n, e, a);
+              for (var a in e)
+                "default" === a ||
+                  Object.prototype.hasOwnProperty.call(n, a) ||
+                  t(n, e, a);
             };
         (Object.defineProperty(n, "__esModule", { value: !0 }),
           r(a(48), n),
@@ -197,7 +230,7 @@ function swfUrlToLocalPath(url) {
       },
       836(e, n) {
         Object.defineProperty(n, "__esModule", { value: !0 });
-      }
+      },
     },
     t = {};
   function r(e) {
@@ -208,11 +241,18 @@ function swfUrlToLocalPath(url) {
   }
   ((r.m = a),
     (r.d = (e, n) => {
-      for (var a in n) r.o(n, a) && !r.o(e, a) && Object.defineProperty(e, a, { enumerable: !0, get: n[a] });
+      for (var a in n)
+        r.o(n, a) &&
+          !r.o(e, a) &&
+          Object.defineProperty(e, a, { enumerable: !0, get: n[a] });
     }),
     (r.f = {}),
-    (r.e = (e) => Promise.all(Object.keys(r.f).reduce((n, a) => (r.f[a](e, n), n), []))),
-    (r.u = (e) => "core.ruffle." + { 482: "ff8df7e6e087331ff134", 655: "ad36e63ddc36512daec7" }[e] + ".js"),
+    (r.e = (e) =>
+      Promise.all(Object.keys(r.f).reduce((n, a) => (r.f[a](e, n), n), []))),
+    (r.u = (e) =>
+      "core.ruffle." +
+      { 482: "ff8df7e6e087331ff134", 655: "ad36e63ddc36512daec7" }[e] +
+      ".js"),
     (r.g = (function () {
       if ("object" == typeof globalThis) return globalThis;
       try {
@@ -229,9 +269,16 @@ function swfUrlToLocalPath(url) {
       else {
         var s, l;
         if (void 0 !== o)
-          for (var u = document.getElementsByTagName("script"), c = 0; c < u.length; c++) {
+          for (
+            var u = document.getElementsByTagName("script"), c = 0;
+            c < u.length;
+            c++
+          ) {
             var d = u[c];
-            if (d.getAttribute("src") == a || d.getAttribute("data-webpack") == n + o) {
+            if (
+              d.getAttribute("src") == a ||
+              d.getAttribute("data-webpack") == n + o
+            ) {
               s = d;
               break;
             }
@@ -246,10 +293,21 @@ function swfUrlToLocalPath(url) {
         var f = (n, t) => {
             ((s.onerror = s.onload = null), clearTimeout(m));
             var r = e[a];
-            if ((delete e[a], s.parentNode && s.parentNode.removeChild(s), r && r.forEach((e) => e(t)), n)) return n(t);
+            if (
+              (delete e[a],
+              s.parentNode && s.parentNode.removeChild(s),
+              r && r.forEach((e) => e(t)),
+              n)
+            )
+              return n(t);
           },
-          m = setTimeout(f.bind(null, void 0, { type: "timeout", target: s }), 12e4);
-        ((s.onerror = f.bind(null, s.onerror)), (s.onload = f.bind(null, s.onload)), l && document.head.appendChild(s));
+          m = setTimeout(
+            f.bind(null, void 0, { type: "timeout", target: s }),
+            12e4,
+          );
+        ((s.onerror = f.bind(null, s.onerror)),
+          (s.onload = f.bind(null, s.onload)),
+          l && document.head.appendChild(s));
       }
     }),
     (r.r = (e) => {
@@ -260,7 +318,9 @@ function swfUrlToLocalPath(url) {
     }),
     (r.p = ""),
     (() => {
-      r.b = ("undefined" != typeof document && document.baseURI) || self.location.href;
+      r.b =
+        ("undefined" != typeof document && document.baseURI) ||
+        self.location.href;
       var e = { 792: 0 };
       r.f.j = (n, a) => {
         var t = r.o(e, n) ? e[n] : void 0;
@@ -277,7 +337,8 @@ function swfUrlToLocalPath(url) {
                 if (r.o(e, n) && (0 !== (t = e[n]) && (e[n] = void 0), t)) {
                   var o = a && ("load" === a.type ? "missing" : a.type),
                     i = a && a.target && a.target.src;
-                  ((s.message = "Loading chunk " + n + " failed.\n(" + o + ": " + i + ")"),
+                  ((s.message =
+                    "Loading chunk " + n + " failed.\n(" + o + ": " + i + ")"),
                     (s.name = "ChunkLoadError"),
                     (s.type = o),
                     (s.request = i),
@@ -285,7 +346,7 @@ function swfUrlToLocalPath(url) {
                 }
               },
               "chunk-" + n,
-              n
+              n,
             );
           }
       };
@@ -298,14 +359,20 @@ function swfUrlToLocalPath(url) {
             for (t in s) r.o(s, t) && (r.m[t] = s[t]);
             if (l) l(r);
           }
-          for (n && n(a); u < i.length; u++) ((o = i[u]), r.o(e, o) && e[o] && e[o][0](), (e[o] = 0));
+          for (n && n(a); u < i.length; u++)
+            ((o = i[u]), r.o(e, o) && e[o] && e[o][0](), (e[o] = 0));
         },
-        a = (self.webpackChunkruffle_selfhosted = self.webpackChunkruffle_selfhosted || []);
+        a = (self.webpackChunkruffle_selfhosted =
+          self.webpackChunkruffle_selfhosted || []);
       (a.forEach(n.bind(null, 0)), (a.push = n.bind(null, a.push.bind(a))));
     })());
   class o {
     constructor(e, n, a, t, r) {
-      ((this.major = e), (this.minor = n), (this.patch = a), (this.prIdent = t), (this.buildIdent = r));
+      ((this.major = e),
+        (this.minor = n),
+        (this.patch = a),
+        (this.prIdent = t),
+        (this.buildIdent = r));
     }
     static fromSemver(e) {
       const n = e.split("+"),
@@ -327,7 +394,10 @@ function swfUrlToLocalPath(url) {
     isCompatibleWith(e) {
       return (
         (0 !== this.major && this.major === e.major) ||
-        (0 === this.major && 0 === e.major && 0 !== this.minor && this.minor === e.minor) ||
+        (0 === this.major &&
+          0 === e.major &&
+          0 !== this.minor &&
+          this.minor === e.minor) ||
         (0 === this.major &&
           0 === e.major &&
           0 === this.minor &&
@@ -347,7 +417,11 @@ function swfUrlToLocalPath(url) {
       if (null !== this.prIdent && null === e.prIdent) return !1;
       if (null !== this.prIdent && null !== e.prIdent) {
         const n = /^[0-9]*$/;
-        for (let a = 0; a < this.prIdent.length && a < e.prIdent.length; a += 1) {
+        for (
+          let a = 0;
+          a < this.prIdent.length && a < e.prIdent.length;
+          a += 1
+        ) {
           const t = n.test(e.prIdent[a]),
             r = n.test(this.prIdent[a]);
           if (!r && t) return !0;
@@ -371,7 +445,11 @@ function swfUrlToLocalPath(url) {
       if (null === this.buildIdent && null !== e.buildIdent) return !1;
       if (null !== this.buildIdent && null !== e.buildIdent) {
         const n = /^[0-9]*$/;
-        for (let a = 0; a < this.buildIdent.length && a < e.buildIdent.length; a += 1) {
+        for (
+          let a = 0;
+          a < this.buildIdent.length && a < e.buildIdent.length;
+          a += 1
+        ) {
           const t = n.test(this.buildIdent[a]),
             r = n.test(e.buildIdent[a]);
           if (!t && r) return !0;
@@ -393,10 +471,19 @@ function swfUrlToLocalPath(url) {
       return !1;
     }
     isEqual(e) {
-      return this.major === e.major && this.minor === e.minor && this.patch === e.patch;
+      return (
+        this.major === e.major &&
+        this.minor === e.minor &&
+        this.patch === e.patch
+      );
     }
     isStableOrCompatiblePrerelease(e) {
-      return null === e.prIdent || (this.major === e.major && this.minor === e.minor && this.patch === e.patch);
+      return (
+        null === e.prIdent ||
+        (this.major === e.major &&
+          this.minor === e.minor &&
+          this.patch === e.patch)
+      );
     }
   }
   class i {
@@ -466,9 +553,14 @@ function swfUrlToLocalPath(url) {
     }
     init() {
       if (!this.invoked) {
-        if (((this.invoked = !0), (this.newestName = this.newestSourceName()), null === this.newestName))
+        if (
+          ((this.invoked = !0),
+          (this.newestName = this.newestSourceName()),
+          null === this.newestName)
+        )
           throw new Error("No registered Ruffle source!");
-        !1 !== (!("polyfills" in this.config) || this.config.polyfills) && this.sources[this.newestName].polyfill();
+        !1 !== (!("polyfills" in this.config) || this.config.polyfills) &&
+          this.sources[this.newestName].polyfill();
       }
     }
     newest() {
@@ -486,10 +578,14 @@ function swfUrlToLocalPath(url) {
       return a;
     }
     localCompatible() {
-      return void 0 !== this.sources.local ? this.satisfying("^" + this.sources.local.version) : this.newest();
+      return void 0 !== this.sources.local
+        ? this.satisfying("^" + this.sources.local.version)
+        : this.newest();
     }
     local() {
-      return void 0 !== this.sources.local ? this.satisfying("=" + this.sources.local.version) : this.newest();
+      return void 0 !== this.sources.local
+        ? this.satisfying("=" + this.sources.local.version)
+        : this.newest();
     }
     superseded() {
       this.invoked = !0;
@@ -500,11 +596,13 @@ function swfUrlToLocalPath(url) {
     versionName: "0.2.0-nightly.2026.1.8",
     versionChannel: "nightly",
     buildDate: "2026-01-08T00:09:26.874Z",
-    commitHash: "f0fa0a3d1db88970527c79323a910715801dbd6a"
+    commitHash: "f0fa0a3d1db88970527c79323a910715801dbd6a",
   };
   var u;
   !(function (e) {
-    ((e[(e.HaveNothing = 0)] = "HaveNothing"), (e[(e.Loading = 1)] = "Loading"), (e[(e.Loaded = 2)] = "Loaded"));
+    ((e[(e.HaveNothing = 0)] = "HaveNothing"),
+      (e[(e.Loading = 1)] = "Loading"),
+      (e[(e.Loaded = 2)] = "Loaded"));
   })(u || (u = {}));
   var c,
     d,
@@ -530,7 +628,11 @@ function swfUrlToLocalPath(url) {
       ((e.Visible = "visible"), (e.Hidden = "hidden"));
     })(f || (f = {})),
     (function (e) {
-      ((e.Error = "error"), (e.Warn = "warn"), (e.Info = "info"), (e.Debug = "debug"), (e.Trace = "trace"));
+      ((e.Error = "error"),
+        (e.Warn = "warn"),
+        (e.Info = "info"),
+        (e.Debug = "debug"),
+        (e.Trace = "trace"));
     })(m || (m = {})),
     (function (e) {
       ((e.Window = "window"),
@@ -540,7 +642,10 @@ function swfUrlToLocalPath(url) {
         (e.Gpu = "gpu"));
     })(p || (p = {})),
     (function (e) {
-      ((e.WebGpu = "webgpu"), (e.WgpuWebgl = "wgpu-webgl"), (e.Webgl = "webgl"), (e.Canvas = "canvas"));
+      ((e.WebGpu = "webgpu"),
+        (e.WgpuWebgl = "wgpu-webgl"),
+        (e.Webgl = "webgl"),
+        (e.Canvas = "canvas"));
     })(h || (h = {})),
     (function (e) {
       ((e.On = "on"), (e.RightClickOnly = "rightClickOnly"), (e.Off = "off"));
@@ -619,7 +724,7 @@ function swfUrlToLocalPath(url) {
     gamepadButtonMapping: {},
     urlRewriteRules: [],
     scrollingBehavior: k.Smart,
-    deviceFontRenderer: y.Embedded
+    deviceFontRenderer: y.Embedded,
   };
   class z {
     constructor(e) {
@@ -644,7 +749,9 @@ function swfUrlToLocalPath(url) {
     toString(e) {
       if (e)
         try {
-          return e.memoizeIntlObject(Intl.NumberFormat, this.opts).format(this.value);
+          return e
+            .memoizeIntlObject(Intl.NumberFormat, this.opts)
+            .format(this.value);
         } catch (n) {
           e.reportError(n);
         }
@@ -671,8 +778,13 @@ function swfUrlToLocalPath(url) {
       return !1;
     }
     constructor(e, n = {}) {
-      (e instanceof A ? ((n = { ...e.opts, ...n }), (e = e.value)) : e instanceof z && (e = e.valueOf()),
-        "object" == typeof e && "calendarId" in e && void 0 === n.calendar && (n = { ...n, calendar: e.calendarId }),
+      (e instanceof A
+        ? ((n = { ...e.opts, ...n }), (e = e.value))
+        : e instanceof z && (e = e.valueOf()),
+        "object" == typeof e &&
+          "calendarId" in e &&
+          void 0 === n.calendar &&
+          (n = { ...n, calendar: e.calendarId }),
         super(e),
         (this.opts = n));
     }
@@ -684,13 +796,16 @@ function swfUrlToLocalPath(url) {
       if ("number" == typeof e) return e;
       if (e instanceof Date) return e.getTime();
       if ("epochMilliseconds" in e) return e.epochMilliseconds;
-      if ("toZonedDateTime" in e) return e.toZonedDateTime("UTC").epochMilliseconds;
+      if ("toZonedDateTime" in e)
+        return e.toZonedDateTime("UTC").epochMilliseconds;
       throw new TypeError("Unwrapping a non-number value as a number");
     }
     toString(e) {
       if (e)
         try {
-          return e.memoizeIntlObject(Intl.DateTimeFormat, this.opts).format(this.value);
+          return e
+            .memoizeIntlObject(Intl.DateTimeFormat, this.opts)
+            .format(this.value);
         } catch (n) {
           e.reportError(n);
         }
@@ -703,17 +818,21 @@ function swfUrlToLocalPath(url) {
     if (a === n) return !0;
     if (a instanceof C && n instanceof C && a.value === n.value) return !0;
     if (n instanceof C && "string" == typeof a) {
-      if (a === e.memoizeIntlObject(Intl.PluralRules, n.opts).select(n.value)) return !0;
+      if (a === e.memoizeIntlObject(Intl.PluralRules, n.opts).select(n.value))
+        return !0;
     }
     return !1;
   }
   function F(e, n, a) {
-    return n[a] ? $(e, n[a].value) : (e.reportError(new RangeError("No default")), new S());
+    return n[a]
+      ? $(e, n[a].value)
+      : (e.reportError(new RangeError("No default")), new S());
   }
   function q(e, n) {
     const a = [],
       t = Object.create(null);
-    for (const r of n) "narg" === r.type ? (t[r.name] = P(e, r.value)) : a.push(P(e, r));
+    for (const r of n)
+      "narg" === r.type ? (t[r.name] = P(e, r.value)) : a.push(P(e, r));
     return { positional: a, named: t };
   }
   function P(e, n) {
@@ -726,11 +845,15 @@ function swfUrlToLocalPath(url) {
         return (function (e, { name: n }) {
           let a;
           if (e.params) {
-            if (!Object.prototype.hasOwnProperty.call(e.params, n)) return new S(`$${n}`);
+            if (!Object.prototype.hasOwnProperty.call(e.params, n))
+              return new S(`$${n}`);
             a = e.params[n];
           } else {
             if (!e.args || !Object.prototype.hasOwnProperty.call(e.args, n))
-              return (e.reportError(new ReferenceError(`Unknown variable: $${n}`)), new S(`$${n}`));
+              return (
+                e.reportError(new ReferenceError(`Unknown variable: $${n}`)),
+                new S(`$${n}`)
+              );
             a = e.args[n];
           }
           if (a instanceof z) return a;
@@ -742,25 +865,46 @@ function swfUrlToLocalPath(url) {
             case "object":
               if (A.supportsValue(a)) return new A(a);
             default:
-              return (e.reportError(new TypeError(`Variable type not supported: $${n}, ${typeof a}`)), new S(`$${n}`));
+              return (
+                e.reportError(
+                  new TypeError(
+                    `Variable type not supported: $${n}, ${typeof a}`,
+                  ),
+                ),
+                new S(`$${n}`)
+              );
           }
         })(e, n);
       case "mesg":
         return (function (e, { name: n, attr: a }) {
           const t = e.bundle._messages.get(n);
-          if (!t) return (e.reportError(new ReferenceError(`Unknown message: ${n}`)), new S(n));
+          if (!t)
+            return (
+              e.reportError(new ReferenceError(`Unknown message: ${n}`)),
+              new S(n)
+            );
           if (a) {
             const r = t.attributes[a];
-            return r ? $(e, r) : (e.reportError(new ReferenceError(`Unknown attribute: ${a}`)), new S(`${n}.${a}`));
+            return r
+              ? $(e, r)
+              : (e.reportError(new ReferenceError(`Unknown attribute: ${a}`)),
+                new S(`${n}.${a}`));
           }
           if (t.value) return $(e, t.value);
-          return (e.reportError(new ReferenceError(`No value: ${n}`)), new S(n));
+          return (
+            e.reportError(new ReferenceError(`No value: ${n}`)),
+            new S(n)
+          );
         })(e, n);
       case "term":
         return (function (e, { name: n, attr: a, args: t }) {
           const r = `-${n}`,
             o = e.bundle._terms.get(r);
-          if (!o) return (e.reportError(new ReferenceError(`Unknown term: ${r}`)), new S(r));
+          if (!o)
+            return (
+              e.reportError(new ReferenceError(`Unknown term: ${r}`)),
+              new S(r)
+            );
           if (a) {
             const n = o.attributes[a];
             if (n) {
@@ -768,7 +912,10 @@ function swfUrlToLocalPath(url) {
               const a = $(e, n);
               return ((e.params = null), a);
             }
-            return (e.reportError(new ReferenceError(`Unknown attribute: ${a}`)), new S(`${r}.${a}`));
+            return (
+              e.reportError(new ReferenceError(`Unknown attribute: ${a}`)),
+              new S(`${r}.${a}`)
+            );
           }
           e.params = q(e, t).named;
           const i = $(e, o.value);
@@ -777,9 +924,16 @@ function swfUrlToLocalPath(url) {
       case "func":
         return (function (e, { name: n, args: a }) {
           let t = e.bundle._functions[n];
-          if (!t) return (e.reportError(new ReferenceError(`Unknown function: ${n}()`)), new S(`${n}()`));
+          if (!t)
+            return (
+              e.reportError(new ReferenceError(`Unknown function: ${n}()`)),
+              new S(`${n}()`)
+            );
           if ("function" != typeof t)
-            return (e.reportError(new TypeError(`Function ${n}() is not callable`)), new S(`${n}()`));
+            return (
+              e.reportError(new TypeError(`Function ${n}() is not callable`)),
+              new S(`${n}()`)
+            );
           try {
             let n = q(e, a);
             return t(n.positional, n.named);
@@ -801,7 +955,8 @@ function swfUrlToLocalPath(url) {
     }
   }
   function D(e, n) {
-    if (e.dirty.has(n)) return (e.reportError(new RangeError("Cyclic reference")), new S());
+    if (e.dirty.has(n))
+      return (e.reportError(new RangeError("Cyclic reference")), new S());
     e.dirty.add(n);
     const a = [],
       t = e.bundle._useIsolating && n.length > 1;
@@ -810,9 +965,13 @@ function swfUrlToLocalPath(url) {
         if ((e.placeables++, e.placeables > 100))
           throw (
             e.dirty.delete(n),
-            new RangeError(`Too many placeables expanded: ${e.placeables}, max allowed is 100`)
+            new RangeError(
+              `Too many placeables expanded: ${e.placeables}, max allowed is 100`,
+            )
           );
-        (t && a.push("\u2068"), a.push(P(e, r).toString(e)), t && a.push("\u2069"));
+        (t && a.push("\u2068"),
+          a.push(P(e, r).toString(e)),
+          t && a.push("\u2069"));
       } else a.push(e.bundle._transform(r));
     return (e.dirty.delete(n), a.join(""));
   }
@@ -841,7 +1000,8 @@ function swfUrlToLocalPath(url) {
   }
   function M(e, n) {
     const a = Object.create(null);
-    for (const [t, r] of Object.entries(e)) n.includes(t) && (a[t] = r.valueOf());
+    for (const [t, r] of Object.entries(e))
+      n.includes(t) && (a[t] = r.valueOf());
     return a;
   }
   const I = [
@@ -852,7 +1012,7 @@ function swfUrlToLocalPath(url) {
     "minimumFractionDigits",
     "maximumFractionDigits",
     "minimumSignificantDigits",
-    "maximumSignificantDigits"
+    "maximumSignificantDigits",
   ];
   function T(e, n) {
     let a = e[0];
@@ -875,7 +1035,7 @@ function swfUrlToLocalPath(url) {
     "hour",
     "minute",
     "second",
-    "timeZoneName"
+    "timeZoneName",
   ];
   function L(e, n) {
     let a = e[0];
@@ -885,7 +1045,10 @@ function swfUrlToLocalPath(url) {
   }
   const N = new Map();
   class _ {
-    constructor(e, { functions: n, useIsolating: a = !0, transform: t = (e) => e } = {}) {
+    constructor(
+      e,
+      { functions: n, useIsolating: a = !0, transform: t = (e) => e } = {},
+    ) {
       ((this._terms = new Map()),
         (this._messages = new Map()),
         (this.locales = Array.isArray(e) ? e : [e]),
@@ -910,13 +1073,17 @@ function swfUrlToLocalPath(url) {
         let r = e.body[t];
         if (r.id.startsWith("-")) {
           if (!1 === n && this._terms.has(r.id)) {
-            a.push(new Error(`Attempt to override an existing term: "${r.id}"`));
+            a.push(
+              new Error(`Attempt to override an existing term: "${r.id}"`),
+            );
             continue;
           }
           this._terms.set(r.id, r);
         } else {
           if (!1 === n && this._messages.has(r.id)) {
-            a.push(new Error(`Attempt to override an existing message: "${r.id}"`));
+            a.push(
+              new Error(`Attempt to override an existing message: "${r.id}"`),
+            );
             continue;
           }
           this._messages.set(r.id, r);
@@ -930,7 +1097,8 @@ function swfUrlToLocalPath(url) {
       try {
         return D(t, e).toString(t);
       } catch (e) {
-        if (t.errors && e instanceof Error) return (t.errors.push(e), new S().toString(t));
+        if (t.errors && e instanceof Error)
+          return (t.errors.push(e), new S().toString(t));
         throw e;
       }
     }
@@ -1008,14 +1176,22 @@ function swfUrlToLocalPath(url) {
             }
             return e;
           })();
-        if (null === n && 0 === Object.keys(t).length) throw new SyntaxError("Expected message value or attributes");
+        if (null === n && 0 === Object.keys(t).length)
+          throw new SyntaxError("Expected message value or attributes");
         return { id: e, value: n, attributes: t };
       }
       function l() {
         let t;
-        if ((a(Q) && (t = i(Q)), "{" === e[n] || "}" === e[n])) return u(t ? [t] : [], 1 / 0);
+        if ((a(Q) && (t = i(Q)), "{" === e[n] || "}" === e[n]))
+          return u(t ? [t] : [], 1 / 0);
         let r = g();
-        return r ? (t ? u([t, r], r.length) : ((r.value = b(r.value, ee)), u([r], r.length))) : t ? b(t, ne) : null;
+        return r
+          ? t
+            ? u([t, r], r.length)
+            : ((r.value = b(r.value, ee)), u([r], r.length))
+          : t
+            ? b(t, ne)
+            : null;
       }
       function u(t = [], r) {
         for (;;) {
@@ -1036,7 +1212,9 @@ function swfUrlToLocalPath(url) {
           s = t[o];
         "string" == typeof s && (t[o] = b(s, ne));
         let l = [];
-        for (let e of t) (e instanceof pe && (e = e.value.slice(0, e.value.length - r)), e && l.push(e));
+        for (let e of t)
+          (e instanceof pe && (e = e.value.slice(0, e.value.length - r)),
+            e && l.push(e));
         return l;
       }
       function c() {
@@ -1085,17 +1263,28 @@ function swfUrlToLocalPath(url) {
             if (Z.test(t)) return { type: "func", name: t, args: o };
             throw new SyntaxError("Function names must be all upper-case");
           }
-          return "-" === a ? { type: "term", name: t, attr: i, args: [] } : { type: "mesg", name: t, attr: i };
+          return "-" === a
+            ? { type: "term", name: t, attr: i, args: [] }
+            : { type: "mesg", name: t, attr: i };
         }
         return p();
       }
       function f() {
         let e = d();
-        return "mesg" !== e.type ? e : r(ce) ? { type: "narg", name: e.name, value: p() } : e;
+        return "mesg" !== e.type
+          ? e
+          : r(ce)
+            ? { type: "narg", name: e.name, value: p() }
+            : e;
       }
       function m() {
         let e;
-        return (r(ie, SyntaxError), (e = a(J) ? h() : { type: "str", value: i(H) }), r(se, SyntaxError), e);
+        return (
+          r(ie, SyntaxError),
+          (e = a(J) ? h() : { type: "str", value: i(H) }),
+          r(se, SyntaxError),
+          e
+        );
       }
       function p() {
         if (a(J)) return h();
@@ -1158,7 +1347,7 @@ function swfUrlToLocalPath(url) {
   }
   const he = new RegExp(
     "^([a-z]{2,3}|\\*)(?:-([a-z]{4}|\\*))?(?:-([a-z]{2}|\\*))?(?:-(([0-9][a-z0-9]{3}|[a-z0-9]{5,8})|\\*))?$",
-    "i"
+    "i",
   );
   class ve {
     constructor(e) {
@@ -1181,14 +1370,24 @@ function swfUrlToLocalPath(url) {
     }
     matches(e, n = !1, a = !1) {
       return (
-        (this.language === e.language || (n && void 0 === this.language) || (a && void 0 === e.language)) &&
-        (this.script === e.script || (n && void 0 === this.script) || (a && void 0 === e.script)) &&
-        (this.region === e.region || (n && void 0 === this.region) || (a && void 0 === e.region)) &&
-        (this.variant === e.variant || (n && void 0 === this.variant) || (a && void 0 === e.variant))
+        (this.language === e.language ||
+          (n && void 0 === this.language) ||
+          (a && void 0 === e.language)) &&
+        (this.script === e.script ||
+          (n && void 0 === this.script) ||
+          (a && void 0 === e.script)) &&
+        (this.region === e.region ||
+          (n && void 0 === this.region) ||
+          (a && void 0 === e.region)) &&
+        (this.variant === e.variant ||
+          (n && void 0 === this.variant) ||
+          (a && void 0 === e.variant))
       );
     }
     toString() {
-      return [this.language, this.script, this.region, this.variant].filter((e) => void 0 !== e).join("-");
+      return [this.language, this.script, this.region, this.variant]
+        .filter((e) => void 0 !== e)
+        .join("-");
     }
     clearVariants() {
       this.variant = void 0;
@@ -1200,7 +1399,8 @@ function swfUrlToLocalPath(url) {
       const e = (function (e) {
         if (Object.prototype.hasOwnProperty.call(ge, e)) return new ve(ge[e]);
         const n = new ve(e);
-        if (n.language && be.includes(n.language)) return ((n.region = n.language.toUpperCase()), n);
+        if (n.language && be.includes(n.language))
+          return ((n.region = n.language.toUpperCase()), n);
         return null;
       })(this.toString().toLowerCase());
       return (
@@ -1236,9 +1436,25 @@ function swfUrlToLocalPath(url) {
       "zh-mo": "zh-hant-mo",
       "zh-tw": "zh-hant-tw",
       "zh-gb": "zh-hant-gb",
-      "zh-us": "zh-hant-us"
+      "zh-us": "zh-hant-us",
     },
-    be = ["az", "bg", "cs", "de", "es", "fi", "fr", "hu", "it", "lt", "lv", "nl", "pl", "ro", "ru"];
+    be = [
+      "az",
+      "bg",
+      "cs",
+      "de",
+      "es",
+      "fi",
+      "fr",
+      "hu",
+      "it",
+      "lt",
+      "lv",
+      "nl",
+      "pl",
+      "ro",
+      "ru",
+    ];
   function we(e, n, { strategy: a = "filtering", defaultLocale: t } = {}) {
     const r = (function (e, n, a) {
       const t = new Set(),
@@ -1263,7 +1479,8 @@ function swfUrlToLocalPath(url) {
           if (o.addLikelySubtags())
             for (const [e, n] of r.entries())
               if (n.matches(o, !0, !1)) {
-                if ((t.add(e), r.delete(e), "lookup" === a)) return Array.from(t);
+                if ((t.add(e), r.delete(e), "lookup" === a))
+                  return Array.from(t);
                 if ("filtering" === a) continue;
                 continue e;
               }
@@ -1277,7 +1494,8 @@ function swfUrlToLocalPath(url) {
           if ((o.clearRegion(), o.addLikelySubtags()))
             for (const [e, n] of r.entries())
               if (n.matches(o, !0, !1)) {
-                if ((t.add(e), r.delete(e), "lookup" === a)) return Array.from(t);
+                if ((t.add(e), r.delete(e), "lookup" === a))
+                  return Array.from(t);
                 if ("filtering" === a) continue;
                 continue e;
               }
@@ -1291,9 +1509,16 @@ function swfUrlToLocalPath(url) {
         }
       }
       return Array.from(t);
-    })(Array.from(null != e ? e : []).map(String), Array.from(null != n ? n : []).map(String), a);
+    })(
+      Array.from(null != e ? e : []).map(String),
+      Array.from(null != n ? n : []).map(String),
+      a,
+    );
     if ("lookup" === a) {
-      if (void 0 === t) throw new Error("defaultLocale cannot be undefined for strategy `lookup`");
+      if (void 0 === t)
+        throw new Error(
+          "defaultLocale cannot be undefined for strategy `lookup`",
+        );
       0 === r.length && r.push(t);
     } else t && !r.includes(t) && r.push(t);
     return r;
@@ -1315,7 +1540,10 @@ function swfUrlToLocalPath(url) {
     e && (Map = e);
   }
   function Re(e) {
-    const n = "function" == typeof Function.prototype.toString ? Function.prototype.toString() : null;
+    const n =
+      "function" == typeof Function.prototype.toString
+        ? Function.prototype.toString()
+        : null;
     return (
       "string" == typeof n &&
       n.indexOf("[native code]") >= 0 &&
@@ -1323,14 +1551,24 @@ function swfUrlToLocalPath(url) {
     );
   }
   function je() {
-    (("function" == typeof Array.prototype.reduce && Re(Array.prototype.reduce)) ||
+    (("function" == typeof Array.prototype.reduce &&
+      Re(Array.prototype.reduce)) ||
       Object.defineProperty(Array.prototype, "reduce", {
         value(...e) {
-          if (0 === e.length && window.Prototype && window.Prototype.Version && window.Prototype.Version < "1.6.1")
+          if (
+            0 === e.length &&
+            window.Prototype &&
+            window.Prototype.Version &&
+            window.Prototype.Version < "1.6.1"
+          )
             return this.length > 1 ? this : this[0];
           const n = e[0];
-          if (null === this) throw new TypeError("Array.prototype.reduce called on null or undefined");
-          if ("function" != typeof n) throw new TypeError(`${n} is not a function`);
+          if (null === this)
+            throw new TypeError(
+              "Array.prototype.reduce called on null or undefined",
+            );
+          if ("function" != typeof n)
+            throw new TypeError(`${n} is not a function`);
           const a = Object(this),
             t = a.length >>> 0;
           let r,
@@ -1338,27 +1576,38 @@ function swfUrlToLocalPath(url) {
           if (e.length >= 2) r = e[1];
           else {
             for (; o < t && !(o in a); ) o++;
-            if (o >= t) throw new TypeError("Reduce of empty array with no initial value");
+            if (o >= t)
+              throw new TypeError(
+                "Reduce of empty array with no initial value",
+              );
             r = a[o++];
           }
           for (; o < t; ) (o in a && (r = n(r, a[o], o, a)), o++);
           return r;
-        }
+        },
       }),
       ("function" == typeof Window && Re(Window)) ||
-        ("function" == typeof window.constructor && Re(window.constructor) && (window.Window = window.constructor)),
-      (void 0 !== window.Reflect && null !== window.Reflect) || (window.Reflect = {}),
-      "function" != typeof Reflect.get && Object.defineProperty(Reflect, "get", { value: (e, n) => e[n] }),
+        ("function" == typeof window.constructor &&
+          Re(window.constructor) &&
+          (window.Window = window.constructor)),
+      (void 0 !== window.Reflect && null !== window.Reflect) ||
+        (window.Reflect = {}),
+      "function" != typeof Reflect.get &&
+        Object.defineProperty(Reflect, "get", { value: (e, n) => e[n] }),
       "function" != typeof Reflect.set &&
         Object.defineProperty(Reflect, "set", {
           value(e, n, a) {
             e[n] = a;
-          }
+          },
         }),
-      "function" != typeof Reflect.has && Object.defineProperty(Reflect, "has", { value: (e, n) => n in e }),
+      "function" != typeof Reflect.has &&
+        Object.defineProperty(Reflect, "has", { value: (e, n) => n in e }),
       "function" != typeof Reflect.ownKeys &&
         Object.defineProperty(Reflect, "ownKeys", {
-          value: (e) => [...Object.getOwnPropertyNames(e), ...Object.getOwnPropertySymbols(e)]
+          value: (e) => [
+            ...Object.getOwnPropertyNames(e),
+            ...Object.getOwnPropertySymbols(e),
+          ],
         }));
   }
   const xe = {
@@ -1370,14 +1619,15 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = \u0647\u0644 \u0623\u0646\u062a \u0645\u062a\u0623\u0643\u062f \u0623\u0646\u0643 \u062a\u0631\u064a\u062f \u062d\u0630\u0641 \u0645\u0644\u0641 \u0627\u0644\u062d\u0641\u0638 \u0647\u0630\u0627\u061f\nsave-reload-prompt =\n    \u0627\u0644\u0637\u0631\u064a\u0642\u0629 \u0627\u0644\u0648\u062d\u064a\u062f\u0629 \u0644\u0640 { $action ->\n        [delete] \u062d\u0630\u0641\n       *[replace] \u0625\u0633\u062a\u0628\u062f\u0627\u0644\n    } \u0645\u0644\u0641 \u0627\u0644\u062d\u0641\u0638 \u0647\u0630\u0627 \u062f\u0648\u0646 \u062a\u0639\u0627\u0631\u0636 \u0645\u062d\u062a\u0645\u0644 \u0647\u064a \u0625\u0639\u0627\u062f\u0629 \u062a\u062d\u0645\u064a\u0644 \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629. \u0647\u0644 \u062a\u0631\u063a\u0628 \u0641\u064a \u0627\u0644\u0645\u062a\u0627\u0628\u0639\u0629 \u0639\u0644\u0649 \u0623\u064a \u062d\u0627\u0644\u061f\nsave-download = \u062d\u0645\u0651\u0644\nsave-replace = \u0625\u0633\u062a\u0628\u062f\u0644\nsave-delete = \u0625\u062d\u0630\u0641\nsave-backup-all = \u062d\u0645\u0651\u0644 \u062c\u0645\u064a\u0639 \u0645\u0644\u0641\u0627\u062a \u0627\u0644\u062d\u0641\u0638\n",
         "volume-controls.ftl":
-          "volume-controls-mute = \u0625\u0643\u062a\u0645\nvolume-controls-unmute = \u0623\u0644\u063a\u0650 \u0627\u0644\u0643\u062a\u0645\n"
+          "volume-controls-mute = \u0625\u0643\u062a\u0645\nvolume-controls-unmute = \u0623\u0644\u063a\u0650 \u0627\u0644\u0643\u062a\u0645\n",
       },
       "bs-BA": {
         "context_menu.ftl":
           "context-menu-download-swf = Preuzmite .swf datoteku\ncontext-menu-copy-debug-info = Kopiraj informacije o otklanjanju gre\u0161aka\ncontext-menu-open-save-manager = Otvori Upravitelj pohrane\ncontext-menu-about-ruffle =\n    { $flavor ->\n    [extension] O ekstenziji Ruffle ({ $version })\n    *[other] O Ruffle ({ $version })\n    }\ncontext-menu-hide = Sakrij ovaj meni\ncontext-menu-enter-fullscreen = Pre\u0111i na cijeli ekran\ncontext-menu-volume-controls = Kontrole ja\u010dine zvuka\n",
         "messages.ftl": "update-ruffle = A\u017eurirajte Ruffle\n",
         "save-manager.ftl": "",
-        "volume-controls.ftl": "volume-controls-mute = Isklju\u010di zvuk\nvolume-controls-unmute = Uklju\u010di zvuk\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Isklju\u010di zvuk\nvolume-controls-unmute = Uklju\u010di zvuk\n",
       },
       "ca-ES": {
         "context_menu.ftl":
@@ -1386,7 +1636,7 @@ function swfUrlToLocalPath(url) {
           "message-cant-embed =\n    Ruffle no ha pogut executar el contingut Flash incrustat en aquesta p\xe0gina.\n    Podeu provar d'obrir el fitxer en una pestanya a part per evitar aquest problema.\npanic-title = Alguna cosa ha fallat :(\nmore-info = M\xe9s informaci\xf3\nrun-anyway = Reprodueix igualment\ncontinue = Continua\nreport-bug = Informa d'un error\nupdate-ruffle = Actualitza Ruffle\nruffle-demo = Demostraci\xf3 web\nruffle-desktop = Aplicaci\xf3 d'escriptori\nruffle-wiki = Obre la wiki de Ruffle\nview-error-details = Mostra detalls de l'error\nopen-in-new-tab = Obre en una pestanya nova\nclick-to-unmute = Feu clic per activar el so\nerror-file-protocol =\n    Sembla que esteu executant Ruffle al protocol \"file:\".\n    Aix\xf2 no funcionar\xe0 perqu\xe8 els navegadors bloquegen moltes caracter\xedstiques per raons de seguretat. En comptes d'aix\xf2, us suggerim que configureu un servidor local o b\xe9 utilitzeu la demostraci\xf3 web o l'aplicaci\xf3 d'escriptori.\nerror-javascript-config =\n    Ruffle ha topat amb un problema greu a causa d'una configuraci\xf3 JavaScript err\xf2nia.\n    Si sou l'administrador del servidor, us suggerim que comproveu els detalls de l'error per determinar el par\xe0metre culpable.\n    Tamb\xe9 podeu consultar la wiki del Ruffle per obtenir ajuda.\nerror-wasm-not-found =\n    Ruffle no ha pogut carregar el component de fitxer \".wasm\" necessari.\n    Si sou l'administrador del servidor, si us plau, comproveu que el fitxer ha estat carregat correctament.\n    Si el problema continua, \xe9s possible que h\xe0giu d'utilitzar el par\xe1metre \"publicPath\": us preguem que consulteu la wiki de Ruffle per obtenir ajuda.\nerror-wasm-mime-type =\n    Ruffle ha topat amb un problema greu mentre provava d'inicialitzar-se.\n    Aquest servidor no est\xe0 servint els fitxers \".wasm\" amb el tipus MIME adequat.\n    Si sou l'administrador del servidor, us preguem que consulteu la wiki de Ruffle per obtenir ajuda.\nerror-invalid-swf =\n    Ruffle no ha pogut llegir el fitxer sol\xb7licitat.\n    La ra\xf3 m\xe9s probable \xe9s que no sigui un fitxer SWF v\xe0lid.\nerror-swf-fetch =\n    Ruffle no ha pogut carregar el fitxer SWF Flash.\n    La ra\xf3 m\xe9s probable \xe9s que el fitxer ja no existeixi, aix\xed que no hi ha res que el Ruffle pugui carregar.\n    Proveu de contactar a l'administrador del lloc per obtenir ajuda.\nerror-swf-cors =\n    Ruffle no ha pogut carregar el fitxer SWF Flash.\n    \xc9s probable que l'acc\xe9s a la c\xe0rrega hagi estat denegat per una pol\xedtica CORS.\n    Si sou l'administrador del servidor, us preguem que consulteu la wiki del Ruffle per obtenir ajuda.\nerror-wasm-cors =\n    Ruffle no ha pogut carregar el component de fitxer \".wasm\" necessari.\n    \xc9s probable que l'acc\xe9s a la c\xe0rrega hagi estat denegat per una pol\xedtica CORS.\n    Si sou l'administrador del servidor, us preguem que consulteu la wiki del Ruffle per obtenir ajuda.\nerror-wasm-invalid =\n    Ruffle ha topat amb un problema greu mentre provava d'inicialitzar-se.\n    Sembla que a aquest lloc li manquen fitxers o aquests no s\xf3n v\xe0lids per a l'execuci\xf3 de Ruffle.\n    Si sou l'administrador del servidor, us preguem que consulteu la wiki de Ruffle per obtenir ajuda.\nerror-wasm-download =\n    Ruffle ha topat amb un problema greu mentre provava d'inicialitzar-se.\n    Aix\xf2 sovint aix\xf2 pot resoldre's sol, aix\xed que podeu provar de recarregar la p\xe0gina.\n    En cas contrari, us preguem que contacteu l'administrador del lloc.\nerror-wasm-disabled-on-edge =\n    Ruffle no ha pogut carregar el component de fitxer \".wasm\" necessari.\n    Per a arreglar-ho, proveu d'obrir els par\xe0metres del navegador, feu clic sobre \"Privadesa, cerca i serveis\", i desactiveu \"Prevenci\xf3 de seguiment\".\n    Aix\xf2 permetr\xe0 que el vostre navegador carregui els fitxers \".wasm\" necessaris.\n    Si el problema continua, possiblement haureu d'utilitzar un altre navegador.\nerror-javascript-conflict =\n    Ruffle ha topat amb un problema greu mentre provava d'inicialitzar-se.\n    Sembla que aquest lloc fa servir codi JavaScript que entra en conflicte amb Ruffle.\n    Si sou l'administrador del servidor, us preguem que consulteu la wiki de Ruffle per obtenir ajuda.\nerror-javascript-conflict-outdated = Tamb\xe9 podeu provar de carregar una versi\xf3 m\xe9s recent de Ruffle que podria resoldre el problema (la compilaci\xf3 actual est\xe0 desactualitzada: { $buildDate }).\nerror-csp-conflict =\n    Ruffle ha topat amb un problema greu mentre provava d'inicialitzar-se.\n    La pol\xedtica de seguretat del contingut (CSP) no permet l'execuci\xf3 del component \".wasm\" necessari.\n    Si sou l'administrador del servidor, us preguem que consulteu la wiki de Ruffle per obtenir ajuda.\nerror-unknown =\n    Ruffle ha topat amb un problema greu mentre provava de mostrar aquest contingut Flash.\n    { $outdated ->\n        [true] Si sou l'administrador del servidor, us preguem que proveu de carregar una versi\xf3 m\xe9s recent de Ruffle (la compilaci\xf3 actual est\xe0 desactualitzada: { $buildDate }).\n       *[false] Aix\xf2 no hauria d'haver passat, aix\xed que us agrair\xedem molt que n'inform\xe9ssiu l'error!\n    }\n",
         "save-manager.ftl":
           "save-delete-prompt = Segur que vols esborrar aquest fitxer desat?\nsave-reload-prompt =\n    L'\xfanica forma d{ $action ->\n        [delete] 'eliminar\n       *[replace] e substituir\n    } aquest fitxer desat sense crear un potencial conflicte \xe9s recarregant el contingut. Voleu continuar igualment?\nsave-download = Baixa\nsave-replace = Substitueix\nsave-delete = Elimina\nsave-backup-all = Baixa tots els fitxers desats\n",
-        "volume-controls.ftl": "volume-controls-mute = Silenci\n"
+        "volume-controls.ftl": "volume-controls-mute = Silenci\n",
       },
       "cs-CZ": {
         "context_menu.ftl":
@@ -1395,7 +1645,8 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle nemohl spustit Flash vlo\u017een\xfd na t\xe9to str\xe1nce.\n    M\u016f\u017eete se pokusit otev\u0159\xedt soubor na samostatn\xe9 kart\u011b, abyste se vyhnuli tomuto probl\xe9mu.\nmessage-restored-from-bfcache =\n    V\xe1\u0161 prohl\xed\u017ee\u010d obnovil tento Flash obsah z p\u0159edchoz\xed relace.\n    Chcete-li za\u010d\xedt znovu, znovu na\u010dt\u011bte str\xe1nku.\npanic-title = N\u011bco se pokazilo :(\nmore-info = Dal\u0161\xed informace\nrun-anyway = P\u0159esto spustit\ncontinue = Pokra\u010dovat\nreport-bug = Nahl\xe1sit chybu\nupdate-ruffle = Aktualizovat Ruffle\nruffle-demo = Web Demo\nruffle-desktop = Desktopov\xe1 aplikace\nruffle-wiki = Zobrazit Ruffle Wiki\nenable-hardware-acceleration = Zd\xe1 se, \u017ee hardwarov\xe1 akcelerace je vypnut\xe1. I kdy\u017e Ruffle funguje spr\xe1vn\u011b, m\u016f\u017ee b\xfdt nep\u0159im\u011b\u0159en\u011b pomal\xfd. Jak povolit hardwarovou akceleraci zjist\xedte na tomto odkazu:\nenable-hardware-acceleration-link = \u010cast\xe9 dotazy - Hardwarov\xe1 akcelerace Chrome\nview-error-details = Zobrazit podrobnosti o chyb\u011b\nopen-in-new-tab = Otev\u0159\xedt na nov\xe9 kart\u011b\nclick-to-unmute = Kliknut\xedm zru\u0161\xedte ztlumen\xed\nclipboard-message-title = Kop\xedrov\xe1n\xed a vkl\xe1d\xe1n\xed v Ruffle\nclipboard-message-description =\n    { $variant ->\n       *[unsupported] V\xe1\u0161 prohl\xed\u017ee\u010d nepodporuje pln\xfd p\u0159\xedstup ke schr\xe1nce,\n        [access-denied] P\u0159\xedstup ke schr\xe1nce byl odep\u0159en,\n    } ale m\xedsto toho m\u016f\u017eete v\u017edy pou\u017e\xedt tyto zkratky:\nclipboard-message-copy = { " " } pro kop\xedrov\xe1n\xed\nclipboard-message-cut = { " " } pro vyst\u0159ihov\xe1n\xed\nclipboard-message-paste = { " " } pro vkl\xe1d\xe1n\xed\nerror-canvas-reload = Nelze znovu na\u010d\xedst pomoc\xed vykreslova\u010de pl\xe1tna, pokud je vykreslova\u010d pl\xe1tna ji\u017e pou\u017e\xedv\xe1n.\nerror-file-protocol =\n    Zd\xe1 se, \u017ee pou\u017e\xedv\xe1te Ruffle na protokolu "file:".\n    To nen\xed mo\u017en\xe9, proto\u017ee prohl\xed\u017ee\u010de blokuj\xed fungov\xe1n\xed mnoha funkc\xed z bezpe\u010dnostn\xedch d\u016fvod\u016f.\n    Nam\xedsto toho v\xe1m doporu\u010dujeme nastavit lok\xe1ln\xed server nebo pou\u017e\xedt web demo \u010di desktopovou aplikaci.\nerror-javascript-config =\n    Ruffle narazil na probl\xe9m v d\u016fsledku nespr\xe1vn\xe9 konfigurace JavaScriptu.\n    Pokud jste spr\xe1vcem serveru, doporu\u010dujeme v\xe1m zkontrolovat podrobnosti o chyb\u011b, abyste zjistili, kter\xfd parametr je vadn\xfd.\n    Pomoc m\u016f\u017eete z\xedskat tak\xe9 na wiki Ruffle.\nerror-wasm-not-found =\n    Ruffle se nepoda\u0159ilo na\u010d\xedst po\u017eadovanou komponentu souboru \u201e.wasm\u201c.\n    Pokud jste spr\xe1vcem serveru, zkontrolujte, zda byl soubor spr\xe1vn\u011b nahr\xe1n.\n    Pokud probl\xe9m p\u0159etrv\xe1v\xe1, mo\u017en\xe1 budete muset pou\u017e\xedt nastaven\xed \u201epublicPath\u201c: pomoc naleznete na wiki Ruffle.\nerror-wasm-mime-type =\n    Ruffle narazil na probl\xe9m p\u0159i pokusu o inicializaci.\n    Tento webov\xfd server neposkytuje soubory \u201e.wasm\u201c se spr\xe1vn\xfdm typem MIME.\n    Pokud jste spr\xe1vcem serveru, n\xe1pov\u011bdu najdete na Ruffle wiki.\nerror-invalid-swf =\n    Ruffle nem\u016f\u017ee zpracovat po\u017eadovan\xfd soubor.\n    Nejpravd\u011bpodobn\u011bj\u0161\xedm d\u016fvodem je, \u017ee po\u017eadovan\xfd soubor nen\xed platn\xfdm souborem SWF.\nerror-swf-fetch =\n    Ruffle se nepoda\u0159ilo na\u010d\xedst SWF soubor Flash.\n    Nejpravd\u011bpodobn\u011bj\u0161\xedm d\u016fvodem je, \u017ee soubor ji\u017e neexistuje, tak\u017ee Ruffle nem\xe1 co na\u010d\xedst.\n    Zkuste po\u017e\xe1dat o pomoc spr\xe1vce webu.\nerror-swf-cors =\n    Ruffle se nepoda\u0159ilo na\u010d\xedst SWF soubor Flash.\n    P\u0159\xedstup k na\u010d\xedt\xe1n\xed byl pravd\u011bpodobn\u011b zablokov\xe1n politikou CORS.\n    Pokud jste spr\xe1vcem serveru, n\xe1pov\u011bdu najdete na Ruffle wiki.\nerror-wasm-cors =\n    Ruffle se nepoda\u0159ilo na\u010d\xedst po\u017eadovanou komponentu souboru \u201e.wasm\u201c.\n    P\u0159\xedstup k na\u010d\xedt\xe1n\xed byl pravd\u011bpodobn\u011b zablokov\xe1n politikou CORS.\n    Pokud jste spr\xe1vcem serveru, n\xe1pov\u011bdu najdete na Ruffle wiki.\nerror-wasm-invalid =\n    Ruffle narazil na probl\xe9m p\u0159i pokusu o inicializaci.\n    Zd\xe1 se, \u017ee na t\xe9to str\xe1nce chyb\xed nebo jsou neplatn\xe9 soubory ke spu\u0161t\u011bn\xed Ruffle.\n    Pokud jste spr\xe1vcem serveru, n\xe1pov\u011bdu najdete na Ruffle wiki.\nerror-wasm-download =\n    Ruffle narazil na probl\xe9m p\u0159i pokusu o inicializaci.\n    Probl\xe9m se m\u016f\u017ee vy\u0159e\u0161it i s\xe1m, tak\u017ee m\u016f\u017eete zkusit str\xe1nku na\u010d\xedst znovu.\n    V opa\u010dn\xe9m p\u0159\xedpad\u011b kontaktujte administr\xe1tora str\xe1nky.\nerror-wasm-disabled-on-edge =\n    Ruffle se nepoda\u0159ilo na\u010d\xedst po\u017eadovanou komponentu souboru \u201e.wasm\u201c.\n    Chcete-li tento probl\xe9m vy\u0159e\u0161it, zkuste otev\u0159\xedt nastaven\xed prohl\xed\u017ee\u010de, klikn\u011bte na polo\u017eku \u201eOchrana osobn\xedch \xfadaj\u016f, vyhled\xe1v\xe1n\xed a slu\u017eby\u201c, p\u0159ejd\u011bte dol\u016f a vypn\u011bte mo\u017enost \u201eZvy\u0161te svou bezpe\u010dnost na webu\u201c.\n    Va\u0161emu prohl\xed\u017ee\u010di to umo\u017en\xed na\u010d\xedst po\u017eadovan\xe9 soubory \u201e.wasm\u201c.\n    Pokud probl\xe9m p\u0159etrv\xe1v\xe1, budete mo\u017en\xe1 muset pou\u017e\xedt jin\xfd prohl\xed\u017ee\u010d.\nerror-wasm-unsupported-browser =\n    Prohl\xed\u017ee\u010d, kter\xfd pou\u017e\xedv\xe1te, nepodporuje roz\u0161\xed\u0159en\xed WebAssembly, kter\xe9 Ruffle vy\u017eaduje ke spu\u0161t\u011bn\xed.\n    P\u0159ejd\u011bte na podporovan\xfd prohl\xed\u017ee\u010d.\n    Seznam podporovan\xfdch prohl\xed\u017ee\u010d\u016f naleznete na Wiki.\nerror-javascript-conflict =\n    Ruffle narazil na probl\xe9m p\u0159i pokusu o inicializaci.\n    Zd\xe1 se, \u017ee tato str\xe1nka pou\u017e\xedv\xe1 k\xf3d JavaScript, kter\xfd je v konfliktu s Ruffle.\n    Pokud jste spr\xe1vcem serveru, doporu\u010dujeme v\xe1m zkusit na\u010d\xedst soubor na pr\xe1zdnou str\xe1nku.\nerror-javascript-conflict-outdated = M\u016f\u017eete se tak\xe9 pokusit nahr\xe1t nov\u011bj\u0161\xed verzi Ruffle, kter\xe1 m\u016f\u017ee dan\xfd probl\xe9m vy\u0159e\u0161it (aktu\xe1ln\xed build je zastaral\xfd: { $buildDate }).\nerror-csp-conflict =\n    Ruffle narazil na probl\xe9m p\u0159i pokusu o inicializaci.\n    Z\xe1sady zabezpe\u010den\xed obsahu tohoto webov\xe9ho serveru nepovoluj\xed spu\u0161t\u011bn\xed po\u017eadovan\xe9 komponenty \u201e.wasm\u201c.\n    Pokud jste spr\xe1vcem serveru, n\xe1pov\u011bdu najdete na Ruffle wiki.\nerror-unknown =\n    Ruffle narazil na probl\xe9m p\u0159i pokusu zobrazit tento Flash obsah.\n    { $outdated ->\n          [true] Pokud jste spr\xe1vcem serveru, zkuste nahr\xe1t nov\u011bj\u0161\xed verzi Ruffle (aktu\xe1ln\xed build je zastaral\xfd: { $buildDate }).\n         *[false] Toto by se nem\u011blo st\xe1t, tak\u017ee bychom opravdu ocenili, kdybyste mohli nahl\xe1sit chybu!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Opravdu chcete odstranit tento soubor s ulo\u017een\xfdmi pozicemi?\nsave-reload-prompt =\n    Jedin\xfd zp\u016fsob, jak { $action ->\n          [delete] vymazat\n         *[replace] nahradit\n    } tento soubor s ulo\u017een\xfdmi pozicemi bez potenci\xe1ln\xedho konfliktu je op\u011btovn\xe9 na\u010dten\xed tohoto obsahu. Chcete p\u0159esto pokra\u010dovat?\nsave-download = St\xe1hnout\nsave-replace = Nahradit\nsave-delete = Vymazat\nsave-backup-all = St\xe1hnout v\u0161echny soubory s ulo\u017een\xfdmi pozicemi\n",
-        "volume-controls.ftl": "volume-controls-mute = Ztlumit\nvolume-controls-unmute = Zru\u0161it ztlumen\xed\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Ztlumit\nvolume-controls-unmute = Zru\u0161it ztlumen\xed\n",
       },
       "de-DE": {
         "context_menu.ftl":
@@ -1405,7 +1656,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = Sind Sie sicher, dass Sie diese Speicherdatei l\xf6schen m\xf6chten?\nsave-reload-prompt =\n    Der einzige Weg zu { $action ->\n        [delete] l\xf6schen\n       *[replace] ersetzen\n    } diese Speicherdatei ohne m\xf6glichen Konflikt ist das erneute Laden dieses Inhalts. M\xf6chten Sie trotzdem fortfahren?\nsave-download = Herunterladen\nsave-replace = Ersetzen\nsave-delete = L\xf6schen\nsave-backup-all = Alle gespeicherten Dateien herunterladen\n",
         "volume-controls.ftl":
-          "volume-controls-mute = Stummschalten\nvolume-controls-unmute = Stummschaltung aufheben\n"
+          "volume-controls-mute = Stummschalten\nvolume-controls-unmute = Stummschaltung aufheben\n",
       },
       "en-US": {
         "context_menu.ftl":
@@ -1414,9 +1665,15 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle wasn\'t able to run the Flash embedded in this page.\n    You can try to open the file in a separate tab, to sidestep this issue.\nmessage-restored-from-bfcache =\n    Your browser restored this Flash content from a previous session.\n    To start fresh, reload the page.\npanic-title = Something went wrong :(\nmore-info = More info\nrun-anyway = Run anyway\ncontinue = Continue\nreport-bug = Report Bug\nupdate-ruffle = Update Ruffle\nruffle-demo = Web Demo\nruffle-desktop = Desktop Application\nruffle-wiki = View Ruffle Wiki\nenable-hardware-acceleration = It looks like hardware acceleration is disabled. While Ruffle may work, it could be very slow. You can find out how to enable hardware acceleration by following the link below:\nenable-hardware-acceleration-link = FAQ - Chrome Hardware Acceleration\nview-error-details = View Error Details\nopen-in-new-tab = Open in a new tab\nclick-to-unmute = Click to unmute\nclipboard-message-title = Copying and pasting in Ruffle\nclipboard-message-description =\n    { $variant ->\n        *[unsupported] Your browser does not support full clipboard access,\n        [access-denied] Access to the clipboard has been denied,\n    } but you can always use these shortcuts instead:\nclipboard-message-copy = { " " } for copy\nclipboard-message-cut = { " " } for cut\nclipboard-message-paste = { " " } for paste\nerror-canvas-reload = Cannot reload with the canvas renderer when the canvas renderer is already in use.\nerror-file-protocol =\n    It appears you are running Ruffle on the "file:" protocol.\n    This doesn\'t work as browsers block many features from working for security reasons.\n    Instead, we invite you to setup a local server or either use the web demo or the desktop application.\nerror-javascript-config =\n    Ruffle has encountered a major issue due to an incorrect JavaScript configuration.\n    If you are the server administrator, we invite you to check the error details to find out which parameter is at fault.\n    You can also consult the Ruffle wiki for help.\nerror-wasm-not-found =\n    Ruffle failed to load the required ".wasm" file component.\n    If you are the server administrator, please ensure the file has correctly been uploaded.\n    If the issue persists, you may need to use the "publicPath" setting: please consult the Ruffle wiki for help.\nerror-wasm-mime-type =\n    Ruffle has encountered a major issue whilst trying to initialize.\n    This web server is not serving ".wasm" files with the correct MIME type.\n    If you are the server administrator, please consult the Ruffle wiki for help.\nerror-invalid-swf =\n    Ruffle cannot parse the requested file.\n    The most likely reason is that the requested file is not a valid SWF.\nerror-swf-fetch =\n    Ruffle failed to load the Flash SWF file.\n    The most likely reason is that the file no longer exists, so there is nothing for Ruffle to load.\n    Try contacting the website administrator for help.\nerror-swf-cors =\n    Ruffle failed to load the Flash SWF file.\n    Access to fetch has likely been blocked by CORS policy.\n    If you are the server administrator, please consult the Ruffle wiki for help.\nerror-wasm-cors =\n    Ruffle failed to load the required ".wasm" file component.\n    Access to fetch has likely been blocked by CORS policy.\n    If you are the server administrator, please consult the Ruffle wiki for help.\nerror-wasm-invalid =\n    Ruffle has encountered a major issue whilst trying to initialize.\n    It seems like this page has missing or invalid files for running Ruffle.\n    If you are the server administrator, please consult the Ruffle wiki for help.\nerror-wasm-download =\n    Ruffle has encountered a major issue whilst trying to initialize.\n    This can often resolve itself, so you can try reloading the page.\n    Otherwise, please contact the website administrator.\nerror-wasm-disabled-on-edge =\n    Ruffle failed to load the required ".wasm" file component.\n    To fix this, try opening your browser\'s settings, clicking "Privacy, search, and services", scrolling down, and turning off "Enhance your security on the web".\n    This will allow your browser to load the required ".wasm" files.\n    If the issue persists, you might have to use a different browser.\nerror-wasm-unsupported-browser =\n    The browser you are using does not support the WebAssembly extensions Ruffle requires to run.\n    Please switch to a supported browser.\n    You can find a list of supported browsers on the Wiki.\nerror-javascript-conflict =\n    Ruffle has encountered a major issue whilst trying to initialize.\n    It seems like this page uses JavaScript code that conflicts with Ruffle.\n    If you are the server administrator, we invite you to try loading the file on a blank page.\nerror-javascript-conflict-outdated = You can also try to upload a more recent version of Ruffle that may circumvent the issue (current build is outdated: {$buildDate}).\nerror-csp-conflict =\n    Ruffle has encountered a major issue whilst trying to initialize.\n    This web server\'s Content Security Policy does not allow the required ".wasm" component to run.\n    If you are the server administrator, please consult the Ruffle wiki for help.\nerror-unknown =\n    Ruffle has encountered a major issue whilst trying to display this Flash content.\n    {$outdated ->\n        [true] If you are the server administrator, please try to upload a more recent version of Ruffle (current build is outdated: {$buildDate}).\n        *[false] This isn\'t supposed to happen, so we\'d really appreciate if you could file a bug!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Are you sure you want to delete this save file?\nsave-reload-prompt =\n    The only way to {$action ->\n    [delete] delete\n    *[replace] replace\n    } this save file without potential conflict is to reload this content. Do you wish to continue anyway?\nsave-download = Download\nsave-replace = Replace\nsave-delete = Delete\nsave-backup-all = Download all save files\n",
-        "volume-controls.ftl": "volume-controls-mute = Mute\nvolume-controls-unmute = Unmute\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Mute\nvolume-controls-unmute = Unmute\n",
       },
-      "eo-UY": { "context_menu.ftl": "", "messages.ftl": "", "save-manager.ftl": "", "volume-controls.ftl": "" },
+      "eo-UY": {
+        "context_menu.ftl": "",
+        "messages.ftl": "",
+        "save-manager.ftl": "",
+        "volume-controls.ftl": "",
+      },
       "es-ES": {
         "context_menu.ftl":
           "context-menu-download-swf = Descargar .swf\ncontext-menu-copy-debug-info = Copiar Informaci\xf3n de depuraci\xf3n\ncontext-menu-open-save-manager = Abrir gestor de guardado\ncontext-menu-about-ruffle =\n    { $flavor ->\n        [extension] Sobre la extensi\xf3n de Ruffle ({ $version })\n       *[other] Sobre Ruffle ({ $version })\n    }\ncontext-menu-hide = Ocultar este men\xfa\ncontext-menu-exit-fullscreen = Salir de pantalla completa\ncontext-menu-enter-fullscreen = Entrar a pantalla completa\ncontext-menu-volume-controls = Controles de volumen\n",
@@ -1424,7 +1681,8 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle no pudo ejecutar el Flash incrustado en esta p\xe1gina.\n    Puedes intentar abrir el archivo en una pesta\xf1a aparte, para evitar este problema.\nmessage-restored-from-bfcache =\n    Su navegador ha recuperado este contenido Flash de una sesi\xf3n anterior.\n    Para empezar de cero, refresque la p\xe1gina.\npanic-title = Algo sali\xf3 mal :(\nmore-info = M\xe1s info\nrun-anyway = Ejecutar de todos modos\ncontinue = Continuar\nreport-bug = Reportar un error\nupdate-ruffle = Actualizar Ruffle\nruffle-demo = Demostraci\xf3n de web\nruffle-desktop = Aplicaci\xf3n de desktop\nruffle-wiki = Ver la p\xe1gina wiki\nenable-hardware-acceleration = Al parecer, la aceleraci\xf3n de hardware est\xe1 deshabilitada. Puede que Ruffle funcione, pero este podr\xeda funcionar muy lentamente. Puedes averiguar como habilitar aceleraci\xf3n de hardware presionando el enlace:\nenable-hardware-acceleration-link = Preguntas frecuentes sobre la aceleraci\xf3n de hardware en Chrome\nview-error-details = Ver los detalles del error\nopen-in-new-tab = Abrir en una pesta\xf1a nueva\nclick-to-unmute = Haz clic para dejar de silenciar\nclipboard-message-title = Para copiar y pegar en Ruffle\nclipboard-message-description =\n    { $variant ->\n       *[unsupported] Este navegador no apoya acceso completo al portapapeles,\n        [access-denied] Se ha denegado el acceso al portapapeles,\n    } pero siempre se puede utilizar estos atajos:\nclipboard-message-copy = Para copiar\nclipboard-message-cut = Para cortar\nclipboard-message-paste = Para pegar\nerror-canvas-reload = No se puede recargar con el renderizado de lienzo cuando este ya est\xe1 en uso.\nerror-file-protocol =\n    Parece que est\xe1 ejecutando Ruffle en el protocolo "archivo:".\n    Esto no funciona porque los navegadores bloquean que muchas caracter\xedsticas funcionen por razones de seguridad.\n    En su lugar, le invitamos a configurar un servidor local o bien usar la demostraci\xf3n web o la aplicaci\xf3n de desktop.\nerror-javascript-config =\n    Ruffle ha encontrado un problema cr\xedtico debido a una configuraci\xf3n JavaScript incorrecta.\n    Si usted es el administrador del servidor, le invitamos a comprobar los detalles del error para averiguar qu\xe9 par\xe1metro est\xe1 en falta.\n    Tambi\xe9n puedes consultar la wiki de Ruffle para obtener ayuda.\nerror-wasm-not-found =\n    Ruffle no pudo cargar el componente de archivo ".wasm" requerido.\n    Si usted es el administrador del servidor, aseg\xfarese de que el archivo ha sido subido correctamente.\n    Si el problema persiste, puede que necesite usar la configuraci\xf3n "publicPath": por favor consulte la wiki de Ruffle para obtener ayuda.\nerror-wasm-mime-type =\n    Ruffle ha encontrado un problema cr\xedtico al intentar inicializar.\n    Este servidor web no est\xe1 sirviendo archivos wasm" con el tipo MIME correcto.\n    Si usted es el administrador del servidor, consulte la wiki de Ruffle para obtener ayuda.\nerror-invalid-swf = Ruffle no puede analizar el archivo solicitado. La raz\xf3n m\xe1s probable es que no es un archivo v\xe1lido SWF.\nerror-swf-fetch =\n    Ruffle no pudo cargar el archivo Flash SWF.\n    La raz\xf3n m\xe1s probable es que el archivo ya no existe, as\xed que no hay nada para cargar Ruffle.\n    Intente ponerse en contacto con el administrador del sitio web para obtener ayuda.\nerror-swf-cors =\n    Ruffle no pudo cargar el archivo Flash SWF.\n    Es probable que el acceso a la b\xfasqueda haya sido bloqueado por la pol\xedtica CORS.\n    Si usted es el administrador del servidor, consulte la wiki de Ruffle para obtener ayuda.\nerror-wasm-cors =\n    Ruffle no pudo cargar el archivo ".wasm."\n    Es probable que el acceso a la b\xfasqueda o la llamada a la funci\xf3n fetch haya sido bloqueado por la pol\xedtica CORS.\n    Si usted es el administrador del servidor, consulte la wiki de Ruffle para obtener ayuda.\nerror-wasm-invalid =\n    Ruffle ha encontrado un problema cr\xedtico al intentar inicializar.\n    Este servidor web no est\xe1 sirviendo archivos wasm" con el tipo Mime correcto.\n    Si usted es el administrador del servidor, consulte la wiki de Ruffle para obtener ayuda.\nerror-wasm-download =\n    Ruffle ha encontrado un problema cr\xedtico mientras intentaba inicializarse.\n    Esto a menudo puede resolverse por s\xed mismo, as\xed que puede intentar recargar la p\xe1gina.\n    De lo contrario, p\xf3ngase en contacto con el administrador del sitio web.\nerror-wasm-disabled-on-edge =\n    Ruffle no pudo cargar el componente de archivo ".wasm" requerido.\n    Para solucionar esto, intenta abrir la configuraci\xf3n de tu navegador, haciendo clic en "Privacidad, b\xfasqueda y servicios", desplaz\xe1ndote y apagando "Mejore su seguridad en la web".\n    Esto permitir\xe1 a su navegador cargar los archivos ".wasm" necesarios.\n    Si el problema persiste, puede que tenga que utilizar un navegador diferente.\nerror-wasm-unsupported-browser =\n    Este navegador no apoya las extensiones de WebAssembly que Ruffle requiere para ejecutar.\n    Por favor, cambia a un navegador apoyado.\n    Se puede ver una lista de navegadores apoyados en el Wiki.\nerror-javascript-conflict =\n    Ruffle ha encontrado un problema cr\xedtico mientras intentaba inicializarse.\n    Parece que esta p\xe1gina utiliza c\xf3digo JavaScript que entra en conflicto con Ruffle.\n    Si usted es el administrador del servidor, le invitamos a intentar cargar el archivo en una p\xe1gina en blanco.\nerror-javascript-conflict-outdated = Tambi\xe9n puedes intentar subir una versi\xf3n m\xe1s reciente de Ruffle que puede eludir el problema (la versi\xf3n actual est\xe1 desactualizada: { $buildDate }).\nerror-csp-conflict =\n    Ruffle encontr\xf3 un problema al intentar inicializarse.\n    La Pol\xedtica de Seguridad de Contenido de este servidor web no permite el componente requerido ".wasm".\n    Si usted es el administrador del servidor, por favor consulta la wiki de Ruffle para obtener ayuda.\nerror-unknown =\n    Ruffle ha encontrado un problema al tratar de mostrar el contenido Flash.\n    { $outdated ->\n        [true] Si usted es el administrador del servidor, intenta cargar una version m\xe1s reciente de Ruffle (la version actual esta desactualizada: { $buildDate }).\n       *[false] Esto no deberia suceder! apreciariamos que reportes el error!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = \xbfEst\xe1 seguro de querer eliminar este archivo de guardado?\nsave-reload-prompt =\n    La \xfanica forma de { $action ->\n        [delete] eliminar\n       *[replace] sobreescribir\n    } este archivo de guardado sin conflictos potenciales es reiniciando el contenido. \xbfDesea continuar de todos modos?\nsave-download = Descargar\nsave-replace = Sobreescribir\nsave-delete = Borrar\nsave-backup-all = Borrar todos los archivos de guardado\n",
-        "volume-controls.ftl": "volume-controls-mute = Silenciar\nvolume-controls-unmute = Desmutear\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Silenciar\nvolume-controls-unmute = Desmutear\n",
       },
       "fi-FI": {
         "context_menu.ftl":
@@ -1433,7 +1691,8 @@ function swfUrlToLocalPath(url) {
           'message-restored-from-bfcache =\n    Selaimesi palautti t\xe4m\xe4n Flash-sis\xe4ll\xf6n aiemmasta istunnosta.\n    Aloita alusta lataamalla sivu uudelleen.\npanic-title = Jokin meni pieleen :(\nmore-info = Lis\xe4tietoja\nrun-anyway = Suorita silti\ncontinue = Jatka\nreport-bug = Ilmoita ongelmasta\nupdate-ruffle = P\xe4ivit\xe4 Ruffle\nruffle-desktop = Ty\xf6p\xf6yt\xe4sovellus\nruffle-wiki = N\xe4yt\xe4 Rufflen wiki\nenable-hardware-acceleration = Vaikuttaa silt\xe4, ett\xe4 laitteistokiihdytys on pois k\xe4yt\xf6st\xe4. Ruffle saattaa silti toimia, mutta hitaasti. Lis\xe4tietoja laitteistokiihdytyksen ottamisesta k\xe4ytt\xf6\xf6n on saatavilla alla olevan linkin kautta:\nview-error-details = N\xe4yt\xe4 virheen tiedot\nopen-in-new-tab = Avaa uudessa v\xe4lilehdess\xe4\nclick-to-unmute = Napsauta palauttaaksesi \xe4\xe4net\nclipboard-message-title = Kopiointi ja liitt\xe4minen Rufflessa\nclipboard-message-copy = { " " } kopioi\nclipboard-message-cut = { " " } leikkaa\nclipboard-message-paste = { " " } liitt\xe4\xe4\nerror-wasm-unsupported-browser =\n    K\xe4ytt\xe4m\xe4si selain ei tue Rufflen vaatimia WebAssembly-laajennuksia.\n    Vaihda tuettuun selaimeen.\n    Lista tuetuista selaimista on koottu wikiin.\n',
         "save-manager.ftl":
           "save-delete-prompt = Haluatko varmasti poistaa t\xe4m\xe4n tallennuksen?\nsave-download = Lataa\nsave-replace = Korvaa\nsave-delete = Poista\n",
-        "volume-controls.ftl": "volume-controls-mute = Mykist\xe4\nvolume-controls-unmute = Poista mykistys\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Mykist\xe4\nvolume-controls-unmute = Poista mykistys\n",
       },
       "fr-FR": {
         "context_menu.ftl":
@@ -1442,7 +1701,8 @@ function swfUrlToLocalPath(url) {
           "message-cant-embed =\n    Ruffle n'a pas \xe9t\xe9 en mesure de lire le fichier Flash int\xe9gr\xe9 dans cette page.\n    Vous pouvez essayer d'ouvrir le fichier dans un onglet isol\xe9, pour contourner le probl\xe8me.\nmessage-restored-from-bfcache =\n    Votre navigateur a restaur\xe9 ce contenu Flash d'une session ant\xe9rieure.\n    Rechargez la page pour repartir de z\xe9ro.\npanic-title = Une erreur est survenue :(\nmore-info = Plus d'infos\nrun-anyway = Ex\xe9cuter quand m\xeame\ncontinue = Continuer\nreport-bug = Signaler le bug\nupdate-ruffle = Mettre \xe0 jour Ruffle\nruffle-demo = D\xe9mo en ligne\nruffle-desktop = Application de bureau\nruffle-wiki = Wiki de Ruffle\nenable-hardware-acceleration = Il semblerait que l'acc\xe9l\xe9ration mat\xe9rielle soit d\xe9sactiv\xe9e. Cela n'emp\xeache g\xe9n\xe9ralement pas Ruffle de fonctionner, mais il peut \xeatre beaucoup plus lent. Vous pouvez trouver comment activer l'acc\xe9l\xe9ration mat\xe9rielle en suivant le lien ci-dessous :\nenable-hardware-acceleration-link = FAQ - Acc\xe9l\xe9ration mat\xe9rielle dans Chrome\nview-error-details = D\xe9tails de l'erreur\nopen-in-new-tab = Ouvrir dans un nouvel onglet\nclick-to-unmute = Cliquez pour activer le son\nclipboard-message-title = Copier et coller dans Ruffle\nclipboard-message-description =\n    { $variant ->\n       *[unsupported] Votre navigateur ne prend pas en charge l'acc\xe8s au presse-papiers,\n        [access-denied] L'acc\xe8s au presse-papiers a \xe9t\xe9 refus\xe9,\n    } mais vous pouvez toujours utiliser ces raccourcis clavier \xe0 la place :\nclipboard-message-copy = { \" \" } pour copier\nclipboard-message-cut = { \" \" } pour couper\nclipboard-message-paste = { \" \" } pour coller\nerror-canvas-reload = Impossible de recharger avec le moteur de rendu canvas lorsque celui-ci est d\xe9j\xe0 en cours d'utilisation.\nerror-file-protocol =\n    Il semblerait que vous ex\xe9cutiez Ruffle sur le protocole \"file:\".\n    Cela ne fonctionne pas car les navigateurs bloquent de nombreuses fonctionnalit\xe9s pour des raisons de s\xe9curit\xe9.\n    Nous vous invitons soit \xe0 configurer un serveur local, soit \xe0 utiliser la d\xe9mo en ligne ou l'application de bureau.\nerror-javascript-config =\n    Ruffle a rencontr\xe9 un probl\xe8me majeur en raison d'une configuration JavaScript incorrecte.\n    Si vous \xeates l'administrateur du serveur, nous vous invitons \xe0 v\xe9rifier les d\xe9tails de l'erreur pour savoir quel est le param\xe8tre en cause.\n    Vous pouvez \xe9galement consulter le wiki de Ruffle pour obtenir de l'aide.\nerror-wasm-not-found =\n    Ruffle n'a pas r\xe9ussi \xe0 charger son fichier \".wasm\".\n    Si vous \xeates l'administrateur du serveur, veuillez vous assurer que ce fichier a bien \xe9t\xe9 mis en ligne.\n    Si le probl\xe8me persiste, il vous faudra peut-\xeatre utiliser le param\xe8tre \"publicPath\" : veuillez consulter le wiki de Ruffle pour obtenir de l'aide.\nerror-wasm-mime-type =\n    Ruffle a rencontr\xe9 un probl\xe8me majeur durant sa phase d'initialisation.\n    Ce serveur web ne renvoie pas le bon type MIME pour les fichiers \".wasm\".\n    Si vous \xeates l'administrateur du serveur, veuillez consulter le wiki de Ruffle pour obtenir de l'aide.\nerror-invalid-swf =\n    Ruffle n'a pas \xe9t\xe9 en mesure de lire le fichier demand\xe9.\n    La raison la plus probable est que ce fichier n'est pas un SWF valide.\nerror-swf-fetch =\n    Ruffle n'a pas r\xe9ussi \xe0 charger le fichier Flash.\n    La raison la plus probable est que le fichier n'existe pas ou plus.\n    Vous pouvez essayer de prendre contact avec l'administrateur du site pour obtenir plus d'informations.\nerror-swf-cors =\n    Ruffle n'a pas r\xe9ussi \xe0 charger le fichier Flash.\n    La requ\xeate a probablement \xe9t\xe9 rejet\xe9e en raison de la configuration du CORS.\n    Si vous \xeates l'administrateur du serveur, veuillez consulter le wiki de Ruffle pour obtenir de l'aide.\nerror-wasm-cors =\n    Ruffle n'a pas r\xe9ussi \xe0 charger son fichier \".wasm\".\n    La requ\xeate a probablement \xe9t\xe9 rejet\xe9e en raison de la configuration du CORS.\n    Si vous \xeates l'administrateur du serveur, veuillez consulter le wiki de Ruffle pour obtenir de l'aide.\nerror-wasm-invalid =\n    Ruffle a rencontr\xe9 un probl\xe8me majeur durant sa phase d'initialisation.\n    Il semblerait que cette page comporte des fichiers manquants ou invalides pour ex\xe9cuter Ruffle.\n    Si vous \xeates l'administrateur du serveur, veuillez consulter le wiki de Ruffle pour obtenir de l'aide.\nerror-wasm-download =\n    Ruffle a rencontr\xe9 un probl\xe8me majeur durant sa phase d'initialisation.\n    Le probl\xe8me d\xe9tect\xe9 peut souvent se r\xe9soudre de lui-m\xeame, donc vous pouvez essayer de recharger la page.\n    Si le probl\xe8me persiste, veuillez prendre contact avec l'administrateur du site.\nerror-wasm-disabled-on-edge =\n    Ruffle n'a pas r\xe9ussi \xe0 charger son fichier \".wasm\".\n    Pour r\xe9soudre ce probl\xe8me, essayez d'ouvrir les param\xe8tres de votre navigateur et de cliquer sur \"Confidentialit\xe9, recherche et services\". Puis, vers le bas de la page, d\xe9sactivez l'option \"Am\xe9liorez votre s\xe9curit\xe9 sur le web\".\n    Cela permettra \xe0 votre navigateur de charger les fichiers \".wasm\".\n    Si le probl\xe8me persiste, vous devrez peut-\xeatre utiliser un autre navigateur.\nerror-wasm-unsupported-browser =\n    Votre navigateur ne prend pas en charge les extensions WebAssembly n\xe9cessaires au fonctionnement de Ruffle.\n    Veuillez utiliser un navigateur les prenant en charge.\n    Vous pouvez trouver une liste de navigateurs fonctionnant avec Ruffle sur le wiki.\nerror-javascript-conflict =\n    Ruffle a rencontr\xe9 un probl\xe8me majeur durant sa phase d'initialisation.\n    Il semblerait que cette page contienne du code JavaScript qui entre en conflit avec Ruffle.\n    Si vous \xeates l'administrateur du serveur, nous vous invitons \xe0 essayer de charger le fichier dans une page vide.\nerror-javascript-conflict-outdated = Vous pouvez \xe9galement essayer de mettre en ligne une version plus r\xe9cente de Ruffle qui pourrait avoir corrig\xe9 le probl\xe8me (la version que vous utilisez est obsol\xe8te : { $buildDate }).\nerror-csp-conflict =\n    Ruffle a rencontr\xe9 un probl\xe8me majeur durant sa phase d'initialisation.\n    La strat\xe9gie de s\xe9curit\xe9 du contenu (CSP) de ce serveur web n'autorise pas l'ex\xe9cution de fichiers \".wasm\".\n    Si vous \xeates l'administrateur du serveur, veuillez consulter le wiki de Ruffle pour obtenir de l'aide.\nerror-unknown =\n    Ruffle a rencontr\xe9 un probl\xe8me majeur durant l'ex\xe9cution de ce contenu Flash.\n    { $outdated ->\n        [true] Si vous \xeates l'administrateur du serveur, veuillez essayer de mettre en ligne une version plus r\xe9cente de Ruffle (la version que vous utilisez est obsol\xe8te : { $buildDate }).\n       *[false] Cela n'est pas cens\xe9 se produire, donc nous vous serions reconnaissants si vous pouviez nous signaler ce bug !\n    }\n",
         "save-manager.ftl":
           "save-delete-prompt = Voulez-vous vraiment supprimer ce fichier de sauvegarde ?\nsave-reload-prompt =\n    La seule fa\xe7on de { $action ->\n        [delete] supprimer\n       *[replace] remplacer\n    } ce fichier de sauvegarde sans conflit potentiel est de recharger ce contenu. Souhaitez-vous quand m\xeame continuer ?\nsave-download = T\xe9l\xe9charger\nsave-replace = Remplacer\nsave-delete = Supprimer\nsave-backup-all = T\xe9l\xe9charger tous les fichiers de sauvegarde\n",
-        "volume-controls.ftl": "volume-controls-mute = Rendre muet\nvolume-controls-unmute = Rendre audible\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Rendre muet\nvolume-controls-unmute = Rendre audible\n",
       },
       "he-IL": {
         "context_menu.ftl":
@@ -1452,7 +1712,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = \u05d4\u05d0\u05dd \u05d0\u05ea\u05d4 \u05d1\u05d8\u05d5\u05d7 \u05e9\u05d1\u05e8\u05e6\u05d5\u05e0\u05da \u05dc\u05de\u05d7\u05d5\u05e7 \u05d0\u05ea \u05e7\u05d5\u05d1\u05e5 \u05e9\u05de\u05d9\u05e8\u05d4 \u05d6\u05d4?\nsave-reload-prompt =\n    \u05d4\u05d3\u05e8\u05da \u05d4\u05d9\u05d7\u05d9\u05d3\u05d4 { $action ->\n        [delete] \u05dc\u05de\u05d7\u05d5\u05e7\n       *[replace] \u05dc\u05d4\u05d7\u05dc\u05d9\u05e3\n    } \u05d0\u05ea \u05e7\u05d5\u05d1\u05e5 \u05d4\u05e9\u05de\u05d9\u05e8\u05d4 \u05d4\u05d6\u05d4 \u05de\u05d1\u05dc\u05d9 \u05dc\u05d2\u05e8\u05d5\u05dd \u05dc\u05d5 \u05dc\u05d4\u05ea\u05e0\u05d2\u05e9 \u05d4\u05d9\u05d0 \u05dc\u05d8\u05e2\u05d5\u05df \u05de\u05d7\u05d3\u05e9 \u05d0\u05ea \u05ea\u05d5\u05db\u05df \u05d6\u05d4. \u05d4\u05d0\u05dd \u05d0\u05ea\u05d4 \u05e8\u05d5\u05e6\u05d4 \u05dc\u05d4\u05de\u05e9\u05d9\u05da \u05d1\u05db\u05dc \u05d6\u05d0\u05ea?\nsave-download = \u05d4\u05d5\u05e8\u05d3\u05d4\nsave-replace = \u05d4\u05d7\u05dc\u05e4\u05d4\nsave-delete = \u05de\u05d7\u05d9\u05e7\u05d4\nsave-backup-all = \u05d4\u05d5\u05e8\u05d3\u05ea \u05db\u05dc \u05e7\u05d1\u05e6\u05d9 \u05d4\u05e9\u05de\u05d9\u05e8\u05d4\n",
         "volume-controls.ftl":
-          "volume-controls-mute = \u05d4\u05e9\u05ea\u05e7\nvolume-controls-unmute = \u05d1\u05d9\u05d8\u05d5\u05dc \u05d4\u05e9\u05ea\u05e7\u05d4\n"
+          "volume-controls-mute = \u05d4\u05e9\u05ea\u05e7\nvolume-controls-unmute = \u05d1\u05d9\u05d8\u05d5\u05dc \u05d4\u05e9\u05ea\u05e7\u05d4\n",
       },
       "hr-HR": {
         "context_menu.ftl":
@@ -1460,7 +1720,8 @@ function swfUrlToLocalPath(url) {
         "messages.ftl": "update-ruffle = A\u017eurirajte Ruffle\n",
         "save-manager.ftl":
           "save-delete-prompt = Jeste li sigurni da \u017eelite izbrisati ovu spremljenu datoteku?\nsave-reload-prompt =\n    Jedini na\u010din da { $action ->\n    [delete] izbri\u0161ete\n    *[replace] zamijenite\n    } ovu datoteku za spremanje bez potencijalnog sukoba jest ponovno u\u010ditavanje ovog sadr\u017eaja. \u017delite li ipak nastaviti?\nsave-download = Preuzmite\nsave-replace = Zamijeni\nsave-delete = Izbri\u0161i\nsave-backup-all = Preuzmi sve spremljene datoteke\n",
-        "volume-controls.ftl": "volume-controls-mute = Isklju\u010di zvuk\nvolume-controls-unmute = Uklju\u010di zvuk\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Isklju\u010di zvuk\nvolume-controls-unmute = Uklju\u010di zvuk\n",
       },
       "hu-HU": {
         "context_menu.ftl":
@@ -1470,7 +1731,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = Biztosan t\xf6r\xf6lni akarod ezt a ment\xe9st?\nsave-reload-prompt =\n    Ennek a ment\xe9snek az esetleges konfliktus n\xe9lk\xfcli { $action ->\n        [delete] t\xf6rl\xe9s\xe9hez\n       *[replace] cser\xe9j\xe9hez\n    } \xfajra kell t\xf6lteni a tartalmat. M\xe9gis szeretn\xe9d folytatni?\nsave-download = Let\xf6lt\xe9s\nsave-replace = Csere\nsave-delete = T\xf6rl\xe9s\nsave-backup-all = Az \xf6sszes f\xe1jl let\xf6lt\xe9se\n",
         "volume-controls.ftl":
-          "volume-controls-mute = N\xe9m\xedt\xe1s\nvolume-controls-unmute = N\xe9m\xedt\xe1s felold\xe1sa\n"
+          "volume-controls-mute = N\xe9m\xedt\xe1s\nvolume-controls-unmute = N\xe9m\xedt\xe1s felold\xe1sa\n",
       },
       "id-ID": {
         "context_menu.ftl":
@@ -1479,7 +1740,7 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle tidak dapat menjalankan Flash yang disematkan di halaman ini.\n    Anda dapat mencoba membuka file di tab terpisah, untuk menghindari masalah ini.\npanic-title = Terjadi kesalahan :(\nmore-info = Info lebih lanjut\nrun-anyway = Jalankan\ncontinue = Lanjutkan\nreport-bug = Laporkan Bug\nupdate-ruffle = Perbarui Ruffle\nruffle-demo = Demo Web\nruffle-desktop = Aplikasi Desktop\nruffle-wiki = Kunjungi Wiki Ruffle\nview-error-details = Tunjukan Detail Error\nopen-in-new-tab = Buka di Tab Baru\nclick-to-unmute = Tekan untuk menyalakan suara\nerror-file-protocol =\n    Sepertinya anda menjalankan Ruffle di protokol "file:".\n    Ini tidak berfungsi karena browser memblokir fitur ini dengan alasan keamanan.\n    Sebagai gantinya, kami mengajak anda untuk membuat server lokal, menggunakan demo web atau aplikasi desktop.\nerror-javascript-config =\n    Ruffle mengalami masalah besar karena konfigurasi JavaScript yang salah.\n    Jika Anda adalah administrator server ini, kami mengajak Anda untuk memeriksa detail kesalahan untuk mengetahui parameter mana yang salah.\n    Anda juga dapat membaca wiki Ruffle untuk mendapatkan bantuan.\nerror-wasm-not-found =\n    Ruffle gagal memuat komponen file ".wasm" yang diperlukan.\n    Jika Anda adalah administrator server ini, pastikan file telah diunggah dengan benar.\n    Jika masalah terus berlanjut, Anda mungkin perlu menggunakan pengaturan "publicPath": silakan baca wiki Ruffle untuk mendapatkan bantuan.\nerror-wasm-mime-type =\n    Ruffle mengalami masalah ketika mencoba melakukan inisialisasi.\n    Server web ini tidak melayani file ".wasm" dengan tipe MIME yang benar.\n    Jika Anda adalah administrator server ini, silakan baca wiki Ruffle untuk mendapatkan bantuan.\nerror-swf-fetch =\n    Ruffle gagal memuat file SWF Flash.\n    Kemungkinan file tersebut sudah tidak ada, sehingga tidak dapat dimuat oleh Ruffle.\n    Coba hubungi administrator situs web ini untuk mendapatkan bantuan.\nerror-swf-cors =\n    Ruffle gagal memuat file SWF Flash.\n    Akses untuk memuat kemungkinan telah diblokir oleh kebijakan CORS.\n    Jika Anda adalah administrator server ini, silakan baca wiki Ruffle untuk mendapatkan bantuan.\nerror-wasm-cors =\n    Ruffle gagal memuat komponen file ".wasm" yang diperlukan.\n    Akses untuk mengambil kemungkinan telah diblokir oleh kebijakan CORS.\n    Jika Anda adalah administrator server ini, silakan baca wiki Ruffle untuk mendapatkan bantuan.\nerror-wasm-invalid =\n    Ruffle mengalami masalah besar ketika mencoba melakukan inisialisasi.\n    Sepertinya halaman ini memiliki file yang hilang atau tidak valid untuk menjalankan Ruffle.\n    Jika Anda adalah administrator server ini, silakan baca wiki Ruffle untuk mendapatkan bantuan.\nerror-wasm-download =\n    Ruffle mengalami masalah besar ketika mencoba melakukan inisialisasi.\n    Hal ini sering kali dapat teratasi dengan sendirinya, sehingga Anda dapat mencoba memuat ulang halaman.\n    Jika tidak, silakan hubungi administrator situs web ini.\nerror-wasm-disabled-on-edge =\n    Ruffle gagal memuat komponen file ".wasm" yang diperlukan.\n    Untuk mengatasinya, coba buka pengaturan peramban Anda, klik "Privasi, pencarian, dan layanan", turun ke bawah, dan matikan "Tingkatkan keamanan Anda di web".\n    Ini akan memungkinkan browser Anda memuat file ".wasm" yang diperlukan.\n    Jika masalah berlanjut, Anda mungkin harus menggunakan browser yang berbeda.\nerror-javascript-conflict =\n    Ruffle mengalami masalah besar ketika mencoba melakukan inisialisasi.\n    Sepertinya situs web ini menggunakan kode JavaScript yang bertentangan dengan Ruffle.\n    Jika Anda adalah administrator server ini, kami mengajak Anda untuk mencoba memuat file pada halaman kosong.\nerror-javascript-conflict-outdated = Anda juga dapat mencoba mengunggah versi Ruffle yang lebih baru yang mungkin dapat mengatasi masalah ini (versi saat ini sudah kedaluwarsa: { $buildDate }).\nerror-csp-conflict =\n    Ruffle mengalami masalah besar ketika mencoba melakukan inisialisasi.\n    Kebijakan Keamanan Konten server web ini tidak mengizinkan komponen ".wasm" yang diperlukan untuk dijalankan.\n    Jika Anda adalah administrator server ini, silakan baca wiki Ruffle untuk mendapatkan bantuan.\nerror-unknown =\n    Ruffle telah mengalami masalah besar saat menampilkan konten Flash ini.\n    { $outdated ->\n        [true] Jika Anda administrator server ini, cobalah untuk mengganti versi Ruffle yang lebih baru (versi saat ini sudah kedaluwarsa: { $buildDate }).\n       *[false] Hal ini seharusnya tidak terjadi, jadi kami sangat menghargai jika Anda dapat melaporkan bug ini!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Anda yakin ingin menghapus berkas ini?\nsave-reload-prompt =\n    Satu-satunya cara untuk { $action ->\n        [delete] menghapus\n       *[replace] mengganti\n    } berkas penyimpanan ini tanpa potensi konflik adalah dengan memuat ulang konten ini. Apakah Anda ingin melanjutkannya?\nsave-download = Unduh\nsave-replace = Ganti\nsave-delete = Hapus\nsave-backup-all = Unduh semua berkas penyimpanan\n",
-        "volume-controls.ftl": "volume-controls-mute = Bisukan\n"
+        "volume-controls.ftl": "volume-controls-mute = Bisukan\n",
       },
       "it-IT": {
         "context_menu.ftl":
@@ -1488,7 +1749,8 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle non \xe8 stato in grado di eseguire il Flash incorporato in questa pagina.\n    Puoi provare ad aprire il file in una scheda separata, per evitare questo problema.\npanic-title = Qualcosa \xe8 andato storto :(\nmore-info = Maggiori informazioni\nrun-anyway = Esegui comunque\ncontinue = Continua\nreport-bug = Segnala un bug\nupdate-ruffle = Aggiorna Ruffle\nruffle-demo = Demo web\nruffle-desktop = Applicazione desktop\nruffle-wiki = Visualizza la wiki di Ruffle\nenable-hardware-acceleration = Sembra che l\'accelerazione hardware sia disabilitata. Sebbene Ruffle possa funzionare, potrebbe essere molto lento. Puoi scoprire come abilitare l\'accelerazione hardware seguendo il link seguente:\nenable-hardware-acceleration-link = FAQ - Accelerazione hardware di Chrome\nview-error-details = Visualizza dettagli errore\nopen-in-new-tab = Apri in una nuova scheda\nclick-to-unmute = Clicca per riattivare l\'audio\nclipboard-message-title = Copiando e incollando su Ruffle\nclipboard-message-copy = { " " } per copiare\nclipboard-message-cut = { " " } per tagliare\nclipboard-message-paste = { " " } per incollare\nerror-file-protocol =\n    Sembra che tu stia eseguendo Ruffle sul protocollo "file:".\n    Questo non funziona come browser blocca molte funzionalit\xe0 di lavoro per motivi di sicurezza.\n    Invece, ti invitiamo a configurare un server locale o a utilizzare la demo web o l\'applicazione desktop.\nerror-javascript-config =\n    Ruffle ha incontrato un problema importante a causa di una configurazione JavaScript non corretta.\n    Se sei l\'amministratore del server, ti invitiamo a controllare i dettagli dell\'errore per scoprire quale parametro \xe8 in errore.\n    Puoi anche consultare la wiki di Ruffle per aiuto.\nerror-wasm-not-found =\n    Ruffle non \xe8 riuscito a caricare il componente di file ".wasm".\n    Se sei l\'amministratore del server, assicurati che il file sia stato caricato correttamente.\n    Se il problema persiste, potrebbe essere necessario utilizzare l\'impostazione "publicPath": si prega di consultare la wiki di Ruffle per aiuto.\nerror-wasm-mime-type =\n    Ruffle ha incontrato un problema importante durante il tentativo di inizializzazione.\n    Questo server web non serve ".wasm" file con il tipo MIME corretto.\n    Se sei l\'amministratore del server, consulta la wiki di Ruffle per aiuto.\nerror-swf-fetch =\n    Ruffle non \xe8 riuscito a caricare il file Flash SWF.\n    La ragione pi\xf9 probabile \xe8 che il file non esiste pi\xf9, quindi non c\'\xe8 nulla che Ruffle possa caricare.\n    Prova a contattare l\'amministratore del sito web per aiuto.\nerror-swf-cors =\n    Ruffle non \xe8 riuscito a caricare il file SWF Flash.\n    L\'accesso al recupero probabilmente \xe8 stato bloccato dalla politica CORS.\n    Se sei l\'amministratore del server, consulta la wiki di Ruffle per ricevere aiuto.\nerror-wasm-cors =\n    Ruffle non \xe8 riuscito a caricare il componente di file ".wasm".\n    L\'accesso al recupero probabilmente \xe8 stato bloccato dalla politica CORS.\n    Se sei l\'amministratore del server, consulta la wiki di Ruffle per ricevere aiuto.\nerror-wasm-invalid =\n    Ruffle ha incontrato un problema importante durante il tentativo di inizializzazione.\n    Sembra che questa pagina abbia file mancanti o non validi per l\'esecuzione di Ruffle.\n    Se sei l\'amministratore del server, consulta la wiki di Ruffle per ricevere aiuto.\nerror-wasm-download =\n    Ruffle ha incontrato un problema importante durante il tentativo di inizializzazione.\n    Questo pu\xf2 spesso risolversi da solo, quindi puoi provare a ricaricare la pagina.\n    Altrimenti, contatta l\'amministratore del sito.\nerror-wasm-disabled-on-edge =\n    Ruffle non ha caricato il componente di file ".wasm" richiesto.\n    Per risolvere il problema, prova ad aprire le impostazioni del tuo browser, facendo clic su "Privacy, ricerca e servizi", scorrendo verso il basso e disattivando "Migliora la tua sicurezza sul web".\n    Questo permetter\xe0 al tuo browser di caricare i file ".wasm" richiesti.\n    Se il problema persiste, potresti dover usare un browser diverso.\nerror-wasm-unsupported-browser =\n    Il browser che stai usando non ha supporto per l\'estensione WebAssembly che Ruffle richiede per funzionare.\n    Per favore cambi con un browser supportato.\n    Puoi trovare una lista di browser supportati nella Wiki.\nerror-javascript-conflict =\n    Ruffle ha riscontrato un problema importante durante il tentativo di inizializzazione.\n    Sembra che questa pagina utilizzi il codice JavaScript che \xe8 in conflitto con Ruffle.\n    Se sei l\'amministratore del server, ti invitiamo a provare a caricare il file su una pagina vuota.\nerror-javascript-conflict-outdated = Puoi anche provare a caricare una versione pi\xf9 recente di Ruffle che potrebbe aggirare il problema (l\'attuale build \xe8 obsoleta: { $buildDate }).\nerror-csp-conflict =\n    Ruffle ha incontrato un problema importante durante il tentativo di inizializzare.\n    La Politica di Sicurezza dei Contenuti di questo server web non consente l\'impostazione richiesta". asm" componente da eseguire.\n    Se sei l\'amministratore del server, consulta la Ruffle di wiki per aiuto.\nerror-unknown =\n    Ruffle ha incontrato un problema importante durante il tentativo di visualizzare questo contenuto Flash.\n    { $outdated ->\n        [true] Se sei l\'amministratore del server, prova a caricare una versione pi\xf9 recente di Ruffle (la versione attuale \xe8 obsoleta: { $buildDate }).\n       *[false] Questo non dovrebbe accadere, quindi ci piacerebbe molto se si potesse inviare un bug!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Sei sicuro di voler eliminare questo file di salvataggio?\nsave-reload-prompt =\n    L'unico modo per { $action ->\n        [delete] delete\n       *[replace] replace\n    } questo salvataggio file senza potenziali conflitti \xe8 quello di ricaricare questo contenuto. Volete continuare comunque?\nsave-download = Scarica\nsave-replace = Sostituisci\nsave-delete = Elimina\nsave-backup-all = Scarica tutti i file di salvataggio\n",
-        "volume-controls.ftl": "volume-controls-mute = Silenzia\nvolume-controls-unmute = Riattiva l'audio\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Silenzia\nvolume-controls-unmute = Riattiva l'audio\n",
       },
       "ja-JP": {
         "context_menu.ftl":
@@ -1498,7 +1760,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = \u3053\u306e\u30bb\u30fc\u30d6\u30d5\u30a1\u30a4\u30eb\u3092\u524a\u9664\u3057\u3066\u3082\u3088\u308d\u3057\u3044\u3067\u3059\u304b?\nsave-reload-prompt =\n    \u30bb\u30fc\u30d6\u30d5\u30a1\u30a4\u30eb\u3092\u7af6\u5408\u306e\u53ef\u80fd\u6027\u306a\u304f { $action ->\n        [delete] \u524a\u9664\u3059\u308b\n       *[replace] \u7f6e\u304d\u63db\u3048\u308b\n    } \u305f\u3081\u306b\u3001\u3053\u306e\u30b3\u30f3\u30c6\u30f3\u30c4\u3092\u518d\u8aad\u307f\u8fbc\u307f\u3059\u308b\u3053\u3068\u3092\u63a8\u5968\u3057\u307e\u3059\u3002\u7d9a\u884c\u3057\u307e\u3059\u304b\uff1f\nsave-download = \u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\nsave-replace = \u7f6e\u304d\u63db\u3048\nsave-delete = \u524a\u9664\nsave-backup-all = \u3059\u3079\u3066\u306e\u30bb\u30fc\u30d6\u30d5\u30a1\u30a4\u30eb\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\n",
         "volume-controls.ftl":
-          "volume-controls-mute = \u30df\u30e5\u30fc\u30c8\nvolume-controls-unmute = \u30df\u30e5\u30fc\u30c8\u89e3\u9664\n"
+          "volume-controls-mute = \u30df\u30e5\u30fc\u30c8\nvolume-controls-unmute = \u30df\u30e5\u30fc\u30c8\u89e3\u9664\n",
       },
       "ko-KR": {
         "context_menu.ftl":
@@ -1508,7 +1770,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = \uc815\ub9d0\ub85c \uc774 \uc138\uc774\ube0c \ud30c\uc77c\uc744 \uc0ad\uc81c\ud558\uc2dc\uaca0\uc2b5\ub2c8\uae4c?\nsave-reload-prompt =\n    \b\uc774 \ud30c\uc77c\uc744 \uc7a0\uc7ac\uc801\uc778 \ucda9\ub3cc \uc5c6\uc774 { $action ->\n        [delete] \uc0ad\uc81c\n       *[replace] \uad50\uccb4\n    }\ud558\ub824\uba74 \ucf58\ud150\uce20\ub97c \ub2e4\uc2dc \ub85c\ub4dc\ud574\uc57c \ud569\ub2c8\ub2e4. \uadf8\ub798\ub3c4 \uacc4\uc18d\ud558\uc2dc\uaca0\uc2b5\ub2c8\uae4c?\nsave-download = \ub2e4\uc6b4\ub85c\ub4dc\nsave-replace = \uad50\uccb4\nsave-delete = \uc0ad\uc81c\nsave-backup-all = \ubaa8\ub4e0 \uc800\uc7a5 \ud30c\uc77c \ub2e4\uc6b4\ub85c\ub4dc\n",
         "volume-controls.ftl":
-          "volume-controls-mute = \uc74c\uc18c\uac70\nvolume-controls-unmute = \uc74c\uc18c\uac70 \ud574\uc81c\n"
+          "volume-controls-mute = \uc74c\uc18c\uac70\nvolume-controls-unmute = \uc74c\uc18c\uac70 \ud574\uc81c\n",
       },
       "nl-NL": {
         "context_menu.ftl":
@@ -1517,7 +1779,8 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle kon de Flash-inhoud op de pagina niet draaien.\n    Je kan proberen het bestand in een apart tabblad te openen, om hier omheen te werken.\nmessage-restored-from-bfcache =\n    Je browser heeft deze Flash-inhoud uit een eerdere sessie hersteld.\n    Herlaad de pagina voor een frisse start.\npanic-title = Er ging iets mis :(\nmore-info = Meer informatie\nrun-anyway = Toch starten\ncontinue = Doorgaan\nreport-bug = Bug rapporteren\nupdate-ruffle = Ruffle updaten\nruffle-demo = Web Demo\nruffle-desktop = Desktopapplicatie\nruffle-wiki = Bekijk de Ruffle Wiki\nenable-hardware-acceleration = Het lijkt erop dat hardwareversnelling is uitgeschakeld. Ruffle zou hierdoor erg traag kunnen zijn. In de link hieronder wordt uitgelegd hoe je hardwareversnelling kunt inschakelen:\nenable-hardware-acceleration-link = FAQ - Chrome Hardwareversnelling\nview-error-details = Foutdetails tonen\nopen-in-new-tab = Openen in een nieuw tabblad\nclick-to-unmute = Klik om te ontdempen\nclipboard-message-title = Kopi\xebren en plakken in Ruffle\nclipboard-message-description =\n    { $variant ->\n       *[unsupported] Je browser heeft geen ondersteuning voor volledige toegang tot het klembord,\n        [access-denied] Toegang tot het klembord werd geweigerd,\n    } maar je kunt altijd nog de volgende sneltoetsen gebruiken:\nclipboard-message-copy = { " " } om te kopi\xebren\nclipboard-message-cut = { " " } om te knippen\nclipboard-message-paste = { " " } om te plakken\nerror-canvas-reload = De canvas renderer kan niet herladen worden wanneer deze al in gebruik is.\nerror-file-protocol =\n    Het lijkt erop dat je Ruffle gebruikt met het "file" protocol.\n    De meeste browsers blokkeren dit om veiligheidsredenen, waardoor het niet werkt.\n    In plaats hiervan raden we aan om een lokale server te draaien, de web demo te gebruiken, of de desktopapplicatie.\nerror-javascript-config =\n    Ruffle heeft een groot probleem ondervonden vanwege een onjuiste JavaScript configuratie.\n    Als je de serverbeheerder bent, kijk dan naar de foutdetails om te zien wat er verkeerd is.\n    Je kan ook in de Ruffle wiki kijken voor hulp.\nerror-wasm-not-found =\n    Ruffle kon het vereiste ".wasm" bestandscomponent niet laden.\n    Als je de serverbeheerder bent, controleer dan of het bestaand juist is ge\xfcpload.\n    Mocht het probleem blijven voordoen, moet je misschien de "publicPath" instelling gebruiken: zie ook de Ruffle wiki voor hulp.\nerror-wasm-mime-type =\n    Ruffle heeft een groot probleem ondervonden tijdens het initialiseren.\n    Deze webserver serveert ".wasm" bestanden niet met het juiste MIME type.\n    Als je de serverbeheerder bent, kijk dan in de Ruffle wiki voor hulp.\nerror-invalid-swf =\n    Ruffle kon het gevraagde bestand niet verwerken.\n    Waarschijnlijk is het geen geldig SWF bestand.\nerror-swf-fetch =\n    Ruffle kon het Flash SWF bestand niet inladen.\n    De meest waarschijnlijke reden is dat het bestand niet langer bestaat, en er dus niets is om in te laden.\n    Probeer contact op te nemen met de websitebeheerder voor hulp.\nerror-swf-cors =\n    Ruffle kon het Flash SWD bestand niet inladen.\n    Toegang is waarschijnlijk geblokeerd door het CORS beleid.\n    Als je de serverbeheerder bent, kijk dan in de Ruffle wiki voor hulp.\nerror-wasm-cors =\n    Ruffle kon het vereiste ".wasm" bestandscomponent niet laden.\n    Toegang is waarschijnlijk geblokeerd door het CORS beleid.\n    Als je de serverbeheerder bent, kijk dan in de Ruffle wiki voor hulp.\nerror-wasm-invalid =\n    Ruffle heeft een groot probleem ondervonden tijdens het initialiseren.\n    Het lijkt erop dat de Ruffle bestanden ontbreken of ongeldig zijn.\n    Als je de serverbeheerder bent, kijk dan in de Ruffle wiki voor hulp.\nerror-wasm-download =\n    Ruffle heeft een groot probleem ondervonden tijdens het initialiseren.\n    Dit lost zichzelf vaak op als je de bladzijde opnieuw inlaadt.\n    Zo niet, neem dan contact op met de websitebeheerder.\nerror-wasm-disabled-on-edge =\n    Ruffle kon het vereiste ".wasm" bestandscomponent niet laden.\n    Om dit op te lossen, ga naar je browserinstellingen, klik op "Privacy, zoeken en diensten", scroll omlaag, en schakel "Verbeter je veiligheid op he web" uit.\n    Dan kan je browser wel de vereiste ".wasm" bestanden inladen.\n    Als het probleem zich blijft voordoen, moet je misschien een andere browser gebruiken.\nerror-wasm-unsupported-browser =\n    De browser die je gebruikt ondersteunt de WebAssembly extensies die Ruffle nodig heeft niet.\n    Gebruik alsjeblieft een ondersteunde browser.\n    Je kunt een lijst aan ondersteunde browsers vinden op de Wiki.\nerror-javascript-conflict =\n    Ruffle heeft een groot probleem ondervonden tijdens het initialiseren.\n    Het lijkt erop dat deze pagina JavaScript code gebruikt die conflicteert met Ruffle.\n    Als je de serverbeheerder bent, raden we aan om het bestand op een lege pagina te proberen in te laden.\nerror-javascript-conflict-outdated = Je kan ook proberen een nieuwe versie van Ruffle te installeren, om om het probleem heen te werken (huidige versie is oud: { $buildDate }).\nerror-csp-conflict =\n    Ruffle heeft een groot probleem ondervonden tijdens het initialiseren.\n    Het CSP-beleid staat niet toe dat het vereiste ".wasm" component kan draaien.\n    Als je de serverbeheerder bent, kijk dan in de Ruffle wiki voor hulp.\nerror-unknown =\n    Ruffle heeft een groot probleem onderbonden tijdens het weergeven van deze Flash-inhoud.\n    { $outdated ->\n        [true] Als je de serverbeheerder bent, upload dan een nieuwe versie van Ruffle (huidige versie is oud: { $buildDate }).\n       *[false] Dit hoort niet te gebeuren, dus we stellen het op prijs als je de fout aan ons rapporteert!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Weet je zeker dat je deze opgeslagen data wilt verwijderen?\nsave-reload-prompt =\n    De enige manier om deze opgeslagen data te { $action ->\n        [delete] verwijderen\n       *[replace] vervangen\n    } zonder potenti\xeble problemen is door de inhoud opnieuw te laden. Toch doorgaan?\nsave-download = Downloaden\nsave-replace = Vervangen\nsave-delete = Verwijderen\nsave-backup-all = Download alle opgeslagen data\n",
-        "volume-controls.ftl": "volume-controls-mute = Dempen\nvolume-controls-unmute = Dempen opheffen\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Dempen\nvolume-controls-unmute = Dempen opheffen\n",
       },
       "pl-PL": {
         "context_menu.ftl":
@@ -1526,7 +1789,8 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle nie by\u0142o w stanie uruchomi\u0107 zawarto\u015bci Flash w tej stronie.\n    Mo\u017cesz spr\xf3bowa\u0107 otworzy\u0107 plik w nowej karcie, aby unikn\u0105\u0107 tego problemu.\nmessage-restored-from-bfcache =\n    Twoja przegl\u0105darka przywr\xf3ci\u0142a t\u0119 zawarto\u015b\u0107 Flash z poprzedniej sesji.\n    Aby zacz\u0105\u0107 od nowa, od\u015bwie\u017c stron\u0119.\npanic-title = Co\u015b posz\u0142o nie tak :(\nmore-info = Wi\u0119cej informacji\nrun-anyway = Uruchom mimo tego\ncontinue = Kontynuuj\nreport-bug = Zg\u0142o\u015b b\u0142\u0105d\nupdate-ruffle = Zaktualizuj Ruffle\nruffle-demo = Webowe demo\nruffle-desktop = Aplikacja na komputer\nruffle-wiki = Zobacz Wiki Ruffle\nenable-hardware-acceleration = Wygl\u0105da na to, \u017ce akceleracja grafiki jest wy\u0142\u0105czona. Chocia\u017c Ruffle mo\u017ce dzia\u0142a\u0107, mo\u017ce by\u0107 bardzo powolny. Mo\u017cesz dowiedzie\u0107 si\u0119, jak w\u0142\u0105czy\u0107 akceleracj\u0119 grafiki, klikaj\u0105c poni\u017cszy link:\nenable-hardware-acceleration-link = FAQ \u2014 Akceleracja Grafiki Chrome\nview-error-details = Zobacz szczeg\xf3\u0142y b\u0142\u0119du\nopen-in-new-tab = Otw\xf3rz w nowej karcie\nclick-to-unmute = Kliknij aby wy\u0142\u0105czy\u0107 wyciszenie\nclipboard-message-title = Kopiowanie i wklejanie w Ruffle\nclipboard-message-description =\n    { $variant ->\n       *[unsupported] Twoja przegl\u0105darka nie obs\u0142uguje pe\u0142nego dost\u0119pu do schowka,\n        [access-denied] Odm\xf3wiono dost\u0119pu do schowka,\n    } ale zawsze mo\u017cesz stosowa\u0107 te skr\xf3ty klawiszowe:\nclipboard-message-copy = { " " } w celu skopiowania\nclipboard-message-cut = { " " } w celu wyci\u0119cia\nclipboard-message-paste = { " " } w celu wklejenia\nerror-canvas-reload = Nie mo\u017cna ponownie za\u0142adowa\u0107 renderera canvas, gdy jest ju\u017c on u\u017cywany.\nerror-file-protocol =\n    Wygl\u0105da na to, \u017ce u\u017cywasz Ruffle z protoko\u0142em "file:".\n    To nie dzia\u0142a, poniewa\u017c przegl\u0105darka blokuje wiele funkcji przed dzia\u0142aniem ze wzgl\u0119d\xf3w bezpiecze\u0144stwa.\n    Zamiast tego zach\u0119camy do konfiguracji lokalnego serwera lub u\u017cycia webowego demo lub aplikacji desktopowej.\nerror-javascript-config =\n    Ruffle napotka\u0142 powa\u017cny problem z powodu nieprawid\u0142owej konfiguracji JavaScript.\n    Je\u015bli jeste\u015b administratorem serwera, prosimy o sprawdzenie szczeg\xf3\u0142\xf3w b\u0142\u0119du, aby dowiedzie\u0107 si\u0119, kt\xf3ry parametr jest b\u0142\u0119dny.\n    Mo\u017cesz r\xf3wnie\u017c zapozna\u0107 si\u0119 z wiki Ruffle, aby uzyska\u0107 pomoc.\nerror-wasm-not-found =\n    Nie uda\u0142o si\u0119 za\u0142adowa\u0107 wymaganego komponentu pliku ".wasm".\n    Je\u015bli jeste\u015b administratorem serwera, upewnij si\u0119, \u017ce plik zosta\u0142 poprawnie przes\u0142any.\n    Je\u015bli problem b\u0119dzie si\u0119 powtarza\u0142, by\u0107 mo\u017ce b\u0119dziesz musia\u0142 u\u017cy\u0107 ustawienia "publicPath": zapoznaj si\u0119 z wiki Ruffle, aby uzyska\u0107 pomoc.\nerror-wasm-mime-type =\n    Ruffle napotka\u0142 powa\u017cny problem podczas pr\xf3by zainicjowania.\n    Ten serwer nie serwuje plik\xf3w ".wasm" z poprawnym typem MIME.\n    Je\u015bli jeste\u015b administratorem serwera, zasi\u0119gnij pomocy na wiki Ruffle.\nerror-invalid-swf =\n    Ruffle nie mo\u017ce przetworzy\u0107 \u017c\u0105danego pliku.\n    Prawdopodobnie to nie jest poprawny plik SWF.\nerror-swf-fetch =\n    Nie uda\u0142o si\u0119 za\u0142adowa\u0107 pliku Flash SWF.\n    Najbardziej prawdopodobnym powodem jest to, \u017ce plik ju\u017c nie istnieje, wi\u0119c Ruffle nie ma co za\u0142adowa\u0107.\n    Spr\xf3buj skontaktowa\u0107 si\u0119 z administratorem witryny, aby uzyska\u0107 pomoc.\nerror-swf-cors =\n    Nie uda\u0142o si\u0119 za\u0142adowa\u0107 pliku Flash SWF.\n    Pobieranie zosta\u0142o prawdopodobnie zablokowane przez polityk\u0119 CORS.\n    Je\u015bli jeste\u015b administratorem serwera, zasi\u0119gnij pomocy na wiki Ruffle.\nerror-wasm-cors =\n    Nie uda\u0142o si\u0119 za\u0142adowa\u0107 wymaganego komponentu pliku ".wasm".\n    Pobieranie zosta\u0142o prawdopodobnie zablokowane przez polityk\u0119 CORS.\n    Je\u015bli jeste\u015b administratorem serwera, zasi\u0119gnij pomocy na wiki Ruffle.\nerror-wasm-invalid =\n    Ruffle napotka\u0142 powa\u017cny problem podczas pr\xf3by zainicjowania.\n    Wygl\u0105da na to, \u017ce ta strona ma brakuj\u0105ce lub nieprawid\u0142owe pliki niezb\u0119dne do uruchomienia Ruffle.\n    Je\u015bli jeste\u015b administratorem serwera, zasi\u0119gnij pomocy na wiki Ruffle.\nerror-wasm-download =\n    Ruffle napotka\u0142 powa\u017cny problem podczas pr\xf3by zainicjowania.\n    Ten problem cz\u0119sto sam si\u0119 rozwi\u0105zuje, wi\u0119c mo\u017cesz spr\xf3bowa\u0107 od\u015bwie\u017cy\u0107 stron\u0119.\n    W przeciwnym razie skontaktuj si\u0119 z administratorem witryny.\nerror-wasm-disabled-on-edge =\n    Ruffle nie uda\u0142o si\u0119 za\u0142adowa\u0107 wymaganego komponentu pliku ".wasm".\n    Aby to naprawi\u0107, spr\xf3buj otworzy\u0107 ustawienia przegl\u0105darki, klikaj\u0105c "Prywatno\u015b\u0107, wyszukiwanie i us\u0142ugi", przewijaj\u0105c w d\xf3\u0142 i wy\u0142\u0105czaj\u0105c "Zwi\u0119ksz bezpiecze\u0144stwo w sieci".\n    Pozwoli to przegl\u0105darce za\u0142adowa\u0107 wymagane pliki ".wasm".\n    Je\u015bli problem b\u0119dzie si\u0119 powtarza\u0142, by\u0107 mo\u017ce b\u0119dziesz musia\u0142 u\u017cy\u0107 innej przegl\u0105darki.\nerror-wasm-unsupported-browser =\n    Przegl\u0105darka, kt\xf3rej u\u017cywasz, nie obs\u0142uguje rozszerze\u0144 WebAssembly wymaganych do dzia\u0142ania Ruffle.\n    Prosz\u0119 u\u017cy\u0107 obs\u0142ugiwanej przegl\u0105darki.\n    List\u0119 obs\u0142ugiwanych przegl\u0105darek znajdziesz na Wiki.\nerror-javascript-conflict =\n    Ruffle napotka\u0142 powa\u017cny problem podczas pr\xf3by zainicjowania.\n    Wygl\u0105da na to, \u017ce ta strona u\u017cywa kodu JavaScript, kt\xf3ry koliduje z Ruffle.\n    Je\u015bli jeste\u015b administratorem serwera, zapraszamy Ci\u0119 do \u0142adowania pliku na pustej stronie.\nerror-javascript-conflict-outdated = Mo\u017cesz r\xf3wnie\u017c spr\xf3bowa\u0107 przes\u0142a\u0107 nowsz\u0105 wersj\u0119 Ruffle, kt\xf3ra mo\u017ce omin\u0105\u0107 problem (obecna wersja jest przestarza\u0142a: { $buildDate }).\nerror-csp-conflict =\n    Ruffle napotka\u0142 powa\u017cny problem podczas pr\xf3by zainicjowania.\n    Polityka bezpiecze\u0144stwa zawarto\u015bci tego serwera (CSP) nie zezwala na komponent ".wasm" wymagany do uruchomienia.\n    Je\u015bli jeste\u015b administratorem serwera, zasi\u0119gnij pomocy na wiki Ruffle.\nerror-unknown =\n    Ruffle napotka\u0142 powa\u017cny problem podczas pr\xf3by wy\u015bwietlenia tej zawarto\u015bci Flash.\n    { $outdated ->\n        [true] Je\u015bli jeste\u015b administratorem serwera, spr\xf3buj zaktualizowa\u0107 Ruffle (obecna wersja jest przestarza\u0142a: { $buildDate }).\n       *[false] To nie powinno si\u0119 wydarzy\u0107, wi\u0119c byliby\u015bmy wdzi\u0119czni, gdyby\u015b zg\u0142osi\u0142 b\u0142\u0105d!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Czy na pewno chcesz skasowa\u0107 ten plik zapisu?\nsave-reload-prompt =\n    Jedyn\u0105 opcj\u0105, aby { $action ->\n        [delete] usun\u0105\u0107\n       *[replace] zamieni\u0107\n    } ten plik zapisu bez potencjalnych konflikt\xf3w jest prze\u0142adowanie zawarto\u015bci. Czy chcesz kontynuowa\u0107?\nsave-download = Pobierz\nsave-replace = Zamie\u0144\nsave-delete = Usu\u0144\nsave-backup-all = Pobierz wszystkie pliki zapisu\n",
-        "volume-controls.ftl": "volume-controls-mute = Wycisz\nvolume-controls-unmute = Wy\u0142\u0105cz wyciszenie\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Wycisz\nvolume-controls-unmute = Wy\u0142\u0105cz wyciszenie\n",
       },
       "pt-BR": {
         "context_menu.ftl":
@@ -1535,7 +1799,8 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle n\xe3o conseguiu executar o Flash incorporado nesta p\xe1gina.\n    Voc\xea pode tentar abrir o arquivo em uma guia separada para evitar esse problema.\nmessage-restored-from-bfcache =\n    Seu navegador restaurou este conte\xfado Flash de uma sess\xe3o anterior.\n    Para come\xe7ar do zero, recarregue a p\xe1gina.\npanic-title = Algo deu errado :(\nmore-info = Mais informa\xe7\xe3o\nrun-anyway = Executar mesmo assim\ncontinue = Continuar\nreport-bug = Reportar bug\nupdate-ruffle = Atualizar Ruffle\nruffle-demo = Demo Web\nruffle-desktop = Aplicativo de desktop\nruffle-wiki = Ver guia oficial do Ruffle\nenable-hardware-acceleration = Parece que a acelera\xe7\xe3o de hardware est\xe1 desabilitada. Embora o Ruffle possa funcionar, ele pode ser muito lento. Voc\xea pode descobrir como habilitar a acelera\xe7\xe3o de hardware seguindo o link abaixo:\nenable-hardware-acceleration-link = FAQ \u2014 Acelera\xe7\xe3o de hardware no Chrome\nview-error-details = Ver detalhes do erro\nopen-in-new-tab = Abrir em uma nova guia\nclick-to-unmute = Clique para ativar o som\nclipboard-message-title = Copiando e colando no Ruffle\nclipboard-message-description =\n    { $variant ->\n       *[unsupported] Seu navegador n\xe3o suporta acesso total \xe0 \xe1rea de transfer\xeancia,\n        [access-denied] O acesso \xe0 \xe1rea de transfer\xeancia foi negado,\n    } mas voc\xea sempre pode usar estes atalhos:\nclipboard-message-copy = { " " } para copiar\nclipboard-message-cut = { " " } para recortar\nclipboard-message-paste = { " " } para colar\nerror-canvas-reload = N\xe3o \xe9 poss\xedvel recarregar com o renderizador canvas enquanto ele j\xe1 est\xe1 em uso.\nerror-file-protocol =\n    Parece que voc\xea est\xe1 executando o Ruffle no protocolo "file:".\n    Isto n\xe3o funciona como navegadores bloqueiam muitos recursos de funcionar por raz\xf5es de seguran\xe7a.\n    Ao inv\xe9s disso, convidamos voc\xea a configurar um servidor local ou a usar a demonstra\xe7\xe3o da web, ou o aplicativo de desktop.\nerror-javascript-config =\n    O Ruffle encontrou um grande problema devido a uma configura\xe7\xe3o incorreta do JavaScript.\n    Se voc\xea for o administrador do servidor, convidamos voc\xea a verificar os detalhes do erro para descobrir qual par\xe2metro est\xe1 com falha.\n    Voc\xea tamb\xe9m pode consultar o guia oficial do Ruffle para obter ajuda.\nerror-wasm-not-found =\n    Ruffle falhou ao carregar o componente de arquivo ".wasm" necess\xe1rio.\n    Se voc\xea \xe9 o administrador do servidor, por favor, certifique-se de que o arquivo foi carregado corretamente.\n    Se o problema persistir, voc\xea pode precisar usar a configura\xe7\xe3o "publicPath": por favor consulte a wiki do Ruffle para obter ajuda.\nerror-wasm-mime-type =\n    Ruffle encontrou um grande problema ao tentar inicializar.\n    Este servidor de web n\xe3o est\xe1 servindo ".wasm" arquivos com o tipo MIME correto.\n    Se voc\xea \xe9 o administrador do servidor, por favor consulte o guia oficial do Ruffle para obter ajuda.\nerror-invalid-swf =\n    Ruffle n\xe3o pode analisar o arquivo solicitado.\n    O motivo prov\xe1vel \xe9 que o arquivo solicitado n\xe3o seja um SWF v\xe1lido.\nerror-swf-fetch =\n    Ruffle falhou ao carregar o arquivo Flash SWF.\n    A raz\xe3o prov\xe1vel \xe9 que o arquivo n\xe3o existe mais, ent\xe3o n\xe3o h\xe1 nada para o Ruffle carregar.\n    Tente contatar o administrador do site para obter ajuda.\nerror-swf-cors =\n    Ruffle falhou ao carregar o arquivo Flash SWF.\n    O acesso para fetch provavelmente foi bloqueado pela pol\xedtica CORS.\n    Se voc\xea for o administrador do servidor, consulte o wiki do Ruffle para obter ajuda.\nerror-wasm-cors =\n    Ruffle falhou ao carregar o componente de arquivo ".wasm" necess\xe1rio.\n    O acesso para fetch foi provavelmente bloqueado pela pol\xedtica CORS.\n    Se voc\xea \xe9 o administrador do servidor, por favor consulte a wiki do Ruffle para obter ajuda.\nerror-wasm-invalid =\n    Ruffle encontrou um grande problema ao tentar inicializar.\n    Parece que esta p\xe1gina tem arquivos ausentes ou inv\xe1lidos para executar o Ruffle.\n    Se voc\xea for o administrador do servidor, consulte o wiki do Ruffle para obter ajuda.\nerror-wasm-download =\n    O Ruffle encontrou um grande problema ao tentar inicializar.\n    Muitas vezes isso pode se resolver sozinho, ent\xe3o voc\xea pode tentar recarregar a p\xe1gina.\n    Caso contr\xe1rio, contate o administrador do site.\nerror-wasm-disabled-on-edge =\n    O Ruffle falhou ao carregar o componente de arquivo ".wasm" necess\xe1rio.\n    Para corrigir isso, tente abrir configura\xe7\xf5es do seu navegador, clicando em "Privacidade, pesquisa e servi\xe7os", rolando para baixo e desativando "Melhore sua seguran\xe7a na web".\n    Isso permitir\xe1 que seu navegador carregue os arquivos ".wasm" necess\xe1rios.\n    Se o problema persistir, talvez seja necess\xe1rio usar um navegador diferente.\nerror-wasm-unsupported-browser =\n    O navegador que voc\xea est\xe1 usando n\xe3o suporta as extens\xf5es WebAssembly necess\xe1rias para o Ruffle.\n    Por favor, utilize um navegador compat\xedvel.\n    Voc\xea pode encontrar uma lista de navegadores suportados no wiki.\nerror-javascript-conflict =\n    Ruffle encontrou um grande problema ao tentar inicializar.\n    Parece que esta p\xe1gina usa c\xf3digo JavaScript que entra em conflito com o Ruffle.\n    Se voc\xea for o administrador do servidor, convidamos voc\xea a tentar carregar o arquivo em uma p\xe1gina em branco.\nerror-javascript-conflict-outdated = Voc\xea tamb\xe9m pode tentar fazer o upload de uma vers\xe3o mais recente do Ruffle que pode contornar o problema (a compila\xe7\xe3o atual est\xe1 desatualizada: { $buildDate }).\nerror-csp-conflict =\n    Ruffle encontrou um grande problema ao tentar inicializar.\n    A pol\xedtica de seguran\xe7a de conte\xfado deste servidor da web n\xe3o permite a execu\xe7\xe3o do componente ".wasm" necess\xe1rio.\n    Se voc\xea for o administrador do servidor, consulte o wiki do Ruffle para obter ajuda.\nerror-unknown =\n    O Ruffle encontrou um grande problema enquanto tentava exibir este conte\xfado em Flash.\n    { $outdated ->\n        [true] Se voc\xea \xe9 o administrador do servidor, por favor tente fazer o upload de uma vers\xe3o mais recente do Ruffle (a compila\xe7\xe3o atual est\xe1 desatualizada: { $buildDate }).\n       *[false] Isso n\xe3o deveria acontecer, ent\xe3o apreciar\xedamos muito se voc\xea pudesse arquivar um bug!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Tem certeza que deseja excluir este arquivo de salvamento?\nsave-reload-prompt =\n    A \xfanica maneira de { $action ->\n        [delete] excluir\n       *[replace] substituir\n    } este arquivo sem potencial conflito \xe9 recarregar este conte\xfado. Deseja continuar mesmo assim?\nsave-download = Baixar\nsave-replace = Substituir\nsave-delete = Excluir\nsave-backup-all = Baixar todos os arquivos de salvamento\n",
-        "volume-controls.ftl": "volume-controls-mute = Silenciar\nvolume-controls-unmute = Ativar som\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Silenciar\nvolume-controls-unmute = Ativar som\n",
       },
       "pt-PT": {
         "context_menu.ftl":
@@ -1544,7 +1809,8 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    O Ruffle n\xe3o conseguiu abrir o Flash integrado nesta p\xe1gina.\n    Para tentar resolver o problema, pode abrir o ficheiro num novo separador.\nmessage-restored-from-bfcache =\n    O seu navegador restaurou este conte\xfado Flash de uma sess\xe3o anterior.\n    Para come\xe7ar do zero, recarregue a p\xe1gina.\npanic-title = Algo correu mal :(\nmore-info = Mais informa\xe7\xf5es\nrun-anyway = Executar mesmo assim\ncontinue = Continuar\nreport-bug = Reportar falha\nupdate-ruffle = Atualizar o Ruffle\nruffle-demo = Demonstra\xe7\xe3o web\nruffle-desktop = Aplica\xe7\xe3o para computador\nruffle-wiki = Ver a wiki do Ruffle\nenable-hardware-acceleration = Parece que a acelera\xe7\xe3o de hardware est\xe1 desativada. Mesmo que o Ruffle funcione, pode estar demasiado lento. Descubra como ativar a acelera\xe7\xe3o de hardware seguindo este link:\nenable-hardware-acceleration-link = Perguntas Frequentes - Acelera\xe7\xe3o de Hardware no Chrome\nview-error-details = Ver detalhes do erro\nopen-in-new-tab = Abrir num novo separador\nclick-to-unmute = Clique para ativar o som\nclipboard-message-title = Copiar e colar no Ruffle\nclipboard-message-description =\n    { $variant ->\n       *[unsupported] O seu navegador n\xe3o suporta acesso total \xe0 \xe1rea de transfer\xeancia,\n        [access-denied] O acesso \xe0 \xe1rea de transfer\xeancia foi negado,\n    } mas pode sempre usar estes atalhos em alternativa:\nclipboard-message-copy = { " " } para copiar\nclipboard-message-cut = { " " } para cortar\nclipboard-message-paste = { " " } para colar\nerror-canvas-reload = N\xe3o \xe9 poss\xedvel recarregar com o renderizador canvas quando este j\xe1 est\xe1 em uso.\nerror-file-protocol =\n    Parece que executou o Ruffle no protocolo "file:".\n    Isto n\xe3o funciona porque os navegadores bloqueiam muitas funcionalidades por seguran\xe7a.\n    Em vez disto, experimente configurar um servidor local, ou ent\xe3o a usar a demonstra\xe7\xe3o web ou a aplica\xe7\xe3o para computador.\nerror-javascript-config =\n    O Ruffle encontrou um problema grave devido a uma configura\xe7\xe3o de JavaScript incorreta.\n    Se \xe9 o administrador do servidor, experimente verificar os detalhes do erro para identificar o par\xe2metro em falha.\n    Pode ainda consultar a wiki do Ruffle para obter ajuda.\nerror-wasm-not-found =\n    O Ruffle falhou ao carregar o componente de ficheiro ".wasm" necess\xe1rio.\n    Se \xe9 o administrador do servidor, certifique-se de que o ficheiro foi devidamente carregado.\n    Se o problema persistir, talvez queira usar a configura\xe7\xe3o "publicPath": consulte a wiki do Ruffle para obter ajuda.\nerror-wasm-mime-type =\n    O Ruffle encontrou um problema grave ao tentar inicializar.\n    Este servidor web n\xe3o est\xe1 a servir ficheiros \u201c.wasm\u201d com o tipo MIME correto.\n    Se \xe9 o administrador do servidor, consulte a wiki do Ruffle para obter ajuda.\nerror-invalid-swf =\n    O Ruffle n\xe3o consegue analisar o ficheiro solicitado.\n    O mais prov\xe1vel \xe9 que o ficheiro solicitado n\xe3o seja um SWF v\xe1lido.\nerror-swf-fetch =\n    O Ruffle falhou ao carregar o ficheiro Flash SWF.\n    O mais prov\xe1vel \xe9 que o ficheiro j\xe1 n\xe3o exista, da\xed n\xe3o haver nada para o Ruffle carregar.\n    Tente contactar o administrador do site para obter ajuda.\nerror-swf-cors =\n    O Ruffle falhou ao carregar o ficheiro Flash SWF.\n    Obter o ficheiro (fetch) foi provavelmente bloqueado pela pol\xedtica CORS.\n    Se \xe9 o administrador do servidor, consulte a wiki do Ruffle para obter ajuda.\nerror-wasm-cors =\n    O Ruffle falhou ao carregar o componente de ficheiro ".wasm" necess\xe1rio.\n    Obter o ficheiro (fetch) foi provavelmente bloqueado pela pol\xedtica CORS.\n    Se \xe9 o administrador do servidor, consulte a wiki do Ruffle para obter ajuda.\nerror-wasm-invalid =\n    O Ruffle encontrou um problema grave ao tentar inicializar.\n    Parece que esta p\xe1gina tem ficheiros inv\xe1lidos ou em falta para executar o Ruffle.\n    Se \xe9 o administrador do servidor, consulte a wiki do Ruffle para obter ajuda.\nerror-wasm-download =\n    O Ruffle encontrou um problema grave ao tentar inicializar.\n    Isto costuma resolver-se sozinho, por isso experimente recarregar a p\xe1gina.\n    Se n\xe3o acontecer, contacte o administrador do site.\nerror-wasm-disabled-on-edge =\n    O Ruffle falhou ao carregar o componente de ficheiro ".wasm" necess\xe1rio.\n    Tente corrigir isto nas defini\xe7\xf5es do navegador; clique em "Privacidade, pesquisa e servi\xe7os", deslize para baixo e desative "Melhore a sua seguran\xe7a na Web".\n    Isto permitir\xe1 ao navegador carregar os ficheiros ".wasm" necess\xe1rios.\n    Se o problema persistir, talvez precise de um navegador diferente.\nerror-wasm-unsupported-browser =\n    O navegador que usa n\xe3o suporta as extens\xf5es WebAssembly de que o Ruffle necessita para executar.\n    Deve mudar para um navegador suportado.\n    Pode encontrar uma lista de navegadores suportados na Wiki.\nerror-javascript-conflict =\n    O Ruffle encontrou um problema grave ao tentar inicializar.\n    Parece que esta p\xe1gina usa c\xf3digo JavaScript que entra em conflito com o Ruffle.\n    Se \xe9 o administrador do servidor, experimente carregar o ficheiro numa p\xe1gina em branco.\nerror-javascript-conflict-outdated = Pode ainda tentar carregar uma vers\xe3o mais recente do Ruffle que talvez contorne o problema (a compila\xe7\xe3o atual est\xe1 desatualizada: { $buildDate }).\nerror-csp-conflict =\n    O Ruffle encontrou um problema grave ao tentar inicializar.\n    A Pol\xedtica de Seguran\xe7a de Conte\xfados deste servidor web n\xe3o permite executar o componente ".wasm" necess\xe1rio.\n    Se \xe9 o administrador do servidor, consulte a wiki do Ruffle para obter ajuda.\nerror-unknown =\n    O Ruffle encontrou um problema grave ao tentar apresentar este conte\xfado Flash.\n    { $outdated ->\n        [true] Se \xe9 o administrador do servidor, tente carregar uma vers\xe3o mais recente do Ruffle (a vers\xe3o atual est\xe1 desatualizada: { $buildDate }).\n       *[false] N\xe3o era suposto ter acontecido, por isso agradec\xedamos imenso se reportasse a falha!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Tem a certeza de que quer eliminar esta grava\xe7\xe3o?\nsave-reload-prompt =\n    A \xfanica forma de { $action ->\n        [delete] eliminar\n       *[replace] substituir\n    } esta grava\xe7\xe3o sem risco de conflito \xe9 recarregando este conte\xfado. Deseja continuar na mesma?\nsave-download = Descarregar\nsave-replace = Substituir\nsave-delete = Eliminar\nsave-backup-all = Descarregar todas as grava\xe7\xf5es\n",
-        "volume-controls.ftl": "volume-controls-mute = Silenciar\nvolume-controls-unmute = Ativar o som\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Silenciar\nvolume-controls-unmute = Ativar o som\n",
       },
       "ro-RO": {
         "context_menu.ftl":
@@ -1553,7 +1819,8 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle nu a putut s\u0103 ruleze Flash \xeencorporat \xeen aceast\u0103 pagin\u0103.\n    Po\u021bi \xeencerca s\u0103 deschizi fi\u0219ierul \xeentr-o fil\u0103 separat\u0103, pentru a evita aceast\u0103 problem\u0103.\nmessage-restored-from-bfcache =\n    Browserul dvs. a restaurat acest con\u021binut Flash dintr-o sesiune anterioar\u0103.\n    Pentru a \xeencepe de la zero, re\xeenc\u0103rca\u021bi pagina.\npanic-title = Ceva a mers prost :(\nmore-info = Mai multe informa\u021bii\nrun-anyway = Ruleaz\u0103 oricum\ncontinue = Continu\u0103\nreport-bug = Raporteaz\u0103 un bug\nupdate-ruffle = Actualizeaz\u0103 Ruffle\nruffle-demo = Demo web\nruffle-desktop = Aplica\u021bie desktop\nruffle-wiki = Vezi wikiul Ruffle\nenable-hardware-acceleration = Se pare c\u0103 accelerarea hardware este dezactivat\u0103. De\u0219i Ruffle ar putea func\u021biona, va fi foarte lent. Pute\u021bi afla cum s\u0103 activa\u021bi accelerarea hardware acces\xe2nd linkul de mai jos:\nenable-hardware-acceleration-link = \xcentreb\u0103ri frecvente - Accelerarea hardware Chrome\nview-error-details = Vezi detaliile erorii\nopen-in-new-tab = Deschide \xeentr-o fil\u0103 nou\u0103\nclick-to-unmute = D\u0103 click pentru a dezmu\u021bi\nclipboard-message-title = Copierea \u0219i lipirea \xeen Ruffle\nclipboard-message-description =\n    { $variant ->\n       *[unsupported] Browserul dvs. nu accept\u0103 accesul complet c\u0103tre clipboard,\n        [access-denied] Accesul la clipboard a fost refuzat,\n    } dar pute\u021bi oric\xe2nd s\u0103 utiliza\u021bi aceste scurt\u0103turi:\nclipboard-message-copy = { " " } pentru copiere\nclipboard-message-cut = { " " } pentru decupare\nclipboard-message-paste = { " " } pentru lipire\nerror-canvas-reload = Nu se poate re\xeenc\u0103rca utiliz\xe2nd rendererul canvas atunci c\xe2nd acesta este deja folosit.\nerror-file-protocol =\n    Se pare c\u0103 rulezi Ruffle pe protocolul \u201efile:\u201d.\n    Acesta nu func\u021bioneaz\u0103, deoarece browserele blocheaz\u0103 func\u021bionarea multor func\u021bii din motive de securitate.\n    \xcen schimb, te invit\u0103m s\u0103 configurezi un server local sau s\u0103 folose\u0219ti fie demoul web, fie aplica\u021bia desktop.\nerror-javascript-config =\n    Ruffle a \xeent\xe2mpinat o problem\u0103 major\u0103 din cauza unei configur\u0103ri incorecte a JavaScript.\n    Dac\u0103 e\u0219ti administratorul serverului, te invit\u0103m s\u0103 verifici detaliile erorii pentru a afla care parametru este defect.\n    De asemenea, po\u021bi consulta wikiul Ruffle pentru ajutor.\nerror-wasm-not-found =\n    Ruffle a e\u0219uat la \xeenc\u0103rcarea componentei de fi\u0219ier \u201e.wasm\u201d.\n    Dac\u0103 e\u0219ti administratorul serverului, te rug\u0103m s\u0103 te asiguri c\u0103 fi\u0219ierul a fost \xeenc\u0103rcat corect.\n    Dac\u0103 problema persist\u0103, poate fi necesar s\u0103 folose\u0219ti setarea \u201epublicPath\u201d: te rug\u0103m s\u0103 consul\u021bi wikiul Ruffle pentru ajutor.\nerror-wasm-mime-type =\n    Ruffle a \xeent\xe2mpinat o problem\u0103 major\u0103 \xeen timp ce \xeencerca s\u0103 se ini\u021bializeze.\n    Acest server web nu serve\u0219te fi\u0219iere \u201e.wasm\u201d cu tipul MIME corect.\n    Dac\u0103 e\u0219ti administratorul serverului, te rug\u0103m s\u0103 consul\u021bi wikiul Ruffle pentru ajutor.\nerror-invalid-swf =\n    Ruffle nu poate analiza fi\u0219ierul solicitat.\n    Cel mai probabil motiv este c\u0103 fi\u0219ierul solicitat nu este un SWF valid.\nerror-swf-fetch =\n    Ruffle a e\u0219uat la \xeenc\u0103rcarea fi\u0219ierului SWF.\n    Motivul cel mai probabil este c\u0103 fi\u0219ierul nu mai exist\u0103, deci Ruffle nu mai are ce s\u0103 \xeencarce.\n    \xcencearc\u0103 s\u0103 contactezi administratorul site-ului web pentru ajutor.\nerror-swf-cors =\n    Ruffle a e\u0219uat la \xeenc\u0103rcarea fi\u0219ierului SWF.\n    Accesul de preluare a fost probabil blocat de politica CORS.\n    Dac\u0103 e\u0219ti administratorul serverului, te rug\u0103m s\u0103 consul\u021bi wikiul Ruffle pentru ajutor.\nerror-wasm-cors =\n    Ruffle a e\u0219uat la \xeenc\u0103rcarea componentei de fi\u0219ier \u201e.wasm\u201d.\n    Accesul de preluare a fost probabil blocat de politica CORS.\n    Dac\u0103 e\u0219ti administratorul serverului, te rug\u0103m s\u0103 consul\u021bi wikiul Ruffle pentru ajutor.\nerror-wasm-invalid =\n    Ruffle a \xeent\xe2mpinat o problem\u0103 major\u0103 \xeen timp ce \xeencerca s\u0103 se ini\u021bializeze.\n    Se pare c\u0103 aceast\u0103 pagin\u0103 are fi\u0219iere lips\u0103 sau nevalide pentru a rula Ruffle.\n    Dac\u0103 e\u0219ti administratorul serverului, te rug\u0103m s\u0103 consul\u021bi wikiul Ruffle pentru ajutor.\nerror-wasm-download =\n    Ruffle a \xeent\xe2mpinat o problem\u0103 major\u0103 \xeen timp ce \xeencerca s\u0103 ini\u021bializeze.\n    Acest lucru se poate rezolva adesea de la sine, a\u0219a c\u0103 po\u021bi \xeencerca s\u0103 re\xeencarci pagina.\n    \xcen caz contrar, te rug\u0103m s\u0103 contactezi administratorul site-ului web.\nerror-wasm-disabled-on-edge =\n    Ruffle a e\u0219uat la \xeenc\u0103rcarea componentei de fi\u0219ier \u201e.wasm\u201d.\n    Pentru a remedia acest lucru, \xeencearc\u0103 s\u0103 deschizi set\u0103rile browserului, s\u0103 faci clic pe \u201eConfiden\u021bialitate, c\u0103utare \u0219i servicii\u201d, s\u0103 derulezi \xeen jos \u0219i s\u0103 dezactivezi \u201e\xcembun\u0103t\u0103\u021bi\u021bi-v\u0103 securitatea pe web\u201d.\n    Acest lucru va permite browserului s\u0103 \xeencarce fi\u0219ierele \u201e.wasm\u201d necesare.\n    Dac\u0103 problema persist\u0103, este posibil s\u0103 trebuiasc\u0103 s\u0103 folose\u0219ti un alt browser.\nerror-wasm-unsupported-browser =\n    Browserul pe care \xeel utiliza\u021bi nu suport\u0103 extensiile WebAssembly pe care Ruffle le solicit\u0103 pentru a rula.\n    V\u0103 rug\u0103m s\u0103 folosi\u021bi un browser compatibil.\n    Pute\u021bi g\u0103si o list\u0103 de browsere compatibile pe Wiki.\nerror-javascript-conflict =\n    Ruffle a \xeent\xe2mpinat o problem\u0103 major\u0103 \xeen timp ce \xeencerca s\u0103 se ini\u021bializeze.\n    Se pare c\u0103 aceast\u0103 pagin\u0103 folose\u0219te cod JavaScript care intr\u0103 \xeen conflict cu Ruffle.\n    Dac\u0103 e\u0219ti administratorul serverului, te invit\u0103m s\u0103 \xeencerci \xeenc\u0103rcarea fi\u0219ierului pe o pagin\u0103 goal\u0103.\nerror-javascript-conflict-outdated = De asemenea, po\u021bi \xeencerca s\u0103 \xeencarci o versiune mai recent\u0103 de Ruffle care ar putea ocoli problema (versiunea actual\u0103 este \xeenvechit\u0103: { $buildDate }).\nerror-csp-conflict =\n    Ruffle a \xeent\xe2mpinat o problem\u0103 major\u0103 \xeen timp ce \xeencerca s\u0103 se ini\u021bializeze.\n    Politica de securitate a con\u021binutului a acestui server web nu permite rularea componentei \u201e.wasm\u201d necesare.\n    Dac\u0103 e\u0219ti administratorul serverului, te rug\u0103m s\u0103 consul\u021bi wikiul Ruffle pentru ajutor.\nerror-unknown =\n    Ruffle a \xeent\xe2mpinat o problem\u0103 major\u0103 \xeen timp ce \xeencerca s\u0103 afi\u0219eze acest con\u021binut Flash.\n    { $outdated ->\n        [true] Dac\u0103 e\u0219ti administratorul serverului, te rug\u0103m s\u0103 \xeencerci s\u0103 \xeencarci o versiune mai recent\u0103 de Ruffle (versiunea actual\u0103 este \xeenvechit\u0103: { $buildDate }).\n       *[false] Acest lucru nu ar trebui s\u0103 se \xeent\xe2mple, a\u0219a c\u0103 am aprecia foarte mult dac\u0103 ai putea trimite un bug!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Sigur vrei s\u0103 \u0219tergi acest fi\u0219ier de salvare?\nsave-reload-prompt =\n    Singura cale de a { $action ->\n        [delete] \u0219terge\n       *[replace] \xeenlocui\n    } acest fi\u0219ier de salvare f\u0103r\u0103 un conflict poten\u021bial este de a re\xeenc\u0103rca acest con\u021binut. Dore\u0219ti s\u0103 continui oricum?\nsave-download = Descarc\u0103\nsave-replace = \xcenlocuie\u0219te\nsave-delete = \u0218terge\nsave-backup-all = Descarc\u0103 toate fi\u0219ierele de salvare\n",
-        "volume-controls.ftl": "volume-controls-mute = Mut\nvolume-controls-unmute = Activare sunet\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Mut\nvolume-controls-unmute = Activare sunet\n",
       },
       "ru-RU": {
         "context_menu.ftl":
@@ -1563,7 +1830,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = \u0423\u0434\u0430\u043b\u0438\u0442\u044c \u044d\u0442\u043e\u0442 \u0444\u0430\u0439\u043b \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f?\nsave-reload-prompt =\n    \u0415\u0434\u0438\u043d\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0439 \u0441\u043f\u043e\u0441\u043e\u0431 { $action ->\n        [delete] \u0443\u0434\u0430\u043b\u0438\u0442\u044c\n       *[replace] \u0437\u0430\u043c\u0435\u043d\u0438\u0442\u044c\n    } \u044d\u0442\u043e\u0442 \u0444\u0430\u0439\u043b \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f \u0431\u0435\u0437 \u043f\u043e\u0442\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u043a\u043e\u043d\u0444\u043b\u0438\u043a\u0442\u0430 \u2013 \u043f\u0435\u0440\u0435\u0437\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u044c \u0437\u0430\u043f\u0443\u0449\u0435\u043d\u043d\u044b\u0439 \u043a\u043e\u043d\u0442\u0435\u043d\u0442. \u0412\u0441\u0451 \u0440\u0430\u0432\u043d\u043e \u043f\u0440\u043e\u0434\u043e\u043b\u0436\u0438\u0442\u044c?\nsave-download = \u0421\u043a\u0430\u0447\u0430\u0442\u044c\nsave-replace = \u0417\u0430\u043c\u0435\u043d\u0438\u0442\u044c\nsave-delete = \u0423\u0434\u0430\u043b\u0438\u0442\u044c\nsave-backup-all = \u0421\u043a\u0430\u0447\u0430\u0442\u044c \u0432\u0441\u0435 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f\n",
         "volume-controls.ftl":
-          "volume-controls-mute = \u0411\u0435\u0437 \u0437\u0432\u0443\u043a\u0430\nvolume-controls-unmute = \u0412\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u0437\u0432\u0443\u043a\n"
+          "volume-controls-mute = \u0411\u0435\u0437 \u0437\u0432\u0443\u043a\u0430\nvolume-controls-unmute = \u0412\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u0437\u0432\u0443\u043a\n",
       },
       "sk-SK": {
         "context_menu.ftl":
@@ -1573,7 +1840,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = Naozaj chcete odstr\xe1ni\u0165 tento s\xfabor s ulo\u017een\xfdmi poz\xedciami?\nsave-reload-prompt =\n    Jedin\xfd sp\xf4sob, ako { $action ->\n         [delete] vymaza\u0165\n        *[replace] nahradi\u0165\n    } tento s\xfabor s ulo\u017een\xfdmi poz\xedciami bez potenci\xe1lneho konfliktu je op\xe4tovn\xe9 na\u010d\xedtanie tohto obsahu. Chcete napriek tomu pokra\u010dova\u0165?\nsave-download = Stiahnu\u0165\nsave-replace = Nahradi\u0165\nsave-delete = Vymaza\u0165\nsave-backup-all = Stiahnu\u0165 v\u0161etky s\xfabory s ulo\u017een\xfdmi poz\xedciami\n",
         "volume-controls.ftl":
-          "volume-controls-mute = Stlmi\u0165\nvolume-controls-unmute = Zru\u0161i\u0165 stlmenie\n"
+          "volume-controls-mute = Stlmi\u0165\nvolume-controls-unmute = Zru\u0161i\u0165 stlmenie\n",
       },
       "sl-SI": {
         "context_menu.ftl":
@@ -1582,7 +1849,8 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle ni mogel zagnati Flash vsebine, vgrajene v to stran.\n    Lahko poskusite odpreti datoteko v lo\u010denem zavihku, da se izognete tej te\u017eavi.\nmessage-restored-from-bfcache =\n    Va\u0161 brskalnik je obnovil to Flash vsebino iz prej\u0161nje seje.\n    Da bi za\u010deli na novo, ponovno nalo\u017eite stran.\npanic-title = Nekaj je \u0161lo narobe :(\nmore-info = Ve\u010d informacij\nrun-anyway = Vseeno za\u017eeni\ncontinue = Nadaljuj\nreport-bug = Prijavi napako\nupdate-ruffle = Posodobite Ruffle\nruffle-demo = Spletni demo\nruffle-desktop = Namizna aplikacija\nruffle-wiki = Oglejte si Ruffle Wiki\nenable-hardware-acceleration = Zdi se, da je strojna pospe\u0161itev onemogo\u010dena. Ruffle bo sicer deloval, vendar bo lahko zelo po\u010dasen. Kako omogo\u010diti strojno pospe\u0161itev, lahko izveste na spodnji povezavi:\nenable-hardware-acceleration-link = Pogosta vpra\u0161anja \u2013 Pospe\u0161evanje strojne opreme v brskalniku Chrome\nview-error-details = Poglej podrobnosti napake\nopen-in-new-tab = Odpri v novem zavihku\nclick-to-unmute = Kliknite za vklop zvoka\nclipboard-message-title = Kopiranje in lepljenje v Ruffle\nclipboard-message-description =\n    { $variant ->\n       *[unsupported] Va\u0161 brskalnik ne podpira polnega dostopa do odlo\u017ei\u0161\u010da,\n        [access-denied] Dostop do odlo\u017ei\u0161\u010da je bil zavrnjen,\n    } vendar lahko namesto tega vedno uporabite te bli\u017enjice:\nclipboard-message-copy = { " " } za kopiranje\nclipboard-message-cut = { " " } za izrez\nclipboard-message-paste = { " " } za lepljenje\nerror-canvas-reload = Ne morem ponovno nalo\u017eiti z upodabljalnikom platna, \u010de je upodabljalnik platna \u017ee v uporabi.\nerror-file-protocol =\n    Zdi se, da uporabljate Ruffle na protokolu "file:".\n    To ne deluje, ker brskalniki iz varnostnih razlogov blokirajo delovanje mnogih funkcij.\n    Namesto tega vam priporo\u010damo, da nastavite lokalni stre\u017enik ali uporabite spletno demo ali namizno aplikacijo.\nerror-javascript-config =\n    Ruffle je naletel na ve\u010djo te\u017eavo zaradi nepravilne konfiguracije JavaScript.\n    \u010ce ste skrbnik stre\u017enika, vas prosimo, da preverite podrobnosti napake in ugotovite, kateri parameter je kriv.\n    Za pomo\u010d lahko poi\u0161\u010dete tudi wiki Ruffle.\nerror-invalid-swf =\n    Ruffle ne more raz\u010dleniti zahtevane datoteke.\n    Najverjetnej\u0161i razlog je, da zahtevana datoteka ni veljavna datoteka SWF.\nerror-swf-fetch =\n    Ruffle ni uspel nalo\u017eiti datoteke Flash SWF.\n    Najverjetnej\u0161i razlog je, da datoteka ne obstaja ve\u010d, zato Ruffle nima kaj nalo\u017eiti.\n    Za pomo\u010d se obrnite na skrbnika spletnega mesta.\nerror-swf-cors =\n    Ruffle ni uspel nalo\u017eiti datoteke Flash SWF.\n    Dostop do prenosa je verjetno blokiran s politiko CORS.\n    \u010ce ste skrbnik stre\u017enika, poi\u0161\u010dite pomo\u010d v Ruffle wiki.\nerror-wasm-invalid =\n    Ruffle je med poskusom inicializacije naletel na ve\u010djo te\u017eavo.\n    Zdi se, da na tej strani manjkajo datoteke ali so datoteke za zagon Ruffle neveljavne.\n    \u010ce ste skrbnik stre\u017enika, poi\u0161\u010dite pomo\u010d v Ruffle wiki.\nerror-wasm-download =\n    Ruffle je med poskusom inicializacije naletel na ve\u010djo te\u017eavo.\n    Ta se pogosto re\u0161i sama, zato lahko poskusite ponovno nalo\u017eiti stran.\n    V nasprotnem primeru se obrnite na skrbnika spletnega mesta.\nerror-wasm-unsupported-browser =\n    Brskalnik, ki ga uporabljate, ne podpira raz\u0161iritev WebAssembly, ki jih Ruffle potrebuje za delovanje.\n    Preklopite na podprt brskalnik.\n    Seznam podprtih brskalnikov najdete na Wiki.\nerror-javascript-conflict =\n    Ruffle je med poskusom inicializacije naletel na ve\u010djo te\u017eavo.\n    Zdi se, da ta stran uporablja JavaScript kodo, ki je v nasprotju z Ruffle.\n    \u010ce ste skrbnik stre\u017enika, vas prosimo, da poskusite nalo\u017eiti datoteko na prazno stran.\nerror-javascript-conflict-outdated = Lahko poskusite nalo\u017eiti novej\u0161o razli\u010dico Ruffle, ki bo morda odpravila te\u017eavo (trenutna razli\u010dica je zastarela: { $buildDate }).\nerror-unknown =\n    Ruffle je naletel na ve\u010djo te\u017eavo pri prikazovanju te vsebine Flash.\n    { $outdated ->\n        [true] \u010ce ste skrbnik stre\u017enika, poskusite nalo\u017eiti novej\u0161o razli\u010dico Ruffle (trenutna razli\u010dica je zastarela: { $buildDate }).\n       *[false] To se ne bi smelo zgoditi, zato bi bili zelo hvale\u017eni, \u010de bi prijavili napako!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Ali ste prepri\u010dani, da \u017eelite izbrisati to shranjeno datoteko?\nsave-reload-prompt =\n    Edini na\u010din, da { $action ->\n        [delete] izbri\u0161ete\n       *[replace] zamenjate\n    } to shranjeno datoteko brez morebitnega konflikta, je, da ponovno nalo\u017eite to vsebino. \u017delite vseeno nadaljevati?\nsave-replace = Zamenjaj\nsave-delete = Izbri\u0161i\nsave-backup-all = Prenesi vse shranjene datoteke\n",
-        "volume-controls.ftl": "volume-controls-mute = Uti\u0161aj\nvolume-controls-unmute = Vklopi zvok\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Uti\u0161aj\nvolume-controls-unmute = Vklopi zvok\n",
       },
       "sr-CS": {
         "context_menu.ftl":
@@ -1591,7 +1859,8 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle nije mogao da pokrene Fle\u0161 ugra\u0111en na ovoj stranici.\n    Mo\u017eete poku\u0161ati da otvorite datoteku u posebnoj kartici da biste izbegli ovaj problem.\nmessage-restored-from-bfcache =\n    Va\u0161 pregleda\u010d je vratio ovaj Fle\u0161 sadr\u017eaj iz prethodne sesije.\n    Molimo vas da ponovo u\u010ditate stranicu za novi po\u010detak.\npanic-title = Ne\u0161to je po\u0161lo po zlu :(\nmore-info = Dodatne informacije\nrun-anyway = Ipak pokreni\ncontinue = Nastavi\nreport-bug = Prijavi gre\u0161ku\nupdate-ruffle = A\u017eurirajte Ruffle\nruffle-demo = Veb demo\nruffle-desktop = Desktop aplikacija\nruffle-wiki = Pogledajte Ruffle Wiki\nenable-hardware-acceleration = Izgleda da je hardversko ubrzanje onemogu\u0107eno. Iako Ruffle mo\u017eda radi, mo\u017ee biti veoma spor. Mo\u017eete saznati kako da omogu\u0107ite hardversko ubrzanje prate\u0107i donju vezu:\nenable-hardware-acceleration-link = \u010cesta pitanja - Hardversko ubrzanje u Chrome-u\nview-error-details = Prika\u017ei detalje gre\u0161ke\nopen-in-new-tab = Otvori u novoj kartici\nclick-to-unmute = Kliknite da biste uklju\u010dili zvuk\nclipboard-message-copy = { " " } za kopiju\nclipboard-message-cut = { " " } za se\u010denje\nclipboard-message-paste = { " " } za lepljenje\nerror-canvas-reload = Ne mo\u017ee se ponovo u\u010ditati renderer za platno kada je renderer za platno ve\u0107 u upotrebi.\nerror-javascript-config =\n    Ruffle je nai\u0161ao na ozbiljan problem zbog pogre\u0161ne konfiguracije JavaSkripta.\n    Ako ste administrator servera, preporu\u010dujemo vam da proverite detalje gre\u0161ke kako biste saznali koji parametar uzrokuje problem. Tako\u0111e mo\u017eete da konsultujete Ruffleov viki za pomo\u0107.\nerror-invalid-swf =\n    Ruffle ne mo\u017ee da analizira tra\u017eenu datoteku.\n    Najverovatniji razlog je taj \u0161to tra\u017eena datoteka nije va\u017ee\u0107i SWF.\nerror-swf-fetch =\n    Ruffle nije uspeo da u\u010dita Fle\u0161 SWF datoteku.\n    Najverovatniji razlog je taj \u0161to datoteka vi\u0161e ne postoji, pa Ruffle nema \u0161ta da u\u010dita.\n    Poku\u0161ajte da kontaktirate administratora veb stranice za pomo\u0107.\nerror-swf-cors =\n    Ruffle nije uspeo da u\u010dita Fle\u0161 SWF datoteku.\n    Pristup preuzimanju je verovatno blokiran CORS politikom.\n    Ako ste administrator servera, pogledajte Ruffleovu viki stranicu za pomo\u0107.\nerror-wasm-invalid =\n    Ruffle je nai\u0161ao na ozbiljan problem prilikom poku\u0161aja inicijalizacije.\n    Izgleda da ovoj stranici nedostaju ili su neva\u017ee\u0107e datoteke za pokretanje Rufflea.\n    Ako ste administrator servera, pogledajte Ruffleov viki za pomo\u0107.\nerror-wasm-download =\n    Ruffle je nai\u0161ao na ozbiljan problem prilikom poku\u0161aja inicijalizacije.\n    Ovo se \u010desto mo\u017ee re\u0161iti jednostavnim ponovnim u\u010ditavanjem stranice.\n    U suprotnom, kontaktirajte administratora sajta.\nerror-wasm-unsupported-browser =\n    Pregleda\u010d koji koristite ne podr\u017eava WebAssembly ekstenzije potrebne za rad Ruffle-a.\n    Molimo vas da pre\u0111ete na podr\u017eani pregleda\u010d.\n    Lista podr\u017eanih pregleda\u010da mo\u017ee se na\u0107i na Viki stranici.\nerror-javascript-conflict =\n    Ruffle je nai\u0161ao na ozbiljan problem prilikom poku\u0161aja inicijalizacije.\n    Izgleda da ova stranica koristi JavaSkript kod koji je u sukobu sa Ruffleom.\n    Ako ste administrator servera, pozivamo vas da poku\u0161ate da otpremite datoteku na praznu stranicu.\nerror-javascript-conflict-outdated = Tako\u0111e mo\u017eete poku\u0161ati da otpremite noviju verziju programa Ruffle koja bi mogla da re\u0161i problem (trenutna verzija je zastarela: { $buildDate }).\nerror-unknown =\n    Ruffle je nai\u0161ao na ozbiljan problem prilikom poku\u0161aja prikazivanja ovog Fle\u0161 sadr\u017eaja.\n    { $outdated ->\n    [true] Ako ste administrator servera, poku\u0161ajte da otpremite noviju verziju Rufflea (trenutna verzija je zastarela: { $buildDate }).\n    *[false] Ovo ne bi trebalo da se de\u0161ava, pa bismo vam bili veoma zahvalni ako biste prijavili gre\u0161ku!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Da li ste sigurni da \u017eelite da obri\u0161ete ovu datoteku za \u010duvanje?\nsave-reload-prompt =\n    Jedini na\u010din da { $action ->\n        [delete] obri\u0161ete\n       *[replace] zamenite\n    } ovu sa\u010duvanu datoteku bez mogu\u0107ih konflikata jeste da ponovo u\u010ditate ovaj sadr\u017eaj. Da li \u017eelite da ipak nastavite?\nsave-download = Preuzmite\nsave-replace = Zameni\nsave-delete = Obri\u0161i\nsave-backup-all = Preuzmi sve sa\u010duvane datoteke\n",
-        "volume-controls.ftl": "volume-controls-mute = Isklju\u010di zvuk\nvolume-controls-unmute = Uklju\u010di zvuk\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Isklju\u010di zvuk\nvolume-controls-unmute = Uklju\u010di zvuk\n",
       },
       "sr-SP": {
         "context_menu.ftl":
@@ -1601,7 +1870,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = \u0414\u0430 \u043b\u0438 \u0441\u0442\u0435 \u0441\u0438\u0433\u0443\u0440\u043d\u0438 \u0434\u0430 \u0436\u0435\u043b\u0438\u0442\u0435 \u0434\u0430 \u043e\u0431\u0440\u0438\u0448\u0435\u0442\u0435 \u043e\u0432\u0443 \u0434\u0430\u0442\u043e\u0442\u0435\u043a\u0443 \u0437\u0430 \u0447\u0443\u0432\u0430\u045a\u0435?\nsave-reload-prompt =\n    \u0408\u0435\u0434\u0438\u043d\u0438 \u043d\u0430\u0447\u0438\u043d \u0434\u0430 { $action ->\n        [delete] \u043e\u0431\u0440\u0438\u0448\u0435\u0442\u0435\n       *[replace] \u0437\u0430\u043c\u0435\u043d\u0438\u0442\u0435\n    } \u043e\u0432\u0443 \u0441\u0430\u0447\u0443\u0432\u0430\u043d\u0443 \u0434\u0430\u0442\u043e\u0442\u0435\u043a\u0443 \u0431\u0435\u0437 \u043c\u043e\u0433\u0443\u045b\u0438\u0445 \u043a\u043e\u043d\u0444\u043b\u0438\u043a\u0430\u0442\u0430 \u0458\u0435\u0441\u0442\u0435 \u0434\u0430 \u043f\u043e\u043d\u043e\u0432\u043e \u0443\u0447\u0438\u0442\u0430\u0442\u0435 \u043e\u0432\u0430\u0458 \u0441\u0430\u0434\u0440\u0436\u0430\u0458. \u0414\u0430 \u043b\u0438 \u0436\u0435\u043b\u0438\u0442\u0435 \u0434\u0430 \u0438\u043f\u0430\u043a \u043d\u0430\u0441\u0442\u0430\u0432\u0438\u0442\u0435?\nsave-download = \u041f\u0440\u0435\u0443\u0437\u043c\u0438\u0442\u0435\nsave-replace = \u0417\u0430\u043c\u0435\u043d\u0438\nsave-delete = \u041e\u0431\u0440\u0438\u0448\u0438\nsave-backup-all = \u041f\u0440\u0435\u0443\u0437\u043c\u0438 \u0441\u0432\u0435 \u0441\u0430\u0447\u0443\u0432\u0430\u043d\u0435 \u0434\u0430\u0442\u043e\u0442\u0435\u043a\u0435\n",
         "volume-controls.ftl":
-          "volume-controls-mute = \u0418\u0441\u043a\u0459\u0443\u0447\u0438 \u0437\u0432\u0443\u043a\nvolume-controls-unmute = \u0423\u043a\u0459\u0443\u0447\u0438 \u0437\u0432\u0443\u043a\n"
+          "volume-controls-mute = \u0418\u0441\u043a\u0459\u0443\u0447\u0438 \u0437\u0432\u0443\u043a\nvolume-controls-unmute = \u0423\u043a\u0459\u0443\u0447\u0438 \u0437\u0432\u0443\u043a\n",
       },
       "sv-SE": {
         "context_menu.ftl":
@@ -1610,7 +1879,7 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle kunde inte k\xf6ra det inb\xe4ddade Flashinneh\xe5llet p\xe5 denna sida.\n    Du kan f\xf6rs\xf6ka \xf6ppna filen i en separat flik f\xf6r att kringg\xe5 problemet.\npanic-title = N\xe5got gick fel :(\nmore-info = Mer info\nrun-anyway = K\xf6r \xe4nd\xe5\ncontinue = Forts\xe4tt\nreport-bug = Rapportera bugg\nupdate-ruffle = Uppdatera Ruffle\nruffle-demo = Webbdemo\nruffle-desktop = Skrivbordsprogram\nruffle-wiki = Se Ruffle-wiki\nenable-hardware-acceleration = Det ser ut som att h\xe5rdvaruacceleration \xe4r avst\xe4ngt. P\xe5 grund av det kan Ruffle fungera l\xe5ngsamt. Du kan ta reda p\xe5 hur man s\xe4tter p\xe5 h\xe5rdvaruacceleration genom l\xe4nken nedan:\nenable-hardware-acceleration-link = FAQ - Chrome h\xe5rdvaruacceleration\nview-error-details = Visa felinformation\nopen-in-new-tab = \xd6ppna i en ny flik\nclick-to-unmute = Klicka f\xf6r ljud\nclipboard-message-title = Kopierar och klistrar in i Ruffle\nclipboard-message-description =\n    { $variant ->\n       *[unsupported] Din webbl\xe4sare har inte fullst\xe4ndig \xe5tkomst till urklipp,\n        [access-denied] Urklipps\xe5tkomst har nekats,\n    } men du kan anv\xe4nda dom h\xe4r kortkommandon ist\xe4llet:\nclipboard-message-copy = { " " } f\xf6r att kopiera\nclipboard-message-cut = { " " } f\xf6r att klippa\nclipboard-message-paste = { " " } f\xf6r att klistra in\nerror-canvas-reload = Kan inte ladda om med canvas render:aren n\xe4r den redan anv\xe4nds.\nerror-file-protocol =\n    Det verkar som att du k\xf6r Ruffle p\xe5 "fil:"-protokollet.\n    Detta fungerar inte eftersom webbl\xe4sare blockerar m\xe5nga funktioner fr\xe5n att fungera av s\xe4kerhetssk\xe4l.\n    Ist\xe4llet bjuder vi in dig att s\xe4tta upp en lokal server eller antingen anv\xe4nda webbdemon eller skrivbordsprogrammet.\nerror-javascript-config =\n    Ruffle har st\xf6tt p\xe5 ett stort fel p\xe5 grund av en felaktig JavaScript-konfiguration.\n    Om du \xe4r serveradministrat\xf6ren bjuder vi in dig att kontrollera feldetaljerna f\xf6r att ta reda p\xe5 vilken parameter som \xe4r felaktig.\n    Du kan ocks\xe5 konsultera Ruffle-wikin f\xf6r hj\xe4lp.\nerror-wasm-not-found =\n    Ruffle misslyckades ladda ".wasm"-filkomponenten.\n    Om du \xe4r serveradministrat\xf6ren se till att filen har laddats upp korrekt.\n    Om problemet kvarst\xe5r kan du beh\xf6va anv\xe4nda inst\xe4llningen "publicPath": konsultera v\xe4nligen Ruffle-wikin f\xf6r hj\xe4lp.\nerror-wasm-mime-type =\n    Ruffle har st\xf6tt p\xe5 ett stort fel under initialiseringen.\n    Denna webbserver serverar inte ".wasm"-filer med korrekt MIME-typ.\n    Om du \xe4r serveradministrat\xf6ren konsultera v\xe4nligen Ruffle-wikin f\xf6r hj\xe4lp.\nerror-invalid-swf =\n    Ruffle kan inte l\xe4sa den beg\xe4rda filen.\n    Det mest sannolika sk\xe4let \xe4r att den beg\xe4rda filen inte \xe4r en giltig SWF.\nerror-swf-fetch =\n    Ruffle misslyckades ladda SWF-filen.\n    Det mest sannolika sk\xe4let \xe4r att filen inte l\xe4ngre existerar, s\xe5 det finns inget f\xf6r Ruffle att k\xf6ra.\n    F\xf6rs\xf6k att kontakta webbplatsadministrat\xf6ren f\xf6r hj\xe4lp.\nerror-swf-cors =\n    Ruffle misslyckades ladda SWF-filen.\n    \xc5tkomst att h\xe4mta har sannolikt blockerats av CORS-policy.\n    Om du \xe4r serveradministrat\xf6ren konsultera v\xe4nligen Ruffle-wikin f\xf6r hj\xe4lp.\nerror-wasm-cors =\n    Ruffle misslyckades ladda ".wasm"-filkomponenten.\n    \xc5tkomst att h\xe4mta har sannolikt blockerats av CORS-policy.\n    Om du \xe4r serveradministrat\xf6ren konsultera v\xe4nligen Ruffle-wikin f\xf6r hj\xe4lp.\nerror-wasm-invalid =\n    Ruffle har st\xf6tt p\xe5 ett stort fel under initialiseringen.\n    Det verkar som att den h\xe4r sidan har saknade eller ogiltiga filer f\xf6r att k\xf6ra Ruffle.\n    Om du \xe4r serveradministrat\xf6ren konsultera v\xe4nligen Ruffle-wikin f\xf6r hj\xe4lp.\nerror-wasm-download =\n    Ruffle har st\xf6tt p\xe5 ett stort fel under initialiseringen.\n    Detta kan ofta l\xf6sas av sig sj\xe4lv s\xe5 du kan prova att ladda om sidan.\n    Kontakta annars v\xe4nligen webbplatsens administrat\xf6r.\nerror-wasm-disabled-on-edge =\n    Ruffle misslyckades ladda ".wasm"-filkomponenten.\n    F\xf6r att \xe5tg\xe4rda detta f\xf6rs\xf6k att \xf6ppna webbl\xe4sarens inst\xe4llningar, klicka p\xe5 "Sekretess, s\xf6kning och tj\xe4nster", bl\xe4ddra ner och st\xe4ng av "F\xf6rb\xe4ttra s\xe4kerheten p\xe5 webben".\n    Detta till\xe5ter din webbl\xe4sare att ladda ".wasm"-filerna.\n    Om problemet kvarst\xe5r kan du beh\xf6va anv\xe4nda en annan webbl\xe4sare.\nerror-wasm-unsupported-browser =\n    Webbl\xe4saren du anv\xe4nder st\xf6der inte de WebAssembly till\xe4ggen som Ruffle beh\xf6ver f\xf6r att k\xf6ra.\n    V\xe4nligen byt till en webbl\xe4sare som st\xf6ds.\n    Du kan hitta en lista \xf6ver webbl\xe4sare som st\xf6ds p\xe5 Wikin.\nerror-javascript-conflict =\n    Ruffle har st\xf6tt p\xe5 ett stort fel under initialiseringen.\n    Det verkar som att den h\xe4r sidan anv\xe4nder JavaScript-kod som st\xf6r Ruffle.\n    Om du \xe4r serveradministrat\xf6ren bjuder vi in dig att f\xf6rs\xf6ka k\xf6ra filen p\xe5 en blank sida.\nerror-javascript-conflict-outdated = Du kan ocks\xe5 f\xf6rs\xf6ka ladda upp en nyare version av Ruffle, vilket kan kringg\xe5 problemet (nuvarande version \xe4r utdaterad: { $buildDate }).\nerror-csp-conflict =\n    Ruffle har st\xf6tt p\xe5 ett stort fel under initialiseringen.\n    Webbserverns Content Security Policy till\xe5ter inte ".wasm"-komponenten att k\xf6ra.\n    Om du \xe4r serveradministrat\xf6ren konsultera v\xe4nligen Ruffle-wikin f\xf6r hj\xe4lp.\nerror-unknown =\n    Ruffle har st\xf6tt p\xe5 ett stort fel medan den f\xf6rs\xf6kte visa Flashinneh\xe5llet.\n    { $outdated ->\n        [true] Om du \xe4r serveradministrat\xf6ren f\xf6rs\xf6k att ladda upp en nyare version av Ruffle (nuvarande version \xe4r utdaterad: { $buildDate }).\n       *[false] Detta \xe4r inte t\xe4nkt att h\xe4nda s\xe5 vi skulle verkligen uppskatta om du kunde rapportera in en bugg!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = \xc4r du s\xe4ker p\xe5 att du vill radera sparfilen?\nsave-reload-prompt =\n    Det enda s\xe4ttet att { $action ->\n        [delete] radera\n       *[replace] ers\xe4tta\n    } denna sparfil utan potentiell konflikt \xe4r att ladda om inneh\xe5llet. Vill du forts\xe4tta \xe4nd\xe5?\nsave-download = Ladda ner\nsave-replace = Ers\xe4tt\nsave-delete = Radera\nsave-backup-all = Ladda ner alla sparfiler\n",
-        "volume-controls.ftl": "volume-controls-mute = St\xe4ng av ljud\n"
+        "volume-controls.ftl": "volume-controls-mute = St\xe4ng av ljud\n",
       },
       "th-TH": {
         "context_menu.ftl":
@@ -1620,7 +1889,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = \u0e04\u0e38\u0e13\u0e41\u0e19\u0e48\u0e43\u0e08\u0e2b\u0e23\u0e37\u0e2d\u0e27\u0e48\u0e32\u0e08\u0e30\u0e25\u0e1a\u0e44\u0e1f\u0e25\u0e4c\u0e19\u0e35\u0e49?\n",
         "volume-controls.ftl":
-          "volume-controls-mute = \u0e1b\u0e34\u0e14\u0e40\u0e2a\u0e35\u0e22\u0e07\nvolume-controls-unmute = \u0e43\u0e0a\u0e49\u0e40\u0e2a\u0e35\u0e22\u0e07\n"
+          "volume-controls-mute = \u0e1b\u0e34\u0e14\u0e40\u0e2a\u0e35\u0e22\u0e07\nvolume-controls-unmute = \u0e43\u0e0a\u0e49\u0e40\u0e2a\u0e35\u0e22\u0e07\n",
       },
       "tr-TR": {
         "context_menu.ftl":
@@ -1629,7 +1898,8 @@ function swfUrlToLocalPath(url) {
           'message-cant-embed =\n    Ruffle, bu sayfaya g\xf6m\xfcl\xfc Flash\'\u0131 \xe7al\u0131\u015ft\u0131ramad\u0131.\n    Bu sorunu ortadan kald\u0131rmak i\xe7in dosyay\u0131 ayr\u0131 bir sekmede a\xe7may\u0131 deneyebilirsiniz.\nmessage-restored-from-bfcache =\n    Taray\u0131c\u0131n\u0131z bu Flash i\xe7eri\u011fini \xf6nceki bir oturumdan geri y\xfckledi.\n    S\u0131f\u0131rdan ba\u015flamak i\xe7in sayfay\u0131 yeniden y\xfckleyin.\npanic-title = Bir \u015feyler yanl\u0131\u015f gitti :(\nmore-info = Daha fazla bilgi\nrun-anyway = Yine de \xe7al\u0131\u015ft\u0131r\ncontinue = Devam et\nreport-bug = Hata bildir\nupdate-ruffle = Ruffle\'\u0131 g\xfcncelle\nruffle-demo = A\u011f Demosu\nruffle-desktop = Masa\xfcst\xfc uygulamas\u0131\nruffle-wiki = Ruffle wiki\'yi g\xf6r\xfcnt\xfcle\nenable-hardware-acceleration = Donan\u0131m h\u0131zland\u0131rmas\u0131 etkin de\u011fil gibi g\xf6r\xfcn\xfcyor. Ruffle \xe7al\u0131\u015fabilir ancak \xe7ok yava\u015f olabilir. Donan\u0131m h\u0131zland\u0131rmas\u0131n\u0131 nas\u0131l etkinle\u015ftirebilece\u011finizi bu linkten \xf6\u011frenebilirsiniz:\nenable-hardware-acceleration-link = SSS - Chrome Donan\u0131m H\u0131zland\u0131rmas\u0131\nview-error-details = Hata ayr\u0131nt\u0131lar\u0131n\u0131 g\xf6r\xfcnt\xfcle\nopen-in-new-tab = Yeni sekmede a\xe7\nclick-to-unmute = Sesi a\xe7mak i\xe7in t\u0131klay\u0131n\nclipboard-message-title = Ruffle\'da kopyalama ve yap\u0131\u015ft\u0131rma\nclipboard-message-description =\n    { $variant ->\n    *[unsupported] Taray\u0131c\u0131n\u0131z tam panoya eri\u015fimi desteklemiyor,\n    [access-denied] Pano eri\u015fimi reddedildi,\n    } ancak pano yerine her zaman bu k\u0131sayollar\u0131 kullanabilirsiniz:\nclipboard-message-copy = { " " } kopyalamak i\xe7in\nclipboard-message-cut = { " " } kesmek i\xe7in\nclipboard-message-paste = { " " } yap\u0131\u015ft\u0131rmak i\xe7in\nerror-canvas-reload = Tuval olu\u015fturucusu kullan\u0131mda oldu\u011funda tuval olu\u015fturucusu ile yeniden y\xfckleme yap\u0131lamaz.\nerror-file-protocol =\n    G\xf6r\xfcn\xfc\u015fe g\xf6re Ruffle\'\u0131 "dosya:" protokol\xfcnde \xe7al\u0131\u015ft\u0131r\u0131yorsunuz.\n    Taray\u0131c\u0131lar g\xfcvenlik nedenleriyle bir\xe7ok \xf6zelli\u011fin \xe7al\u0131\u015fmas\u0131n\u0131 engelledi\u011finden bu i\u015fe yaramaz.\n    Bunun yerine, sizi yerel bir sunucu kurmaya veya a\u011f\u0131n demosunu ya da masa\xfcst\xfc uygulamas\u0131n\u0131 kullanmaya davet ediyoruz.\nerror-javascript-config =\n    Ruffle, yanl\u0131\u015f bir JavaScript yap\u0131land\u0131rmas\u0131 nedeniyle \xf6nemli bir sorunla kar\u015f\u0131la\u015ft\u0131.\n    Sunucu y\xf6neticisiyseniz, hangi parametrenin hatal\u0131 oldu\u011funu bulmak i\xe7in sizi hata ayr\u0131nt\u0131lar\u0131n\u0131 kontrol etmeye davet ediyoruz.\n    Yard\u0131m i\xe7in Ruffle wiki\'sine de ba\u015fvurabilirsiniz.\nerror-wasm-not-found =\n    Ruffle gerekli ".wasm" dosya bile\u015fenini y\xfckleyemedi.\n    Sunucu y\xf6neticisi iseniz, l\xfctfen dosyan\u0131n do\u011fru bir \u015fekilde y\xfcklendi\u011finden emin olun.\n    Sorun devam ederse, "publicPath" ayar\u0131n\u0131 kullanman\u0131z gerekebilir: yard\u0131m i\xe7in l\xfctfen Ruffle wiki\'sine ba\u015fvurun.\nerror-wasm-mime-type =\n    Ruffle, ba\u015flatmaya \xe7al\u0131\u015f\u0131rken \xf6nemli bir sorunla kar\u015f\u0131la\u015ft\u0131.\n    Bu web sunucusu, do\u011fru MIME tipinde ".wasm" dosyalar\u0131 sunmuyor.\n    Sunucu y\xf6neticisiyseniz, yard\u0131m i\xe7in l\xfctfen Ruffle wiki\'sine ba\u015fvurun.\nerror-invalid-swf =\n    Ruffle istenen dosyay\u0131 ayr\u0131\u015ft\u0131ram\u0131yor.\n    Bunun en olas\u0131 nedeni, istenen dosyan\u0131n ge\xe7erli bir SWF olmamas\u0131d\u0131r.\nerror-swf-fetch =\n    Ruffle, Flash SWF dosyas\u0131n\u0131 y\xfckleyemedi.\n    Bunun en olas\u0131 nedeni, dosyan\u0131n art\u0131k mevcut olmamas\u0131 ve bu nedenle Ruffle\'\u0131n y\xfckleyece\u011fi hi\xe7bir \u015feyin olmamas\u0131d\u0131r.\n    Yard\u0131m i\xe7in web sitesi y\xf6neticisiyle ileti\u015fime ge\xe7meyi deneyin.\nerror-swf-cors =\n    Ruffle, Flash SWF dosyas\u0131n\u0131 y\xfckleyemedi.\n    Getirme eri\u015fimi muhtemelen CORS politikas\u0131 taraf\u0131ndan engellenmi\u015ftir.\n    Sunucu y\xf6neticisiyseniz, yard\u0131m i\xe7in l\xfctfen Ruffle wiki\'sine ba\u015fvurun.\nerror-wasm-cors =\n    Ruffle gerekli ".wasm" dosya bile\u015fenini y\xfckleyemedi.\n    Getirme eri\u015fimi muhtemelen CORS politikas\u0131 taraf\u0131ndan engellenmi\u015ftir.\n    Sunucu y\xf6neticisiyseniz, yard\u0131m i\xe7in l\xfctfen Ruffle wiki\'sine ba\u015fvurun.\nerror-wasm-invalid =\n    Ruffle, ba\u015flatmaya \xe7al\u0131\u015f\u0131rken \xf6nemli bir sorunla kar\u015f\u0131la\u015ft\u0131.\n    G\xf6r\xfcn\xfc\u015fe g\xf6re bu sayfada Ruffle\'\u0131 \xe7al\u0131\u015ft\u0131rmak i\xe7in eksik veya ge\xe7ersiz dosyalar var.\n    Sunucu y\xf6neticisiyseniz, yard\u0131m i\xe7in l\xfctfen Ruffle wiki\'sine ba\u015fvurun.\nerror-wasm-download =\n    Ruffle, ba\u015flatmaya \xe7al\u0131\u015f\u0131rken \xf6nemli bir sorunla kar\u015f\u0131la\u015ft\u0131.\n    Bu genellikle kendi kendine \xe7\xf6z\xfclebilir, bu nedenle sayfay\u0131 yeniden y\xfcklemeyi deneyebilirsiniz.\n    Aksi takdirde, l\xfctfen site y\xf6neticisiyle ileti\u015fime ge\xe7in.\nerror-wasm-disabled-on-edge =\n    Ruffle gerekli ".wasm" dosya bile\u015fenini y\xfckleyemedi.\n    Bunu d\xfczeltmek i\xe7in taray\u0131c\u0131n\u0131z\u0131n ayarlar\u0131n\u0131 a\xe7\u0131n, "Gizlilik, arama ve hizmetler"i t\u0131klay\u0131n, a\u015fa\u011f\u0131 kayd\u0131r\u0131n ve "Web\'de g\xfcvenli\u011finizi art\u0131r\u0131n"\u0131 kapatmay\u0131 deneyin.\n    Bu, taray\u0131c\u0131n\u0131z\u0131n gerekli ".wasm" dosyalar\u0131n\u0131 y\xfcklemesine izin verecektir.\n    Sorun devam ederse, farkl\u0131 bir taray\u0131c\u0131 kullanman\u0131z gerekebilir.\nerror-wasm-unsupported-browser =\n    Kulland\u0131\u011f\u0131n\u0131z taray\u0131c\u0131, Ruffle\'\u0131n \xe7al\u0131\u015fmas\u0131 i\xe7in gereken WebAssembly uzant\u0131lar\u0131n\u0131 desteklemiyor.\n    L\xfctfen desteklenen bir taray\u0131c\u0131ya ge\xe7in.\n    Wiki\'de desteklenen taray\u0131c\u0131lar\u0131n bir listesini bulabilirsiniz.\nerror-javascript-conflict =\n    Ruffle, ba\u015flatmaya \xe7al\u0131\u015f\u0131rken \xf6nemli bir sorunla kar\u015f\u0131la\u015ft\u0131.\n    G\xf6r\xfcn\xfc\u015fe g\xf6re bu sayfa, Ruffle ile \xe7ak\u0131\u015fan JavaScript kodu kullan\u0131yor.\n    Sunucu y\xf6neticisiyseniz, sizi dosyay\u0131 bo\u015f bir sayfaya y\xfcklemeyi denemeye davet ediyoruz.\nerror-javascript-conflict-outdated = Ayr\u0131ca sorunu giderebilecek daha yeni bir Ruffle s\xfcr\xfcm\xfc y\xfcklemeyi de deneyebilirsiniz (mevcut yap\u0131m eskimi\u015f: { $buildDate }).\nerror-csp-conflict =\n    Ruffle, ba\u015flatmaya \xe7al\u0131\u015f\u0131rken \xf6nemli bir sorunla kar\u015f\u0131la\u015ft\u0131.\n    Bu web sunucusunun \u0130\xe7erik G\xfcvenli\u011fi Politikas\u0131, gerekli ".wasm" bile\u015feninin \xe7al\u0131\u015fmas\u0131na izin vermiyor.\n    Sunucu y\xf6neticisiyseniz, yard\u0131m i\xe7in l\xfctfen Ruffle wiki\'sine bak\u0131n.\nerror-unknown =\n    Ruffle, bu Flash i\xe7eri\u011fini g\xf6r\xfcnt\xfclemeye \xe7al\u0131\u015f\u0131rken \xf6nemli bir sorunla kar\u015f\u0131la\u015ft\u0131.\n    { $outdated ->\n        [true] Sunucu y\xf6neticisiyseniz, l\xfctfen Ruffle\'\u0131n daha yeni bir s\xfcr\xfcm\xfcn\xfc y\xfcklemeyi deneyin (mevcut yap\u0131m eskimi\u015f: { $buildDate }).\n       *[false] Bunun olmamas\u0131 gerekiyor, bu y\xfczden bir hata bildirebilirseniz \xe7ok memnun oluruz!\n    }\n',
         "save-manager.ftl":
           "save-delete-prompt = Bu kay\u0131t dosyas\u0131n\u0131 silmek istedi\u011finize emin misiniz?\nsave-reload-prompt =\n    Bu kaydetme dosyas\u0131n\u0131 potansiyel \xe7ak\u0131\u015fma olmadan { $action ->\n        [delete] silmenin\n       *[replace] de\u011fi\u015ftirmenin\n    } tek yolu, bu i\xe7eri\u011fi yeniden y\xfcklemektir. Yine de devam etmek istiyor musunuz?\nsave-download = \u0130ndir\nsave-replace = De\u011fi\u015ftir\nsave-delete = Sil\nsave-backup-all = T\xfcm kay\u0131t dosyalar\u0131n\u0131 indir\n",
-        "volume-controls.ftl": "volume-controls-mute = Sustur\nvolume-controls-unmute = Susturmay\u0131 kald\u0131r\n"
+        "volume-controls.ftl":
+          "volume-controls-mute = Sustur\nvolume-controls-unmute = Susturmay\u0131 kald\u0131r\n",
       },
       "tt-RU": {
         "context_menu.ftl":
@@ -1638,7 +1908,7 @@ function swfUrlToLocalPath(url) {
           "panic-title = \u041d\u04d9\u0440\u0441\u04d9\u0434\u0435\u0440 \u0434\u04e9\u0440\u0435\u0441 \u044d\u0448\u043b\u04d9\u043c\u04d9\u0433\u04d9\u043d :(\nmore-info = \u0422\u0443\u043b\u044b\u0440\u0430\u043a\nrun-anyway = \u0411\u0430\u0440\u044b\u0431\u0435\u0440 \u044d\u0448\u043b\u04d9\u0442\ncontinue = \u0414\u04d9\u0432\u0430\u043c \u0438\u0442\u04af\nreport-bug = \u0425\u0430\u0442\u0430 \u0442\u0443\u0440\u044b\u043d\u0434\u0430 \u0445\u04d9\u0431\u04d9\u0440 \u0438\u0442\u04af\nopen-in-new-tab = \u042f\u04a3\u0430 \u0441\u0430\u043b\u044b\u043d\u043c\u0430\u0434\u0430 \u0430\u0447\u0443\n",
         "save-manager.ftl": "",
         "volume-controls.ftl":
-          "volume-controls-mute = \u0422\u0430\u0432\u044b\u0448\u043d\u044b \u044f\u0431\u0443\nvolume-controls-unmute = \u0422\u0430\u0432\u044b\u0448\u043d\u044b \u0430\u0447\u0443\n"
+          "volume-controls-mute = \u0422\u0430\u0432\u044b\u0448\u043d\u044b \u044f\u0431\u0443\nvolume-controls-unmute = \u0422\u0430\u0432\u044b\u0448\u043d\u044b \u0430\u0447\u0443\n",
       },
       "uk-UA": {
         "context_menu.ftl":
@@ -1648,7 +1918,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = \u0412\u0438 \u0432\u043f\u0435\u0432\u043d\u0435\u043d\u0456, \u0449\u043e \u0445\u043e\u0447\u0435\u0442\u0435 \u0432\u0438\u0434\u0430\u043b\u0438\u0442\u0438 \u0446\u0435\u0439 \u0444\u0430\u0439\u043b \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043d\u043d\u044f?\nsave-reload-prompt =\n    \u0404\u0434\u0438\u043d\u0438\u0439 \u0441\u043f\u043e\u0441\u0456\u0431 { $action ->\n        [delete] \u0432\u0438\u0434\u0430\u043b\u0438\u0442\u0438\n       *[replace] \u0437\u0430\u043c\u0456\u043d\u0438\u0442\u0438\n    } \u0446\u0435\u0439 \u0444\u0430\u0439\u043b \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043d\u043d\u044f \u0431\u0435\u0437 \u043f\u043e\u0442\u0435\u043d\u0446\u0456\u0439\u043d\u043e\u0433\u043e \u043a\u043e\u043d\u0444\u043b\u0456\u043a\u0442\u0443 \u0454 \u043f\u0435\u0440\u0435\u0437\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0435\u043d\u043d\u044f \u0446\u044c\u043e\u0433\u043e \u043a\u043e\u043d\u0442\u0435\u043d\u0442\u0443. \u0412\u0438 \u0432\u0441\u0435 \u043e\u0434\u043d\u043e \u0431\u0430\u0436\u0430\u0454\u0442\u0435 \u043f\u0440\u043e\u0434\u043e\u0432\u0436\u0438\u0442\u0438?\nsave-download = \u0417\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0438\u0442\u0438\nsave-replace = \u0417\u0430\u043c\u0456\u043d\u0438\u0442\u0438\nsave-delete = \u0412\u0438\u0434\u0430\u043b\u0438\u0442\u0438\nsave-backup-all = \u0417\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0438\u0442\u0438 \u0432\u0441\u0456 \u0444\u0430\u0439\u043b\u0438 \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043d\u043d\u044f\n",
         "volume-controls.ftl":
-          "volume-controls-mute = \u0412\u0438\u043c\u043a\u043d\u0443\u0442\u0438 \u0437\u0432\u0443\u043a\nvolume-controls-unmute = \u0423\u0432\u0456\u043c\u043a\u043d\u0443\u0442\u0438 \u0437\u0432\u0443\u043a\n"
+          "volume-controls-mute = \u0412\u0438\u043c\u043a\u043d\u0443\u0442\u0438 \u0437\u0432\u0443\u043a\nvolume-controls-unmute = \u0423\u0432\u0456\u043c\u043a\u043d\u0443\u0442\u0438 \u0437\u0432\u0443\u043a\n",
       },
       "vi-VN": {
         "context_menu.ftl":
@@ -1658,7 +1928,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = B\u1ea1n c\xf3 ch\u1eafc ch\u1eafn mu\u1ed1n xo\xe1 t\u1ec7p \u0111\xe3 l\u01b0u n\xe0y kh\xf4ng?\nsave-reload-prompt =\n    C\xe1ch duy nh\u1ea5t \u0111\u1ec3 { $action ->\n        [delete] xo\xe1\n       *[replace] thay th\u1ebf\n    } t\u1ec7p \u0111\xe3 l\u01b0u n\xe0y m\xe0 kh\xf4ng c\xf3 nguy c\u01a1 xung \u0111\u1ed9t l\xe0 t\u1ea3i l\u1ea1i n\u1ed9i dung n\xe0y. B\u1ea1n c\xf3 mu\u1ed1n ti\u1ebfp t\u1ee5c kh\xf4ng?\nsave-download = T\u1ea3i v\u1ec1\nsave-replace = Thay th\u1ebf\nsave-delete = Xo\xe1\nsave-backup-all = T\u1ea3i xu\u1ed1ng t\u1ea5t c\u1ea3 t\u1ec7p \u0111\xe3 l\u01b0u\n",
         "volume-controls.ftl":
-          "volume-controls-mute = T\u1eaft ti\u1ebfng\nvolume-controls-unmute = B\u1eadt ti\u1ebfng\n"
+          "volume-controls-mute = T\u1eaft ti\u1ebfng\nvolume-controls-unmute = B\u1eadt ti\u1ebfng\n",
       },
       "zh-CN": {
         "context_menu.ftl":
@@ -1668,7 +1938,7 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = \u786e\u5b9a\u8981\u5220\u9664\u6b64\u5b58\u6863\u5417\uff1f\nsave-reload-prompt =\n    \u4e3a\u4e86\u907f\u514d\u6f5c\u5728\u7684\u51b2\u7a81\uff0c{ $action ->\n        [delete] \u5220\u9664\n       *[replace] \u66ff\u6362\n    } \u6b64\u5b58\u6863\u6587\u4ef6\u9700\u8981\u91cd\u65b0\u52a0\u8f7d\u5f53\u524d\u5185\u5bb9\u3002\u662f\u5426\u4ecd\u7136\u7ee7\u7eed\uff1f\nsave-download = \u4e0b\u8f7d\nsave-replace = \u66ff\u6362\nsave-delete = \u5220\u9664\nsave-backup-all = \u4e0b\u8f7d\u6240\u6709\u5b58\u6863\u6587\u4ef6\n",
         "volume-controls.ftl":
-          "volume-controls-mute = \u9759\u97f3\nvolume-controls-unmute = \u53d6\u6d88\u9759\u97f3\n"
+          "volume-controls-mute = \u9759\u97f3\nvolume-controls-unmute = \u53d6\u6d88\u9759\u97f3\n",
       },
       "zh-TW": {
         "context_menu.ftl":
@@ -1678,8 +1948,8 @@ function swfUrlToLocalPath(url) {
         "save-manager.ftl":
           "save-delete-prompt = \u4f60\u78ba\u5b9a\u8981\u522a\u9664\u9019\u500b\u5b58\u6a94\u55ce\uff1f\nsave-reload-prompt =\n    \u552f\u4e00\u65b9\u6cd5\u53ea\u6709 { $action ->\n        [delete] \u522a\u9664\n       *[replace] \u53d6\u4ee3\n    } \u9019\u500b\u5b58\u6a94\u4e0d\u6703\u5b8c\u5168\u53d6\u4ee3\u76f4\u5230\u91cd\u65b0\u555f\u52d5\u3002 \u4f60\u9700\u8981\u7e7c\u7e8c\u55ce?\nsave-download = \u4e0b\u8f09\nsave-replace = \u53d6\u4ee3\nsave-delete = \u522a\u9664\nsave-backup-all = \u4e0b\u8f09\u6240\u6709\u5b58\u6a94\u6a94\u6848\u3002\n",
         "volume-controls.ftl":
-          "volume-controls-mute = \u975c\u97f3\nvolume-controls-unmute = \u53d6\u6d88\u975c\u97f3\n"
-      }
+          "volume-controls-mute = \u975c\u97f3\nvolume-controls-unmute = \u53d6\u6d88\u975c\u97f3\n",
+      },
     },
     ze = {};
   for (const [e, n] of Object.entries(xe)) {
@@ -1689,7 +1959,8 @@ function swfUrlToLocalPath(url) {
       for (const [r, o] of Object.entries(n))
         if (o) {
           t ??= ke();
-          for (const n of a.addResource(new me(o))) console.error(`Error in text for ${e} ${r}: ${n}`);
+          for (const n of a.addResource(new me(o)))
+            console.error(`Error in text for ${e} ${r}: ${n}`);
         }
       ye(t);
     }
@@ -1730,14 +2001,14 @@ function swfUrlToLocalPath(url) {
     (0, j.jsx)(function () {
       return (0, j.jsx)("style", {
         children:
-          ":host{all:initial;pointer-events:inherit;--ruffle-blue:#37528c;--ruffle-orange:#ffad33;display:inline-block;font-family:Arial,sans-serif;height:400px;letter-spacing:.4px;position:relative;touch-action:none;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:550px;-webkit-tap-highlight-color:transparent}:host(:-webkit-full-screen){display:block;height:100%!important;width:100%!important}.hidden{display:none!important}#container,#message-overlay,#panic,#play-button,#splash-screen,#unmute-overlay,#unmute-overlay .background{inset:0;position:absolute}#container{outline:none;overflow:hidden}#container canvas{height:100%;width:100%}#play-button,#unmute-overlay{cursor:pointer;display:none}#unmute-overlay .background{background:#000;opacity:.7}#play-button .icon,#unmute-overlay .icon{height:50%;left:50%;max-height:384px;max-width:384px;opacity:.8;position:absolute;top:50%;transform:translate(-50%,-50%);width:50%}#play-button:hover .icon,#unmute-overlay:hover .icon{opacity:1}#unmute-overlay-svg{scale:.8}#panic{background:linear-gradient(180deg,#fd3a40,#fda138);color:#fff;display:flex;flex-flow:column;font-size:20px;justify-content:space-around;overflow:auto;text-align:center}#panic a{color:var(--ruffle-blue);font-weight:700}#panic-title{font-size:xxx-large;font-weight:700}#panic-body.details{flex:0.9;margin:0 10px}#panic-body textarea{height:100%;resize:none;width:100%}#panic ul{display:flex;justify-content:space-evenly;list-style-type:none;padding:0}#message-overlay{align-items:center;background:var(--ruffle-blue);color:var(--ruffle-orange);display:flex;justify-content:center;opacity:1;overflow:auto;position:absolute;z-index:2}#message-overlay .message{font-size:20px;max-height:100%;max-width:100%;padding:5%;text-align:center}#message-overlay p{margin:.5em 0}#message-overlay .message div{-moz-column-gap:1em;column-gap:1em;display:flex;flex-wrap:wrap;justify-content:center}#message-overlay a,#message-overlay button{background:var(--ruffle-blue);border:2px solid var(--ruffle-orange);border-radius:.6em;color:var(--ruffle-orange);cursor:pointer;font-size:1.25em;font-weight:700;margin:2% 0;padding:10px;text-decoration:none}#message-overlay a:hover,#message-overlay button:hover{background:#ffffff4c}#continue-btn{background:var(--ruffle-blue);border:2px solid var(--ruffle-orange);border-radius:20px;color:var(--ruffle-orange);cursor:pointer;font-size:20px;font-weight:700;padding:10px}#continue-btn:hover{background:#ffffff4c}#context-menu-overlay,.modal{height:100%;position:absolute;width:100%;z-index:1}#context-menu{background-color:var(--modal-background);border:1px solid gray;box-shadow:0 5px 10px -5px #000;color:rgb(var(--modal-foreground-rgb));font-size:14px;list-style:none;margin:0;padding:3px 0;position:absolute;text-align:start;white-space:nowrap}#context-menu .menu-item{color:rgb(var(--modal-foreground-rgb));padding:5px 10px}#context-menu .menu-item.disabled{color:rgb(var(--modal-foreground-rgb),.5);cursor:default}#context-menu .menu-item:not(.disabled):hover{background-color:rgb(var(--modal-foreground-rgb),.15)}#context-menu .menu-separator hr{border:none;border-bottom:1px solid rgb(var(--modal-foreground-rgb),.2);margin:3px}#splash-screen{align-items:center;background:var(\n        --splash-screen-background,var(--preloader-background,var(--ruffle-blue))\n    );display:flex;flex-direction:column;justify-content:center}.loadbar{background:#253559;height:20%;max-height:10px;max-width:316px;width:100%}.loadbar-inner{background:var(--ruffle-orange);height:100%;max-width:100%;width:0}.logo{display:var(--logo-display,block);max-height:150px;max-width:380px}.loading-animation{aspect-ratio:1;margin-bottom:2%;max-height:28px;max-width:28px;width:10%}.spinner{stroke-dasharray:180;stroke-dashoffset:135;stroke:var(--ruffle-orange);animation:a 1.5s linear infinite;transform-origin:50% 50%}@keyframes a{to{transform:rotate(1turn)}}#virtual-keyboard{height:1px;opacity:0;position:absolute;top:-100px;width:1px}.modal{background-color:#0008}.modal-area{background-color:var(--modal-background);border-radius:12px;box-shadow:0 2px 6px 0 #0008;color:rgb(var(--modal-foreground-rgb));left:50%;padding:8px 12px;position:relative;transform:translateX(-50%);width:-moz-fit-content;width:fit-content}#modal-area{height:300px;width:450px}.close-modal{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 -960 960 960'%3E%3Cpath d='M480-392 300-212q-18 18-44 18t-44-18-18-44 18-44l180-180-180-180q-18-18-18-44t18-44 44-18 44 18l180 180 180-180q18-18 44-18t44 18 18 44-18 44L568-480l180 180q18 18 18 44t-18 44-44 18-44-18z'/%3E%3C/svg%3E\");cursor:pointer;filter:var(--modal-foreground-filter);height:16px;width:16px}.modal-button{background-color:rgb(var(--modal-foreground-rgb),.2);border-radius:6px;color:rgb(var(--modal-foreground-rgb));cursor:pointer;display:inline-block;padding:4px 8px;text-decoration:none}:not(#volume-controls)>.close-modal{position:absolute;right:16px;top:14px}.general-save-options{border-bottom:2px solid rgb(var(--modal-foreground-rgb),.3);padding-bottom:8px;text-align:center}#local-saves{border-collapse:collapse;color:inherit;display:block;height:calc(100% - 45px);min-height:30px;overflow-y:auto}#local-saves td{border-bottom:2px solid rgb(var(--modal-foreground-rgb),.15);height:30px}#local-saves td:first-child{width:100%;word-break:break-all}.save-option{cursor:pointer;display:inline-block;filter:var(--modal-foreground-filter);height:24px;opacity:.4;vertical-align:middle;width:24px}#local-saves>tr:hover .save-option{opacity:1}#download-save{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 -960 960 960'%3E%3Cpath d='M480-337q-8 0-15-2.5t-13-8.5L308-492q-12-12-11.5-28t11.5-28q12-12 28.5-12.5T365-549l75 75v-286q0-17 11.5-28.5T480-800t28.5 11.5T520-760v286l75-75q12-12 28.5-11.5T652-548q11 12 11.5 28T652-492L508-348q-6 6-13 8.5t-15 2.5M240-160q-33 0-56.5-23.5T160-240v-80q0-17 11.5-28.5T200-360t28.5 11.5T240-320v80h480v-80q0-17 11.5-28.5T760-360t28.5 11.5T800-320v80q0 33-23.5 56.5T720-160z'/%3E%3C/svg%3E\")}#replace-save{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 -1080 960 1200'%3E%3Cpath d='M440-367v127q0 17 11.5 28.5T480-200t28.5-11.5T520-240v-127l36 36q6 6 13.5 9t15 2.5T599-323t13-9q11-12 11.5-28T612-388L508-492q-6-6-13-8.5t-15-2.5-15 2.5-13 8.5L348-388q-12 12-11.5 28t12.5 28q12 11 28 11.5t28-11.5zM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80zm280-560q0 17 11.5 28.5T560-600h160L520-800z'/%3E%3C/svg%3E\")}#delete-save{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 -1020 960 1080'%3E%3Cpath d='M280-120q-33 0-56.5-23.5T200-200v-520q-17 0-28.5-11.5T160-760t11.5-28.5T200-800h160q0-17 11.5-28.5T400-840h160q17 0 28.5 11.5T600-800h160q17 0 28.5 11.5T800-760t-11.5 28.5T760-720v520q0 33-23.5 56.5T680-120zm120-160q17 0 28.5-11.5T440-320v-280q0-17-11.5-28.5T400-640t-28.5 11.5T360-600v280q0 17 11.5 28.5T400-280m160 0q17 0 28.5-11.5T600-320v-280q0-17-11.5-28.5T560-640t-28.5 11.5T520-600v280q0 17 11.5 28.5T560-280'/%3E%3C/svg%3E\")}.replace-save{display:none}#video-modal .modal-area{box-sizing:border-box;height:95%;width:95%}#video-holder{box-sizing:border-box;height:100%;padding:36px 4px 6px}#video-holder video{background-color:#000;height:100%;width:100%}#volume-controls{align-items:center;display:flex;gap:6px}#mute-checkbox{display:none}label[for=mute-checkbox]{cursor:pointer;filter:var(--modal-foreground-filter);height:24px;line-height:0;width:24px}#volume-mute{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 -960 960 960'%3E%3Cpath d='m719.13-419.35-71.67 71.68Q634.78-335 617.13-335t-30.33-12.67q-12.67-12.68-12.67-30.33t12.67-30.33L658.48-480l-71.68-71.67q-12.67-12.68-12.67-30.33t12.67-30.33Q599.48-625 617.13-625t30.33 12.67l71.67 71.68 71.67-71.68Q803.48-625 821.13-625t30.33 12.67q12.67 12.68 12.67 30.33t-12.67 30.33L779.78-480l71.68 71.67q12.67 12.68 12.67 30.33t-12.67 30.33Q838.78-335 821.13-335t-30.33-12.67zM278-357.87H161.22q-17.66 0-30.33-12.67-12.67-12.68-12.67-30.33v-158.26q0-17.65 12.67-30.33 12.67-12.67 30.33-12.67H278l130.15-129.91q20.63-20.63 46.98-9.45 26.35 11.19 26.35 39.77v443.44q0 28.58-26.35 39.77-26.35 11.18-46.98-9.45z'/%3E%3C/svg%3E\")}#volume-min{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='161 -960 960 960'%3E%3Cpath d='M438.65-357.87H321.87q-17.65 0-30.33-12.67-12.67-12.68-12.67-30.33v-158.26q0-17.65 12.67-30.33 12.68-12.67 30.33-12.67h116.78L568.8-732.04q20.63-20.63 46.98-9.45 26.35 11.19 26.35 39.77v443.44q0 28.58-26.35 39.77-26.35 11.18-46.98-9.45z'/%3E%3C/svg%3E\")}#volume-mid{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='80 -960 960 960'%3E%3Cpath d='M357.98-357.87H241.2q-17.66 0-30.33-12.67-12.67-12.68-12.67-30.33v-158.26q0-17.65 12.67-30.33 12.67-12.67 30.33-12.67h116.78L487.65-731.8q20.63-20.64 47.1-9.57t26.47 39.65v443.44q0 28.58-26.47 39.65t-47.1-9.57zM741.8-480q0 42.48-20.47 80.09-20.48 37.61-54.94 60.82-10.22 5.98-20.19.25-9.98-5.73-9.98-17.44v-248.44q0-11.71 9.98-17.32 9.97-5.61 20.19.37 34.46 23.71 54.94 61.45Q741.8-522.48 741.8-480'/%3E%3C/svg%3E\")}#volume-max{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='9 -960 960 960'%3E%3Cpath d='M754.22-480.5q0-78.52-41.88-143.9t-111.91-98.62q-14.47-6.74-20.47-20.96t-.53-28.93q5.74-15.72 20.34-22.46t29.58 0q92.48 42.46 147.97 127.05 55.48 84.6 55.48 187.82t-55.48 187.82q-55.49 84.59-147.97 127.05-14.98 6.74-29.58 0t-20.34-22.46q-5.47-14.71.53-28.93t20.47-20.96q70.03-33.24 111.91-98.62t41.88-143.9M286.98-357.87H170.2q-17.66 0-30.33-12.67-12.67-12.68-12.67-30.33v-158.26q0-17.65 12.67-30.33 12.67-12.67 30.33-12.67h116.78L416.65-731.8q20.63-20.64 47.1-9.57t26.47 39.65v443.44q0 28.58-26.47 39.65t-47.1-9.57zM670.8-480q0 42.48-20.47 80.09-20.48 37.61-54.94 60.82-10.22 5.98-20.19.25-9.98-5.73-9.98-17.44v-248.44q0-11.71 9.98-17.32 9.97-5.61 20.19.37 34.46 23.71 54.94 61.45Q670.8-522.48 670.8-480'/%3E%3C/svg%3E\")}#volume-slider-text{text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:4.8ch}#hardware-acceleration-modal .modal-area{box-sizing:border-box;padding:16px 48px;text-align:center;width:95%}#acceleration-text{display:block;margin-bottom:8px}#clipboard-modal h2{margin-right:36px;margin-top:4px}#clipboard-modal p:last-child{margin-bottom:2px}@media (prefers-color-scheme:light){:host{--modal-background:#fafafa;--modal-foreground-rgb:0,0,0;--modal-foreground-filter:none}}@media (prefers-color-scheme:dark){:host{--modal-background:#282828;--modal-foreground-rgb:221,221,221;--modal-foreground-filter:invert(90%)}}"
+          ":host{all:initial;pointer-events:inherit;--ruffle-blue:#37528c;--ruffle-orange:#ffad33;display:inline-block;font-family:Arial,sans-serif;height:400px;letter-spacing:.4px;position:relative;touch-action:none;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:550px;-webkit-tap-highlight-color:transparent}:host(:-webkit-full-screen){display:block;height:100%!important;width:100%!important}.hidden{display:none!important}#container,#message-overlay,#panic,#play-button,#splash-screen,#unmute-overlay,#unmute-overlay .background{inset:0;position:absolute}#container{outline:none;overflow:hidden}#container canvas{height:100%;width:100%}#play-button,#unmute-overlay{cursor:pointer;display:none}#unmute-overlay .background{background:#000;opacity:.7}#play-button .icon,#unmute-overlay .icon{height:50%;left:50%;max-height:384px;max-width:384px;opacity:.8;position:absolute;top:50%;transform:translate(-50%,-50%);width:50%}#play-button:hover .icon,#unmute-overlay:hover .icon{opacity:1}#unmute-overlay-svg{scale:.8}#panic{background:linear-gradient(180deg,#fd3a40,#fda138);color:#fff;display:flex;flex-flow:column;font-size:20px;justify-content:space-around;overflow:auto;text-align:center}#panic a{color:var(--ruffle-blue);font-weight:700}#panic-title{font-size:xxx-large;font-weight:700}#panic-body.details{flex:0.9;margin:0 10px}#panic-body textarea{height:100%;resize:none;width:100%}#panic ul{display:flex;justify-content:space-evenly;list-style-type:none;padding:0}#message-overlay{align-items:center;background:var(--ruffle-blue);color:var(--ruffle-orange);display:flex;justify-content:center;opacity:1;overflow:auto;position:absolute;z-index:2}#message-overlay .message{font-size:20px;max-height:100%;max-width:100%;padding:5%;text-align:center}#message-overlay p{margin:.5em 0}#message-overlay .message div{-moz-column-gap:1em;column-gap:1em;display:flex;flex-wrap:wrap;justify-content:center}#message-overlay a,#message-overlay button{background:var(--ruffle-blue);border:2px solid var(--ruffle-orange);border-radius:.6em;color:var(--ruffle-orange);cursor:pointer;font-size:1.25em;font-weight:700;margin:2% 0;padding:10px;text-decoration:none}#message-overlay a:hover,#message-overlay button:hover{background:#ffffff4c}#continue-btn{background:var(--ruffle-blue);border:2px solid var(--ruffle-orange);border-radius:20px;color:var(--ruffle-orange);cursor:pointer;font-size:20px;font-weight:700;padding:10px}#continue-btn:hover{background:#ffffff4c}#context-menu-overlay,.modal{height:100%;position:absolute;width:100%;z-index:1}#context-menu{background-color:var(--modal-background);border:1px solid gray;box-shadow:0 5px 10px -5px #000;color:rgb(var(--modal-foreground-rgb));font-size:14px;list-style:none;margin:0;padding:3px 0;position:absolute;text-align:start;white-space:nowrap}#context-menu .menu-item{color:rgb(var(--modal-foreground-rgb));padding:5px 10px}#context-menu .menu-item.disabled{color:rgb(var(--modal-foreground-rgb),.5);cursor:default}#context-menu .menu-item:not(.disabled):hover{background-color:rgb(var(--modal-foreground-rgb),.15)}#context-menu .menu-separator hr{border:none;border-bottom:1px solid rgb(var(--modal-foreground-rgb),.2);margin:3px}#splash-screen{align-items:center;background:var(\n        --splash-screen-background,var(--preloader-background,var(--ruffle-blue))\n    );display:flex;flex-direction:column;justify-content:center}.loadbar{background:#253559;height:20%;max-height:10px;max-width:316px;width:100%}.loadbar-inner{background:var(--ruffle-orange);height:100%;max-width:100%;width:0}.logo{display:var(--logo-display,block);max-height:150px;max-width:380px}.loading-animation{aspect-ratio:1;margin-bottom:2%;max-height:28px;max-width:28px;width:10%}.spinner{stroke-dasharray:180;stroke-dashoffset:135;stroke:var(--ruffle-orange);animation:a 1.5s linear infinite;transform-origin:50% 50%}@keyframes a{to{transform:rotate(1turn)}}#virtual-keyboard{height:1px;opacity:0;position:absolute;top:-100px;width:1px}.modal{background-color:#0008}.modal-area{background-color:var(--modal-background);border-radius:12px;box-shadow:0 2px 6px 0 #0008;color:rgb(var(--modal-foreground-rgb));left:50%;padding:8px 12px;position:relative;transform:translateX(-50%);width:-moz-fit-content;width:fit-content}#modal-area{height:300px;width:450px}.close-modal{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 -960 960 960'%3E%3Cpath d='M480-392 300-212q-18 18-44 18t-44-18-18-44 18-44l180-180-180-180q-18-18-18-44t18-44 44-18 44 18l180 180 180-180q18-18 44-18t44 18 18 44-18 44L568-480l180 180q18 18 18 44t-18 44-44 18-44-18z'/%3E%3C/svg%3E\");cursor:pointer;filter:var(--modal-foreground-filter);height:16px;width:16px}.modal-button{background-color:rgb(var(--modal-foreground-rgb),.2);border-radius:6px;color:rgb(var(--modal-foreground-rgb));cursor:pointer;display:inline-block;padding:4px 8px;text-decoration:none}:not(#volume-controls)>.close-modal{position:absolute;right:16px;top:14px}.general-save-options{border-bottom:2px solid rgb(var(--modal-foreground-rgb),.3);padding-bottom:8px;text-align:center}#local-saves{border-collapse:collapse;color:inherit;display:block;height:calc(100% - 45px);min-height:30px;overflow-y:auto}#local-saves td{border-bottom:2px solid rgb(var(--modal-foreground-rgb),.15);height:30px}#local-saves td:first-child{width:100%;word-break:break-all}.save-option{cursor:pointer;display:inline-block;filter:var(--modal-foreground-filter);height:24px;opacity:.4;vertical-align:middle;width:24px}#local-saves>tr:hover .save-option{opacity:1}#download-save{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 -960 960 960'%3E%3Cpath d='M480-337q-8 0-15-2.5t-13-8.5L308-492q-12-12-11.5-28t11.5-28q12-12 28.5-12.5T365-549l75 75v-286q0-17 11.5-28.5T480-800t28.5 11.5T520-760v286l75-75q12-12 28.5-11.5T652-548q11 12 11.5 28T652-492L508-348q-6 6-13 8.5t-15 2.5M240-160q-33 0-56.5-23.5T160-240v-80q0-17 11.5-28.5T200-360t28.5 11.5T240-320v80h480v-80q0-17 11.5-28.5T760-360t28.5 11.5T800-320v80q0 33-23.5 56.5T720-160z'/%3E%3C/svg%3E\")}#replace-save{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 -1080 960 1200'%3E%3Cpath d='M440-367v127q0 17 11.5 28.5T480-200t28.5-11.5T520-240v-127l36 36q6 6 13.5 9t15 2.5T599-323t13-9q11-12 11.5-28T612-388L508-492q-6-6-13-8.5t-15-2.5-15 2.5-13 8.5L348-388q-12 12-11.5 28t12.5 28q12 11 28 11.5t28-11.5zM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80zm280-560q0 17 11.5 28.5T560-600h160L520-800z'/%3E%3C/svg%3E\")}#delete-save{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 -1020 960 1080'%3E%3Cpath d='M280-120q-33 0-56.5-23.5T200-200v-520q-17 0-28.5-11.5T160-760t11.5-28.5T200-800h160q0-17 11.5-28.5T400-840h160q17 0 28.5 11.5T600-800h160q17 0 28.5 11.5T800-760t-11.5 28.5T760-720v520q0 33-23.5 56.5T680-120zm120-160q17 0 28.5-11.5T440-320v-280q0-17-11.5-28.5T400-640t-28.5 11.5T360-600v280q0 17 11.5 28.5T400-280m160 0q17 0 28.5-11.5T600-320v-280q0-17-11.5-28.5T560-640t-28.5 11.5T520-600v280q0 17 11.5 28.5T560-280'/%3E%3C/svg%3E\")}.replace-save{display:none}#video-modal .modal-area{box-sizing:border-box;height:95%;width:95%}#video-holder{box-sizing:border-box;height:100%;padding:36px 4px 6px}#video-holder video{background-color:#000;height:100%;width:100%}#volume-controls{align-items:center;display:flex;gap:6px}#mute-checkbox{display:none}label[for=mute-checkbox]{cursor:pointer;filter:var(--modal-foreground-filter);height:24px;line-height:0;width:24px}#volume-mute{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 -960 960 960'%3E%3Cpath d='m719.13-419.35-71.67 71.68Q634.78-335 617.13-335t-30.33-12.67q-12.67-12.68-12.67-30.33t12.67-30.33L658.48-480l-71.68-71.67q-12.67-12.68-12.67-30.33t12.67-30.33Q599.48-625 617.13-625t30.33 12.67l71.67 71.68 71.67-71.68Q803.48-625 821.13-625t30.33 12.67q12.67 12.68 12.67 30.33t-12.67 30.33L779.78-480l71.68 71.67q12.67 12.68 12.67 30.33t-12.67 30.33Q838.78-335 821.13-335t-30.33-12.67zM278-357.87H161.22q-17.66 0-30.33-12.67-12.67-12.68-12.67-30.33v-158.26q0-17.65 12.67-30.33 12.67-12.67 30.33-12.67H278l130.15-129.91q20.63-20.63 46.98-9.45 26.35 11.19 26.35 39.77v443.44q0 28.58-26.35 39.77-26.35 11.18-46.98-9.45z'/%3E%3C/svg%3E\")}#volume-min{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='161 -960 960 960'%3E%3Cpath d='M438.65-357.87H321.87q-17.65 0-30.33-12.67-12.67-12.68-12.67-30.33v-158.26q0-17.65 12.67-30.33 12.68-12.67 30.33-12.67h116.78L568.8-732.04q20.63-20.63 46.98-9.45 26.35 11.19 26.35 39.77v443.44q0 28.58-26.35 39.77-26.35 11.18-46.98-9.45z'/%3E%3C/svg%3E\")}#volume-mid{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='80 -960 960 960'%3E%3Cpath d='M357.98-357.87H241.2q-17.66 0-30.33-12.67-12.67-12.68-12.67-30.33v-158.26q0-17.65 12.67-30.33 12.67-12.67 30.33-12.67h116.78L487.65-731.8q20.63-20.64 47.1-9.57t26.47 39.65v443.44q0 28.58-26.47 39.65t-47.1-9.57zM741.8-480q0 42.48-20.47 80.09-20.48 37.61-54.94 60.82-10.22 5.98-20.19.25-9.98-5.73-9.98-17.44v-248.44q0-11.71 9.98-17.32 9.97-5.61 20.19.37 34.46 23.71 54.94 61.45Q741.8-522.48 741.8-480'/%3E%3C/svg%3E\")}#volume-max{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='9 -960 960 960'%3E%3Cpath d='M754.22-480.5q0-78.52-41.88-143.9t-111.91-98.62q-14.47-6.74-20.47-20.96t-.53-28.93q5.74-15.72 20.34-22.46t29.58 0q92.48 42.46 147.97 127.05 55.48 84.6 55.48 187.82t-55.48 187.82q-55.49 84.59-147.97 127.05-14.98 6.74-29.58 0t-20.34-22.46q-5.47-14.71.53-28.93t20.47-20.96q70.03-33.24 111.91-98.62t41.88-143.9M286.98-357.87H170.2q-17.66 0-30.33-12.67-12.67-12.68-12.67-30.33v-158.26q0-17.65 12.67-30.33 12.67-12.67 30.33-12.67h116.78L416.65-731.8q20.63-20.64 47.1-9.57t26.47 39.65v443.44q0 28.58-26.47 39.65t-47.1-9.57zM670.8-480q0 42.48-20.47 80.09-20.48 37.61-54.94 60.82-10.22 5.98-20.19.25-9.98-5.73-9.98-17.44v-248.44q0-11.71 9.98-17.32 9.97-5.61 20.19.37 34.46 23.71 54.94 61.45Q670.8-522.48 670.8-480'/%3E%3C/svg%3E\")}#volume-slider-text{text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:4.8ch}#hardware-acceleration-modal .modal-area{box-sizing:border-box;padding:16px 48px;text-align:center;width:95%}#acceleration-text{display:block;margin-bottom:8px}#clipboard-modal h2{margin-right:36px;margin-top:4px}#clipboard-modal p:last-child{margin-bottom:2px}@media (prefers-color-scheme:light){:host{--modal-background:#fafafa;--modal-foreground-rgb:0,0,0;--modal-foreground-filter:none}}@media (prefers-color-scheme:dark){:host{--modal-background:#282828;--modal-foreground-rgb:221,221,221;--modal-foreground-filter:invert(90%)}}",
       });
-    }, {})
+    }, {}),
   ),
     Fe.content.appendChild(
       (0, j.jsx)(function () {
         return (0, j.jsx)("style", { id: "dynamic-styles" });
-      }, {})
+      }, {}),
     ),
     Fe.content.appendChild(
       (0, j.jsx)(function () {
@@ -1771,14 +2042,14 @@ function swfUrlToLocalPath(url) {
                             (0, j.jsx)("stop", {
                               xmlns: "http://www.w3.org/2000/svg",
                               offset: "0%",
-                              "stop-color": "#FDA138"
+                              "stop-color": "#FDA138",
                             }),
                             (0, j.jsx)("stop", {
                               xmlns: "http://www.w3.org/2000/svg",
                               offset: "100%",
-                              "stop-color": "#FD3A40"
-                            })
-                          ]
+                              "stop-color": "#FD3A40",
+                            }),
+                          ],
                         }),
                         (0, j.jsxs)("g", {
                           xmlns: "http://www.w3.org/2000/svg",
@@ -1787,21 +2058,24 @@ function swfUrlToLocalPath(url) {
                             (0, j.jsx)("path", {
                               xmlns: "http://www.w3.org/2000/svg",
                               fill: "url(#a)",
-                              d: "M250 125q0-52-37-88-36-37-88-37T37 37Q0 73 0 125t37 88q36 37 88 37t88-37q37-36 37-88M87 195V55l100 70-100 70z"
+                              d: "M250 125q0-52-37-88-36-37-88-37T37 37Q0 73 0 125t37 88q36 37 88 37t88-37q37-36 37-88M87 195V55l100 70-100 70z",
                             }),
                             (0, j.jsx)("path", {
                               xmlns: "http://www.w3.org/2000/svg",
                               fill: "#FFF",
-                              d: "M87 55v140l100-70L87 55z"
-                            })
-                          ]
-                        })
-                      ]
+                              d: "M87 55v140l100-70L87 55z",
+                            }),
+                          ],
+                        }),
+                      ],
                     }),
-                    (0, j.jsx)("use", { xmlns: "http://www.w3.org/2000/svg", href: "#b" })
-                  ]
-                })
-              })
+                    (0, j.jsx)("use", {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      href: "#b",
+                    }),
+                  ],
+                }),
+              }),
             }),
             (0, j.jsxs)("div", {
               id: "unmute-overlay",
@@ -1821,19 +2095,19 @@ function swfUrlToLocalPath(url) {
                         xmlns: "http://www.w3.org/2000/svg",
                         fill: "#FFF",
                         stroke: "#FFF",
-                        d: "m457.941 256 47.029-47.029c9.372-9.373 9.372-24.568 0-33.941-9.373-9.373-24.568-9.373-33.941 0l-47.029 47.029-47.029-47.029c-9.373-9.373-24.568-9.373-33.941 0-9.372 9.373-9.372 24.568 0 33.941l47.029 47.029-47.029 47.029c-9.372 9.373-9.372 24.568 0 33.941 4.686 4.687 10.827 7.03 16.97 7.03s12.284-2.343 16.971-7.029l47.029-47.03 47.029 47.029c4.687 4.687 10.828 7.03 16.971 7.03s12.284-2.343 16.971-7.029c9.372-9.373 9.372-24.568 0-33.941z"
+                        d: "m457.941 256 47.029-47.029c9.372-9.373 9.372-24.568 0-33.941-9.373-9.373-24.568-9.373-33.941 0l-47.029 47.029-47.029-47.029c-9.373-9.373-24.568-9.373-33.941 0-9.372 9.373-9.372 24.568 0 33.941l47.029 47.029-47.029 47.029c-9.372 9.373-9.372 24.568 0 33.941 4.686 4.687 10.827 7.03 16.97 7.03s12.284-2.343 16.971-7.029l47.029-47.03 47.029 47.029c4.687 4.687 10.828 7.03 16.971 7.03s12.284-2.343 16.971-7.029c9.372-9.373 9.372-24.568 0-33.941z",
                       }),
                       (0, j.jsx)("path", {
                         xmlns: "http://www.w3.org/2000/svg",
                         fill: "#FFF",
                         stroke: "#FFF",
-                        d: "m99 160h-55c-24.301 0-44 19.699-44 44v104c0 24.301 19.699 44 44 44h55c2.761 0 5-2.239 5-5v-182c0-2.761-2.239-5-5-5z"
+                        d: "m99 160h-55c-24.301 0-44 19.699-44 44v104c0 24.301 19.699 44 44 44h55c2.761 0 5-2.239 5-5v-182c0-2.761-2.239-5-5-5z",
                       }),
                       (0, j.jsx)("path", {
                         xmlns: "http://www.w3.org/2000/svg",
                         fill: "#FFF",
                         stroke: "#FFF",
-                        d: "m280 56h-24c-5.269 0-10.392 1.734-14.578 4.935l-103.459 79.116c-1.237.946-1.963 2.414-1.963 3.972v223.955c0 1.557.726 3.026 1.963 3.972l103.459 79.115c4.186 3.201 9.309 4.936 14.579 4.936h23.999c13.255 0 24-10.745 24-24v-352.001c0-13.255-10.745-24-24-24z"
+                        d: "m280 56h-24c-5.269 0-10.392 1.734-14.578 4.935l-103.459 79.116c-1.237.946-1.963 2.414-1.963 3.972v223.955c0 1.557.726 3.026 1.963 3.972l103.459 79.115c4.186 3.201 9.309 4.936 14.579 4.936h23.999c13.255 0 24-10.745 24-24v-352.001c0-13.255-10.745-24-24-24z",
                       }),
                       (0, j.jsx)("text", {
                         xmlns: "http://www.w3.org/2000/svg",
@@ -1844,12 +2118,12 @@ function swfUrlToLocalPath(url) {
                         "font-size": "60px",
                         fill: "#FFF",
                         stroke: "#FFF",
-                        children: "Click to unmute"
-                      })
-                    ]
-                  })
-                })
-              ]
+                        children: "Click to unmute",
+                      }),
+                    ],
+                  }),
+                }),
+              ],
             }),
             (0, j.jsx)("input", {
               "aria-hidden": "true",
@@ -1857,11 +2131,11 @@ function swfUrlToLocalPath(url) {
               type: "text",
               autocomplete: "off",
               autocorrect: "off",
-              autocapitalize: "none"
-            })
-          ]
+              autocapitalize: "none",
+            }),
+          ],
         });
-      }, {})
+      }, {}),
     ),
     Fe.content.appendChild(
       (0, j.jsx)(function () {
@@ -1880,15 +2154,15 @@ function swfUrlToLocalPath(url) {
                   (0, j.jsx)("path", {
                     xmlns: "http://www.w3.org/2000/svg",
                     fill: "#966214",
-                    d: "M58.75 85.6q.75-.1 1.5-.35.85-.25 1.65-.75.55-.35 1.05-.8.5-.45.95-1 .5-.5.75-1.2-.05.05-.15.1-.1.15-.25.25l-.1.2q-.15.05-.25.1-.4 0-.8.05-.5-.25-.9-.5-.3-.1-.55-.3l-.6-.6-4.25-6.45-1.5 11.25h3.45m83.15-.2h3.45q.75-.1 1.5-.35.25-.05.45-.15.35-.15.65-.3l.5-.3q.25-.15.5-.35.45-.35.9-.75.45-.35.75-.85l.1-.1q.1-.2.2-.35.2-.3.35-.6l-.3.4-.15.15q-.5.15-1.1.1-.25 0-.4-.05-.5-.15-.8-.4-.15-.1-.25-.25-.3-.3-.55-.6l-.05-.05v-.05l-4.25-6.4-1.5 11.25m-21.15-3.95q-.3-.3-.55-.6l-.05-.05v-.05l-4.25-6.4-1.5 11.25h3.45q.75-.1 1.5-.35.85-.25 1.6-.75.75-.5 1.4-1.1.45-.35.75-.85.35-.5.65-1.05l-.45.55q-.5.15-1.1.1-.9 0-1.45-.7m59.15.3q-.75-.5-1.4-1-3.15-2.55-3.5-6.4l-1.5 11.25h21q-3.1-.25-5.7-.75-5.6-1.05-8.9-3.1m94.2 3.85h3.45q.6-.1 1.2-.3.4-.1.75-.2.35-.15.65-.3.7-.35 1.35-.8.75-.55 1.3-1.25.1-.15.25-.3-2.55-.25-3.25-1.8l-4.2-6.3-1.5 11.25m-45.3-4.85q-.5-.4-.9-.8-2.3-2.35-2.6-5.6l-1.5 11.25h21q-11.25-.95-16-4.85m97.7 4.85q-.3-.05-.6-.05-10.8-1-15.4-4.8-3.15-2.55-3.5-6.35l-1.5 11.2h21Z"
+                    d: "M58.75 85.6q.75-.1 1.5-.35.85-.25 1.65-.75.55-.35 1.05-.8.5-.45.95-1 .5-.5.75-1.2-.05.05-.15.1-.1.15-.25.25l-.1.2q-.15.05-.25.1-.4 0-.8.05-.5-.25-.9-.5-.3-.1-.55-.3l-.6-.6-4.25-6.45-1.5 11.25h3.45m83.15-.2h3.45q.75-.1 1.5-.35.25-.05.45-.15.35-.15.65-.3l.5-.3q.25-.15.5-.35.45-.35.9-.75.45-.35.75-.85l.1-.1q.1-.2.2-.35.2-.3.35-.6l-.3.4-.15.15q-.5.15-1.1.1-.25 0-.4-.05-.5-.15-.8-.4-.15-.1-.25-.25-.3-.3-.55-.6l-.05-.05v-.05l-4.25-6.4-1.5 11.25m-21.15-3.95q-.3-.3-.55-.6l-.05-.05v-.05l-4.25-6.4-1.5 11.25h3.45q.75-.1 1.5-.35.85-.25 1.6-.75.75-.5 1.4-1.1.45-.35.75-.85.35-.5.65-1.05l-.45.55q-.5.15-1.1.1-.9 0-1.45-.7m59.15.3q-.75-.5-1.4-1-3.15-2.55-3.5-6.4l-1.5 11.25h21q-3.1-.25-5.7-.75-5.6-1.05-8.9-3.1m94.2 3.85h3.45q.6-.1 1.2-.3.4-.1.75-.2.35-.15.65-.3.7-.35 1.35-.8.75-.55 1.3-1.25.1-.15.25-.3-2.55-.25-3.25-1.8l-4.2-6.3-1.5 11.25m-45.3-4.85q-.5-.4-.9-.8-2.3-2.35-2.6-5.6l-1.5 11.25h21q-11.25-.95-16-4.85m97.7 4.85q-.3-.05-.6-.05-10.8-1-15.4-4.8-3.15-2.55-3.5-6.35l-1.5 11.2h21Z",
                   }),
                   (0, j.jsx)("path", {
                     xmlns: "http://www.w3.org/2000/svg",
                     fill: "var(--ruffle-orange)",
-                    d: "M92.6 54.8q-1.95-1.4-4.5-1.4H60.35q-1.35 0-2.6.45-1.65.55-3.15 1.8-2.75 2.25-3.25 5.25l-1.65 12h.05v.3l5.85 1.15h-9.5q-.5.05-1 .15-.5.15-1 .35-.5.2-.95.45-.5.3-.95.7-.45.35-.85.8-.35.4-.65.85-.3.45-.5.9-.15.45-.3.95l-5.85 41.6H50.3l5-35.5 1.5-11.25 4.25 6.45.6.6q.25.2.55.3.4.25.9.5.4-.05.8-.05.1-.05.25-.1l.1-.2q.15-.1.25-.25.1-.05.15-.1l.3-1.05 1.75-12.3h11.15L75.8 82.6h16.5l2.3-16.25h-.05l.8-5.7q.4-2.45-1-4.2-.35-.4-.75-.8-.25-.25-.55-.5-.2-.2-.45-.35m16.2 18.1h.05l-.05.3 5.85 1.15H105.2q-.5.05-1 .15-.5.15-1 .35-.5.2-.95.45-.5.3-1 .65-.4.4-.8.85-.25.3-.55.65-.05.1-.15.2-.25.45-.4.9-.2.45-.3.95-.1.65-.2 1.25-.2 1.15-.4 2.25l-4.3 30.6q-.25 3 1.75 5.25 1.6 1.8 4 2.15.6.1 1.25.1h27.35q3.25 0 6-2.25.35-.35.7-.55l.3-.2q2-2 2.25-4.5l1.65-11.6q.05-.05.1-.05l1.65-11.35h.05l.7-5.2 1.5-11.25 4.25 6.4v.05l.05.05q.25.3.55.6.1.15.25.25.3.25.8.4.15.05.4.05.6.05 1.1-.1l.15-.15.3-.4.3-1.05 1.3-9.05h-.05l.7-5.05h-.05l.15-1.25h-.05l1.65-11.7h-16.25l-2.65 19.5h.05v.2l-.05.1h.05l5.8 1.15H132.7q-.5.05-1 .15-.5.15-1 .35-.15.05-.3.15-.3.1-.55.25-.05 0-.1.05-.5.3-1 .65-.4.35-.7.7-.55.7-.95 1.45-.35.65-.55 1.4-.15.7-.25 1.4v.05q-.15 1.05-.35 2.05l-1.2 8.75v.1l-2.1 14.7H111.4l2.25-15.55h.05l.7-5.2 1.5-11.25 4.25 6.4v.05l.05.05q.25.3.55.6.55.7 1.45.7.6.05 1.1-.1l.45-.55.3-1.05 1.3-9.05h-.05l.7-5.05h-.05l.15-1.25h-.05l1.65-11.7h-16.25l-2.65 19.5m106.5-41.75q-2.25-2.25-5.5-2.25h-27.75q-3 0-5.75 2.25-1.3.95-2.05 2.1-.45.6-.7 1.2-.2.5-.35 1-.1.45-.15.95l-4.15 29.95h-.05l-.7 5.2h-.05l-.2 1.35h.05l-.05.3 5.85 1.15h-9.45q-2.1.05-3.95 1.6-1.9 1.55-2.25 3.55l-.5 3.5h-.05l-5.3 38.1h16.25l5-35.5 1.5-11.25q.35 3.85 3.5 6.4.65.5 1.4 1 3.3 2.05 8.9 3.1 2.6.5 5.7.75l1.75-11.25h-12.2l.4-2.95h-.05l.7-5.05h-.05q.1-.9.3-1.9.1-.75.2-1.6.85-5.9 2.15-14.9 0-.15.05-.25l.1-.9q.2-1.55.45-3.15h11.25l-3.1 20.8h16.5l4.1-28.05q.15-1.7-.4-3.15-.5-1.1-1.35-2.1m46.65 44.15q-.5.3-1 .65-.4.4-.8.85-.35.4-.7.85-.25.45-.45.9-.15.45-.3.95l-5.85 41.6h16.25l5-35.5 1.5-11.25 4.2 6.3q.7 1.55 3.25 1.8l.05-.1q.25-.4.35-.85l.3-1.05 1.8-14.05v-.05l5.35-37.45h-16.25l-6.15 44.3 5.85 1.15h-9.45q-.5.05-1 .15-.5.15-1 .35-.5.2-.95.45m5.4-38.9q.15-1.7-.4-3.15-.5-1.1-1.35-2.1-2.25-2.25-5.5-2.25h-27.75q-2.3 0-4.45 1.35-.65.35-1.3.9-1.3.95-2.05 2.1-.45.6-.7 1.2-.4.9-.5 1.95l-4.15 29.95h-.05l-.7 5.2h-.05l-.2 1.35h.05l-.05.3 5.85 1.15h-9.45q-2.1.05-3.95 1.6-1.9 1.55-2.25 3.55l-.5 3.5h-.05l-1.2 8.75v.1l-4.1 29.25h16.25l5-35.5 1.5-11.25q.3 3.25 2.6 5.6.4.4.9.8 4.75 3.9 16 4.85l1.75-11.25h-12.2l.4-2.95h-.05l.7-5.05h-.05q.15-.9.3-1.9.1-.75.25-1.6.15-1.25.35-2.65v-.05q.95-6.7 2.35-16.5h11.25l-3.1 20.8h16.5l4.1-28.05M345 66.35h-.05l1.15-8.2q.5-3-1.75-5.25-1.25-1.25-3-1.75-1-.5-2.25-.5h-27.95q-.65 0-1.3.1-2.5.35-4.7 2.15-2.75 2.25-3.25 5.25l-1.95 14.7v.05l-.05.3 5.85 1.15h-9.45q-1.9.05-3.6 1.35-.2.1-.35.25-1.9 1.55-2.25 3.55l-4.85 34.1q-.25 3 1.75 5.25 1.25 1.4 3 1.95 1.05.3 2.25.3H320q3.25 0 6-2.25 2.75-2 3.25-5l2.75-18.5h-16.5l-1.75 11H302.5l2.1-14.75h.05l.85-6 1.5-11.2q.35 3.8 3.5 6.35 4.6 3.8 15.4 4.8.3 0 .6.05h15.75L345 66.35m-16.4-.95-1.25 8.95h-11.3l.4-2.95h-.05l.7-5.05h-.1l.15-.95h11.45Z"
-                  })
-                ]
-              })
+                    d: "M92.6 54.8q-1.95-1.4-4.5-1.4H60.35q-1.35 0-2.6.45-1.65.55-3.15 1.8-2.75 2.25-3.25 5.25l-1.65 12h.05v.3l5.85 1.15h-9.5q-.5.05-1 .15-.5.15-1 .35-.5.2-.95.45-.5.3-.95.7-.45.35-.85.8-.35.4-.65.85-.3.45-.5.9-.15.45-.3.95l-5.85 41.6H50.3l5-35.5 1.5-11.25 4.25 6.45.6.6q.25.2.55.3.4.25.9.5.4-.05.8-.05.1-.05.25-.1l.1-.2q.15-.1.25-.25.1-.05.15-.1l.3-1.05 1.75-12.3h11.15L75.8 82.6h16.5l2.3-16.25h-.05l.8-5.7q.4-2.45-1-4.2-.35-.4-.75-.8-.25-.25-.55-.5-.2-.2-.45-.35m16.2 18.1h.05l-.05.3 5.85 1.15H105.2q-.5.05-1 .15-.5.15-1 .35-.5.2-.95.45-.5.3-1 .65-.4.4-.8.85-.25.3-.55.65-.05.1-.15.2-.25.45-.4.9-.2.45-.3.95-.1.65-.2 1.25-.2 1.15-.4 2.25l-4.3 30.6q-.25 3 1.75 5.25 1.6 1.8 4 2.15.6.1 1.25.1h27.35q3.25 0 6-2.25.35-.35.7-.55l.3-.2q2-2 2.25-4.5l1.65-11.6q.05-.05.1-.05l1.65-11.35h.05l.7-5.2 1.5-11.25 4.25 6.4v.05l.05.05q.25.3.55.6.1.15.25.25.3.25.8.4.15.05.4.05.6.05 1.1-.1l.15-.15.3-.4.3-1.05 1.3-9.05h-.05l.7-5.05h-.05l.15-1.25h-.05l1.65-11.7h-16.25l-2.65 19.5h.05v.2l-.05.1h.05l5.8 1.15H132.7q-.5.05-1 .15-.5.15-1 .35-.15.05-.3.15-.3.1-.55.25-.05 0-.1.05-.5.3-1 .65-.4.35-.7.7-.55.7-.95 1.45-.35.65-.55 1.4-.15.7-.25 1.4v.05q-.15 1.05-.35 2.05l-1.2 8.75v.1l-2.1 14.7H111.4l2.25-15.55h.05l.7-5.2 1.5-11.25 4.25 6.4v.05l.05.05q.25.3.55.6.55.7 1.45.7.6.05 1.1-.1l.45-.55.3-1.05 1.3-9.05h-.05l.7-5.05h-.05l.15-1.25h-.05l1.65-11.7h-16.25l-2.65 19.5m106.5-41.75q-2.25-2.25-5.5-2.25h-27.75q-3 0-5.75 2.25-1.3.95-2.05 2.1-.45.6-.7 1.2-.2.5-.35 1-.1.45-.15.95l-4.15 29.95h-.05l-.7 5.2h-.05l-.2 1.35h.05l-.05.3 5.85 1.15h-9.45q-2.1.05-3.95 1.6-1.9 1.55-2.25 3.55l-.5 3.5h-.05l-5.3 38.1h16.25l5-35.5 1.5-11.25q.35 3.85 3.5 6.4.65.5 1.4 1 3.3 2.05 8.9 3.1 2.6.5 5.7.75l1.75-11.25h-12.2l.4-2.95h-.05l.7-5.05h-.05q.1-.9.3-1.9.1-.75.2-1.6.85-5.9 2.15-14.9 0-.15.05-.25l.1-.9q.2-1.55.45-3.15h11.25l-3.1 20.8h16.5l4.1-28.05q.15-1.7-.4-3.15-.5-1.1-1.35-2.1m46.65 44.15q-.5.3-1 .65-.4.4-.8.85-.35.4-.7.85-.25.45-.45.9-.15.45-.3.95l-5.85 41.6h16.25l5-35.5 1.5-11.25 4.2 6.3q.7 1.55 3.25 1.8l.05-.1q.25-.4.35-.85l.3-1.05 1.8-14.05v-.05l5.35-37.45h-16.25l-6.15 44.3 5.85 1.15h-9.45q-.5.05-1 .15-.5.15-1 .35-.5.2-.95.45m5.4-38.9q.15-1.7-.4-3.15-.5-1.1-1.35-2.1-2.25-2.25-5.5-2.25h-27.75q-2.3 0-4.45 1.35-.65.35-1.3.9-1.3.95-2.05 2.1-.45.6-.7 1.2-.4.9-.5 1.95l-4.15 29.95h-.05l-.7 5.2h-.05l-.2 1.35h.05l-.05.3 5.85 1.15h-9.45q-2.1.05-3.95 1.6-1.9 1.55-2.25 3.55l-.5 3.5h-.05l-1.2 8.75v.1l-4.1 29.25h16.25l5-35.5 1.5-11.25q.3 3.25 2.6 5.6.4.4.9.8 4.75 3.9 16 4.85l1.75-11.25h-12.2l.4-2.95h-.05l.7-5.05h-.05q.15-.9.3-1.9.1-.75.25-1.6.15-1.25.35-2.65v-.05q.95-6.7 2.35-16.5h11.25l-3.1 20.8h16.5l4.1-28.05M345 66.35h-.05l1.15-8.2q.5-3-1.75-5.25-1.25-1.25-3-1.75-1-.5-2.25-.5h-27.95q-.65 0-1.3.1-2.5.35-4.7 2.15-2.75 2.25-3.25 5.25l-1.95 14.7v.05l-.05.3 5.85 1.15h-9.45q-1.9.05-3.6 1.35-.2.1-.35.25-1.9 1.55-2.25 3.55l-4.85 34.1q-.25 3 1.75 5.25 1.25 1.4 3 1.95 1.05.3 2.25.3H320q3.25 0 6-2.25 2.75-2 3.25-5l2.75-18.5h-16.5l-1.75 11H302.5l2.1-14.75h.05l.85-6 1.5-11.2q.35 3.8 3.5 6.35 4.6 3.8 15.4 4.8.3 0 .6.05h15.75L345 66.35m-16.4-.95-1.25 8.95h-11.3l.4-2.95h-.05l.7-5.05h-.1l.15-.95h11.45Z",
+                  }),
+                ],
+              }),
             }),
             (0, j.jsx)("svg", {
               xmlns: "http://www.w3.org/2000/svg",
@@ -1902,13 +2176,16 @@ function swfUrlToLocalPath(url) {
                 "stroke-linecap": "round",
                 cx: "33",
                 cy: "33",
-                r: "30"
-              })
+                r: "30",
+              }),
             }),
-            (0, j.jsx)("div", { class: "loadbar", children: (0, j.jsx)("div", { class: "loadbar-inner" }) })
-          ]
+            (0, j.jsx)("div", {
+              class: "loadbar",
+              children: (0, j.jsx)("div", { class: "loadbar-inner" }),
+            }),
+          ],
         });
-      }, {})
+      }, {}),
     ),
     Fe.content.appendChild(
       (0, j.jsx)(function () {
@@ -1922,13 +2199,13 @@ function swfUrlToLocalPath(url) {
               (0, j.jsx)("span", { class: "close-modal" }),
               (0, j.jsx)("div", {
                 class: "general-save-options",
-                children: (0, j.jsx)("span", { class: "modal-button" })
+                children: (0, j.jsx)("span", { class: "modal-button" }),
               }),
-              (0, j.jsx)("table", { id: "local-saves" })
-            ]
-          })
+              (0, j.jsx)("table", { id: "local-saves" }),
+            ],
+          }),
         });
-      }, {})
+      }, {}),
     ),
     Fe.content.appendChild(
       (0, j.jsx)(function () {
@@ -1941,18 +2218,40 @@ function swfUrlToLocalPath(url) {
               id: "volume-controls",
               children: [
                 (0, j.jsx)("input", { id: "mute-checkbox", type: "checkbox" }),
-                (0, j.jsx)("label", { id: "volume-mute", for: "mute-checkbox", title: Ce("volume-controls-unmute") }),
-                (0, j.jsx)("label", { id: "volume-min", for: "mute-checkbox", title: Ce("volume-controls-mute") }),
-                (0, j.jsx)("label", { id: "volume-mid", for: "mute-checkbox", title: Ce("volume-controls-mute") }),
-                (0, j.jsx)("label", { id: "volume-max", for: "mute-checkbox", title: Ce("volume-controls-mute") }),
-                (0, j.jsx)("input", { id: "volume-slider", type: "range", min: "0", max: "100", step: "1" }),
+                (0, j.jsx)("label", {
+                  id: "volume-mute",
+                  for: "mute-checkbox",
+                  title: Ce("volume-controls-unmute"),
+                }),
+                (0, j.jsx)("label", {
+                  id: "volume-min",
+                  for: "mute-checkbox",
+                  title: Ce("volume-controls-mute"),
+                }),
+                (0, j.jsx)("label", {
+                  id: "volume-mid",
+                  for: "mute-checkbox",
+                  title: Ce("volume-controls-mute"),
+                }),
+                (0, j.jsx)("label", {
+                  id: "volume-max",
+                  for: "mute-checkbox",
+                  title: Ce("volume-controls-mute"),
+                }),
+                (0, j.jsx)("input", {
+                  id: "volume-slider",
+                  type: "range",
+                  min: "0",
+                  max: "100",
+                  step: "1",
+                }),
                 (0, j.jsx)("span", { id: "volume-slider-text" }),
-                (0, j.jsx)("span", { class: "close-modal" })
-              ]
-            })
-          })
+                (0, j.jsx)("span", { class: "close-modal" }),
+              ],
+            }),
+          }),
         });
-      }, {})
+      }, {}),
     ),
     Fe.content.appendChild(
       (0, j.jsx)(function () {
@@ -1961,10 +2260,13 @@ function swfUrlToLocalPath(url) {
           class: "modal hidden",
           children: (0, j.jsxs)("div", {
             class: "modal-area",
-            children: [(0, j.jsx)("span", { class: "close-modal" }), (0, j.jsx)("div", { id: "video-holder" })]
-          })
+            children: [
+              (0, j.jsx)("span", { class: "close-modal" }),
+              (0, j.jsx)("div", { id: "video-holder" }),
+            ],
+          }),
         });
-      }, {})
+      }, {}),
     ),
     Fe.content.appendChild(
       (0, j.jsx)(function () {
@@ -1975,17 +2277,20 @@ function swfUrlToLocalPath(url) {
             class: "modal-area",
             children: [
               (0, j.jsx)("span", { class: "close-modal" }),
-              (0, j.jsx)("span", { id: "acceleration-text", children: Ce("enable-hardware-acceleration") }),
+              (0, j.jsx)("span", {
+                id: "acceleration-text",
+                children: Ce("enable-hardware-acceleration"),
+              }),
               (0, j.jsx)("a", {
                 href: "https://github.com/ruffle-rs/ruffle/wiki/Frequently-Asked-Questions-For-Users#chrome-hardware-acceleration",
                 target: "_blank",
                 class: "modal-button",
-                children: Ce("enable-hardware-acceleration-link")
-              })
-            ]
-          })
+                children: Ce("enable-hardware-acceleration-link"),
+              }),
+            ],
+          }),
         });
-      }, {})
+      }, {}),
     ),
     Fe.content.appendChild(
       (0, j.jsx)(function () {
@@ -2001,34 +2306,38 @@ function swfUrlToLocalPath(url) {
               (0, j.jsxs)("p", {
                 children: [
                   (0, j.jsxs)("b", { children: [Ee, "+C"] }),
-                  (0, j.jsx)("span", { children: Ce("clipboard-message-copy") })
-                ]
+                  (0, j.jsx)("span", {
+                    children: Ce("clipboard-message-copy"),
+                  }),
+                ],
               }),
               (0, j.jsxs)("p", {
                 children: [
                   (0, j.jsxs)("b", { children: [Ee, "+X"] }),
-                  (0, j.jsx)("span", { children: Ce("clipboard-message-cut") })
-                ]
+                  (0, j.jsx)("span", { children: Ce("clipboard-message-cut") }),
+                ],
               }),
               (0, j.jsxs)("p", {
                 children: [
                   (0, j.jsxs)("b", { children: [Ee, "+V"] }),
-                  (0, j.jsx)("span", { children: Ce("clipboard-message-paste") })
-                ]
-              })
-            ]
-          })
+                  (0, j.jsx)("span", {
+                    children: Ce("clipboard-message-paste"),
+                  }),
+                ],
+              }),
+            ],
+          }),
         });
-      }, {})
+      }, {}),
     ),
     Fe.content.appendChild(
       (0, j.jsx)(function () {
         return (0, j.jsx)("div", {
           id: "context-menu-overlay",
           class: "hidden",
-          children: (0, j.jsx)("ul", { id: "context-menu" })
+          children: (0, j.jsx)("ul", { id: "context-menu" }),
         });
-      }, {})
+      }, {}),
     ));
   const qe = "application/x-shockwave-flash",
     Pe = "application/futuresplash",
@@ -2069,7 +2378,10 @@ function swfUrlToLocalPath(url) {
   let Me = null,
     Ie = !1;
   try {
-    if (document.currentScript instanceof HTMLScriptElement && "" !== document.currentScript.src) {
+    if (
+      document.currentScript instanceof HTMLScriptElement &&
+      "" !== document.currentScript.src
+    ) {
       let e = document.currentScript.src;
       (e.endsWith(".js") || e.endsWith("/") || (e += "/"),
         (Me = new URL(".", e)),
@@ -2110,9 +2422,21 @@ function swfUrlToLocalPath(url) {
     return (n.setMonth(n.getMonth() - 6), n > e);
   }
   const Ve = {
-    OpenDemo: { type: "open_link", url: Te + "/demo", label: Ce("ruffle-demo") },
-    DownloadDesktop: { type: "open_link", url: Te + "/downloads#desktop-app", label: Ce("ruffle-desktop") },
-    UpdateRuffle: { type: "open_link", url: Te + "/downloads", label: Ce("update-ruffle") },
+    OpenDemo: {
+      type: "open_link",
+      url: Te + "/demo",
+      label: Ce("ruffle-demo"),
+    },
+    DownloadDesktop: {
+      type: "open_link",
+      url: Te + "/downloads#desktop-app",
+      label: Ce("ruffle-desktop"),
+    },
+    UpdateRuffle: {
+      type: "open_link",
+      url: Te + "/downloads",
+      label: Ce("update-ruffle"),
+    },
     CreateReport: { type: "create_report" },
     ShowDetails: { type: "show_details" },
     createReportOrUpdate() {
@@ -2121,102 +2445,164 @@ function swfUrlToLocalPath(url) {
     openWiki: (e, n) => ({
       type: "open_link",
       url: `https://github.com/ruffle-rs/ruffle/wiki/${e}`,
-      label: n ?? Ce("ruffle-wiki")
-    })
+      label: n ?? Ce("ruffle-wiki"),
+    }),
   };
   function Je(e, n, a, t) {
     const r = a.join(""),
       { body: o, actions: i } = (function (e) {
         if (e instanceof We)
           return e.swfUrl && !e.swfUrl.protocol.includes("http")
-            ? { body: Ae("error-file-protocol"), actions: [Ve.OpenDemo, Ve.DownloadDesktop] }
+            ? {
+                body: Ae("error-file-protocol"),
+                actions: [Ve.OpenDemo, Ve.DownloadDesktop],
+              }
             : window.location.origin === e.swfUrl?.origin ||
                 e.statusNotOk ||
                 window.location.protocol.includes("extension")
               ? { body: Ae("error-swf-fetch"), actions: [Ve.ShowDetails] }
               : {
                   body: Ae("error-swf-cors"),
-                  actions: [Ve.openWiki("Using-Ruffle#configure-cors-header"), Ve.ShowDetails]
+                  actions: [
+                    Ve.openWiki("Using-Ruffle#configure-cors-header"),
+                    Ve.ShowDetails,
+                  ],
                 };
-        if (e instanceof Le) return { body: Ae("error-invalid-swf"), actions: [Ve.ShowDetails] };
+        if (e instanceof Le)
+          return { body: Ae("error-invalid-swf"), actions: [Ve.ShowDetails] };
         if (e instanceof Ne) {
           if ("file:" === window.location.protocol)
-            return { body: Ae("error-file-protocol"), actions: [Ve.OpenDemo, Ve.DownloadDesktop] };
+            return {
+              body: Ae("error-file-protocol"),
+              actions: [Ve.OpenDemo, Ve.DownloadDesktop],
+            };
           const n = String(e.cause.message).toLowerCase();
           if (n.includes("mime"))
             return {
               body: Ae("error-wasm-mime-type"),
-              actions: [Ve.openWiki("Using-Ruffle#configure-webassembly-mime-type"), Ve.ShowDetails]
+              actions: [
+                Ve.openWiki("Using-Ruffle#configure-webassembly-mime-type"),
+                Ve.ShowDetails,
+              ],
             };
-          if (n.includes("networkerror") || n.includes("failed to fetch") || n.includes("load failed"))
+          if (
+            n.includes("networkerror") ||
+            n.includes("failed to fetch") ||
+            n.includes("load failed")
+          )
             return {
               body: Ae("error-wasm-cors"),
-              actions: [Ve.openWiki("Using-Ruffle#configure-cors-header"), Ve.ShowDetails]
+              actions: [
+                Ve.openWiki("Using-Ruffle#configure-cors-header"),
+                Ve.ShowDetails,
+              ],
             };
           if (n.includes("disallowed by embedder"))
             return {
               body: Ae("error-csp-conflict"),
-              actions: [Ve.openWiki("Using-Ruffle#configure-wasm-csp"), Ve.ShowDetails]
+              actions: [
+                Ve.openWiki("Using-Ruffle#configure-wasm-csp"),
+                Ve.ShowDetails,
+              ],
             };
           if ("CompileError" === e.cause.name && n.includes("bad type"))
-            return { body: Ae("error-wasm-unsupported-browser"), actions: [Ve.openWiki("#web"), Ve.ShowDetails] };
+            return {
+              body: Ae("error-wasm-unsupported-browser"),
+              actions: [Ve.openWiki("#web"), Ve.ShowDetails],
+            };
           if ("CompileError" === e.cause.name)
             return {
               body: Ae("error-wasm-invalid"),
-              actions: [Ve.openWiki("Using-Ruffle#addressing-a-compileerror"), Ve.ShowDetails]
+              actions: [
+                Ve.openWiki("Using-Ruffle#addressing-a-compileerror"),
+                Ve.ShowDetails,
+              ],
             };
           if (
-            (n.includes("could not download wasm module") || n.includes("webassembly compilation aborted")) &&
+            (n.includes("could not download wasm module") ||
+              n.includes("webassembly compilation aborted")) &&
             "TypeError" === e.cause.name
           )
-            return { body: Ae("error-wasm-download"), actions: [Ve.ShowDetails] };
+            return {
+              body: Ae("error-wasm-download"),
+              actions: [Ve.ShowDetails],
+            };
           if ("TypeError" === e.cause.name) {
             const e = Ae("error-javascript-conflict");
             return (
-              Be() && e.appendChild(Ae("error-javascript-conflict-outdated", { buildDate: l.buildDate })),
+              Be() &&
+                e.appendChild(
+                  Ae("error-javascript-conflict-outdated", {
+                    buildDate: l.buildDate,
+                  }),
+                ),
               { body: e, actions: [Ve.createReportOrUpdate(), Ve.ShowDetails] }
             );
           }
-          return navigator.userAgent.includes("Edg") && n.includes("webassembly is not defined")
+          return navigator.userAgent.includes("Edg") &&
+            n.includes("webassembly is not defined")
             ? {
                 body: Ae("error-wasm-disabled-on-edge"),
                 actions: [
-                  Ve.openWiki("Frequently-Asked-Questions-For-Users#edge-webassembly-error", Ce("more-info")),
-                  Ve.ShowDetails
-                ]
+                  Ve.openWiki(
+                    "Frequently-Asked-Questions-For-Users#edge-webassembly-error",
+                    Ce("more-info"),
+                  ),
+                  Ve.ShowDetails,
+                ],
               }
             : {
                 body: Ae("error-wasm-not-found"),
-                actions: [Ve.openWiki("Using-Ruffle#configuration-options"), Ve.ShowDetails]
+                actions: [
+                  Ve.openWiki("Using-Ruffle#configuration-options"),
+                  Ve.ShowDetails,
+                ],
               };
         }
         return e instanceof _e
           ? {
               body: Ae("error-javascript-config"),
-              actions: [Ve.openWiki("Using-Ruffle#javascript-api"), Ve.ShowDetails]
+              actions: [
+                Ve.openWiki("Using-Ruffle#javascript-api"),
+                Ve.ShowDetails,
+              ],
             }
           : {
-              body: Ae("error-unknown", { buildDate: l.buildDate, outdated: String(Be) }),
-              actions: [Ve.createReportOrUpdate(), Ve.ShowDetails]
+              body: Ae("error-unknown", {
+                buildDate: l.buildDate,
+                outdated: String(Be),
+              }),
+              actions: [Ve.createReportOrUpdate(), Ve.ShowDetails],
             };
       })(n),
       s = (0, Ue.createRef)(),
       u = () => {
         (s.current.classList.add("details"),
-          s.current.replaceChildren((0, j.jsx)("textarea", { readOnly: !0, children: r })));
+          s.current.replaceChildren(
+            (0, j.jsx)("textarea", { readOnly: !0, children: r }),
+          ));
       };
     ((e.textContent = ""),
       e.appendChild(
         (0, j.jsxs)("div", {
           id: "panic",
           children: [
-            (0, j.jsx)("div", { id: "panic-title", children: Ce("panic-title") }),
+            (0, j.jsx)("div", {
+              id: "panic-title",
+              children: Ce("panic-title"),
+            }),
             (0, j.jsx)("div", { id: "panic-body", ref: s, children: o }),
             (0, j.jsx)("div", {
               id: "panic-footer",
               children: (0, j.jsx)("ul", {
                 children: i.map((e) =>
-                  (function ({ action: e, showDetails: n, errorArray: a, errorText: t, swfUrl: r }) {
+                  (function ({
+                    action: e,
+                    showDetails: n,
+                    errorArray: a,
+                    errorText: t,
+                    swfUrl: r,
+                  }) {
                     if ("show_details" === e.type) {
                       const e = () => (n(), !1);
                       return (0, j.jsx)("li", {
@@ -2224,17 +2610,24 @@ function swfUrlToLocalPath(url) {
                           href: "#",
                           id: "panic-view-details",
                           onClick: e,
-                          children: Ce("view-error-details")
-                        })
+                          children: Ce("view-error-details"),
+                        }),
                       });
                     }
                     if ("open_link" === e.type)
                       return (0, j.jsx)("li", {
-                        children: (0, j.jsx)("a", { href: swfUrlToLocalPath(e.url), target: "_top", children: e.label })
+                        children: (0, j.jsx)("a", {
+                          href: swfUrlToLocalPath(e.url),
+                          target: "_top",
+                          children: e.label,
+                        }),
                       });
                     {
                       let e;
-                      ((e = document.location.protocol.includes("extension") && r ? r.href : document.location.href),
+                      ((e =
+                        document.location.protocol.includes("extension") && r
+                          ? r.href
+                          : document.location.href),
                         (e = e.split(/[?#]/, 1)[0]));
                       let n = `https://github.com/ruffle-rs/ruffle/issues/new?title=${encodeURIComponent(`Error on ${e}`)}&template=error_report.md&labels=error-report&body=`,
                         o = encodeURIComponent(t);
@@ -2246,60 +2639,84 @@ function swfUrlToLocalPath(url) {
                           (o = encodeURIComponent(a.join("")))),
                         (n += o),
                         (0, j.jsx)("li", {
-                          children: (0, j.jsx)("a", { href: n, target: "_top", children: Ce("report-bug") })
+                          children: (0, j.jsx)("a", {
+                            href: n,
+                            target: "_top",
+                            children: Ce("report-bug"),
+                          }),
                         })
                       );
                     }
-                  })({ action: e, showDetails: u, errorText: r, errorArray: a, swfUrl: t })
-                )
-              })
-            })
-          ]
-        })
+                  })({
+                    action: e,
+                    showDetails: u,
+                    errorText: r,
+                    errorArray: a,
+                    swfUrl: t,
+                  }),
+                ),
+              }),
+            }),
+          ],
+        }),
       ));
   }
   const He = async () =>
       WebAssembly.validate(
         new Uint8Array([
-          0, 97, 115, 109, 1, 0, 0, 0, 1, 4, 1, 96, 0, 0, 3, 2, 1, 0, 5, 3, 1, 0, 1, 10, 14, 1, 12, 0, 65, 0, 65, 0, 65,
-          0, 252, 10, 0, 0, 11
-        ])
+          0, 97, 115, 109, 1, 0, 0, 0, 1, 4, 1, 96, 0, 0, 3, 2, 1, 0, 5, 3, 1,
+          0, 1, 10, 14, 1, 12, 0, 65, 0, 65, 0, 65, 0, 252, 10, 0, 0, 11,
+        ]),
       ),
     Ke = async () =>
       WebAssembly.validate(
-        new Uint8Array([0, 97, 115, 109, 1, 0, 0, 0, 1, 4, 1, 96, 0, 0, 3, 2, 1, 0, 10, 7, 1, 5, 0, 208, 112, 26, 11])
+        new Uint8Array([
+          0, 97, 115, 109, 1, 0, 0, 0, 1, 4, 1, 96, 0, 0, 3, 2, 1, 0, 10, 7, 1,
+          5, 0, 208, 112, 26, 11,
+        ]),
       ),
     Ze = async () =>
       WebAssembly.validate(
         new Uint8Array([
-          0, 97, 115, 109, 1, 0, 0, 0, 1, 4, 1, 96, 0, 0, 3, 2, 1, 0, 10, 12, 1, 10, 0, 67, 0, 0, 0, 0, 252, 0, 26, 11
-        ])
+          0, 97, 115, 109, 1, 0, 0, 0, 1, 4, 1, 96, 0, 0, 3, 2, 1, 0, 10, 12, 1,
+          10, 0, 67, 0, 0, 0, 0, 252, 0, 26, 11,
+        ]),
       ),
     Qe = async () =>
       WebAssembly.validate(
-        new Uint8Array([0, 97, 115, 109, 1, 0, 0, 0, 1, 4, 1, 96, 0, 0, 3, 2, 1, 0, 10, 8, 1, 6, 0, 65, 0, 192, 26, 11])
+        new Uint8Array([
+          0, 97, 115, 109, 1, 0, 0, 0, 1, 4, 1, 96, 0, 0, 3, 2, 1, 0, 10, 8, 1,
+          6, 0, 65, 0, 192, 26, 11,
+        ]),
       ),
     Ye = async () =>
       WebAssembly.validate(
         new Uint8Array([
-          0, 97, 115, 109, 1, 0, 0, 0, 1, 5, 1, 96, 0, 1, 123, 3, 2, 1, 0, 10, 10, 1, 8, 0, 65, 0, 253, 15, 253, 98, 11
-        ])
+          0, 97, 115, 109, 1, 0, 0, 0, 1, 5, 1, 96, 0, 1, 123, 3, 2, 1, 0, 10,
+          10, 1, 8, 0, 65, 0, 253, 15, 253, 98, 11,
+        ]),
       );
   let Ge = null;
   async function Xe(e) {
     null === Ge &&
       (Ge = (async function (e) {
         je();
-        const n = (await Promise.all([He(), Ye(), Ze(), Qe(), Ke()])).every(Boolean);
+        const n = (await Promise.all([He(), Ye(), Ze(), Qe(), Ke()])).every(
+          Boolean,
+        );
         (n ||
-          console.log("Some WebAssembly extensions are NOT available, falling back to the vanilla WebAssembly module"),
+          console.log(
+            "Some WebAssembly extensions are NOT available, falling back to the vanilla WebAssembly module",
+          ),
           oa.options.onFirstLoad?.(),
           (oa.options.onFirstLoad = () => {}));
         const {
           default: a,
           RuffleInstanceBuilder: t,
-          ZipWriter: o
-        } = await (n ? r.e(655).then(r.bind(r, 655)) : r.e(482).then(r.bind(r, 482)));
+          ZipWriter: o,
+        } = await (n
+          ? r.e(655).then(r.bind(r, 655))
+          : r.e(482).then(r.bind(r, 482)));
         let i;
         const s = n ? new URL(r(797), r.b) : new URL(r(124), r.b),
           l = await fetch(s),
@@ -2316,12 +2733,14 @@ function swfUrlToLocalPath(url) {
                 for (e(a, t); ; ) {
                   const { done: o, value: i } = await r.read();
                   if (o) break;
-                  (i?.byteLength && (a += i?.byteLength), n.enqueue(i), e(a, t));
+                  (i?.byteLength && (a += i?.byteLength),
+                    n.enqueue(i),
+                    e(a, t));
                 }
                 n.close();
-              }
+              },
             }),
-            l
+            l,
           );
         } else i = l;
         return (await a({ module_or_path: i }), [t, o]);
@@ -2340,8 +2759,14 @@ function swfUrlToLocalPath(url) {
     if (void 0 !== window.customElements)
       for (; t < 999; ) {
         let a = e;
-        if ((t > 0 && (a = a + "-" + t), void 0 === window.customElements.get(a)))
-          return (window.customElements.define(a, n), (en[e] = { class: n, name: a, internalName: e }), a);
+        if (
+          (t > 0 && (a = a + "-" + t), void 0 === window.customElements.get(a))
+        )
+          return (
+            window.customElements.define(a, n),
+            (en[e] = { class: n, name: a, internalName: e }),
+            a
+          );
         t += 1;
       }
     throw new Error("Failed to assign custom element " + e);
@@ -2363,7 +2788,7 @@ function swfUrlToLocalPath(url) {
               isNaN(t) ? (n <<= 4) : (n = (n << 4) | t);
             }
             return n;
-          })(n.backgroundColor)
+          })(n.backgroundColor),
         ),
       an(n.upgradeToHttps) && e.setUpgradeToHttps(n.upgradeToHttps),
       an(n.compatibilityRules) && e.setCompatibilityRules(n.compatibilityRules),
@@ -2376,7 +2801,8 @@ function swfUrlToLocalPath(url) {
       an(n.quality)
         ? e.setQuality(n.quality.toLowerCase())
         : void 0 !== window.orientation &&
-          (console.log("Running on a mobile device; defaulting to low quality"), e.setQuality("low")),
+          (console.log("Running on a mobile device; defaulting to low quality"),
+          e.setQuality("low")),
       an(n.scale) && e.setScale(n.scale.toLowerCase()),
       an(n.forceScale) && e.setForceScale(n.forceScale),
       an(n.frameRate) && e.setFrameRate(n.frameRate),
@@ -2387,19 +2813,23 @@ function swfUrlToLocalPath(url) {
           (function (e) {
             if ("number" == typeof e) return e;
             return e.secs;
-          })(n.maxExecutionDuration)
+          })(n.maxExecutionDuration),
         ),
       an(n.playerVersion) && e.setPlayerVersion(n.playerVersion),
       an(n.preferredRenderer) && e.setPreferredRenderer(n.preferredRenderer),
       an(n.openUrlMode) && e.setOpenUrlMode(n.openUrlMode.toLowerCase()),
-      an(n.allowNetworking) && e.setAllowNetworking(n.allowNetworking.toLowerCase()),
-      an(n.credentialAllowList) && e.setCredentialAllowList(n.credentialAllowList),
+      an(n.allowNetworking) &&
+        e.setAllowNetworking(n.allowNetworking.toLowerCase()),
+      an(n.credentialAllowList) &&
+        e.setCredentialAllowList(n.credentialAllowList),
       an(n.playerRuntime) && e.setPlayerRuntime(n.playerRuntime),
       an(n.socketProxy))
     )
-      for (const a of n.socketProxy) e.addSocketProxy(a.host, a.port, a.proxyUrl);
+      for (const a of n.socketProxy)
+        e.addSocketProxy(a.host, a.port, a.proxyUrl);
     if (an(n.gamepadButtonMapping))
-      for (const [a, t] of Object.entries(n.gamepadButtonMapping)) e.addGamepadButtonMapping(a, t);
+      for (const [a, t] of Object.entries(n.gamepadButtonMapping))
+        e.addGamepadButtonMapping(a, t);
     if (an(n.urlRewriteRules))
       for (const [a, t] of n.urlRewriteRules)
         if (a instanceof RegExp) e.addUrlRewriteRule(a, t);
@@ -2410,7 +2840,8 @@ function swfUrlToLocalPath(url) {
           e.addUrlRewriteRule(r, o);
         }
     (an(n.scrollingBehavior) && e.setScrollingBehavior(n.scrollingBehavior),
-      an(n.deviceFontRenderer) && e.setDeviceFontRenderer(n.deviceFontRenderer));
+      an(n.deviceFontRenderer) &&
+        e.setDeviceFontRenderer(n.deviceFontRenderer));
   }
   const rn = /^\s*(\d+(\.\d+)?(%)?)/;
   let on = !1;
@@ -2459,9 +2890,9 @@ function swfUrlToLocalPath(url) {
                         const a = vn(e);
                         return new Blob([a], { type: n });
                       })(a, "application/octet-stream"),
-                      n + ".sol"
-                    )
-                })
+                      n + ".sol",
+                    ),
+                }),
               }),
               (0, j.jsxs)("td", {
                 children: [
@@ -2470,30 +2901,33 @@ function swfUrlToLocalPath(url) {
                     accept: ".sol",
                     class: "replace-save",
                     id: "replace-save-" + e,
-                    onChange: (n) => this.replaceSOL(n, e)
+                    onChange: (n) => this.replaceSOL(n, e),
                   }),
                   (0, j.jsx)("label", {
                     for: "replace-save-" + e,
                     class: "save-option",
                     id: "replace-save",
-                    title: Ce("save-replace")
-                  })
-                ]
+                    title: Ce("save-replace"),
+                  }),
+                ],
               }),
               (0, j.jsx)("td", {
                 children: (0, j.jsx)("span", {
                   class: "save-option",
                   id: "delete-save",
                   title: Ce("save-delete"),
-                  onClick: () => this.deleteSave(e)
-                })
-              })
-            ]
+                  onClick: () => this.deleteSave(e),
+                }),
+              }),
+            ],
           })),
         (this.element = e),
         (this.debugPlayerInfo = n),
         (this.onCallbackAvailable = a),
-        (this.shadow = this.element.attachShadow({ mode: "open", delegatesFocus: !0 })),
+        (this.shadow = this.element.attachShadow({
+          mode: "open",
+          delegatesFocus: !0,
+        })),
         this.shadow.appendChild(Fe.content.cloneNode(!0)),
         (this.dynamicStyles = this.shadow.getElementById("dynamic-styles")),
         (this.container = this.shadow.getElementById("container")),
@@ -2502,11 +2936,18 @@ function swfUrlToLocalPath(url) {
         (this.unmuteOverlay = this.shadow.getElementById("unmute-overlay")),
         (this.splashScreen = this.shadow.getElementById("splash-screen")),
         (this.virtualKeyboard = this.shadow.getElementById("virtual-keyboard")),
-        this.virtualKeyboard.addEventListener("input", this.virtualKeyboardInput.bind(this)),
+        this.virtualKeyboard.addEventListener(
+          "input",
+          this.virtualKeyboardInput.bind(this),
+        ),
         (this.saveManager = this.shadow.getElementById("save-manager")),
         (this.videoModal = this.shadow.getElementById("video-modal")),
-        (this.hardwareAccelerationModal = this.shadow.getElementById("hardware-acceleration-modal")),
-        (this.volumeControls = this.shadow.getElementById("volume-controls-modal")),
+        (this.hardwareAccelerationModal = this.shadow.getElementById(
+          "hardware-acceleration-modal",
+        )),
+        (this.volumeControls = this.shadow.getElementById(
+          "volume-controls-modal",
+        )),
         (this.clipboardModal = this.shadow.getElementById("clipboard-modal")),
         this.addModalJavaScript(this.saveManager),
         this.addModalJavaScript(this.volumeControls),
@@ -2516,12 +2957,16 @@ function swfUrlToLocalPath(url) {
         (this.volumeSettings = new cn(!1, 100)),
         this.addVolumeControlsJavaScript(this.volumeControls));
       const t = this.saveManager.querySelector(".modal-button");
-      t && (t.addEventListener("click", this.backupSaves.bind(this)), (t.innerText = Ce("save-backup-all")));
+      t &&
+        (t.addEventListener("click", this.backupSaves.bind(this)),
+        (t.innerText = Ce("save-backup-all")));
       const r = this.unmuteOverlay.querySelector("#unmute-overlay-svg");
       if (r) {
         r.querySelector("#unmute-text").textContent = Ce("click-to-unmute");
       }
-      ((this.contextMenuOverlay = this.shadow.getElementById("context-menu-overlay")),
+      ((this.contextMenuOverlay = this.shadow.getElementById(
+        "context-menu-overlay",
+      )),
         (this.contextMenuElement = this.shadow.getElementById("context-menu")));
       const o = (e) => {
         (e.preventDefault(), e.stopPropagation());
@@ -2531,22 +2976,53 @@ function swfUrlToLocalPath(url) {
         (this.contextMenuElement.dir = (function () {
           const e = new Intl.Locale(navigator.language);
           let n = null;
-          if ("getTextInfo" in e && "function" == typeof e.getTextInfo) n = e.getTextInfo();
+          if ("getTextInfo" in e && "function" == typeof e.getTextInfo)
+            n = e.getTextInfo();
           else {
-            if (!("textInfo" in e) || "object" != typeof e.textInfo) return "ltr";
+            if (!("textInfo" in e) || "object" != typeof e.textInfo)
+              return "ltr";
             n = e.textInfo;
           }
-          if ("object" == typeof n && "direction" in n && "string" == typeof n.direction) return n.direction || "ltr";
+          if (
+            "object" == typeof n &&
+            "direction" in n &&
+            "string" == typeof n.direction
+          )
+            return n.direction || "ltr";
           return "ltr";
         })()),
-        document.documentElement.addEventListener("pointerdown", this.checkIfTouch.bind(this)),
-        this.element.addEventListener("contextmenu", this.showContextMenu.bind(this)),
-        this.container.addEventListener("pointerdown", this.pointerDown.bind(this)),
-        this.container.addEventListener("pointermove", this.checkLongPressMovement.bind(this)),
-        this.container.addEventListener("pointerup", this.checkLongPress.bind(this)),
-        this.container.addEventListener("pointercancel", this.clearLongPressTimer.bind(this)),
-        this.element.addEventListener("fullscreenchange", this.fullScreenChange.bind(this)),
-        this.element.addEventListener("webkitfullscreenchange", this.fullScreenChange.bind(this)),
+        document.documentElement.addEventListener(
+          "pointerdown",
+          this.checkIfTouch.bind(this),
+        ),
+        this.element.addEventListener(
+          "contextmenu",
+          this.showContextMenu.bind(this),
+        ),
+        this.container.addEventListener(
+          "pointerdown",
+          this.pointerDown.bind(this),
+        ),
+        this.container.addEventListener(
+          "pointermove",
+          this.checkLongPressMovement.bind(this),
+        ),
+        this.container.addEventListener(
+          "pointerup",
+          this.checkLongPress.bind(this),
+        ),
+        this.container.addEventListener(
+          "pointercancel",
+          this.clearLongPressTimer.bind(this),
+        ),
+        this.element.addEventListener(
+          "fullscreenchange",
+          this.fullScreenChange.bind(this),
+        ),
+        this.element.addEventListener(
+          "webkitfullscreenchange",
+          this.fullScreenChange.bind(this),
+        ),
         (this.instance = null),
         (this.newZipWriter = null),
         (this._readyState = u.HaveNothing),
@@ -2576,7 +3052,11 @@ function swfUrlToLocalPath(url) {
     addVolumeControlsJavaScript(e) {
       const n = e.querySelector("#mute-checkbox"),
         a = e.querySelector("#volume-mute"),
-        t = [e.querySelector("#volume-min"), e.querySelector("#volume-mid"), e.querySelector("#volume-max")],
+        t = [
+          e.querySelector("#volume-min"),
+          e.querySelector("#volume-mid"),
+          e.querySelector("#volume-max"),
+        ],
         r = e.querySelector("#volume-slider"),
         o = e.querySelector("#volume-slider-text"),
         i = () => {
@@ -2616,16 +3096,24 @@ function swfUrlToLocalPath(url) {
         "visibilitychange",
         () => {
           this.instance &&
-            (document.hidden && ((this.lastActivePlayingState = this.instance.is_playing()), this.instance.pause()),
-            document.hidden || !0 !== this.lastActivePlayingState || this.instance.play());
+            (document.hidden &&
+              ((this.lastActivePlayingState = this.instance.is_playing()),
+              this.instance.pause()),
+            document.hidden ||
+              !0 !== this.lastActivePlayingState ||
+              this.instance.play());
         },
-        !1
+        !1,
       );
     }
     updateStyles() {
       if (this.dynamicStyles.sheet) {
         if (this.dynamicStyles.sheet.cssRules)
-          for (let e = this.dynamicStyles.sheet.cssRules.length - 1; e >= 0; e--)
+          for (
+            let e = this.dynamicStyles.sheet.cssRules.length - 1;
+            e >= 0;
+            e--
+          )
             this.dynamicStyles.sheet.deleteRule(e);
         const e = this.element.attributes.getNamedItem("align");
         if (null != e) {
@@ -2660,19 +3148,23 @@ function swfUrlToLocalPath(url) {
         const n = this.element.attributes.getNamedItem("width");
         if (null != n) {
           const e = un.htmlDimensionToCssDimension(n.value);
-          null !== e && this.dynamicStyles.sheet.insertRule(`:host { width: ${e}; }`);
+          null !== e &&
+            this.dynamicStyles.sheet.insertRule(`:host { width: ${e}; }`);
         }
         const a = this.element.attributes.getNamedItem("height");
         if (null != a) {
           const e = un.htmlDimensionToCssDimension(a.value);
-          null !== e && this.dynamicStyles.sheet.insertRule(`:host { height: ${e}; }`);
+          null !== e &&
+            this.dynamicStyles.sheet.insertRule(`:host { height: ${e}; }`);
         }
       }
     }
     isUnusedFallbackObject() {
       const e = (function (e) {
         const n = en[e];
-        return void 0 !== n ? { internalName: e, name: n.name, class: n.class } : null;
+        return void 0 !== n
+          ? { internalName: e, name: n.name, class: n.class }
+          : null;
       })("ruffle-object");
       if (null !== e) {
         let n = this.element.parentNode;
@@ -2692,24 +3184,26 @@ function swfUrlToLocalPath(url) {
         this.loadedConfig &&
           !1 === this.loadedConfig.preloader &&
           console.warn(
-            "The configuration option preloader has been replaced with splashScreen. If you own this website, please update the configuration."
+            "The configuration option preloader has been replaced with splashScreen. If you own this website, please update the configuration.",
           ),
         this.loadedConfig &&
           this.loadedConfig.maxExecutionDuration &&
           "number" != typeof this.loadedConfig.maxExecutionDuration &&
           console.warn(
-            "Configuration: An obsolete format for duration for 'maxExecutionDuration' was used, please use a single number indicating seconds instead. For instance '15' instead of '{secs: 15, nanos: 0}'."
+            "Configuration: An obsolete format for duration for 'maxExecutionDuration' was used, please use a single number indicating seconds instead. For instance '15' instead of '{secs: 15, nanos: 0}'.",
           ),
         this.loadedConfig &&
           "boolean" == typeof this.loadedConfig.contextMenu &&
           console.warn(
-            'The configuration option contextMenu no longer takes a boolean. Use "on", "off", or "rightClickOnly".'
+            'The configuration option contextMenu no longer takes a boolean. Use "on", "off", or "rightClickOnly".',
           ));
-      const [e, n] = await Xe(this.onRuffleDownloadProgress.bind(this)).catch((e) => {
-        console.error(`Serious error loading Ruffle: ${e}`);
-        const n = new Ne(e);
-        throw (this.panic(n), n);
-      });
+      const [e, n] = await Xe(this.onRuffleDownloadProgress.bind(this)).catch(
+        (e) => {
+          console.error(`Serious error loading Ruffle: ${e}`);
+          const n = new Ne(e);
+          throw (this.panic(n), n);
+        },
+      );
       if (
         ((this.newZipWriter = n),
         tn(e, this.loadedConfig || {}),
@@ -2728,11 +3222,19 @@ function swfUrlToLocalPath(url) {
         a && e.setDefaultFont(n, a);
       }
       ((this.instance = await e.build(this.container, this).catch((e) => {
-        throw (console.error(`Serious error loading Ruffle: ${e}`), this.panic(e), e);
+        throw (
+          console.error(`Serious error loading Ruffle: ${e}`),
+          this.panic(e),
+          e
+        );
       })),
         (this.rendererDebugInfo = this.instance.renderer_debug_info()),
         this.rendererDebugInfo.includes("Adapter Device Type: Cpu") &&
-          this.container.addEventListener("mouseover", this.openHardwareAccelerationModal.bind(this), { once: !0 }));
+          this.container.addEventListener(
+            "mouseover",
+            this.openHardwareAccelerationModal.bind(this),
+            { once: !0 },
+          ));
       const a = this.instance.renderer_name(),
         t = this.instance.constructor;
       if (
@@ -2744,7 +3246,7 @@ function swfUrlToLocalPath(url) {
             " | Used renderer: " +
             (a ?? "") +
             ")",
-          "background: #37528C; color: #FFAD33"
+          "background: #37528C; color: #FFAD33",
         ),
         "running" !== this.audioState() &&
           ((this.container.style.visibility = "hidden"),
@@ -2757,16 +3259,23 @@ function swfUrlToLocalPath(url) {
         this.unmuteAudioContext(),
         !this.loadedConfig ||
           this.loadedConfig.autoplay === c.On ||
-          (this.loadedConfig.autoplay !== c.Off && "running" === this.audioState()))
+          (this.loadedConfig.autoplay !== c.Off &&
+            "running" === this.audioState()))
       ) {
         if ((this.play(), "running" !== this.audioState())) {
-          ((this.loadedConfig && this.loadedConfig.unmuteOverlay === f.Hidden) ||
+          ((this.loadedConfig &&
+            this.loadedConfig.unmuteOverlay === f.Hidden) ||
             (this.unmuteOverlay.style.display = "block"),
-            this.container.addEventListener("click", this.unmuteOverlayClicked.bind(this), { once: !0 }));
+            this.container.addEventListener(
+              "click",
+              this.unmuteOverlayClicked.bind(this),
+              { once: !0 },
+            ));
           const e = this.instance?.audio_context();
           e &&
             (e.onstatechange = () => {
-              ("running" === e.state && this.unmuteOverlayClicked(), (e.onstatechange = null));
+              ("running" === e.state && this.unmuteOverlayClicked(),
+                (e.onstatechange = null));
             });
         }
       } else this.playButton.style.display = "block";
@@ -2774,7 +3283,9 @@ function swfUrlToLocalPath(url) {
     onRuffleDownloadProgress(e, n) {
       const a = this.splashScreen.querySelector(".loadbar-inner"),
         t = this.splashScreen.querySelector(".loadbar");
-      Number.isNaN(n) ? t && (t.style.display = "none") : (a.style.width = (e / n) * 100 + "%");
+      Number.isNaN(n)
+        ? t && (t.style.display = "none")
+        : (a.style.width = (e / n) * 100 + "%");
     }
     destroy() {
       this.instance &&
@@ -2793,57 +3304,90 @@ function swfUrlToLocalPath(url) {
         }
       };
       return (
-        n(null !== e && "object" == typeof e, "Argument 0 must be a string or object"),
-        n("url" in e || "data" in e, "Argument 0 must contain a `url` or `data` key"),
+        n(
+          null !== e && "object" == typeof e,
+          "Argument 0 must be a string or object",
+        ),
+        n(
+          "url" in e || "data" in e,
+          "Argument 0 must contain a `url` or `data` key",
+        ),
         n(!("url" in e) || "string" == typeof e.url, "`url` must be a string"),
         e
       );
     }
     async reload() {
-      if (!this.loadedConfig) throw new Error("Cannot reload if load wasn't first called");
+      if (!this.loadedConfig)
+        throw new Error("Cannot reload if load wasn't first called");
       await this.load(this.loadedConfig);
     }
     async reloadWithCanvasRenderer() {
-      if (this.loadedConfig && this.loadedConfig.preferredRenderer !== h.Canvas) {
+      if (
+        this.loadedConfig &&
+        this.loadedConfig.preferredRenderer !== h.Canvas
+      ) {
         const e = { ...this.loadedConfig, preferredRenderer: h.Canvas };
         await this.load(e);
       } else {
-        if (!this.loadedConfig) throw new Error("Cannot reload if load wasn't first called");
+        if (!this.loadedConfig)
+          throw new Error("Cannot reload if load wasn't first called");
         this.panic(new Error(Ce("error-canvas-reload")));
       }
     }
     async load(e, n = !1) {
-      if (((e = this.checkOptions(e)), this.element.isConnected && !this.isUnusedFallbackObject())) {
+      if (
+        ((e = this.checkOptions(e)),
+        this.element.isConnected && !this.isUnusedFallbackObject())
+      ) {
         if (!pn(this.element))
           try {
             ((this.loadedConfig = {
               ...x,
-              ...(n && "url" in e ? { allowScriptAccess: wn("samedomain", swfUrlToLocalPath(e.url)) } : {}),
+              ...(n && "url" in e
+                ? {
+                    allowScriptAccess: wn(
+                      "samedomain",
+                      swfUrlToLocalPath(e.url),
+                    ),
+                  }
+                : {}),
               ...(window.RufflePlayer?.config ?? {}),
               ...this.config,
-              ...e
+              ...e,
             }),
               this.loadedConfig.backgroundColor &&
                 this.loadedConfig.wmode !== p.Transparent &&
-                (this.container.style.backgroundColor = this.loadedConfig.backgroundColor),
+                (this.container.style.backgroundColor =
+                  this.loadedConfig.backgroundColor),
               await this.ensureFreshInstance(),
               "url" in e
                 ? (console.log(`Loading SWF file ${swfUrlToLocalPath(e.url)}`),
-                  (this.swfUrl = new URL(swfUrlToLocalPath(e.url), document.baseURI)),
+                  (this.swfUrl = new URL(
+                    swfUrlToLocalPath(e.url),
+                    document.baseURI,
+                  )),
                   this.instance.stream_from(this.swfUrl.href, sn(e.parameters)))
                 : "data" in e &&
                   (console.log("Loading SWF data"),
                   delete this.swfUrl,
-                  this.instance.load_data(new Uint8Array(e.data), sn(e.parameters), e.swfFileName || "movie.swf")));
+                  this.instance.load_data(
+                    new Uint8Array(e.data),
+                    sn(e.parameters),
+                    e.swfFileName || "movie.swf",
+                  )));
           } catch (e) {
             console.error(`Serious error occurred loading SWF file: ${e}`);
             const n = new Error(e);
             throw (this.panic(n), n);
           }
-      } else console.warn("Ignoring attempt to play a disconnected or suspended Ruffle element");
+      } else
+        console.warn(
+          "Ignoring attempt to play a disconnected or suspended Ruffle element",
+        );
     }
     play() {
-      this.instance && (this.instance.play(), (this.playButton.style.display = "none"));
+      this.instance &&
+        (this.instance.play(), (this.playButton.style.display = "none"));
     }
     get isPlaying() {
       return !!this.instance && this.instance.is_playing();
@@ -2855,13 +3399,20 @@ function swfUrlToLocalPath(url) {
       this.instance && this.instance.set_volume(e);
     }
     get fullscreenEnabled() {
-      return !(!document.fullscreenEnabled && !document.webkitFullscreenEnabled);
+      return !(
+        !document.fullscreenEnabled && !document.webkitFullscreenEnabled
+      );
     }
     get isFullscreen() {
-      return (document.fullscreenElement || document.webkitFullscreenElement) === this.element;
+      return (
+        (document.fullscreenElement || document.webkitFullscreenElement) ===
+        this.element
+      );
     }
     setFullscreen(e) {
-      this.fullscreenEnabled && e !== this.isFullscreen && (e ? this.enterFullscreen() : this.exitFullscreen());
+      this.fullscreenEnabled &&
+        e !== this.isFullscreen &&
+        (e ? this.enterFullscreen() : this.exitFullscreen());
     }
     enterFullscreen() {
       const e = { navigationUI: "hide" };
@@ -2869,19 +3420,26 @@ function swfUrlToLocalPath(url) {
         ? this.element.requestFullscreen(e)
         : this.element.webkitRequestFullscreen
           ? this.element.webkitRequestFullscreen(e)
-          : this.element.webkitRequestFullScreen && this.element.webkitRequestFullScreen(e);
+          : this.element.webkitRequestFullScreen &&
+            this.element.webkitRequestFullScreen(e);
     }
     exitFullscreen() {
       document.exitFullscreen
         ? document.exitFullscreen()
         : document.webkitExitFullscreen
           ? document.webkitExitFullscreen()
-          : document.webkitCancelFullScreen && document.webkitCancelFullScreen();
+          : document.webkitCancelFullScreen &&
+            document.webkitCancelFullScreen();
     }
     fullScreenChange() {
-      if (this.isFullscreen && screen.orientation && "function" == typeof screen.orientation.lock) {
+      if (
+        this.isFullscreen &&
+        screen.orientation &&
+        "function" == typeof screen.orientation.lock
+      ) {
         const e = this.loadedConfig?.fullScreenAspectRatio?.toLowerCase() ?? "";
-        ["portrait", "landscape", "any"].includes(e) && screen.orientation.lock(e).catch(() => {});
+        ["portrait", "landscape", "any"].includes(e) &&
+          screen.orientation.lock(e).catch(() => {});
       } else
         try {
           screen.orientation.unlock();
@@ -2901,7 +3459,9 @@ function swfUrlToLocalPath(url) {
           o = e.split("/").slice(1, -1).join("/");
         if (t.includes(o) && e.startsWith(r)) {
           return void (
-            confirm(Ce("save-reload-prompt", { action: a ? "replace" : "delete" })) &&
+            confirm(
+              Ce("save-reload-prompt", { action: a ? "replace" : "delete" }),
+            ) &&
             this.loadedConfig &&
             (this.destroy(),
             a ? localStorage.setItem(e, n) : localStorage.removeItem(e),
@@ -2925,7 +3485,11 @@ function swfUrlToLocalPath(url) {
           this.confirmReloadSave(n, a, !0);
         }
       }),
-        a && a.files && a.files.length > 0 && a.files[0] && t.readAsDataURL(a.files[0]));
+        a &&
+          a.files &&
+          a.files.length > 0 &&
+          a.files[0] &&
+          t.readAsDataURL(a.files[0]));
     }
     checkSaves() {
       if (!this.saveManager.querySelector("#local-saves")) return !1;
@@ -2951,7 +3515,12 @@ function swfUrlToLocalPath(url) {
         Object.keys(localStorage).forEach((n) => {
           const a = n.split("/").pop(),
             t = localStorage.getItem(n);
-          a && t && gn(t) && e.appendChild((0, j.jsx)(this.SaveRow, { rowKey: n, solName: a, solData: t }));
+          a &&
+            t &&
+            gn(t) &&
+            e.appendChild(
+              (0, j.jsx)(this.SaveRow, { rowKey: n, solName: a, solData: t }),
+            );
         }));
     }
     async backupSaves() {
@@ -2988,7 +3557,7 @@ function swfUrlToLocalPath(url) {
             (function (e) {
               const n = e.pathname;
               return n.substring(n.lastIndexOf("/") + 1);
-            })(this.swfUrl)
+            })(this.swfUrl),
           );
         } else console.error("SWF download failed");
       } catch (e) {
@@ -2999,7 +3568,10 @@ function swfUrlToLocalPath(url) {
       const e = this.virtualKeyboard,
         n = e.value;
       for (const e of n)
-        for (const n of ["keydown", "keyup"]) this.element.dispatchEvent(new KeyboardEvent(n, { key: e, bubbles: !0 }));
+        for (const n of ["keydown", "keyup"])
+          this.element.dispatchEvent(
+            new KeyboardEvent(n, { key: e, bubbles: !0 }),
+          );
       e.value = "";
     }
     openVirtualKeyboard() {
@@ -3010,7 +3582,8 @@ function swfUrlToLocalPath(url) {
           }, 0);
     }
     closeVirtualKeyboard() {
-      this.isVirtualKeyboardFocused() && this.container.focus({ preventScroll: !0 });
+      this.isVirtualKeyboardFocused() &&
+        this.container.focus({ preventScroll: !0 });
     }
     isVirtualKeyboardFocused() {
       return this.shadow.activeElement === this.virtualKeyboard;
@@ -3027,7 +3600,7 @@ function swfUrlToLocalPath(url) {
             n.push({
               text: t.caption + (t.checked ? ` (${e})` : ""),
               onClick: async () => this.instance?.run_context_menu_callback(r),
-              enabled: t.enabled
+              enabled: t.enabled,
             }));
         }),
           a());
@@ -3035,33 +3608,49 @@ function swfUrlToLocalPath(url) {
       return (
         this.fullscreenEnabled &&
           (this.isFullscreen
-            ? n.push({ text: Ce("context-menu-exit-fullscreen"), onClick: async () => this.setFullscreen(!1) })
-            : n.push({ text: Ce("context-menu-enter-fullscreen"), onClick: async () => this.setFullscreen(!0) })),
+            ? n.push({
+                text: Ce("context-menu-exit-fullscreen"),
+                onClick: async () => this.setFullscreen(!1),
+              })
+            : n.push({
+                text: Ce("context-menu-enter-fullscreen"),
+                onClick: async () => this.setFullscreen(!0),
+              })),
         n.push({
           text: Ce("context-menu-volume-controls"),
           onClick: async () => {
             this.openVolumeControls();
-          }
+          },
         }),
         this.instance &&
           this.swfUrl &&
           this.loadedConfig &&
           !0 === this.loadedConfig.showSwfDownload &&
-          (a(), n.push({ text: Ce("context-menu-download-swf"), onClick: this.downloadSwf.bind(this) })),
+          (a(),
+          n.push({
+            text: Ce("context-menu-download-swf"),
+            onClick: this.downloadSwf.bind(this),
+          })),
         navigator.clipboard &&
           window.isSecureContext &&
           n.push({
             text: Ce("context-menu-copy-debug-info"),
-            onClick: () => navigator.clipboard.writeText(this.getPanicData())
+            onClick: () => navigator.clipboard.writeText(this.getPanicData()),
           }),
         this.checkSaves() &&
-          n.push({ text: Ce("context-menu-open-save-manager"), onClick: this.openSaveManager.bind(this) }),
+          n.push({
+            text: Ce("context-menu-open-save-manager"),
+            onClick: this.openSaveManager.bind(this),
+          }),
         a(),
         n.push({
-          text: Ce("context-menu-about-ruffle", { flavor: Ie ? "extension" : "", version: l.versionName }),
+          text: Ce("context-menu-about-ruffle", {
+            flavor: Ie ? "extension" : "",
+            version: l.versionName,
+          }),
           async onClick() {
             window.open(Te, "_blank");
-          }
+          },
         }),
         this.isTouch &&
           (a(),
@@ -3069,7 +3658,7 @@ function swfUrlToLocalPath(url) {
             text: Ce("context-menu-hide"),
             onClick: async () => {
               this.contextMenuForceDisabled = !0;
-            }
+            },
           })),
         n
       );
@@ -3080,10 +3669,15 @@ function swfUrlToLocalPath(url) {
         this.startLongPressTimer());
     }
     clearLongPressTimer() {
-      this.longPressTimer && (clearTimeout(this.longPressTimer), (this.longPressTimer = null));
+      this.longPressTimer &&
+        (clearTimeout(this.longPressTimer), (this.longPressTimer = null));
     }
     startLongPressTimer() {
-      (this.clearLongPressTimer(), (this.longPressTimer = setTimeout(() => this.clearLongPressTimer(), 800)));
+      (this.clearLongPressTimer(),
+        (this.longPressTimer = setTimeout(
+          () => this.clearLongPressTimer(),
+          800,
+        )));
     }
     checkLongPressMovement(e) {
       if (null !== this.pointerDownPosition) {
@@ -3105,16 +3699,27 @@ function swfUrlToLocalPath(url) {
     }
     showContextMenu(e) {
       if (this.panicked) return;
-      if ((e.preventDefault(), this._suppressContextMenu)) return void (this._suppressContextMenu = !1);
-      if (0 !== this.shadow.querySelectorAll(".modal:not(.hidden)").length) return;
+      if ((e.preventDefault(), this._suppressContextMenu))
+        return void (this._suppressContextMenu = !1);
+      if (0 !== this.shadow.querySelectorAll(".modal:not(.hidden)").length)
+        return;
       if (
         ("contextmenu" === e.type
           ? ((this.contextMenuSupported = !0),
-            document.documentElement.addEventListener("click", this.hideContextMenu.bind(this), { once: !0 }))
-          : (document.documentElement.addEventListener("pointerup", this.hideContextMenu.bind(this), { once: !0 }),
+            document.documentElement.addEventListener(
+              "click",
+              this.hideContextMenu.bind(this),
+              { once: !0 },
+            ))
+          : (document.documentElement.addEventListener(
+              "pointerup",
+              this.hideContextMenu.bind(this),
+              { once: !0 },
+            ),
             e.stopPropagation()),
         [!1, v.Off].includes(this.loadedConfig?.contextMenu ?? v.On) ||
-          (this.isTouch && this.loadedConfig?.contextMenu === v.RightClickOnly) ||
+          (this.isTouch &&
+            this.loadedConfig?.contextMenu === v.RightClickOnly) ||
           this.contextMenuForceDisabled)
       )
         return;
@@ -3123,17 +3728,28 @@ function swfUrlToLocalPath(url) {
       for (const e of this.contextMenuItems())
         if (null === e)
           this.contextMenuElement.appendChild(
-            (0, j.jsx)("li", { class: "menu-separator", children: (0, j.jsx)("hr", {}) })
+            (0, j.jsx)("li", {
+              class: "menu-separator",
+              children: (0, j.jsx)("hr", {}),
+            }),
           );
         else {
           const { text: n, onClick: a, enabled: t } = e,
-            r = (0, j.jsx)("li", { class: { "menu-item": !0, disabled: !1 === t }, "data-text": n, children: n });
+            r = (0, j.jsx)("li", {
+              class: { "menu-item": !0, disabled: !1 === t },
+              "data-text": n,
+              children: n,
+            });
           if ((this.contextMenuElement.appendChild(r), !1 !== t)) {
             const e = async (e) => {
-              (e.preventDefault(), e.stopPropagation(), await a(e), this.hideContextMenu());
+              (e.preventDefault(),
+                e.stopPropagation(),
+                await a(e),
+                this.hideContextMenu());
             };
             this.contextMenuSupported
-              ? (r.addEventListener("click", e), r.addEventListener("contextmenu", e))
+              ? (r.addEventListener("click", e),
+                r.addEventListener("contextmenu", e))
               : r.addEventListener("pointerup", e);
           }
         }
@@ -3148,14 +3764,18 @@ function swfUrlToLocalPath(url) {
         l = "rtl" === getComputedStyle(this.contextMenuElement).direction;
       ((this.contextMenuElement.style.top = `${s}px`),
         l
-          ? ((this.contextMenuElement.style.right = n.width - i + "px"), (this.contextMenuElement.style.left = ""))
-          : ((this.contextMenuElement.style.right = ""), (this.contextMenuElement.style.left = `${i}px`)));
+          ? ((this.contextMenuElement.style.right = n.width - i + "px"),
+            (this.contextMenuElement.style.left = ""))
+          : ((this.contextMenuElement.style.right = ""),
+            (this.contextMenuElement.style.left = `${i}px`)));
     }
     hideContextMenu() {
-      (this.instance?.clear_custom_menu_items(), this.contextMenuOverlay.classList.add("hidden"));
+      (this.instance?.clear_custom_menu_items(),
+        this.contextMenuOverlay.classList.add("hidden"));
     }
     pause() {
-      this.instance && (this.instance.pause(), (this.playButton.style.display = "block"));
+      this.instance &&
+        (this.instance.pause(), (this.playButton.style.display = "block"));
     }
     audioState() {
       if (this.instance) {
@@ -3190,7 +3810,9 @@ function swfUrlToLocalPath(url) {
                     const n = new ArrayBuffer(10),
                       a = new DataView(n),
                       t = e.sampleRate;
-                    (a.setUint32(0, t, !0), a.setUint32(4, t, !0), a.setUint16(8, 1, !0));
+                    (a.setUint32(0, t, !0),
+                      a.setUint32(4, t, !0),
+                      a.setUint16(8, 1, !0));
                     return `data:audio/wav;base64,UklGRisAAABXQVZFZm10IBAAAAABAAEA${window.btoa(String.fromCharCode(...new Uint8Array(n))).slice(0, 13)}AgAZGF0YQcAAACAgICAgICAAAA=`;
                   })()),
                     n.load(),
@@ -3203,7 +3825,7 @@ function swfUrlToLocalPath(url) {
                         console.warn(`Failed to play dummy sound: ${e}`);
                       }));
                 },
-                { once: !0 }
+                { once: !0 },
               ));
     }
     static htmlDimensionToCssDimension(e) {
@@ -3255,26 +3877,41 @@ function swfUrlToLocalPath(url) {
       if (this.panicked) return;
       ((this.panicked = !0), this.hideSplashScreen());
       const n = e;
-      if (e instanceof Error && ("AbortError" === e.name || e.message.includes("AbortError"))) return;
+      if (
+        e instanceof Error &&
+        ("AbortError" === e.name || e.message.includes("AbortError"))
+      )
+        return;
       if (e instanceof Ne) {
         const n = this.loadedConfig?.openInNewTab,
           a =
-            this.loadedConfig && "url" in this.loadedConfig ? new URL(this.loadedConfig.url, document.baseURI) : void 0;
+            this.loadedConfig && "url" in this.loadedConfig
+              ? new URL(this.loadedConfig.url, document.baseURI)
+              : void 0;
         if (n && a) return void this.addOpenInNewTabMessage(n, a);
         e = e.cause;
       }
       const a = Object.assign([], { stackIndex: -1, avmStackIndex: -1 });
       if ((a.push("# Error Info\n"), e instanceof Error)) {
-        if ((a.push(`Error name: ${e.name}\n`), a.push(`Error message: ${e.message}\n`), e.stack)) {
+        if (
+          (a.push(`Error name: ${e.name}\n`),
+          a.push(`Error message: ${e.message}\n`),
+          e.stack)
+        ) {
           const n = a.push(`Error stack:\n\`\`\`\n${e.stack}\n\`\`\`\n`) - 1;
           if (e.avmStack) {
-            const n = a.push(`AVM2 stack:\n\`\`\`\n    ${e.avmStack.trim().replace(/\t/g, "    ")}\n\`\`\`\n`) - 1;
+            const n =
+              a.push(
+                `AVM2 stack:\n\`\`\`\n    ${e.avmStack.trim().replace(/\t/g, "    ")}\n\`\`\`\n`,
+              ) - 1;
             a.avmStackIndex = n;
           }
           a.stackIndex = n;
         }
       } else a.push(`Error: ${e}\n`);
-      (a.push(this.getPanicData()), Je(this.container, n, a, this.swfUrl), this.destroy());
+      (a.push(this.getPanicData()),
+        Je(this.container, n, a, this.swfUrl),
+        this.destroy());
     }
     addOpenInNewTabMessage(e, n) {
       const a = new URL(n);
@@ -3289,9 +3926,13 @@ function swfUrlToLocalPath(url) {
         children: [
           Ae("message-cant-embed"),
           (0, j.jsx)("div", {
-            children: (0, j.jsx)("a", { href: "#", onClick: () => e(a), children: Ce("open-in-new-tab") })
-          })
-        ]
+            children: (0, j.jsx)("a", {
+              href: "#",
+              onClick: () => e(a),
+              children: Ce("open-in-new-tab"),
+            }),
+          }),
+        ],
       });
       this.displayMessageOrElement(t, !0);
     }
@@ -3306,13 +3947,19 @@ function swfUrlToLocalPath(url) {
       }
     }
     displayMessageOrElement(e, n) {
-      const a = e instanceof HTMLDivElement ? e : (0, j.jsx)("p", { children: e }),
+      const a =
+          e instanceof HTMLDivElement ? e : (0, j.jsx)("p", { children: e }),
         t = n
           ? null
-          : (0, j.jsx)("div", { children: (0, j.jsx)("button", { id: "continue-btn", children: Ce("continue") }) }),
+          : (0, j.jsx)("div", {
+              children: (0, j.jsx)("button", {
+                id: "continue-btn",
+                children: Ce("continue"),
+              }),
+            }),
         r = (0, j.jsx)("div", {
           id: "message-overlay",
-          children: (0, j.jsxs)("div", { class: "message", children: [a, t] })
+          children: (0, j.jsxs)("div", { class: "message", children: [a, t] }),
         });
       if ((this.container.prepend(r), !n)) {
         this.container.querySelector("#continue-btn").onclick = () => {
@@ -3328,7 +3975,8 @@ function swfUrlToLocalPath(url) {
       const e = Ae("message-restored-from-bfcache");
       this.displayMessageOrElement(e);
       const n = this.container.querySelector("#message-overlay");
-      (n.scrollWidth > n.offsetWidth || n.scrollHeight > n.offsetHeight) && n.parentNode.removeChild(n);
+      (n.scrollWidth > n.offsetWidth || n.scrollHeight > n.offsetHeight) &&
+        n.parentNode.removeChild(n);
     }
     displayUnsupportedVideo(e) {
       const n = this.videoModal.querySelector("#video-holder");
@@ -3337,22 +3985,30 @@ function swfUrlToLocalPath(url) {
           src: e,
           autoplay: !0,
           controls: !0,
-          onContextMenu: (e) => e.stopPropagation()
+          onContextMenu: (e) => e.stopPropagation(),
         });
-        ((n.textContent = ""), n.appendChild(a), this.videoModal.classList.remove("hidden"));
+        ((n.textContent = ""),
+          n.appendChild(a),
+          this.videoModal.classList.remove("hidden"));
       }
     }
     displayClipboardModal(e) {
-      const n = this.clipboardModal.querySelector("#clipboard-modal-description");
+      const n = this.clipboardModal.querySelector(
+        "#clipboard-modal-description",
+      );
       n &&
-        ((n.textContent = Ce("clipboard-message-description", { variant: e ? "access-denied" : "unsupported" })),
+        ((n.textContent = Ce("clipboard-message-description", {
+          variant: e ? "access-denied" : "unsupported",
+        })),
         this.clipboardModal.classList.remove("hidden"));
     }
     hideSplashScreen() {
-      (this.splashScreen.classList.add("hidden"), this.container.classList.remove("hidden"));
+      (this.splashScreen.classList.add("hidden"),
+        this.container.classList.remove("hidden"));
     }
     showSplashScreen() {
-      (this.splashScreen.classList.remove("hidden"), this.container.classList.add("hidden"));
+      (this.splashScreen.classList.remove("hidden"),
+        this.container.classList.add("hidden"));
     }
     setMetadata(e) {
       ((this.metadata = e),
@@ -3410,7 +4066,11 @@ function swfUrlToLocalPath(url) {
         const t = new URL(e, Te);
         ((n = t.pathname), (a = t.hostname));
       } catch (e) {}
-      if (n.startsWith("/v/") && /^(?:(?:www\.|m\.)?youtube(?:-nocookie)?\.com)|(?:youtu\.be)$/i.test(a)) return !0;
+      if (
+        n.startsWith("/v/") &&
+        /^(?:(?:www\.|m\.)?youtube(?:-nocookie)?\.com)|(?:youtu\.be)$/i.test(a)
+      )
+        return !0;
     }
     return !1;
   }
@@ -3479,7 +4139,10 @@ function swfUrlToLocalPath(url) {
         return !1;
       case "samedomain":
         try {
-          return new URL(window.location.href).origin === new URL(n, window.location.href).origin;
+          return (
+            new URL(window.location.href).origin ===
+            new URL(n, window.location.href).origin
+          );
         } catch {
           return !1;
         }
@@ -3490,15 +4153,21 @@ function swfUrlToLocalPath(url) {
   var kn,
     yn = function (e, n, a, t, r) {
       if ("m" === t) throw new TypeError("Private method is not writable");
-      if ("a" === t && !r) throw new TypeError("Private accessor was defined without a setter");
+      if ("a" === t && !r)
+        throw new TypeError("Private accessor was defined without a setter");
       if ("function" == typeof n ? e !== n || !r : !n.has(e))
-        throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        throw new TypeError(
+          "Cannot write private member to an object whose class did not declare it",
+        );
       return ("a" === t ? r.call(e, a) : r ? (r.value = a) : n.set(e, a), a);
     },
     Rn = function (e, n, a, t) {
-      if ("a" === a && !t) throw new TypeError("Private accessor was defined without a getter");
+      if ("a" === a && !t)
+        throw new TypeError("Private accessor was defined without a getter");
       if ("function" == typeof n ? e !== n || !t : !n.has(e))
-        throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        throw new TypeError(
+          "Cannot read private member from an object whose class did not declare it",
+        );
       return "m" === a ? t : "a" === a ? t.call(e) : t ? t.value : n.get(e);
     };
   class jn {
@@ -3579,16 +4248,22 @@ function swfUrlToLocalPath(url) {
   var xn,
     zn,
     Sn = function (e, n, a, t) {
-      if ("a" === a && !t) throw new TypeError("Private accessor was defined without a getter");
+      if ("a" === a && !t)
+        throw new TypeError("Private accessor was defined without a getter");
       if ("function" == typeof n ? e !== n || !t : !n.has(e))
-        throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        throw new TypeError(
+          "Cannot read private member from an object whose class did not declare it",
+        );
       return "m" === a ? t : "a" === a ? t.call(e) : t ? t.value : n.get(e);
     },
     Cn = function (e, n, a, t, r) {
       if ("m" === t) throw new TypeError("Private method is not writable");
-      if ("a" === t && !r) throw new TypeError("Private accessor was defined without a setter");
+      if ("a" === t && !r)
+        throw new TypeError("Private accessor was defined without a setter");
       if ("function" == typeof n ? e !== n || !r : !n.has(e))
-        throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        throw new TypeError(
+          "Cannot write private member to an object whose class did not declare it",
+        );
       return ("a" === t ? r.call(e, a) : r ? (r.value = a) : n.set(e, a), a);
     };
   class An extends HTMLElement {
@@ -3617,15 +4292,19 @@ function swfUrlToLocalPath(url) {
             (e) => {
               try {
                 Object.defineProperty(this, e, {
-                  value: (...n) => Sn(this, xn, "f").callExternalInterface(e, n),
-                  configurable: !0
+                  value: (...n) =>
+                    Sn(this, xn, "f").callExternalInterface(e, n),
+                  configurable: !0,
                 });
               } catch (n) {
-                console.warn(`Error setting ExternalInterface legacy callback for ${e}`, n);
+                console.warn(
+                  `Error setting ExternalInterface legacy callback for ${e}`,
+                  n,
+                );
               }
-            }
+            },
           ),
-          "f"
+          "f",
         ),
         Sn(this, xn, "f").addFSCommandHandler((e, n) => {
           Sn(this, zn, "f")?.call(this, e, n);
@@ -3716,7 +4395,9 @@ function swfUrlToLocalPath(url) {
           try {
             n.setAttribute(a.name, a.value);
           } catch (e) {
-            console.warn(`Unable to set attribute ${a.name} on Ruffle instance`);
+            console.warn(
+              `Unable to set attribute ${a.name} on Ruffle instance`,
+            );
           }
         }
       for (const a of Array.from(e.children)) n.appendChild(a);
@@ -3749,7 +4430,10 @@ function swfUrlToLocalPath(url) {
       return [...An.observedAttributes, "src"];
     }
     attributeChangedCallback(e, n, a) {
-      if ((super.attributeChangedCallback(e, n, a), this.isConnected && "src" === e)) {
+      if (
+        (super.attributeChangedCallback(e, n, a),
+        this.isConnected && "src" === e)
+      ) {
         const e = this.attributes.getNamedItem("src");
         if (e) {
           const n = (e) => this.attributes.getNamedItem(e)?.value ?? null,
@@ -3814,9 +4498,10 @@ function swfUrlToLocalPath(url) {
           a = dn(e, (e) =>
             (function (e, n, a) {
               n = n.toLowerCase();
-              for (const [a, t] of Object.entries(e)) if (a.toLowerCase() === n) return t;
+              for (const [a, t] of Object.entries(e))
+                if (a.toLowerCase() === n) return t;
               return a;
-            })(this.params, e, n.includes(e) ? this.getAttribute(e) : null)
+            })(this.params, e, n.includes(e) ? this.getAttribute(e) : null),
           );
         this.load(a, !0);
       }
@@ -3852,7 +4537,10 @@ function swfUrlToLocalPath(url) {
     }
     static isInterdictable(e) {
       if (pn(e)) return !1;
-      if (e.getElementsByTagName("ruffle-object").length > 0 || e.getElementsByTagName("ruffle-embed").length > 0)
+      if (
+        e.getElementsByTagName("ruffle-object").length > 0 ||
+        e.getElementsByTagName("ruffle-embed").length > 0
+      )
         return !1;
       const n = e.attributes.getNamedItem("data")?.value.toLowerCase(),
         a = e.attributes.getNamedItem("type")?.value ?? null,
@@ -3876,15 +4564,21 @@ function swfUrlToLocalPath(url) {
       }
       const o = e.attributes.getNamedItem("classid")?.value.toLowerCase();
       return o === "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000".toLowerCase()
-        ? !Array.from(e.getElementsByTagName("object")).some(Pn.isInterdictable) &&
-            !Array.from(e.getElementsByTagName("embed")).some(Fn.isInterdictable)
+        ? !Array.from(e.getElementsByTagName("object")).some(
+            Pn.isInterdictable,
+          ) &&
+            !Array.from(e.getElementsByTagName("embed")).some(
+              Fn.isInterdictable,
+            )
         : !o && Oe(r, a);
     }
     static fromNativeObjectElement(e) {
       const n = nn("ruffle-object", Pn),
         a = document.createElement(n);
-      for (const n of Array.from(e.getElementsByTagName("embed"))) Fn.isInterdictable(n) && n.remove();
-      for (const n of Array.from(e.getElementsByTagName("object"))) Pn.isInterdictable(n) && n.remove();
+      for (const n of Array.from(e.getElementsByTagName("embed")))
+        Fn.isInterdictable(n) && n.remove();
+      for (const n of Array.from(e.getElementsByTagName("object")))
+        Pn.isInterdictable(n) && n.remove();
       return (En(e, a), a);
     }
     get height() {
@@ -3916,20 +4610,32 @@ function swfUrlToLocalPath(url) {
     Ln,
     Nn = function (e, n, a, t, r) {
       if ("m" === t) throw new TypeError("Private method is not writable");
-      if ("a" === t && !r) throw new TypeError("Private accessor was defined without a setter");
+      if ("a" === t && !r)
+        throw new TypeError("Private accessor was defined without a setter");
       if ("function" == typeof n ? e !== n || !r : !n.has(e))
-        throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        throw new TypeError(
+          "Cannot write private member to an object whose class did not declare it",
+        );
       return ("a" === t ? r.call(e, a) : r ? (r.value = a) : n.set(e, a), a);
     },
     _n = function (e, n, a, t) {
-      if ("a" === a && !t) throw new TypeError("Private accessor was defined without a getter");
+      if ("a" === a && !t)
+        throw new TypeError("Private accessor was defined without a getter");
       if ("function" == typeof n ? e !== n || !t : !n.has(e))
-        throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        throw new TypeError(
+          "Cannot read private member from an object whose class did not declare it",
+        );
       return "m" === a ? t : "a" === a ? t.call(e) : t ? t.value : n.get(e);
     };
   class Un {
     constructor(e) {
-      if ((Dn.set(this, void 0), $n.set(this, void 0), Nn(this, Dn, [], "f"), Nn(this, $n, {}, "f"), e))
+      if (
+        (Dn.set(this, void 0),
+        $n.set(this, void 0),
+        Nn(this, Dn, [], "f"),
+        Nn(this, $n, {}, "f"),
+        e)
+      )
         for (let n = 0; n < e.length; n++) this.install(e[n]);
     }
     install(e) {
@@ -3937,7 +4643,11 @@ function swfUrlToLocalPath(url) {
         a = _n(this, Dn, "f").length;
       (_n(this, Dn, "f").push(n),
         (_n(this, $n, "f")[e.type] = n),
-        Object.defineProperty(this, n.type, { configurable: !0, enumerable: !1, value: n }),
+        Object.defineProperty(this, n.type, {
+          configurable: !0,
+          enumerable: !1,
+          value: n,
+        }),
         (this[a] = n));
     }
     item(e) {
@@ -3995,20 +4705,30 @@ function swfUrlToLocalPath(url) {
     get filename() {
       return _n(this, Tn, "f");
     }
-    get [((Mn = new WeakMap()), (In = new WeakMap()), (Tn = new WeakMap()), Symbol.toStringTag)]() {
+    get [((Mn = new WeakMap()),
+    (In = new WeakMap()),
+    (Tn = new WeakMap()),
+    Symbol.toStringTag)]() {
       return "Plugin";
     }
   }
   class Jn {
     constructor(e) {
-      (Wn.set(this, void 0), Ln.set(this, void 0), Nn(this, Wn, [], "f"), Nn(this, Ln, {}, "f"));
+      (Wn.set(this, void 0),
+        Ln.set(this, void 0),
+        Nn(this, Wn, [], "f"),
+        Nn(this, Ln, {}, "f"));
       for (let n = 0; n < e.length; n++) this.install(e[n]);
     }
     install(e) {
       const n = _n(this, Wn, "f").length;
       (_n(this, Wn, "f").push(e),
         (_n(this, Ln, "f")[e.name] = e),
-        Object.defineProperty(this, e.name, { configurable: !0, enumerable: !1, value: e }),
+        Object.defineProperty(this, e.name, {
+          configurable: !0,
+          enumerable: !1,
+          value: e,
+        }),
         (this[n] = e));
     }
     item(e) {
@@ -4029,16 +4749,40 @@ function swfUrlToLocalPath(url) {
     }
   }
   const Hn = new Vn("Shockwave Flash", "Shockwave Flash 32.0 r0", "ruffle.js");
-  (Hn.install({ type: Pe, description: "Shockwave Flash", suffixes: "spl", enabledPlugin: Hn }),
-    Hn.install({ type: qe, description: "Shockwave Flash", suffixes: "swf", enabledPlugin: Hn }),
-    Hn.install({ type: De, description: "Shockwave Flash", suffixes: "swf", enabledPlugin: Hn }),
-    Hn.install({ type: $e, description: "Shockwave Flash", suffixes: "swf", enabledPlugin: Hn }));
+  (Hn.install({
+    type: Pe,
+    description: "Shockwave Flash",
+    suffixes: "spl",
+    enabledPlugin: Hn,
+  }),
+    Hn.install({
+      type: qe,
+      description: "Shockwave Flash",
+      suffixes: "swf",
+      enabledPlugin: Hn,
+    }),
+    Hn.install({
+      type: De,
+      description: "Shockwave Flash",
+      suffixes: "swf",
+      enabledPlugin: Hn,
+    }),
+    Hn.install({
+      type: $e,
+      description: "Shockwave Flash",
+      suffixes: "swf",
+      enabledPlugin: Hn,
+    }));
   const Kn = window.RufflePlayer?.config ?? {},
     Zn =
       (function (e) {
         let n = Me?.href ?? "";
         return (
-          !Ie && "publicPath" in e && null !== e.publicPath && void 0 !== e.publicPath && (n = e.publicPath),
+          !Ie &&
+            "publicPath" in e &&
+            null !== e.publicPath &&
+            void 0 !== e.publicPath &&
+            (n = e.publicPath),
           "" === n || n.endsWith("/") || (n += "/"),
           n
         );
@@ -4046,7 +4790,8 @@ function swfUrlToLocalPath(url) {
   let Qn, Yn, Gn, Xn;
   function ea() {
     try {
-      ((Qn = Qn ?? document.getElementsByTagName("object")), (Yn = Yn ?? document.getElementsByTagName("embed")));
+      ((Qn = Qn ?? document.getElementsByTagName("object")),
+        (Yn = Yn ?? document.getElementsByTagName("embed")));
       for (const e of Array.from(Qn))
         if (Pn.isInterdictable(e)) {
           const n = Pn.fromNativeObjectElement(e);
@@ -4058,7 +4803,9 @@ function swfUrlToLocalPath(url) {
           e.replaceWith(n);
         }
     } catch (e) {
-      console.error(`Serious error encountered when polyfilling native Flash elements: ${e}`);
+      console.error(
+        `Serious error encountered when polyfilling native Flash elements: ${e}`,
+      );
     }
   }
   function na() {
@@ -4080,7 +4827,7 @@ function swfUrlToLocalPath(url) {
             () => {
               aa(e, a);
             },
-            !1
+            !1,
           );
         }
       }));
@@ -4100,7 +4847,10 @@ function swfUrlToLocalPath(url) {
     if (Ie || void 0 === a.documentElement.dataset.ruffleOptout)
       if (Ie)
         (e.RufflePlayer || (e.RufflePlayer = {}),
-          (e.RufflePlayer.config = { ...Kn, ...(e.RufflePlayer.config ?? {}) }));
+          (e.RufflePlayer.config = {
+            ...Kn,
+            ...(e.RufflePlayer.config ?? {}),
+          }));
       else if (!e.RufflePlayer) {
         const n = a.createElement("script");
         (n.setAttribute("src", Zn),
@@ -4115,20 +4865,28 @@ function swfUrlToLocalPath(url) {
       if (navigator.plugins.namedItem("Shockwave Flash")) return;
       (("install" in navigator.plugins && navigator.plugins.install) ||
         (Object.defineProperty(window, "PluginArray", { value: Jn }),
-        Object.defineProperty(navigator, "plugins", { value: new Jn(navigator.plugins), writable: !1 })),
+        Object.defineProperty(navigator, "plugins", {
+          value: new Jn(navigator.plugins),
+          writable: !1,
+        })),
         navigator.plugins.install(e),
         !(e.length > 0) ||
           ("install" in navigator.mimeTypes && navigator.mimeTypes.install) ||
           (Object.defineProperty(window, "MimeTypeArray", { value: Un }),
           Object.defineProperty(window, "MimeType", { value: Bn }),
-          Object.defineProperty(navigator, "mimeTypes", { value: new Un(navigator.mimeTypes), writable: !1 })));
+          Object.defineProperty(navigator, "mimeTypes", {
+            value: new Un(navigator.mimeTypes),
+            writable: !1,
+          })));
       const n = navigator.mimeTypes;
       for (let a = 0; a < e.length; a += 1) n.install(e[a]);
     })(Hn);
   }
   function ra() {
     (("favorFlash" in Kn && !1 === Kn.favorFlash) ||
-      "ruffle.js" === (navigator.plugins.namedItem("Shockwave Flash")?.filename ?? "ruffle.js")) &&
+      "ruffle.js" ===
+        (navigator.plugins.namedItem("Shockwave Flash")?.filename ??
+          "ruffle.js")) &&
       (ea(),
       na(),
       new MutationObserver(function (e) {
@@ -4136,8 +4894,9 @@ function swfUrlToLocalPath(url) {
           Array.from(e.addedNodes).some(
             (e) =>
               ["EMBED", "OBJECT"].includes(e.nodeName) ||
-              (e instanceof Element && null !== e.querySelector("embed, object"))
-          )
+              (e instanceof Element &&
+                null !== e.querySelector("embed, object")),
+          ),
         ) && (ea(), na());
       }).observe(document, { childList: !0, subtree: !0 }));
   }
@@ -4153,13 +4912,17 @@ function swfUrlToLocalPath(url) {
       const e = nn("ruffle-player", An);
       return document.createElement(e);
     },
-    options: {}
+    options: {},
   };
   let ia = null;
   try {
-    if (document.currentScript instanceof HTMLScriptElement && "" !== document.currentScript.src) {
+    if (
+      document.currentScript instanceof HTMLScriptElement &&
+      "" !== document.currentScript.src
+    ) {
       let e = document.currentScript.src;
-      (e.endsWith(".js") || e.endsWith("/") || (e += "/"), (ia = new URL(".", e)));
+      (e.endsWith(".js") || e.endsWith("/") || (e += "/"),
+        (ia = new URL(".", e)));
     }
   } catch (e) {
     console.warn("Unable to get currentScript URL", e);
@@ -4171,18 +4934,22 @@ function swfUrlToLocalPath(url) {
       : ((a = new s(window.RufflePlayer)), (window.RufflePlayer = a)),
       (a.sources[e] = oa),
       (oa.options = n),
-      !1 !== (!("polyfills" in a.config) || a.config.polyfills) && oa.pluginPolyfill());
+      !1 !== (!("polyfills" in a.config) || a.config.polyfills) &&
+        oa.pluginPolyfill());
   })("local", {
     onFirstLoad: () => {
       r.p = (function (e) {
         let n = ia?.href ?? "";
         return (
-          "publicPath" in e && null !== e.publicPath && void 0 !== e.publicPath && (n = e.publicPath),
+          "publicPath" in e &&
+            null !== e.publicPath &&
+            void 0 !== e.publicPath &&
+            (n = e.publicPath),
           "" === n || n.endsWith("/") || (n += "/"),
           n
         );
       })(window.RufflePlayer?.config);
-    }
+    },
   });
 })();
 //# sourceMappingURL=ruffle.js.map
