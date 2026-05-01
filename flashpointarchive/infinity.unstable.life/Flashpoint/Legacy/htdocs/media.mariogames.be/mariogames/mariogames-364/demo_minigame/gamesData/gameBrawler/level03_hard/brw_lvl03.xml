@@ -1,0 +1,334 @@
+<world>
+	<properties>
+		<width> 11520 </width>
+		<height> 768 </height>
+		<cameraWidth> 600 </cameraWidth>
+		<cameraHeight> 400 </cameraHeight>
+		<cameraScreenX> 0 </cameraScreenX>
+		<cameraScreenY> 0 </cameraScreenY>
+		<cameraYMin> 0.75 </cameraYMin>
+		<cameraYMax> 0.35 </cameraYMax>
+		<cameraXMin> 0.35 </cameraXMin>
+		<cameraXMax> 0.5 </cameraXMax>
+		<showCollisions> 1 </showCollisions>
+		<playerX> 417 </playerX>
+		<playerY> 437 </playerY>
+		<scalePlayerX> 1 </scalePlayerX>
+		<scalePlayerY> 1 </scalePlayerY>
+		<useEmbeddedAssets> 1 </useEmbeddedAssets>
+		<assetsPath> ../images </assetsPath>
+		<kipu> /kipuObjects/kipuItems.xml </kipu>
+		<camFollowPlayerY> 0 </camFollowPlayerY>
+		<cameraInitX> 0 </cameraInitX>
+		<cameraInitY> 50 </cameraInitY>
+	</properties>
+	<kipuHeader>
+		<kipu id="3" params="name:1up;cost:0;clipname:mc1up;color:red;description:TXT_1;duration:0;equipment:0|lifes:1|||" />
+		<kipu id="2" params="name:MPA;cost:75;clipname:mcElixir;color:white;description:TXT_3;duration:0;equipment:0|magic:10|||" />
+		<kipu id="0" params="name:jewel;cost:0;clipname:mcJewel;color:red;description:TXT_1;duration:0;equipment:0||||" />
+		<kipu id="1" params="name:heartA;cost:0;clipname:mcHeart;color:yellow;description:TXT_2;duration:0;equipment:0|health:30|||" />
+	</kipuHeader>
+	<layer type="cell" name="background" cols="16" rows="3" tileW="256" tileH="256" map="mc_map_brw_lvl03_background" width="4096" height="768" >
+		<tile image="background_lv3-bg_01__0" />
+		<tile image="background_lv3-bg_01__3" />
+		<tile image="background_lv3-bg_01__6" />
+		<tile image="background_lv3-bg_01__9" />
+		<tile image="background_lv3-bg_01__12" />
+		<tile image="background_lv3-bg_01__1" />
+		<tile image="background_lv3-bg_01__4" />
+		<tile image="background_lv3-bg_01__7" />
+		<tile image="background_lv3-bg_01__10" />
+		<tile image="background_lv3-bg_01__13" />
+		<tile image="background_lv3-bg_01__2" />
+		<tile image="background_lv3-bg_01__5" />
+		<tile image="background_lv3-bg_01__8" />
+		<tile image="background_lv3-bg_01__11" />
+		<tile image="background_lv3-bg_01__14" />
+	</layer>
+	<layer name="tilesets_lv3" cols="80" rows="25" tileW="256" tileH="256" map="mc_map_brw_lvl03_tilesets_lv3" width="11520" height="768" >
+		<tile image="tilesets_lv3-tile_08_0" />
+		<tile image="tilesets_lv3-tile_09_0" />
+		<tile image="tilesets_lv3-tile_20_0" />
+		<tile image="tilesets_lv3-tile_21_0" />
+		<tile image="tilesets_lv3-tile_10_0" />
+		<tile image="tilesets_lv3-tile_11_0" />
+		<tile image="tilesets_lv3-tile_28_0" />
+		<tile image="tilesets_lv3-tile_34_0" />
+		<tile image="tilesets_lv3-tile_12_0" />
+		<tile image="tilesets_lv3-tile_13_0" />
+		<tile image="tilesets_lv3-tile_00_0" />
+		<tile image="tilesets_lv3-tile_01_0" />
+		<tile image="tilesets_lv3-tile_02_0" />
+		<tile image="tilesets_lv3-tile_03_0" />
+		<tile image="tilesets_lv3-tile_24_0" />
+		<tile image="tilesets_lv3-tile_25_0" />
+		<tile image="tilesets_lv3-tile_14_0" />
+		<tile image="tilesets_lv3-tile_15_0" />
+		<tile image="tilesets_lv3-tile_32_0" />
+		<tile image="tilesets_lv3-tile_33_0" />
+		<tile image="tilesets_lv3-tile_16_0" />
+		<tile image="tilesets_lv3-tile_04_0" />
+		<tile image="tilesets_lv3-tile_05_0" />
+		<tile image="tilesets_lv3-tile_06_0" />
+		<tile image="tilesets_lv3-tile_07_0" />
+		<tile image="tilesets_lv3-tile_29_0" />
+		<tile image="tilesets_lv3-tile_18_0" />
+		<tile image="tilesets_lv3-tile_19_0" />
+		<tile image="tilesets_lv3-tile_36_0" />
+		<tile image="tilesets_lv3-tile_37_0" />
+	</layer>
+	<layer type="sprites" name="sprites" width="11520" height="768" >
+		<gpx x="319" y="260" image="sprite_lv3-sp_lvl03_10" />
+		<gpx x="461" y="196" image="sprite_lv3-sp_lvl03_04" />
+		<gpx x="634" y="231" image="sprite_lv3-sp_lvl03_10" />
+		<gpx x="779" y="210" image="sprite_lv3-sp_lvl03_27" />
+		<gpx x="974" y="217" image="sprite_lv3-sp_lvl03_07" />
+		<gpx x="1132" y="237" image="sprite_lv3-sp_lvl03_10" />
+		<gpx x="1258" y="216" image="sprite_lv3-sp_lvl03_26" />
+		<gpx x="1395" y="231" image="sprite_lv3-sp_lvl03_10" />
+		<gpx x="1485" y="216" image="sprite_lv3-sp_lvl03_05" />
+		<gpx x="1562" y="269" image="sprite_lv3-sp_lvl03_19" />
+		<gpx x="1644" y="211" image="sprite_lv3-sp_lvl03_06" />
+		<gpx x="1739" y="312" image="sprite_lv3-sp_lvl03_20" />
+		<gpx x="1830" y="233" image="sprite_lv3-sp_lvl03_10" />
+		<gpx x="2000" y="245" image="sprite_lv3-sp_lvl03_24" />
+		<gpx x="2185" y="182" image="sprite_lv3-sp_lvl03_05" />
+		<gpx x="2284" y="306" image="sprite_lv3-sp_lvl03_17" />
+		<gpx x="2465" y="257" image="sprite_lv3-sp_lvl03_01" />
+		<gpx x="2693" y="247" image="sprite_lv3-sp_lvl03_22" />
+		<gpx x="2826" y="211" image="sprite_lv3-sp_lvl03_06" />
+		<gpx x="2942" y="270" image="sprite_lv3-sp_lvl03_09" />
+		<gpx x="3079" y="247" image="sprite_lv3-sp_lvl03_11" />
+		<gpx x="3193" y="233" image="sprite_lv3-sp_lvl03_10" />
+		<gpx x="3443" y="235" image="sprite_lv3-sp_lvl03_23" />
+		<gpx x="3741" y="282" image="sprite_lv3-sp_lvl03_08" />
+		<gpx x="3967" y="231" image="sprite_lv3-sp_lvl03_23" />
+		<gpx x="4197" y="191" image="sprite_lv3-sp_lvl03_02" />
+		<gpx x="4403" y="256" image="sprite_lv3-sp_lvl03_01" />
+		<gpx x="4599" y="235" image="sprite_lv3-sp_lvl03_03" />
+		<gpx x="4728" y="234" image="sprite_lv3-sp_lvl03_10" />
+		<gpx x="4859" y="262" image="sprite_lv3-sp_lvl03_22" />
+		<gpx x="5092" y="241" image="sprite_lv3-sp_lvl03_24" />
+		<gpx x="5290" y="232" image="sprite_lv3-sp_lvl03_23" />
+		<gpx x="5383" y="321" image="sprite_lv3-sp_lvl03_18" />
+		<gpx x="5546" y="193" image="sprite_lv3-sp_lvl03_02" />
+		<gpx x="5758" y="254" image="sprite_lv3-sp_lvl03_01" />
+		<gpx x="5930" y="268" image="sprite_lv3-sp_lvl03_14" />
+		<gpx x="6063" y="316" image="sprite_lv3-sp_lvl03_17" />
+		<gpx x="6153" y="260" image="sprite_lv3-sp_lvl03_16" />
+		<gpx x="6260" y="275" image="sprite_lv3-sp_lvl03_15" />
+		<gpx x="6401" y="216" image="sprite_lv3-sp_lvl03_07" />
+		<gpx x="6526" y="323" image="sprite_lv3-sp_lvl03_18" />
+		<gpx x="6612" y="278" image="sprite_lv3-sp_lvl03_13" />
+		<gpx x="6838" y="212" image="sprite_lv3-sp_lvl03_25" />
+		<gpx x="7074" y="213" image="sprite_lv3-sp_lvl03_05" />
+		<gpx x="7161" y="285" image="sprite_lv3-sp_lvl03_20" />
+		<gpx x="7266" y="323" image="sprite_lv3-sp_lvl03_21" />
+		<gpx x="7346" y="209" image="sprite_lv3-sp_lvl03_06" />
+		<gpx x="7453" y="297" image="sprite_lv3-sp_lvl03_12" />
+		<gpx x="7777" y="255" image="sprite_lv3-sp_lvl03_11" />
+	</layer>
+	<layer type="objects" name="items2" >
+		<object x="5763" y="577" sx="58.2601" sy="0.64" id="18" params="xmin:0.35;xmax:0.5;ymin:0.8;ymax:0.95" />
+		<object x="5828" y="419" sx="57.96" sy="0.96" id="18" params="xmin:0.35;xmax:0.5;ymin:0.5;ymax:0.8" />
+		<object x="5848" y="296" sx="57.41" sy="0.3" id="18" params="xmin:0.35;xmax:0.5;ymin:0.5;ymax:0.7" />
+	</layer>
+	<layer type="objects" name="items" >
+		<object x="34" y="16" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="43" y="88" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="1" _group="2" _speed="0.07" _health="6" _damage="6" _item="coin_silver" _timeInit="1000" _skin="mc_enemy_01" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY" />
+		<object x="83" y="0" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="115" y="0" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="139" y="16" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="149" y="0" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="180" y="2" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="217" y="2" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="248" y="12" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="252" y="2" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="285" y="0" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="317" y="0" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="347" y="1" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="358" y="13" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="380" y="3" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="413" y="1" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="446" y="2" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="464" y="14" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="481" y="4" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="513" y="4" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="547" y="4" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="559" y="14" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="578" y="6" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="615" y="6" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="650" y="6" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="682" y="8" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="900" y="509" id="52" _collisionBlock="cellXi:27;cellYi:16;cellXf:28;cellYf:16" _stopId="0" _group="1" _dropHeight="400" _speed="60" _timeInit="100" _health="2" _item="MPA" />
+		<object x="926" y="406" id="52" _collisionBlock="cellXi:28;cellYi:11;cellXf:29;cellYf:11" _stopId="0" _group="1" _dropHeight="400" _speed="60" _timeInit="100" _health="2" _item="MPA" />
+		<object x="1105" y="455" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="1" _group="1" _speed="0.15" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="1186" y="441" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="1" _group="1" _speed="0.15" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="1295" y="492" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="1" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.4;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:9" />
+		<object x="1298" y="381" id="1" _typeAction="fighter_1" _initAction="fighter" _stopId="1" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.4;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:9" />
+		<object x="1378" y="464" id="12" params="object:enemy" _stopId="1" _range="340" _groups="1,2" _msgInit="" _msgEnd="" />
+		<object x="1526" y="529" id="34" _stopId="2" _group="3" _speed="0.15" _range="70" _health="16" _damage="15" _item="none" _timeInit="0" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="1" _toUp="1" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="1541" y="445" id="34" _stopId="2" _group="3" _speed="0.15" _range="70" _health="16" _damage="15" _item="none" _timeInit="0" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="1" _toUp="1" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="1693" y="475" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="2" _group="1" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:9" />
+		<object x="1730" y="396" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="2" _group="2" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="1799" y="478" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="2" _group="1" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="1000" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="1837" y="391" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="2" _group="2" _speed="0.12" _health="22" _damage="4" _item="none" _timeInit="1000" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.4;att1:25;att2:25;att3:25;att4:25;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="1939" y="353" rot="0.017453" id="34" _stopId="2" _group="1" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="500" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="0" _toUp="0" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="1951" y="479" rot="0.017453" id="34" _stopId="2" _group="1" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="500" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="0" _toUp="0" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="2030" y="454" id="12" params="object:enemy" _stopId="2" _range="340" _groups="2,1,2" _msgInit="" _msgEnd="" />
+		<object x="2092" y="362" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2109" y="425" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2127" y="491" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2144" y="552" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2223" y="344" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2233" y="404" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2255" y="469" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2267" y="528" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2283" y="588" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2354" y="371" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2370" y="434" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2388" y="500" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2404" y="560" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2473" y="393" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2489" y="451" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2507" y="517" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2524" y="578" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2575" y="364" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2592" y="427" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2610" y="493" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2627" y="554" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2694" y="342" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2703" y="401" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2719" y="459" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2737" y="525" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2754" y="586" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2801" y="360" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2818" y="423" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2836" y="489" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2854" y="554" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2863" y="446" id="52" _collisionBlock="cellXi:96;cellYi:16;cellXf:97;cellYf:16" _stopId="0" _group="1" _dropHeight="400" _speed="60" _timeInit="100" _health="2" _item="heartA" />
+		<object x="2906" y="333" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2923" y="396" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2936" y="457" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2962" y="528" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="2992" y="351" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="3009" y="410" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="3031" y="480" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="3062" y="381" id="65" _timeInit="0" _timeOn="3000" _timeOff="6000" _damage="4" />
+		<object x="3101" y="443" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="3" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="1000" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:9" />
+		<object x="3105" y="361" id="29" params="link:-1;bridgeId:1;cellXi:99;cellYi:13;cellXf:108;cellYf:14" />
+		<object x="3117" y="406" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="3" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:9" />
+		<object x="3304" y="365" id="2005" params="bridgeId:1" />
+		<object x="3517" y="383" rot="0.017453" id="34" _stopId="3" _group="1" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="500" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="0" _toUp="0" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="3523" y="476" rot="0.017453" id="34" _stopId="3" _group="1" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="500" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="0" _toUp="0" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="3564" y="450" id="12" params="object:enemy" _stopId="3" _range="600" _groups="1,2" _msgInit="" _msgEnd="" />
+		<object x="3668" y="351" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="3673" y="441" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="3682" y="456" id="52" _collisionBlock="cellXi:114;cellYi:14;cellXf:115;cellYf:14" _stopId="0" _group="1" _dropHeight="400" _speed="60" _timeInit="100" _health="2" _item="MPA" />
+		<object x="3682" y="519" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="3807" y="351" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="3814" y="447" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="3814" y="511" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="3932" y="353" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="3933" y="447" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="3934" y="513" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4045" y="359" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4049" y="516" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4051" y="445" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4160" y="406" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="5" _group="1" _speed="0.12" _health="22" _damage="4" _item="none" _timeInit="1000" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="4160" y="514" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="5" _group="1" _speed="0.12" _health="22" _damage="4" _item="none" _timeInit="1000" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="4236" y="438" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4238" y="509" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4240" y="346" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4378" y="360" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4383" y="517" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4385" y="443" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4506" y="444" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4511" y="350" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4513" y="519" id="15" _dropHeight="400" _range="50" _stopId="0" _group="1" _timeInit="100" _speed="60" _damage="10" _item="none" />
+		<object x="4646" y="494" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="5" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="4648" y="396" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="5" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="4703" y="464" id="12" params="object:enemy" _stopId="5" _range="680" _groups="1" _msgInit="" _msgEnd="" />
+		<object x="4891" y="392" id="52" _collisionBlock="cellXi:151;cellYi:11;cellXf:152;cellYf:11" _stopId="0" _group="1" _dropHeight="400" _speed="60" _timeInit="100" _health="2" _item="MPA" />
+		<object x="4892" y="518" id="52" _collisionBlock="cellXi:151;cellYi:16;cellXf:152;cellYf:16" _stopId="0" _group="1" _dropHeight="400" _speed="60" _timeInit="100" _health="2" _item="MPA" />
+		<object x="5192" y="377" id="77" _collisionBlock="cellXi:162;cellYi:11;cellXf:164;cellYf:12" _stopId="0" _group="1" _dropHeight="400" _speed="60" _health="10" _timeInit="100" _timeWait="1000" _bulletSpeed="0.2" _bulletDamage="3" _range="600" _item="none" />
+		<object x="5203" y="495" id="77" _collisionBlock="cellXi:162;cellYi:15;cellXf:164;cellYf:16" _stopId="0" _group="1" _dropHeight="400" _speed="60" _health="10" _timeInit="100" _timeWait="1000" _bulletSpeed="0.2" _bulletDamage="3" _range="600" _item="none" />
+		<object x="5487" y="438" id="77" _collisionBlock="cellXi:170;cellYi:13;cellXf:172;cellYf:14" _stopId="0" _group="1" _dropHeight="400" _speed="60" _health="10" _timeInit="100" _timeWait="1000" _bulletSpeed="0.2" _bulletDamage="3" _range="600" _item="none" />
+		<object x="5576" y="479" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="4" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:9" />
+		<object x="5586" y="370" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="4" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="5664" y="535" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="4" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="5707" y="433" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="4" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="1000" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:9" />
+		<object x="5714" y="528" id="77" _collisionBlock="cellXi:178;cellYi:16;cellXf:180;cellYf:17" _stopId="0" _group="1" _dropHeight="400" _speed="60" _health="10" _timeInit="100" _timeWait="1000" _bulletSpeed="0.2" _bulletDamage="3" _range="600" _item="none" />
+		<object x="5718" y="373" id="77" _collisionBlock="cellXi:178;cellYi:11;cellXf:180;cellYf:12" _stopId="0" _group="1" _dropHeight="400" _speed="60" _health="10" _timeInit="100" _timeWait="1000" _bulletSpeed="0.2" _bulletDamage="3" _range="600" _item="none" />
+		<object x="5811" y="485" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="4" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:9" />
+		<object x="5816" y="413" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="4" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.5;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="5928" y="527" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="4" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="1000" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:9" />
+		<object x="5952" y="434" id="77" _collisionBlock="cellXi:184;cellYi:13;cellXf:186;cellYf:14" _stopId="0" _group="1" _dropHeight="400" _speed="60" _health="10" _timeInit="100" _timeWait="1000" _bulletSpeed="0.2" _bulletDamage="3" _range="600" _item="none" />
+		<object x="6014" y="403" id="1" _typeAction="fighter_3" _initAction="rusher" _stopId="4" _group="3" _speed="0.1" _health="12" _damage="8" _item="coin_silver" _timeInit="1000" _skin="mc_enemy_06" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY;coverProb:0.5,att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:12" />
+		<object x="6015" y="355" id="1" _typeAction="fighter_3" _initAction="rusher" _stopId="4" _group="3" _speed="0.1" _health="18" _damage="12" _item="coin_silver" _timeInit="1000" _skin="mc_enemy_06" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:12" />
+		<object x="6031" y="471" id="12" params="object:enemy" _stopId="4" _range="340" _groups="2,3,2" _msgInit="" _msgEnd="" />
+		<object x="6306" y="513" id="52" _collisionBlock="cellXi:197;cellYi:16;cellXf:198;cellYf:16" _stopId="0" _group="1" _dropHeight="400" _speed="60" _timeInit="100" _health="2" _item="heartA" />
+		<object x="6554" y="395" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="6" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="6554" y="506" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="6" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="6654" y="452" id="12" params="object:enemy" _stopId="6" _range="680" _groups="2" _msgInit="" _msgEnd="" />
+		<object x="6760" y="483" id="34" _stopId="7" _group="3" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="0" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="1" _toUp="1" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="6760" y="536" id="34" _stopId="7" _group="3" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="0" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="1" _toUp="1" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="6767" y="405" id="34" _stopId="7" _group="3" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="0" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="1" _toUp="1" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="6769" y="453" id="34" _stopId="7" _group="4" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="0" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="1" _toUp="1" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="6854" y="464" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="7" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="10000" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:12" />
+		<object x="6951" y="386" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="7" _group="4" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:12" />
+		<object x="6955" y="560" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="7" _group="4" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="6000" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:12" />
+		<object x="6994" y="398" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="7" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:12" />
+		<object x="7002" y="534" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="7" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:12" />
+		<object x="7127" y="463" id="1" _typeAction="fighter_2" _initAction="fighter" _stopId="7" _group="2" _speed="0.08" _health="18" _damage="12" _item="coin_silver" _timeInit="10000" _skin="mc_enemy_02" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_2;coverProb:0.5;att1:10;att2:25;att3:15;att4:50;dmg1:6;dmg2:6;dmg3:6;dmg4:12" />
+		<object x="7250" y="389" id="1" _typeAction="fighter_3" _initAction="rusher" _stopId="7" _group="4" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="7251" y="565" id="1" _typeAction="fighter_3" _initAction="rusher" _stopId="7" _group="4" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="6000" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="7283" y="413" rot="0.017453" id="34" _stopId="7" _group="3" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="500" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="0" _toUp="0" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="7285" y="491" rot="0.017453" sy="0.999847" id="34" _stopId="7" _group="3" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="500" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="0" _toUp="0" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="7327" y="450" id="1" _typeAction="fighter_3" _initAction="rusher" _stopId="7" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="2000" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="7328" y="538" id="1" _typeAction="fighter_3" _initAction="rusher" _stopId="7" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="2000" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="7330" y="363" id="1" _typeAction="fighter_3" _initAction="rusher" _stopId="7" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="2000" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="7357" y="449" id="12" params="object:enemy" _stopId="7" _range="680" _groups="2,3,4,4" _msgInit="" _msgEnd="" />
+		<object x="7455" y="544" id="29" params="link:1;bridgeId:-1;cellXi:0;cellYi:0;cellXf:0;cellYf:0" />
+		<object x="7566" y="342" id="28" _collisionBlock="cellXi:0;cellYi:0;cellXf:0;cellYf:0" params="opened:0;targetX:8686;targetY:474;input:1;link:1" />
+		<object x="8912" y="402" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="9" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="8912" y="503" id="1" _typeAction="fighter_0" _initAction="fighter" _stopId="9" _group="1" _speed="0.12" _health="22" _damage="12" _item="coin_silver" _timeInit="100" _skin="mc_enemy_05" _teleport="0" params="enableCatch:1;name:TXT_NAME_ENEMY_5;coverProb:0.7;att1:25;att2:15;att3:15;att4:40;dmg1:10;dmg2:10;dmg3:10;dmg4:10" />
+		<object x="9119" y="396" rot="0.017453" id="34" _stopId="9" _group="1" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="5000" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="0" _toUp="0" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="9119" y="507" rot="0.017453" id="34" _stopId="9" _group="1" _speed="0.15" _range="40" _health="16" _damage="15" _item="none" _timeInit="5000" _timeWait="500" _bulletSpeed="0.3" _bulletDamage="15" _skin="mc_enemy_03" _toRight="0" _toUp="0" _toPlayer="1" params="enableCatch:1;name:TXT_NAME_ENEMY_3" />
+		<object x="9256" y="417" id="12" params="object:enemy" _stopId="9" _range="300" _groups="4" _msgInit="" _msgEnd="" />
+		<object x="9358" y="392" id="52" _collisionBlock="cellXi:197;cellYi:16;cellXf:198;cellYf:16" _stopId="0" _group="1" _dropHeight="400" _speed="60" _timeInit="100" _health="2" _item="heartA" />
+		<object x="9452" y="448" id="52" _collisionBlock="cellXi:197;cellYi:16;cellXf:198;cellYf:16" _stopId="0" _group="1" _dropHeight="400" _speed="60" _timeInit="100" _health="2" _item="heartA" />
+		<object x="9531" y="391" id="52" _collisionBlock="cellXi:197;cellYi:16;cellXf:198;cellYf:16" _stopId="0" _group="1" _dropHeight="400" _speed="60" _timeInit="100" _health="2" _item="jewel" />
+		<object x="9906" y="362" id="28" _collisionBlock="cellXi:0;cellYi:0;cellXf:0;cellYf:0" params="opened:1;targetX:10894;targetY:406;input:1;link:-1" />
+		<object x="10999" y="464" id="1001" _typeAction="fighter_0" _initAction="fighter" _stopId="10" _group="1" _speed="0.07" _health="250" _damage="4" _item="none" _timeInit="1000" _skin="chr_e00" _teleport="0" params="enableCatch:0;name:TXT_NAME_ENEMY" />
+		<object x="11151" y="466" sx="0.981818" id="54" _collisionBlock="cellXi:0;cellYi:0;cellXf:0;cellYf:0" _stopId="0" _group="1" _dropHeight="400" _speed="60" _timeInit="100" _health="10" _item="none" _gui_messages="" _gui_messages2="" />
+		<object x="11342" y="465" id="12" params="object:enemy" _stopId="10" _range="450" _groups="1" _msgInit="" _msgEnd="" />
+	</layer>
+	<layer type="collision" name="collisions" cols="360" rows="24" tileW="32" tileH="32" map="mc_map_brw_lvl03_collisions" width="11520" height="768" >
+	</layer>
+	<layer type="player" name="player" x="0" y="0" width="0" height="0" >
+	</layer>
+	<layer type="sprites" name="foreground" width="15000" height="768" >
+		<gpx x="368" y="592" image="foreground_lv3-fg_lv03_01" />
+		<gpx x="785" y="644" image="foreground_lv3-fg_lv03_04" />
+		<gpx x="1235" y="583" image="foreground_lv3-fg_lv03_03" />
+		<gpx x="1883" y="588" image="foreground_lv3-fg_lv03_05" />
+		<gpx x="2508" y="597" image="foreground_lv3-fg_lv03_03" />
+		<gpx x="2997" y="633" image="foreground_lv3-fg_lv03_04" />
+		<gpx x="3840" y="562" image="foreground_lv3-fg_lv03_02" />
+		<gpx x="4766" y="622" image="foreground_lv3-fg_lv03_05" />
+		<gpx x="5211" y="597" image="foreground_lv3-fg_lv03_03" />
+		<gpx x="5704" y="636" image="foreground_lv3-fg_lv03_06" />
+		<gpx x="6546" y="580" image="foreground_lv3-fg_lv03_07" />
+		<gpx x="7270" y="608" image="foreground_lv3-fg_lv03_03" />
+		<gpx x="9942" y="627" image="foreground_lv3-fg_lv03_01" />
+		<gpx x="10983" y="625" image="foreground_lv3-fg_lv03_06" />
+		<gpx x="11327" y="604" image="foreground_lv3-fg_lv03_02" />
+	</layer>
+	<layer name="kipulayer" >
+		<kipuObject id="0" x="-1297" y="-77"/>
+		<kipuObject id="1" x="1003" y="728"/>
+		<kipuObject id="2" x="1201" y="738"/>
+		<kipuObject id="3" x="1357" y="725"/>
+	</layer>
+</world>

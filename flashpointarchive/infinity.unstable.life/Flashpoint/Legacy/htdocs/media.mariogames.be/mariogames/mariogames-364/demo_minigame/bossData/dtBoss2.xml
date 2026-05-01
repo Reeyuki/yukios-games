@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+    <state id="0">
+        <property name="necromancy_attacks" value="3" />
+        <property name="percentHealthLimit" value="0.1" />
+        <property name="num_teleport" value="3" />
+        <property name="time_stand_vulnerable" value="1500" />
+        <property name="time_warning" value="1000" />
+		<property name="time_angry" value="2000" />
+		<property name="damage_stand_vulnerable" value="500" /> <!-- damage_stand_vulnerable in [0, 100] -->
+		<property name="time_teleport_delay" value="500" />
+		<property name="time_waiting_post_shoot" value="2000" />
+		<property name="time_waiting_post_necromancy" value="2000" />
+		<property name="time_post_teleport_vulnerable" value="1000" />
+		<property name="damage_wave" value="15" />
+		<property name="speed_bullet" value="0.3" />
+		<property name="time_dizzi" value="3000" />
+		<property name="num_bullet" value="3" />
+		<property name="time_stand_and_vulnerability" value="1000" />
+		<property name="cooldown_create_bullet" value="800" />
+		<property name="threshold_hp" value="70" />
+		<property name="time_dizzi_N" value="1000" />
+		<property name="time_dizzi_S" value="4000" />
+		<property name="damage_attack_and_teleport" value="3000" />
+
+		
+    </state>
+
+    <state id="1">
+        <property name="necromancy_attacks" value="3" />
+        <property name="percentHealthLimit" value="0.1" />
+        <property name="num_teleport" value="3" />
+		<property name="time_stand_vulnerable" value="1000" />
+        <property name="time_warning" value="1000" />
+		<property name="time_angry" value="2000" />
+		<property name="damage_stand_vulnerable" value="10" />
+		<property name="time_teleport_delay" value="500" />
+		<property name="time_waiting_post_shoot" value="2000" />
+		<property name="time_waiting_post_necromancy" value="1000" />
+		<property name="time_post_teleport_vulnerable" value="1000" />
+		<property name="damage_wave" value="15" />
+		<property name="speed_bullet" value="0.3" />
+		<property name="time_dizzi" value="2000" />
+		<property name="num_bullet" value="3" />
+		<property name="time_stand_and_vulnerability" value="1000" />
+		<property name="cooldown_create_bullet" value="800" />
+		<property name="threshold_hp" value="40" />
+		<property name="time_dizzi_N" value="1000" />
+		<property name="time_dizzi_S" value="3000" />
+		<property name="damage_attack_and_teleport" value="3000" />
+		<property name="damage_vulnerability_and_teleport" value="3000" />
+		
+		
+		
+    </state>
+
+	
+	<state id="2">
+        <property name="percentHealthLimit" value="0.1" />
+		<property name="num_teleport" value="3" />
+        <property name="time_angry" value="2000" />
+		<property name="cooldown_create_estalactita" value="1500" />
+		<property name="num_estalactitas" value="5" />
+		<property name="time_teleport_delay" value="1000" />
+		<property name="time_waiting_post_shoot" value="1000" />
+		<property name="num_teleport_and_shoot" value="3" />
+		<property name="time_dizzi" value="3000" />
+		<property name="speed_bullet" value="0.3" />
+		<property name="cooldown_create_bullet" value="500" />
+		<property name="num_bullet" value="3" />
+		<property name="time_stand_melee" value="2000" />
+		<property name="time_stand_vulnerable" value="1000" />
+		<property name="probability_melee" value="0.20" />
+		<property name="speed_fall" value="45" />
+		<property name="time_dizzi_S" value="3000" />
+		
+		<property name="damage_shield_and_proyectiles" value="3000" />
+		<property name="damage_melee_fight" value="3000" />
+		<property name="damage_teleport_and_shoot" value="3000" />
+		
+	</state>
+	
+    <state id="3">
+        <property name="width" value="280" />
+        <property name="height" value="180" />
+    </state>
+
+</data>

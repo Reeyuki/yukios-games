@@ -1,0 +1,5 @@
+<xmlData version="1.0">
+	<asset id="gui_screens_mainmenu_namegame" file="gui_screens_mainmenu_namegame.png" />
+	<asset id="gui_screens_mainmenu_logo" file="gui_screens_mainmenu_logo.png" />
+	<asset id="gui_common_messagelogo" file="gui_common_messagelogo.png" />
+</xmlData>

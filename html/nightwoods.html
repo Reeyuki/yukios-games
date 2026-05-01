@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Night in the Woods</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: #1f1f20;
+        overflow: hidden;
+      }
+      #unity-canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        background: #1f1f20;
+      }
+      #loading-screen {
+        position: fixed;
+        inset: 0;
+        background: #1f1f20;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        font-family: monospace;
+        color: #e8d5a3;
+      }
+      #loading-title {
+        font-size: 22px;
+        margin-bottom: 32px;
+        letter-spacing: 2px;
+        opacity: 0.9;
+      }
+      #loading-status {
+        font-size: 14px;
+        margin-bottom: 12px;
+        opacity: 0.7;
+        min-height: 18px;
+      }
+      #loading-bar-wrap {
+        width: 320px;
+        height: 6px;
+        background: #333;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 14px;
+      }
+      #loading-bar {
+        height: 100%;
+        width: 0%;
+        background: #e8d5a3;
+        border-radius: 3px;
+        transition: width 0.15s ease;
+      }
+      #loading-mb {
+        font-size: 13px;
+        opacity: 0.55;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading-screen">
+      <div id="loading-title">NIGHT IN THE WOODS</div>
+      <div id="loading-status">Loading...</div>
+      <div id="loading-bar-wrap"><div id="loading-bar"></div></div>
+      <div id="loading-mb"></div>
+    </div>
+
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+
+    <script>
+      const CDN = "https://cdn.jsdelivr.net/gh/Reeyuki/NightInTheWoods";
+      const DATA_PARTS = 17;
+      const WASM_PARTS = 3;
+      const TOTAL_BYTES = (326 + 41) * 1024 * 1024;
+      const TOTAL_MB = (326 + 41).toFixed(1);
+
+      const MAX_RETRIES = 3;
+      const RETRY_DELAY_MS = 1000;
+
+      const elStatus = document.getElementById("loading-status");
+      const elBar = document.getElementById("loading-bar");
+      const elMb = document.getElementById("loading-mb");
+
+      const bytesReceived = new Map();
+
+      function onProgress(key, bytes) {
+        bytesReceived.set(key, bytes);
+        let total = 0;
+        for (const v of bytesReceived.values()) total += v;
+        const pct = Math.min(100, (total / TOTAL_BYTES) * 100);
+        elBar.style.width = pct + "%";
+        elMb.textContent = (total / (1024 * 1024)).toFixed(1) + " MB / " + TOTAL_MB + " MB";
+      }
+
+      function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      async function fetchWithRetry(url, key, retries = MAX_RETRIES) {
+        for (let attempt = 0; attempt <= retries; attempt++) {
+          try {
+            const resp = await fetch(url);
+            if (!resp.ok) throw new Error("HTTP " + resp.status + " for " + url);
+            const reader = resp.body.getReader();
+            const chunks = [];
+            let received = 0;
+            // Reset progress for this key on retry
+            if (attempt > 0) onProgress(key, 0);
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              chunks.push(value);
+              received += value.byteLength;
+              onProgress(key, received);
+            }
+            const merged = new Uint8Array(received);
+            let offset = 0;
+            for (const c of chunks) {
+              merged.set(c, offset);
+              offset += c.byteLength;
+            }
+            return merged.buffer;
+          } catch (err) {
+            if (attempt < retries) {
+              console.warn(`Retry ${attempt + 1}/${retries} for ${url}:`, err.message);
+              await sleep(RETRY_DELAY_MS * (attempt + 1));
+            } else {
+              throw new Error("Failed after " + (retries + 1) + " attempts: " + url);
+            }
+          }
+        }
+      }
+
+      // Fetch all parts in parallel with per-part retry
+      async function fetchAllParts(baseName, numParts) {
+        const promises = Array.from({ length: numParts }, (_, i) => {
+          const suffix = String(i).padStart(3, "0");
+          const url = CDN + "/Build/parts/" + baseName + ".part" + suffix;
+          return fetchWithRetry(url, baseName + suffix);
+        });
+        const buffers = await Promise.all(promises);
+        const total = buffers.reduce((s, b) => s + b.byteLength, 0);
+        const merged = new Uint8Array(total);
+        let offset = 0;
+        for (const b of buffers) {
+          merged.set(new Uint8Array(b), offset);
+          offset += b.byteLength;
+        }
+        return merged.buffer;
+      }
+
+      async function fetchText(path, retries = MAX_RETRIES) {
+        for (let attempt = 0; attempt <= retries; attempt++) {
+          try {
+            const resp = await fetch(CDN + "/" + path);
+            if (!resp.ok) throw new Error("HTTP " + resp.status);
+            return resp.text();
+          } catch (err) {
+            if (attempt < retries) {
+              console.warn(`Retry ${attempt + 1}/${retries} for ${path}:`, err.message);
+              await sleep(RETRY_DELAY_MS * (attempt + 1));
+            } else {
+              throw new Error("Failed to fetch " + path);
+            }
+          }
+        }
+      }
+
+      async function boot() {
+        elStatus.textContent = "Downloading...";
+
+        // All 4 assets fetched in parallel; parts within each asset also parallel
+        const [loaderText, frameworkText, dataBuf, wasmBuf] = await Promise.all([
+          fetchText("Build/bb0d9ecdb05db3e84da20bd14a4f84dc.loader.js"),
+          fetchText("Build/5eb531593953ed3f9d46bf9232472a14.framework.js"),
+          fetchAllParts("1be89627d83a99b9ed0f73daf7c701b0.data", DATA_PARTS),
+          fetchAllParts("d50f42928f17ee1efc318f292db2df90.wasm", WASM_PARTS)
+        ]);
+
+        elStatus.textContent = "Starting...";
+        elBar.style.width = "100%";
+
+        const scriptEl = document.createElement("script");
+        scriptEl.textContent = loaderText;
+        document.head.appendChild(scriptEl);
+
+        const dataUrl = URL.createObjectURL(new Blob([dataBuf], { type: "application/octet-stream" }));
+        const wasmUrl = URL.createObjectURL(new Blob([wasmBuf], { type: "application/wasm" }));
+        const frameworkUrl = URL.createObjectURL(new Blob([frameworkText], { type: "application/javascript" }));
+
+        createUnityInstance(document.querySelector("#unity-canvas"), {
+          dataUrl: dataUrl,
+          frameworkUrl: frameworkUrl,
+          codeUrl: wasmUrl,
+          streamingAssetsUrl: CDN + "/StreamingAssets",
+          companyName: "Infinite Fall",
+          productName: "Night in the Woods",
+          productVersion: "1.0"
+        }).then(function () {
+          document.getElementById("loading-screen").style.display = "none";
+          URL.revokeObjectURL(dataUrl);
+          URL.revokeObjectURL(wasmUrl);
+          URL.revokeObjectURL(frameworkUrl);
+        });
+      }
+
+      boot().catch(function (err) {
+        elStatus.textContent = "Error: " + err.message;
+        console.error(err);
+      });
+    </script>
+  </body>
+</html>

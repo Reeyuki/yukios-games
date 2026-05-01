@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+    <pathBase>spi_spl_act_spiderman/</pathBase>
+    <urls>urls.xml</urls>
+    <urlsPreviewGUI>urlsPreviewGUI.xml</urlsPreviewGUI>
+    <urlsDEMO>urlsDEMO.xml</urlsDEMO>
+    <initBytes>1654377</initBytes>
+    <initBytesDEMO>2260740</initBytesDEMO>
+    <useConsole>0</useConsole>
+    <traceLog>1</traceLog>
+    <appWidth>750</appWidth>
+    <appHeight>500</appHeight>
+    <frameRate>30</frameRate>
+    <quality>high</quality>
+    <enabledCheats>1</enabledCheats>
+    <enableTrackDebug>0</enableTrackDebug>
+    <appName>Application_01</appName>
+    <strings>strings/strings.xml</strings>
+    <loaderURL>demo_minigame_loader.swf</loaderURL>
+</data>

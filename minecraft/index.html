@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minecraft</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+        image-rendering: pixelated;
+      }
+
+      #bg {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          #87ceeb 0%,
+          #87ceeb 55%,
+          #5da832 55%,
+          #5da832 60%,
+          #6b4226 60%,
+          #6b4226 100%
+        );
+        overflow: hidden;
+      }
+
+      .cloud {
+        position: absolute;
+        background: #fff;
+        opacity: 0.85;
+        image-rendering: pixelated;
+      }
+
+      .sun {
+        position: absolute;
+        top: 6%;
+        right: 12%;
+        width: 48px;
+        height: 48px;
+        background: #ffd700;
+        image-rendering: pixelated;
+      }
+
+      .grass-top {
+        position: absolute;
+        bottom: 40%;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: #7ec850;
+      }
+
+      .pixel-tree {
+        position: absolute;
+        bottom: 40%;
+      }
+      .tree-trunk {
+        width: 16px;
+        height: 32px;
+        background: #6b4226;
+        margin: 0 auto;
+      }
+      .tree-leaves {
+        width: 48px;
+        height: 48px;
+        background: #4a7c2f;
+        margin-left: -16px;
+        margin-top: -32px;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+
+      #menu {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 20;
+      }
+
+      .mc-panel {
+        background: rgba(0, 0, 0, 0.72);
+        border: 3px solid #555;
+        box-shadow:
+          inset 2px 2px 0 #888,
+          inset -2px -2px 0 #222,
+          4px 4px 0 #000;
+        padding: 32px 40px 36px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        min-width: 360px;
+      }
+
+      .mc-title {
+        font-family: "Press Start 2P", monospace;
+        font-size: 26px;
+        color: #ffd700;
+        text-shadow:
+          3px 3px 0 #8b6914,
+          -1px -1px 0 #8b6914,
+          1px -1px 0 #8b6914,
+          -1px 1px 0 #8b6914;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+        text-align: center;
+      }
+
+      .mc-subtitle {
+        font-family: "Press Start 2P", monospace;
+        font-size: 8px;
+        color: #aaa;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+      }
+
+      .mc-btn {
+        font-family: "Press Start 2P", monospace;
+        font-size: 11px;
+        color: #fff;
+        background: #555;
+        border: none;
+        padding: 12px 20px;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+        box-shadow:
+          inset 2px 2px 0 #888,
+          inset -2px -2px 0 #333,
+          3px 3px 0 #000;
+        letter-spacing: 1px;
+        line-height: 1.5;
+      }
+
+      .mc-btn:hover {
+        background: #6a8fad;
+        box-shadow:
+          inset 2px 2px 0 #a0c0e0,
+          inset -2px -2px 0 #2a4a6a,
+          3px 3px 0 #000;
+        color: #fff;
+      }
+
+      .mc-btn:active {
+        box-shadow:
+          inset -2px -2px 0 #888,
+          inset 2px 2px 0 #333,
+          1px 1px 0 #000;
+        transform: translate(2px, 2px);
+      }
+
+      .mc-divider {
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #666, transparent);
+        margin: 4px 0;
+      }
+
+      .disclaimer {
+        position: fixed;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "Press Start 2P", monospace;
+        font-size: 9px;
+        background: rgba(0, 0, 0, 0.85);
+        color: #aaa;
+        padding: 12px 18px;
+        border: 2px solid #555;
+        box-shadow: 3px 3px 0 #000;
+        z-index: 10;
+        opacity: 1;
+        transition: opacity 0.6s ease;
+        pointer-events: none;
+        white-space: nowrap;
+        letter-spacing: 1px;
+      }
+
+      .disclaimer.hide {
+        opacity: 0;
+      }
+
+      #gameFrame {
+        display: none;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="bg">
+      <div class="sun"></div>
+      <div class="cloud" style="top: 8%; left: 8%; width: 64px; height: 16px"></div>
+      <div class="cloud" style="top: 8%; left: 10%; width: 32px; height: 32px"></div>
+      <div class="cloud" style="top: 7%; left: 14%; width: 48px; height: 16px"></div>
+      <div class="cloud" style="top: 14%; left: 38%; width: 80px; height: 16px"></div>
+      <div class="cloud" style="top: 14%; left: 40%; width: 48px; height: 32px"></div>
+      <div class="cloud" style="top: 18%; right: 28%; width: 64px; height: 16px"></div>
+      <div class="cloud" style="top: 18%; right: 30%; width: 32px; height: 32px"></div>
+      <div class="grass-top"></div>
+      <div class="pixel-tree" style="left: 7%">
+        <div class="tree-leaves"></div>
+        <div class="tree-trunk"></div>
+      </div>
+      <div class="pixel-tree" style="left: 18%">
+        <div
+          class="tree-leaves"
+          style="width: 64px; height: 64px; margin-left: -24px; margin-top: -48px; background: #3d6e27"
+        ></div>
+        <div class="tree-trunk" style="height: 40px"></div>
+      </div>
+      <div class="pixel-tree" style="right: 10%">
+        <div class="tree-leaves"></div>
+        <div class="tree-trunk"></div>
+      </div>
+      <div class="pixel-tree" style="right: 22%">
+        <div
+          class="tree-leaves"
+          style="width: 56px; height: 56px; margin-left: -20px; margin-top: -40px; background: #3d6e27"
+        ></div>
+        <div class="tree-trunk" style="height: 36px"></div>
+      </div>
+    </div>
+
+    <div id="menu">
+      <div class="mc-panel">
+        <div class="mc-title">MINECRAFT</div>
+        <div class="mc-subtitle">select edition</div>
+        <div class="mc-divider"></div>
+        <button class="mc-btn" onclick="loadGame('lce')">Legacy Console Edition</button>
+        <button class="mc-btn" onclick="loadGame('selenite')">All Versions (1.6.4–1.12)</button>
+      </div>
+    </div>
+
+    <div class="disclaimer" id="disclaimer" style="display: none">powered by selenite.cc</div>
+    <iframe id="gameFrame" allowfullscreen></iframe>
+
+    <script>
+      const menu = document.getElementById("menu");
+      const frame = document.getElementById("gameFrame");
+      const disclaimer = document.getElementById("disclaimer");
+
+      function loadGame(type) {
+        menu.style.display = "none";
+        document.getElementById("bg").style.display = "none";
+        frame.style.display = "block";
+        if (type === "lce") {
+          frame.src = "/static/games/minecraft/lce.html";
+        }
+        if (type === "selenite") {
+          frame.src = "https://selenite.cc/resources/semag/eag/index.html";
+          disclaimer.style.display = "block";
+          setTimeout(() => {
+            disclaimer.classList.add("hide");
+            setTimeout(() => disclaimer.remove(), 600);
+          }, 3000);
+        }
+      }
+    </script>
+  </body>
+</html>

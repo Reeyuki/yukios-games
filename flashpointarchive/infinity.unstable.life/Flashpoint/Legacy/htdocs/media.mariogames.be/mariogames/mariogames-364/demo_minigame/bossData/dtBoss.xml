@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+    <state id="0">
+        <property name="speed_movement" value="0.30" />
+        <property name="speed_movement_to_player" value="0.25" />
+        <property name="laser_range" value="1000" />
+        <property name="num_minions" value="2" />
+        <property name="time_waiting" value="2000" />
+        <property name="time_waiting_attack_player" value="2000" />
+        <property name="time_waiting_post_attack" value="6000" />
+        <property name="delay_fall" value="5000" />
+        <property name="speed_fall_1" value="40" />
+        <property name="speed_fall_2" value="40" />
+        <property name="speed_fall_3" value="40" />
+        <property name="speed_fall_4" value="40" />
+        <property name="health_enemys" value="10" />
+        <property name="cooldown_dizzy" value="5000" />
+        <property name="speed_bullet" value="0.3" />
+		<property name="cooldown_angry" value="1000" />
+		<property name="damage_attack" value="20" /> <!-- damage_attack = 0 to 100 -->
+		<property name="size_bullet" value="1" /> <!-- size_bullet = 1 to 4 -->
+		<property name="coverProb_enemy" value="0.6" />  <!-- coverProb_enemy = 0 to 1 -->
+		
+
+
+    </state>
+
+    <state id="1">
+        <property name="speed_movement" value="0.35" />
+        <property name="speed_movement_to_player" value="0.35" />
+        <property name="laser_range" value="1000" />
+        <property name="num_minions" value="3" />
+        <property name="time_waiting" value="1000" />
+        <property name="time_waiting_attack_player" value="1500" />
+        <property name="time_waiting_post_attack" value="4000" />
+        <property name="delay_fall" value="5000" />
+        <property name="speed_fall_1" value="40" />
+        <property name="speed_fall_2" value="40" />
+        <property name="speed_fall_3" value="40" />
+        <property name="speed_fall_4" value="40" />
+        <property name="health_enemys" value="10" />
+        <property name="cooldown_dizzy" value="5000" />
+        <property name="speed_bullet" value="0.4" />
+		<property name="cooldown_angry" value="1000" />
+		<property name="damage_attack" value="20" /> <!-- damage_attack = 0 to 100 -->
+		<property name="size_bullet" value="1.5" /> <!-- size_bullet = 1 to 4 -->
+		<property name="coverProb_enemy" value="0.6" />  <!-- coverProb_enemy = 0 to 1 -->
+    </state>
+
+    <state id="2">
+       <property name="speed_movement" value="0.5" />
+        <property name="speed_movement_to_player" value="0.50" />
+        <property name="laser_range" value="1000" />
+        <property name="num_minions" value="4" />
+        <property name="time_waiting" value="500" />
+        <property name="time_waiting_attack_player" value="1000" />
+        <property name="time_waiting_post_attack" value="4000" />
+        <property name="delay_fall" value="5000" />
+        <property name="speed_fall_1" value="40" />
+        <property name="speed_fall_2" value="40" />
+        <property name="speed_fall_3" value="40" />
+        <property name="speed_fall_4" value="40" />
+        <property name="health_enemys" value="10" />
+        <property name="cooldown_dizzy" value="4000" />
+        <property name="speed_bullet" value="0.45" />
+		<property name="cooldown_angry" value="1000" />
+		<property name="damage_attack" value="20" /> <!-- damage_attack = 0 to 100 -->
+		<property name="size_bullet" value="1.5" /> <!-- size_bullet = 1 to 4 -->
+		<property name="coverProb_enemy" value="0.6" />  <!-- coverProb_enemy = 0 to 1 -->
+    </state>
+
+    <state id="3">
+        <property name="width" value="480" />
+        <property name="height" value="250" />
+    </state>
+
+</data>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+    <!-- Main -->
+    <url id="sounds"        type="xml" path="sounds.xml"/>
+    <url id="settings"      type="xml" path="settings.xml"/>
+    <url id="soundsAssets"  type="swf" path="demo_minigame_sounds.swf"/>
+    <url id="fonts"         type="swf" path="demo_minigame_fonts.swf"/>
+    <url id="content"       type="swf" path="demo_minigame_content.swf"/>
+    <url id="screens"       type="xml" path="screens/screens.xml"/>
+    <url id="postUrls"      type="xml" path="postUrls.xml"/>
+    <url id="vars"          type="xml" path="debugVars.xml" />
+	<url id="assets"        type="img" path="assets/assets.xml" pathRelative="assets/" />
+
+    <url id="content_brawler" type="swf" path="demo_minigame_gameplay_brawler.swf" />
+
+
+    <!--  LEVEL_1
+    <url id="brw_assetsLevel_1" type="img" path="gamesData/gameBrawler/level01/flash.xml" pathRelative="gamesData/gameBrawler/images/" />
+    -->
+    <url id="brw_dataGeneral_1" type="xml" path="gamesData/gameBrawler/level01/general.xml" />
+    <url id="brw_dataWorld_1"   type="xml" path="gamesData/gameBrawler/level01/brw_lvl01.xml" />
+
+    <url id="brw_dataGeneral_1_hard" type="xml" path="gamesData/gameBrawler/level01_hard/general.xml" />
+    <url id="brw_dataWorld_1_hard"   type="xml" path="gamesData/gameBrawler/level01_hard/brw_lvl01.xml" />
+
+    <!--  LEVEL_2
+    <url id="brw_assetsLevel_2" type="img" path="gamesData/gameBrawler/level02/flash.xml" pathRelative="gamesData/gameBrawler/images/" />
+    -->
+    <url id="brw_dataGeneral_2" type="xml" path="gamesData/gameBrawler/level02/general.xml" />
+    <url id="brw_dataWorld_2"   type="xml" path="gamesData/gameBrawler/level02/brw_lvl02.xml" />
+
+    <url id="brw_dataGeneral_2_hard" type="xml" path="gamesData/gameBrawler/level02_hard/general.xml" />
+    <url id="brw_dataWorld_2_hard"   type="xml" path="gamesData/gameBrawler/level02_hard/brw_lvl02.xml" />
+
+    <!--  LEVEL_3
+    <url id="brw_assetsLevel_3" type="img" path="gamesData/gameBrawler/level03/flash.xml" pathRelative="gamesData/gameBrawler/images/" />
+    -->
+    <url id="brw_dataGeneral_3" type="xml" path="gamesData/gameBrawler/level03/general.xml" />
+    <url id="brw_dataWorld_3"   type="xml" path="gamesData/gameBrawler/level03/brw_lvl03.xml" />
+
+    <url id="brw_dataGeneral_3_hard" type="xml" path="gamesData/gameBrawler/level03_hard/general.xml" />
+    <url id="brw_dataWorld_3_hard"   type="xml" path="gamesData/gameBrawler/level03_hard/brw_lvl03.xml" />
+
+    <!-- Enemy Engine-->
+    <url id="dtBoss"       type="xml" path="bossData/dtBoss.xml" />
+	<url id="dtBoss2"       type="xml" path="bossData/dtBoss2.xml" />
+
+</data>

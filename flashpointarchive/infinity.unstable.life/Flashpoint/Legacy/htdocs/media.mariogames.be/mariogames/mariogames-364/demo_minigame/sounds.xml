@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+    <sound linked="sndDemoSoundAttack" vol="1" bg="0" debug="1" />
+
+    <!-- MUSIC -->
+    <sound linked="ATB_Win" vol="0.8" bg="0" debug="1"/>
+    <sound linked="ATB_Titlecard" vol="0.9" bg="1" debug="1"/>
+    <sound linked="ATB_Lose" vol="0.8" bg="1" debug="1"/>
+    <sound linked="ATB_Gameplay3" vol="0.8" bg="1" debug="1"/>
+    <sound linked="ATB_Gameplay2" vol="1" bg="1" debug="1"/>
+    <sound linked="ATB_Gameplay1" vol="0.8" bg="1" debug="1"/>
+    <sound linked="ATB_WinGame" vol="0.8" bg="1" debug="1"/>
+	
+    <!-- BRAWLER : ENEMY -->
+    <sound linked="snd_atb_enemies_wormshoot" vol="0.8" bg="0" debug="1"/>
+    <sound linked="snd_atb_enemies_penguinsplit" vol="0.7" bg="0" debug="1"/>
+    <sound linked="snd_atb_enemies_penguinshoot" vol="0.8" bg="0" debug="1"/>
+    <sound linked="snd_atb_enemies_gethit" vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_enemies_appear" vol="1.0" bg="0" debug="1"/>
+	<sound linked="snd_atb_worm_wowowow" vol="0.4" bg="0" debug="1"/>
+	<sound linked="snd_atb_worm_move" vol="0.4" bg="0" debug="1"/>
+    <sound linked="snd_atb_enemies_getup" vol="0.4" bg="0" debug="1"/>
+    <sound linked="snd_atb_enemies_fall" vol="0.5" bg="0" debug="1"/>
+	<sound linked="snd_atb_worm_wowowow_2" vol="0.4" bg="1" debug="1"/>
+    <sound linked="snd_atb_enemy_appear2" vol="0.2" bg="0" debug="1"/>
+    <sound linked="snd_atb_enemies_cover" vol="1.1" bg="0" debug="1"/>
+	
+    <!-- GUI -->
+    <sound linked="snd_atb_interface_button" vol="1.2" bg="0" debug="1"/>
+    <sound linked="snd_atb_interface_play"   vol="1.1" bg="0" debug="1"/>
+    <sound linked="snd_atb_interface_over"   vol="1.5" bg="0" debug="1"/>
+
+    <!-- BRAWLER : COLLECTIBLE -->
+    <sound linked="snd_atb_collectibles_1up"   vol="1.1" bg="0" debug="1"/>
+    <sound linked="snd_atb_collectibles_hp"    vol="1.3" bg="0" debug="1"/>
+    <sound linked="snd_atb_collectibles_jewel" vol="2" bg="0" debug="1"/>
+    <sound linked="snd_atb_collectibles_mp"    vol="1.3" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_switch"    vol="1.2"  bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_portalout" vol="0.7" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_portalin"  vol="0.7" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_crates"    vol="1.8" bg="0" debug="1"/>
+
+    <!-- BRAWLER : PLAYER -->
+    <sound linked="snd_atb_player_attack1" vol="0.9" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_attack2" vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_attack3" vol="1.1" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_grab"    vol="0.9" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_jump"    vol="0.9" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_land"    vol="0.9" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_throw"   vol="0.9" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_bigfeetwalk"   vol="0.5" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_bigfeethalf"   vol="0.5" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_bigfeetfinish" vol="0.5" bg="0" debug="1"/>
+	<sound linked="snd_atb_hit1"   vol="0.4" bg="0" debug="1"/>
+	<sound linked="snd_atb_hit2"   vol="0.4" bg="0" debug="1"/>
+	<sound linked="snd_atb_hit3"   vol="0.4" bg="0" debug="1"/>
+	<sound linked="snd_atb_attack1"   vol="0.4" bg="0" debug="1"/>
+	<sound linked="snd_atb_attack2"   vol="0.4" bg="0" debug="1"/>
+	<sound linked="snd_atb_attack3"   vol="0.4" bg="0" debug="1"/>
+	<sound linked="snd_atb_schdow"   vol="0.7" bg="0" debug="1"/>
+	<sound linked="snd_atb_ow"   vol="0.6" bg="0" debug="1"/>
+	<sound linked="snd_atb_player_fear1"   vol="1" bg="0" debug="1"/>
+	<sound linked="snd_atb_player_fear2"   vol="1" bg="1" debug="1"/>
+	<sound linked="snd_atb_player_fear3"   vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_sharkhalf"   vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_sharkfullstart"   vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_sharkfullactivate"   vol="1.1" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_sharkfull"   vol="1" bg="1" debug="1"/>
+    <sound linked="snd_atb_player_fearactivate"   vol="0.7" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_bigfeetactivate"   vol="0.8" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_dash"   vol="0.8" bg="0" debug="1"/>
+    <sound linked="snd_atb_player_specialselector"   vol="0.8" bg="0" debug="1"/>
+
+    <!-- BRAWLER : STAGE -->
+    <sound linked="snd_atb_scenario_falling_destroy" vol="0.3" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_falling_alert" vol="0.4" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_cannons" vol="0.2" bg="0" debug="1"/>
+	<sound linked="snd_atb_logo_sword" vol="0.8" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_start" vol="1.2" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_awesome" vol="1.1" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_go" vol="1.1" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_falling_fireballs" vol="1.1" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_nightmare" vol="1.1" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_wormdestroy" vol="1.1" bg="0" debug="1"/>
+    <sound linked="snd_atb_scenario_wormdehydratate" vol="1.1" bg="0" debug="1"/>
+	
+     <!-- BRAWLER : BOSS (GUNTER) -->
+    <sound linked="snd_atb_boss_weg_defeat"          vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_boss_weg_gethit"           vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_boss_weg_shield"           vol="1" bg="1" debug="1"/>
+    <sound linked="snd_atb_boss_weg_special"          vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_boss_weg_summonpenguins"   vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_boss_weg_appear"   vol="1" bg="0" debug="1"/>
+	
+	<!-- BRAWLER : BOSS (LICH) -->
+	<sound linked="snd_atb_boss_lich_appear"          vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_boss_lich_die"           vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_boss_lich_fireball"           vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_boss_lich_gethit"          vol="1" bg="0" debug="1"/>
+    <sound linked="snd_atb_boss_lich_teleport_in"   vol="1" bg="0" debug="1"/>
+	<sound linked="snd_atb_boss_lich_teleport_out"   vol="1" bg="0" debug="1"/>
+	
+</data>

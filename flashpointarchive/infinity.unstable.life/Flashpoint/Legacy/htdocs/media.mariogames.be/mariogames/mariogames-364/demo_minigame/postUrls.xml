@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+    <group id="media0">
+        <url id="gui"      size="1349427"   type="swf" path="demo_minigame_gui.swf"/>
+    </group>
+    <group id="media1">
+        <url id="enemies"  size="406312" type="swf" path="demo_minigame_enemies.swf"/>
+        <url id="player"   size="126315"  type="swf" path="demo_minigame_player.swf"/>
+        <url id="gameplay" size="2881"  type="swf" path="demo_minigame_gameplay.swf"/>
+        <url id="world_brawler" size="455396"  type="swf" path="demo_minigame_world_brawler.swf"/>
+    </group>
+    <group id="media2">
+        <url id="enemies"  size="406312" type="swf" path="demo_minigame_enemies.swf"/>
+        <url id="player"   size="126315"  type="swf" path="demo_minigame_player.swf"/>
+        <url id="gameplay" size="2881"  type="swf" path="demo_minigame_gameplay.swf"/>
+        <url id="world_brawler_2" size="346449"  type="swf" path="demo_minigame_world_brawler_2.swf"/>
+    </group>
+    <group id="media3">
+        <url id="enemies"  size="406312" type="swf" path="demo_minigame_enemies.swf"/>
+        <url id="player"   size="126315"  type="swf" path="demo_minigame_player.swf"/>
+        <url id="gameplay" size="2881"  type="swf" path="demo_minigame_gameplay.swf"/>
+        <url id="world_brawler_3" size="590293"  type="swf" path="demo_minigame_world_brawler_3.swf"/>
+    </group>
+</data>

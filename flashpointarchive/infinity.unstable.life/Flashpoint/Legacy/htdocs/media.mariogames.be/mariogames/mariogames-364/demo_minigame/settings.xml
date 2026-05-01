@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<xmlData version="1.0">
+  <general>
+    <sampleParameters value="1" />
+  </general>
+
+  <player>
+    <health value="100" />
+    <lifes value="3" />
+    <dashDistance value="280" />
+    <dashSpeed value="0.7" />
+    <timeHitTint value="1500" />
+    <bulletDamage value="10" />
+    <bulletSpeed value="0.6" />
+    <bulletDistance value="300" />
+    <meleeDamage value="80" />
+    <bombDamage value="100" />
+  </player>
+
+  <combos>
+      <range1 value="1" />
+      <range2 value="6" />
+      <range3 value="11" />
+      <range4 value="16" />
+      <range5 value="21" />
+  </combos>
+
+  <objects>
+    <springJumpSpeed value="1.6" />
+    <itemPlusHealth value="50" />
+    <itemPlusScore value="10" />
+    <trapZoneDamage value="10" />
+  </objects>
+
+  <brawler_game>
+    <timeResetComboAttack value="1500" />
+  </brawler_game>
+
+  <enemies_bonus>
+    <penguin value="125" />
+    <burguer value="175" />
+    <pinkWorn value="200" />
+    <greenWorn value="250" />
+    <boss1 value="300" />
+    <boss2 value="400" />
+  </enemies_bonus>
+
+</xmlData>
