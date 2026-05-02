@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MINUS THREE</title>
+    <style>
+      body {
+        margin: 0;
+        background: #0a0a0a;
+        color: #fff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: none;
+        background: #000;
+      }
+
+      #ui {
+        position: absolute;
+        text-align: center;
+        z-index: 5;
+      }
+
+      #bar {
+        width: 320px;
+        height: 6px;
+        background: #1a1a1a;
+        margin: 20px auto;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #333;
+      }
+
+      #pct {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+        transition: width 0.3s;
+      }
+
+      #msg {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #888;
+        margin-bottom: 8px;
+      }
+
+      #val {
+        font-size: 24px;
+        font-weight: 300;
+        color: #fff;
+      }
+
+      #fs {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        cursor: pointer;
+        display: none;
+        z-index: 100;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+
+      #fs:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(1.05);
+      }
+
+      #fs svg {
+        fill: #fff;
+        width: 20px;
+        height: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="c"></canvas>
+    <div id="ui">
+      <div id="msg">Retrieving Assets</div>
+      <div id="val">0%</div>
+      <div id="bar">
+        <div id="pct"></div>
+      </div>
+    </div>
+    <button id="fs">
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"
+        />
+      </svg>
+    </button>
+    <script>
+      const bU = "https://cdn.jsdelivr.net/gh/reeyuki/MinusThree@main/";
+      const aS = {
+        d: { n: "Build/minusthree.data", c: 8 },
+        w: { n: "Build/minusthree.wasm.unityweb", c: 1 },
+        f: { n: "Build/minusthree.framework.js.unityweb", c: 1 },
+        l: { n: "Build/minusthree.loader.js", c: 1 },
+      };
+      const mE = document.getElementById("msg");
+      const pC = document.getElementById("pct");
+      const vL = document.getElementById("val");
+      const cV = document.getElementById("c");
+      const uI = document.getElementById("ui");
+      const fS = document.getElementById("fs");
+      let lD = 0;
+      let tT = 0;
+      Object.values(aS).forEach((a) => (tT += a.c));
+      const fF = async (u) => {
+        const r = await fetch(bU + u);
+        if (!r.ok) throw new Error(u);
+        lD++;
+        const p = Math.round((lD / tT) * 100);
+        pC.style.width = p + "%";
+        vL.innerText = p + "%";
+        return r.arrayBuffer();
+      };
+      const iT = async () => {
+        try {
+          const pM = {};
+          for (const [k, a] of Object.entries(aS)) {
+            const cP = [];
+            for (let i = 0; i < a.c; i++) {
+              cP.push(fF(a.c > 1 ? a.n + i.toString().padStart(2, "0") : a.n));
+            }
+            pM[k] = Promise.all(cP);
+          }
+          const rS = await Promise.all(Object.values(pM));
+          const bL = {};
+          Object.keys(pM).forEach((k, i) => {
+            bL[k] = URL.createObjectURL(new Blob(rS[i]));
+          });
+          mE.innerText = "Starting Engine";
+          const s = document.createElement("script");
+          s.src = bL.l;
+          s.onload = () => {
+            createUnityInstance(
+              cV,
+              {
+                dataUrl: bL.d,
+                frameworkUrl: bL.f,
+                codeUrl: bL.w,
+                streamingAssetsUrl: bU + "StreamingAssets",
+                companyName: "JosephPLover",
+                productName: "MINUS THREE",
+                productVersion: "-3.6",
+              },
+              (p) => {
+                mE.innerText = "Loading Game";
+                pC.style.width = p * 100 + "%";
+                vL.innerText = Math.round(p * 100) + "%";
+              },
+            ).then((i) => {
+              uI.style.display = "none";
+              cV.style.display = "block";
+              fS.style.display = "flex";
+              fS.onclick = () => i.SetFullscreen(1);
+            });
+          };
+          document.body.appendChild(s);
+        } catch (e) {
+          mE.innerText = "Error: " + e.message;
+          mE.style.color = "#f44";
+        }
+      };
+      iT();
+    </script>
+  </body>
+</html>
