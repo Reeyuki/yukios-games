@@ -35,33 +35,60 @@
       <canvas id="unity-canvas" tabindex="-1"></canvas>
     </div>
 
-    <script src="Build/web.loader.js"></script>
     <script>
-      var meta = document.createElement("meta");
-      meta.name = "viewport";
-      meta.content =
-        "width=device-width, height=device-height, initial-scale=1.0, user-scalable=no";
-      document.head.appendChild(meta);
+      const BASE =
+        "https://cdn.jsdelivr.net/gh/reeyuki/yukios-games@main/helltaker/Build/";
 
-      var canvas = document.querySelector("#unity-canvas");
+      const STREAM_BASE =
+        "https://cdn.jsdelivr.net/gh/reeyuki/yukios-games@main/helltaker/StreamingAssets/";
 
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+      async function mergeParts(files) {
+        const buffers = await Promise.all(
+          files.map((f) =>
+            fetch(BASE + f).then((r) => r.arrayBuffer()),
+          ),
+        );
+
+        const total = buffers.reduce((a, b) => a + b.byteLength, 0);
+
+        const merged = new Uint8Array(total);
+
+        let offset = 0;
+        for (const b of buffers) {
+          merged.set(new Uint8Array(b), offset);
+          offset += b.byteLength;
+        }
+
+        return URL.createObjectURL(
+          new Blob([merged], { type: "application/octet-stream" }),
+        );
       }
 
-      window.addEventListener("resize", resizeCanvas);
-      resizeCanvas();
+      async function start() {
+        const canvas = document.querySelector("#unity-canvas");
 
-      createUnityInstance(canvas, {
-        dataUrl: "Build/web.data",
-        frameworkUrl: "Build/web.framework.js",
-        codeUrl: "Build/web.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "vanripper",
-        productName: "Helltaker",
-        productVersion: "ex1.1",
-      });
+        const dataUrl = await mergeParts(["web.data.1", "web.data.2"]);
+        const wasmUrl = await mergeParts(["web.wasm.1", "web.wasm.2"]);
+
+        const loader = document.createElement("script");
+        loader.src = BASE + "web.loader.js";
+
+        loader.onload = () => {
+          createUnityInstance(canvas, {
+            dataUrl: dataUrl,
+            frameworkUrl: BASE + "web.framework.js",
+            codeUrl: wasmUrl,
+            streamingAssetsUrl: STREAM_BASE,
+            companyName: "vanripper",
+            productName: "Helltaker",
+            productVersion: "ex1.1",
+          });
+        };
+
+        document.body.appendChild(loader);
+      }
+
+      start();
     </script>
   </body>
 </html>
