@@ -44,9 +44,7 @@
 
       async function mergeParts(files) {
         const buffers = await Promise.all(
-          files.map((f) =>
-            fetch(BASE + f).then((r) => r.arrayBuffer()),
-          ),
+          files.map((f) => fetch(BASE + f).then((r) => r.arrayBuffer())),
         );
 
         const total = buffers.reduce((a, b) => a + b.byteLength, 0);
@@ -67,7 +65,12 @@
       async function start() {
         const canvas = document.querySelector("#unity-canvas");
 
-        const dataUrl = await mergeParts(["web.data.1", "web.data.2"]);
+        const dataUrl = await mergeParts([
+          "web.data.part-aa",
+          "web.data.part-ab",
+          "web.data.part-ac",
+        ]);
+
         const wasmUrl = await mergeParts(["web.wasm.1", "web.wasm.2"]);
 
         const loader = document.createElement("script");
