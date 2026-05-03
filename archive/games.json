@@ -171,11 +171,6 @@
       "thumbnail": "/games/basketstars.webp"
     },
     {
-      "name": "Bendy And The Ink Machine",
-      "url": "https://truffled.lol/games/BATIM/BATIM/index.html",
-      "thumbnail": "/games/bendy.webp"
-    },
-    {
       "name": "Bergentruck",
       "url": "https://truffled.lol/games/bergentruck/index.html",
       "thumbnail": "/games/ber.webp"
@@ -2764,11 +2759,6 @@
       "name": "Cut the Rope: Holiday Gift",
       "url": "https://cdn.jsdelivr.net/gh/freebuisness/html@main/214-fi.html",
       "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/214.png"
-    },
-    {
-      "name": "Bendy and the Ink Machine",
-      "url": "https://cdn.jsdelivr.net/gh/freebuisness/html@main/215.html",
-      "thumbnail": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/215.png"
     },
     {
       "name": "That's Not My Neighbor",
@@ -7117,11 +7107,6 @@
       "thumbnail": "semag/baldi-remaster/logo.png"
     },
     {
-      "name": "Bendy and the Ink Machine",
-      "url": "https://selenite.cc/resources/semag/bendy/index.html",
-      "thumbnail": "semag/bendy/logo.png"
-    },
-    {
       "name": "BERGENTRUCK",
       "url": "https://selenite.cc/resources/semag/bergentruck/index.html",
       "thumbnail": "semag/bergentruck/BERGENTRUCK_201X.apple-touch-icon.png"
@@ -10970,11 +10955,6 @@
       "name": "people playground",
       "url": "https://larp.now/stuff/selfhosted/ppgbog/",
       "thumbnail": "/stuff/games/ppg.png"
-    },
-    {
-      "name": "bendy and the ink machine",
-      "url": "https://larp.now/stuff/selfhosted/batim/",
-      "thumbnail": "/stuff/games/batim.png"
     },
     {
       "name": "fused 240",
