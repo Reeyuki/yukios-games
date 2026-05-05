@@ -482,6 +482,8 @@
       <div class="emscripten" id="status">Downloading...</div>
 
       <progress value="0" max="100" id="progress" hidden="1"></progress>
+      <img id="QRCode" class="qrCode" src="runner.svg" alt="URL QR Code" hidden="1"></img>
+      <img id="QR2Code" class="qrCode" src="runnerLocal.svg" alt="URL QR2 Code" hidden="1"></img>
     </div>
 
     <div class="floating-control" id="multiplayer-stats-container">
@@ -582,7 +584,7 @@
       </div>
     </div>
 
-    <script id="tick-worker" type="javascript/worker">
+	    <script id="tick-worker" type="javascript/worker">
       let running = false;
       let stop_called = false;
 
@@ -769,14 +771,33 @@
         },
       };
       Module.setStatus("Downloading...");
-      window.onerror = function (event) {
-        // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
-        Module.setStatus("Exception thrown, see JavaScript console");
-        spinnerElement.style.display = "none";
-        Module.setStatus = function (text) {
-          if (text) Module.printErr("[post-exception status] " + text);
-        };
-      };
+	      window.onerror = function (event) {
+	        // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
+	        Module.setStatus("Exception thrown, see JavaScript console");
+	        spinnerElement.style.display = "none";
+	        Module.setStatus = function (text) {
+	          if (text) Module.printErr("[post-exception status] " + text);
+	        };
+	      };
+
+	      const ASSET_BASE_URL = "https://cdn.jsdelivr.net/gh/reeyuki/frickbears3port@2c872369c5ca9e6fff2a2310cc80c3c802ec8d53/";
+	      const SPLIT_COUNTS = {"music.dat":5,"game.unx":2,"voicelines_ingame.dat":2};
+	      const __assetAlias = new Map();
+	      const __cdnBase = new URL(ASSET_BASE_URL, location.href);
+	      const __localBase = new URL("./", location.href);
+	      const __stripUrl = function (u) { try { const x = new URL(u, location.href); x.hash = ""; x.search = ""; return x.href; } catch (e) { return u; } };
+	      const __normalize = function (u) { const s = __stripUrl(u); if (typeof s !== "string") return "" + s; return s; };
+	      const __toCdn = function (u) { try { const x = new URL(u, __localBase); if (x.origin === __localBase.origin && x.href.startsWith(__localBase.href)) return new URL(x.href.slice(__localBase.href.length), __cdnBase).href; return x.href; } catch (e) { return u; } };
+	      const __aliasGet = function (u) { const k = __normalize(u); if (__assetAlias.has(k)) return __assetAlias.get(k); const cdn = __normalize(__toCdn(k)); if (__assetAlias.has(cdn)) return __assetAlias.get(cdn); return null; };
+	      const __aliasSet = function (fromUrl, toUrl) { const keys = [fromUrl, __toCdn(fromUrl)]; for (let i = 0; i < keys.length; i++) { const k = __normalize(keys[i]); if (k) __assetAlias.set(k, toUrl); } };
+	      const __loadSplit = async function (name, count) { const partUrls = Array.from({length: count}, function (_, i) { return ASSET_BASE_URL + name + String(i).padStart(2, "0"); }); const bufs = await Promise.all(partUrls.map(function (u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error("fetch failed " + u + " " + r.status); return r.arrayBuffer(); }); })); let total = 0; for (let i = 0; i < bufs.length; i++) total += bufs[i].byteLength; const out = new Uint8Array(total); let off = 0; for (let i = 0; i < bufs.length; i++) { out.set(new Uint8Array(bufs[i]), off); off += bufs[i].byteLength; } const blobUrl = URL.createObjectURL(new Blob([out])); __aliasSet(name, blobUrl); __aliasSet(ASSET_BASE_URL + name, blobUrl); return blobUrl; };
+	      const __preloadSplits = async function () { const names = Object.keys(SPLIT_COUNTS); await Promise.all(names.map(function (n) { return __loadSplit(n, SPLIT_COUNTS[n]); })); };
+	      const __wrapFetch = function () { const nativeFetch = window.fetch; if (typeof nativeFetch !== "function") return; window.fetch = function (resource, init) { let url = resource; if (resource && typeof resource === "object" && typeof resource.url === "string") url = resource.url; const alias = __aliasGet(url); if (alias) { if (resource && typeof resource === "object" && typeof resource.url === "string") { const req = new Request(alias, resource); return nativeFetch(req, init); } return nativeFetch(alias, init); } const rewritten = __toCdn(url); if (rewritten !== url) { if (resource && typeof resource === "object" && typeof resource.url === "string") { const req = new Request(rewritten, resource); return nativeFetch(req, init); } return nativeFetch(rewritten, init); } return nativeFetch(resource, init); }; };
+	      const __wrapXhr = function () { const NativeXHR = window.XMLHttpRequest; if (typeof NativeXHR !== "function") return; window.XMLHttpRequest = function () { const xhr = new NativeXHR(); const nativeOpen = xhr.open; xhr.open = function (method, url, async, user, password) { const alias = __aliasGet(url); if (alias) url = alias; else url = __toCdn(url); if (typeof async === "undefined") async = true; return nativeOpen.call(this, method, url, async, user, password); }; return xhr; }; };
+	      const __startRunner = function () { const s = document.createElement("script"); s.async = true; s.type = "text/javascript"; s.src = ASSET_BASE_URL + "runner.js"; document.body.appendChild(s); };
+	      __wrapFetch();
+	      __wrapXhr();
+	      __preloadSplits().then(__startRunner, function (e) { Module.setStatus("Failed to preload assets"); Module.printErr(e && e.stack ? e.stack : String(e)); });
 
       // Route URL GET parameters to argc+argv
       if (typeof window === "object") {
@@ -787,114 +808,8 @@
         }
       }
 
-      const ASSET_BASE_URL = "https://cdn.jsdelivr.net/gh/reeyuki/frickbears3port@bb30221ab0a740d51ec150f0d185ee7f21789824/";
-      const SPLIT_PARTS = { "game.unx": 2, "music.dat": 5, "voicelines_ingame.dat": 2 };
-      const SPLIT_ALIASES = { "game.unc": "game.unx" };
-      const splitBlobUrlByName = Object.create(null);
-      const originalFetch = window.fetch ? window.fetch.bind(window) : null;
-
-      function pad2(n) {
-        return (n < 10 ? "0" : "") + String(n);
-      }
-
-      function normalizeName(name) {
-        let clean = String(name || "").replace(/^[\\/]+/, "");
-        clean = clean.replace(/^frickbears3port\//, "");
-        const aliased = SPLIT_ALIASES[clean] || clean;
-        const basename = aliased.split("/").pop();
-        if (SPLIT_PARTS[basename] || SPLIT_ALIASES[basename]) {
-          return SPLIT_ALIASES[basename] || basename;
-        }
-        return aliased;
-      }
-
-      function toAssetUrl(path) {
-        return ASSET_BASE_URL + path;
-      }
-
-      async function fetchArrayBuffer(url) {
-        const res = await originalFetch(url);
-        if (!res.ok) {
-          throw new Error("fetch failed " + res.status + " " + url);
-        }
-        return await res.arrayBuffer();
-      }
-
-      async function reconstructSplitFile(name, parts) {
-        const urls = Array.from({ length: parts }, (_, i) => toAssetUrl(name + pad2(i)));
-        const buffers = await Promise.all(urls.map(fetchArrayBuffer));
-        const totalSize = buffers.reduce((t, b) => t + b.byteLength, 0);
-        const combined = new Uint8Array(totalSize);
-        let offset = 0;
-        for (const b of buffers) {
-          combined.set(new Uint8Array(b), offset);
-          offset += b.byteLength;
-        }
-        return URL.createObjectURL(new Blob([combined]));
-      }
-
-      const preloadSplitFiles = (async () => {
-        const entries = Object.entries(SPLIT_PARTS);
-        await Promise.all(entries.map(async ([name, parts]) => {
-          splitBlobUrlByName[name] = await reconstructSplitFile(name, parts);
-        }));
-      })();
-
-      if (window.XMLHttpRequest && window.XMLHttpRequest.prototype && window.XMLHttpRequest.prototype.open) {
-        const originalXHROpen = window.XMLHttpRequest.prototype.open;
-        window.XMLHttpRequest.prototype.open = function (method, url, async, user, password) {
-          const rawUrl = typeof url === "string" ? url : "";
-          if (!rawUrl || rawUrl.startsWith("blob:") || rawUrl.startsWith("data:")) {
-            return originalXHROpen.call(this, method, url, async, user, password);
-          }
-          let urlObj = null;
-          try {
-            urlObj = new URL(rawUrl, window.location.href);
-          } catch (e) {}
-          const pathname = urlObj ? urlObj.pathname : rawUrl;
-          const clean = normalizeName(pathname);
-          if (splitBlobUrlByName[clean]) {
-            return originalXHROpen.call(this, method, splitBlobUrlByName[clean], async, user, password);
-          }
-          if (urlObj && (urlObj.protocol === "http:" || urlObj.protocol === "https:") && urlObj.origin !== window.location.origin) {
-            return originalXHROpen.call(this, method, url, async, user, password);
-          }
-          return originalXHROpen.call(this, method, toAssetUrl(clean), async, user, password);
-        };
-      }
-
-      if (originalFetch) {
-        window.fetch = function (input, init) {
-          const rawUrl = typeof input === "string" ? input : (input && input.url ? input.url : "");
-          if (!rawUrl) {
-            return originalFetch(input, init);
-          }
-          if (rawUrl.startsWith("blob:") || rawUrl.startsWith("data:")) {
-            return originalFetch(input, init);
-          }
-          let urlObj = null;
-          try {
-            urlObj = new URL(rawUrl, window.location.href);
-          } catch (e) {}
-          const pathname = urlObj ? urlObj.pathname : rawUrl;
-          const clean = normalizeName(pathname);
-          if (splitBlobUrlByName[clean]) {
-            return originalFetch(splitBlobUrlByName[clean], init);
-          }
-          if (urlObj && (urlObj.protocol === "http:" || urlObj.protocol === "https:") && urlObj.origin !== window.location.origin) {
-            return originalFetch(input, init);
-          }
-          return originalFetch(toAssetUrl(clean), init);
-        };
-      }
-
-      Module.locateFile = function (path) {
-        const clean = normalizeName(String(path || "").replace(/^[./]+/, ""));
-        if (splitBlobUrlByName[clean]) {
-          return splitBlobUrlByName[clean];
-        }
-        return toAssetUrl(clean);
-      };
+      // add in the script code
+      
 
       function toggleElement(id) {
         var elem = document.getElementById(id);
@@ -1101,7 +1016,7 @@
 "3c9d7e5d0fca31379217e19ef59052dc",
 "9f2d2ae08c0bc749b040f83f74427502",
 "e8f1e8db8cf996f8715a6f2164c2e44e",
-"93ce26850c57651d4e9e82461315d9a5",
+"fd69e43cb91c6496044567320aa2ec3b",
 "573fecc1a727b9c7b7f7959f70f89de9",
 "eb0a71ead25a38631d0d618d3800fd87",
 "69e1553b9204f997ecd98c73ae3e345c",
@@ -1941,15 +1856,7 @@
         wallpaper_update_config(JSON.stringify(wallpaperConfig));
       }
     </script>
-    <script type="text/javascript">
-      preloadSplitFiles.then(() => {
-        const s = document.createElement("script");
-        s.async = true;
-        s.type = "text/javascript";
-        s.src = ASSET_BASE_URL + "runner.js";
-        document.body.appendChild(s);
-      });
-    </script>
+
 
     <!-- Custom BodyEnd code is injected here -->
     
