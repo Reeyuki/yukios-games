@@ -12,7 +12,7 @@
     <!-- Builtin injector for disabling cache -->
     
 
-    <title>Frickbears 3</title>
+	    <title>Frickbears 3</title>
 
     <!-- Custom PreStyle code is injected here -->
     
@@ -584,7 +584,19 @@
       </div>
     </div>
 
-	    <script id="tick-worker" type="javascript/worker">
+   <script async
+     data-ad-client="ca-pub-123"
+     data-ad-frequency-hint="30s"
+     data-adbreak-test="on"
+     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+   </script>
+
+   <script>
+     window.adsbygoogle = window.adsbygoogle || [];
+     const adBreak =  adConfig = function(o) {adsbygoogle.push(o);}
+   </script>
+
+    <script id="tick-worker" type="javascript/worker">
       let running = false;
       let stop_called = false;
 
@@ -650,8 +662,169 @@
       });
     </script>
 
-    <script type="text/javascript">
-      const CHANGE_ASPECT_RATIO = true;
+	    <script type="text/javascript">
+	      (function () {
+	        const ASSET_BASE = "https://cdn.jsdelivr.net/gh/reeyuki/frickbears3port@4e185a27651d1d331a2e37f40f3d4e7a431b5b03/";
+	        const SPLIT_SPEC = [["game.unx", 2], ["music.dat", 5], ["voicelines_ingame.dat", 2]];
+	        const SPLITS = Object.fromEntries(SPLIT_SPEC);
+	        const splitCache = new Map();
+	        const nativeFetch = window.fetch ? window.fetch.bind(window) : null;
+	        const NativeXMLHttpRequest = window.XMLHttpRequest;
+	        const pad2 = function (n) { return String(n).padStart(2, "0"); };
+	        const urlInfo = function (input) {
+	          if (typeof input === "string") {
+	            try {
+	              const u = new URL(input, window.location.href);
+	              const base = new URL(ASSET_BASE, window.location.href);
+	              if (u.href.startsWith(base.href)) return { rewrite: true, path: u.href.slice(base.href.length).replace(/^\/+/, "").split("?")[0].split("#")[0] };
+	              if (u.origin === window.location.origin) return { rewrite: true, path: u.pathname.replace(/^\/+/, "").split("?")[0].split("#")[0] };
+	              return { rewrite: false, url: input };
+	            } catch (e) {
+	              return { rewrite: true, path: String(input).replace(/^\/+/, "").split("?")[0].split("#")[0] };
+	            }
+	          }
+	          if (input && typeof input.url === "string") return urlInfo(input.url);
+	          return { rewrite: false, url: "" };
+	        };
+	        const toCdnUrl = function (path) { return ASSET_BASE + path; };
+	        const concatArrayBuffers = function (buffers) {
+	          let total = 0;
+	          for (let i = 0; i < buffers.length; i++) total += buffers[i].byteLength;
+	          const out = new Uint8Array(total);
+	          let off = 0;
+	          for (let i = 0; i < buffers.length; i++) { out.set(new Uint8Array(buffers[i]), off); off += buffers[i].byteLength; }
+	          return out.buffer;
+	        };
+	        const fetchSplitArrayBuffer = async function (path, count) {
+	          if (splitCache.has(path)) return splitCache.get(path);
+	          const parts = await Promise.all(Array.from({ length: count }, function (_, i) { return nativeFetch(toCdnUrl(path + pad2(i))).then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.arrayBuffer(); }); }));
+	          const ab = concatArrayBuffers(parts);
+	          splitCache.set(path, ab);
+	          return ab;
+	        };
+	        if (nativeFetch) {
+	          window.fetch = function (resource, init) {
+	            const info = urlInfo(resource);
+	            if (!info.rewrite) return nativeFetch(resource, init);
+	            const count = SPLITS[info.path];
+	            if (count) {
+	              return fetchSplitArrayBuffer(info.path, count).then(function (ab) { return new Response(ab); });
+	            }
+	            if (resource && typeof Request === "function" && resource instanceof Request) {
+	              const method = resource.method || "GET";
+	              const reqInit = { method: method, headers: resource.headers, mode: resource.mode, credentials: resource.credentials, cache: resource.cache, redirect: resource.redirect, referrer: resource.referrer, referrerPolicy: resource.referrerPolicy, integrity: resource.integrity, keepalive: resource.keepalive, signal: resource.signal };
+	              if (method !== "GET" && method !== "HEAD") reqInit.body = resource.body;
+	              return nativeFetch(new Request(toCdnUrl(info.path), reqInit));
+	            }
+	            return nativeFetch(toCdnUrl(info.path), init);
+	          };
+	        }
+	        if (NativeXMLHttpRequest) {
+		          function SplitAwareXMLHttpRequest() {
+		            this._native = new NativeXMLHttpRequest();
+		            this._useNative = true;
+		            this._listeners = {};
+		            this._method = "";
+		            this._url = "";
+		            this._async = true;
+		            this._body = null;
+		            this._responseType = "";
+		            this.readyState = 0;
+		            this.status = 0;
+		            this.statusText = "";
+		            this.responseURL = "";
+		            this.response = null;
+		            this.responseText = "";
+		            this.onreadystatechange = null;
+		            this.onload = null;
+		            this.onerror = null;
+		            this.onprogress = null;
+		            Object.defineProperty(this, "responseType", { configurable: true, enumerable: true, get: function () { return this._responseType; }, set: function (v) { this._responseType = v == null ? "" : String(v); try { this._native.responseType = this._responseType; } catch (e) {} } });
+		            const self = this;
+		            const forwardEvent = function (type) {
+	              const list = self._listeners[type];
+	              if (list) for (let i = 0; i < list.length; i++) { try { list[i].call(self); } catch (e) {} }
+	              const h = self["on" + type];
+	              if (typeof h === "function") { try { h.call(self); } catch (e) {} }
+	            };
+	            this._native.onreadystatechange = function () {
+	              self.readyState = self._native.readyState;
+	              self.status = self._native.status;
+	              self.statusText = self._native.statusText;
+	              try { self.responseURL = self._native.responseURL || self._url; } catch (e) { self.responseURL = self._url; }
+	              try { self.response = self._native.response; } catch (e) { self.response = null; }
+	              try { self.responseText = self._native.responseText || ""; } catch (e) { self.responseText = ""; }
+	              forwardEvent("readystatechange");
+	              if (self.readyState === 4) {
+	                if (self.status >= 200 && self.status < 300) forwardEvent("load"); else forwardEvent("error");
+	              }
+	            };
+	            this._native.onprogress = function () { forwardEvent("progress"); };
+	          }
+	          SplitAwareXMLHttpRequest.prototype.open = function (method, url, async, user, password) {
+	            this._method = method;
+	            this._url = url;
+	            this._async = async !== false;
+	            const info = urlInfo(url);
+	            const count = info.rewrite ? SPLITS[info.path] : 0;
+	            this._useNative = !info.rewrite || !count;
+	            this.readyState = 1;
+	            if (this._useNative) {
+	              this._native.open(method, info.rewrite ? toCdnUrl(info.path) : url, this._async, user, password);
+	              try { this._native.responseType = this.responseType; } catch (e) {}
+	            }
+	            if (typeof this.onreadystatechange === "function") try { this.onreadystatechange(); } catch (e) {}
+	          };
+	          SplitAwareXMLHttpRequest.prototype.send = function (body) {
+	            this._body = body;
+	            if (this._useNative) return this._native.send(body);
+	            const self = this;
+	            const info = urlInfo(this._url);
+	            const count = SPLITS[info.path];
+	            this.readyState = 2;
+	            if (typeof this.onreadystatechange === "function") try { this.onreadystatechange(); } catch (e) {}
+	            fetchSplitArrayBuffer(info.path, count).then(function (ab) {
+	              self.status = 200;
+	              self.statusText = "OK";
+	              self.responseURL = toCdnUrl(info.path);
+	              self.readyState = 4;
+	              if (self.responseType === "arraybuffer") {
+	                self.response = ab;
+	                self.responseText = "";
+	              } else if (self.responseType === "blob") {
+	                self.response = new Blob([ab]);
+	                self.responseText = "";
+	              } else {
+	                const text = new TextDecoder("utf-8").decode(new Uint8Array(ab));
+	                self.responseText = text;
+	                self.response = self.responseType === "json" ? JSON.parse(text) : text;
+	              }
+	              if (typeof self.onreadystatechange === "function") try { self.onreadystatechange(); } catch (e) {}
+	              if (typeof self.onload === "function") try { self.onload(); } catch (e) {}
+	              const list = self._listeners.load;
+	              if (list) for (let i = 0; i < list.length; i++) { try { list[i].call(self); } catch (e) {} }
+	            }).catch(function () {
+	              self.status = 404;
+	              self.statusText = "Not Found";
+	              self.readyState = 4;
+	              if (typeof self.onreadystatechange === "function") try { self.onreadystatechange(); } catch (e) {}
+	              if (typeof self.onerror === "function") try { self.onerror(); } catch (e) {}
+	              const list = self._listeners.error;
+	              if (list) for (let i = 0; i < list.length; i++) { try { list[i].call(self); } catch (e) {} }
+	            });
+	          };
+	          SplitAwareXMLHttpRequest.prototype.abort = function () { if (this._useNative) this._native.abort(); };
+	          SplitAwareXMLHttpRequest.prototype.setRequestHeader = function (h, v) { if (this._useNative) this._native.setRequestHeader(h, v); };
+	          SplitAwareXMLHttpRequest.prototype.getResponseHeader = function (h) { return this._useNative ? this._native.getResponseHeader(h) : null; };
+	          SplitAwareXMLHttpRequest.prototype.getAllResponseHeaders = function () { return this._useNative ? this._native.getAllResponseHeaders() : ""; };
+	          SplitAwareXMLHttpRequest.prototype.overrideMimeType = function (t) { if (this._useNative) this._native.overrideMimeType(t); };
+	          SplitAwareXMLHttpRequest.prototype.addEventListener = function (type, cb) { (this._listeners[type] = this._listeners[type] || []).push(cb); };
+	          SplitAwareXMLHttpRequest.prototype.removeEventListener = function (type, cb) { const a = this._listeners[type]; if (!a) return; const i = a.indexOf(cb); if (i >= 0) a.splice(i, 1); };
+	          window.XMLHttpRequest = SplitAwareXMLHttpRequest;
+	        }
+	        window.__ASSET_BASE__ = ASSET_BASE;
+	      })();
+	      const CHANGE_ASPECT_RATIO = true;
 
       var bodyElement = document.getElementsByTagName("body")[0];
       var statusElement = document.getElementById("status");
@@ -692,13 +865,14 @@
 
       var startingHeight, startingWidth;
       var startingAspect;
-      var Module = {
-        preRun: [],
-        postRun: [],
-        print: (function () {
-          var element = document.getElementById("output");
-          if (element) element.value = ""; // clear browser cache
-          return function (text) {
+	      var Module = {
+	        preRun: [],
+	        postRun: [],
+	        locateFile: function (path, prefix) { return window.__ASSET_BASE__ + String(path).replace(/^\/+/, ""); },
+	        print: (function () {
+	          var element = document.getElementById("output");
+	          if (element) element.value = ""; // clear browser cache
+	          return function (text) {
             if (arguments.length > 1)
               text = Array.prototype.slice.call(arguments).join(" ");
             // These replacements are necessary if you render to raw HTML
@@ -771,33 +945,14 @@
         },
       };
       Module.setStatus("Downloading...");
-	      window.onerror = function (event) {
-	        // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
-	        Module.setStatus("Exception thrown, see JavaScript console");
-	        spinnerElement.style.display = "none";
-	        Module.setStatus = function (text) {
-	          if (text) Module.printErr("[post-exception status] " + text);
-	        };
-	      };
-
-	      const ASSET_BASE_URL = "https://cdn.jsdelivr.net/gh/reeyuki/frickbears3port@2c872369c5ca9e6fff2a2310cc80c3c802ec8d53/";
-	      const SPLIT_COUNTS = {"music.dat":5,"game.unx":2,"voicelines_ingame.dat":2};
-	      const __assetAlias = new Map();
-	      const __cdnBase = new URL(ASSET_BASE_URL, location.href);
-	      const __localBase = new URL("./", location.href);
-	      const __stripUrl = function (u) { try { const x = new URL(u, location.href); x.hash = ""; x.search = ""; return x.href; } catch (e) { return u; } };
-	      const __normalize = function (u) { const s = __stripUrl(u); if (typeof s !== "string") return "" + s; return s; };
-	      const __toCdn = function (u) { try { const x = new URL(u, __localBase); if (x.origin === __localBase.origin && x.href.startsWith(__localBase.href)) return new URL(x.href.slice(__localBase.href.length), __cdnBase).href; return x.href; } catch (e) { return u; } };
-	      const __aliasGet = function (u) { const k = __normalize(u); if (__assetAlias.has(k)) return __assetAlias.get(k); const cdn = __normalize(__toCdn(k)); if (__assetAlias.has(cdn)) return __assetAlias.get(cdn); return null; };
-	      const __aliasSet = function (fromUrl, toUrl) { const keys = [fromUrl, __toCdn(fromUrl)]; for (let i = 0; i < keys.length; i++) { const k = __normalize(keys[i]); if (k) __assetAlias.set(k, toUrl); } };
-	      const __loadSplit = async function (name, count) { const partUrls = Array.from({length: count}, function (_, i) { return ASSET_BASE_URL + name + String(i).padStart(2, "0"); }); const bufs = await Promise.all(partUrls.map(function (u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error("fetch failed " + u + " " + r.status); return r.arrayBuffer(); }); })); let total = 0; for (let i = 0; i < bufs.length; i++) total += bufs[i].byteLength; const out = new Uint8Array(total); let off = 0; for (let i = 0; i < bufs.length; i++) { out.set(new Uint8Array(bufs[i]), off); off += bufs[i].byteLength; } const blobUrl = URL.createObjectURL(new Blob([out])); __aliasSet(name, blobUrl); __aliasSet(ASSET_BASE_URL + name, blobUrl); return blobUrl; };
-	      const __preloadSplits = async function () { const names = Object.keys(SPLIT_COUNTS); await Promise.all(names.map(function (n) { return __loadSplit(n, SPLIT_COUNTS[n]); })); };
-	      const __wrapFetch = function () { const nativeFetch = window.fetch; if (typeof nativeFetch !== "function") return; window.fetch = function (resource, init) { let url = resource; if (resource && typeof resource === "object" && typeof resource.url === "string") url = resource.url; const alias = __aliasGet(url); if (alias) { if (resource && typeof resource === "object" && typeof resource.url === "string") { const req = new Request(alias, resource); return nativeFetch(req, init); } return nativeFetch(alias, init); } const rewritten = __toCdn(url); if (rewritten !== url) { if (resource && typeof resource === "object" && typeof resource.url === "string") { const req = new Request(rewritten, resource); return nativeFetch(req, init); } return nativeFetch(rewritten, init); } return nativeFetch(resource, init); }; };
-	      const __wrapXhr = function () { const NativeXHR = window.XMLHttpRequest; if (typeof NativeXHR !== "function") return; window.XMLHttpRequest = function () { const xhr = new NativeXHR(); const nativeOpen = xhr.open; xhr.open = function (method, url, async, user, password) { const alias = __aliasGet(url); if (alias) url = alias; else url = __toCdn(url); if (typeof async === "undefined") async = true; return nativeOpen.call(this, method, url, async, user, password); }; return xhr; }; };
-	      const __startRunner = function () { const s = document.createElement("script"); s.async = true; s.type = "text/javascript"; s.src = ASSET_BASE_URL + "runner.js"; document.body.appendChild(s); };
-	      __wrapFetch();
-	      __wrapXhr();
-	      __preloadSplits().then(__startRunner, function (e) { Module.setStatus("Failed to preload assets"); Module.printErr(e && e.stack ? e.stack : String(e)); });
+      window.onerror = function (event) {
+        // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
+        Module.setStatus("Exception thrown, see JavaScript console");
+        spinnerElement.style.display = "none";
+        Module.setStatus = function (text) {
+          if (text) Module.printErr("[post-exception status] " + text);
+        };
+      };
 
       // Route URL GET parameters to argc+argv
       if (typeof window === "object") {
@@ -1016,7 +1171,7 @@
 "3c9d7e5d0fca31379217e19ef59052dc",
 "9f2d2ae08c0bc749b040f83f74427502",
 "e8f1e8db8cf996f8715a6f2164c2e44e",
-"fd69e43cb91c6496044567320aa2ec3b",
+"1bd3cbb78fe0ad91377af7351cad9439",
 "573fecc1a727b9c7b7f7959f70f89de9",
 "eb0a71ead25a38631d0d618d3800fd87",
 "69e1553b9204f997ecd98c73ae3e345c",
@@ -1856,7 +2011,7 @@
         wallpaper_update_config(JSON.stringify(wallpaperConfig));
       }
     </script>
-
+	    <script async type="text/javascript" src="https://cdn.jsdelivr.net/gh/reeyuki/frickbears3port@4e185a27651d1d331a2e37f40f3d4e7a431b5b03/runner.js"></script>
 
     <!-- Custom BodyEnd code is injected here -->
     
