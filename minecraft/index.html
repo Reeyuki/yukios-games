@@ -288,6 +288,10 @@
         <button class="mc-btn" onclick="loadGame('selenite')">
           All Versions (1.6.4–1.12)
         </button>
+        <button class="mc-btn" onclick="loadGame('eagler1-16-5')">
+          1.16.5
+        </button>
+        
       </div>
     </div>
 
@@ -321,6 +325,14 @@
 
         if (type === "selenite") {
           frame.src = "https://selenite.cc/resources/semag/eag/index.html";
+          disclaimer.style.display = "block";
+          setTimeout(() => {
+            disclaimer.classList.add("hide");
+            setTimeout(() => disclaimer.remove(), 600);
+          }, 3000);
+        }
+        if (type === "eagler1-16-5") {
+          frame.src = "https://techyako.github.io/Eaglercraft-1.16.5";
           disclaimer.style.display = "block";
           setTimeout(() => {
             disclaimer.classList.add("hide");
